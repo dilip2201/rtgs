@@ -17,7 +17,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
 /******************************* Invite User ****************************/
 Route::get('/invite/password/{token}', ['as' => 'newpasswordsetup', 'uses' => 'Admin\PasswordSetupController@setPassInvitationView']);
@@ -55,8 +54,16 @@ Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
     /***************** Dashboard *************************/
     Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
     /******************** User Dev : Dilip 15-06 ***********************/
+
+
+    Route::group(['namespace' => 'Company'], function () {
+        Route::get('users', ['as' => 'users', 'uses' => 'UserController@user']);
+    });
+
+
 });
 
 Route::get('profile', ['as' => 'profile', 'uses' => 'Admin\ProfileController@index']);
 Route::post('/admin/profileupdate', ['as' => 'profileupdate', 'uses' => 'Admin\ProfileController@profileupdate']);
 Route::post('/changepassword', ['as' => 'changepassword', 'uses' => 'Admin\ProfileController@changepassword']);
+

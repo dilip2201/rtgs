@@ -19,6 +19,15 @@ function activeMenu($uri = '') {
     return $active;
 }
 
+function activeMenucompany($uri = '') {
+
+    $active = '';
+    if (Request::is(Request::segment(1) . '/' . $uri . '/*') || Request::is(Request::segment(1) . '/' . $uri) || Request::is($uri)) {
+        $active = 'menu-item-active';
+    }
+    return $active;
+}
+
 
 function checkPermission($permissions){
 	if(auth()->check())
