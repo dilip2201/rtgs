@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" style="width:100%;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0">
 <head>
@@ -107,10 +110,10 @@
                                                 <td valign="top" align="center" style="padding:0;Margin:0;width:530px">
                                                     <table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr style="border-collapse:collapse">
-                                                            <td class="es-m-txt-l" align="left" style="padding:0;Margin:0;padding-top:15px"><h3 style="Margin:0;line-height:22px;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;font-size:18px;font-style:normal;font-weight:bold;color:#282A3C">Hello {{ $data['name'] }},</h3></td>
+                                                            <td class="es-m-txt-l" align="left" style="padding:0;Margin:0;padding-top:15px"><h3 style="Margin:0;line-height:22px;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;font-size:18px;font-style:normal;font-weight:bold;color:#282A3C">Hello ,</h3></td>
                                                         </tr>
                                                         <tr style="border-collapse:collapse">
-                                                            <td align="left" style="padding:0;Margin:0;padding-bottom:10px;padding-top:15px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:16px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#777777">{{ $data['text'] }}</p></td>
+                                                            <td align="left" style="padding:0;Margin:0;padding-bottom:10px;padding-top:15px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:16px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#777777">You are receiving this email because we received a password reset request for your account.</p></td>
                                                         </tr>
                                                         <tr style="border-collapse:collapse">
                                                             <td align="center" style="padding:0;Margin:0;padding-bottom:15px;padding-top:20px">
@@ -125,16 +128,13 @@
                                         </table></td>
                                 </tr>
                                 <tr style="border-collapse:collapse">
-                                    <td align="left" style="Margin:0;padding-top:30px;padding-bottom:35px;padding-left:35px;padding-right:35px">
+                                    <td align="left" style="Margin:0;padding-bottom:35px;padding-left:35px;padding-right:35px">
                                         <table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                             <tr style="border-collapse:collapse">
                                                 <td valign="top" align="center" style="padding:0;Margin:0;width:530px">
                                                     <table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr style="border-collapse:collapse">
-                                                            <td align="center" style="padding:0;Margin:0"><h2 style="Margin:0;line-height:29px;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;font-size:24px;font-style:normal;font-weight:bold;color:#282A3C">NEXT STEP</h2></td>
-                                                        </tr>
-                                                        <tr style="border-collapse:collapse">
-                                                            <td align="center" style="padding:0;Margin:0;padding-bottom:15px;padding-top:30px"><span class="es-button-border" style="border-style:solid;border-color:transparent;background:#282A3C;border-width:0px;display:inline-block;border-radius:5px;width:auto"><a href="{{ $data['url'] }}" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;            font-family: 'open sans', 'helvetica neue', helvetica, arial, sans-serif;
+                                                            <td align="center" style="padding:0;Margin:0;padding-bottom:15px;padding-top:30px"><span class="es-button-border" style="border-style:solid;border-color:transparent;background:#282A3C;border-width:0px;display:inline-block;border-radius:5px;width:auto"><a href="{{ $actionUrl }}" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;            font-family: 'open sans', 'helvetica neue', helvetica, arial, sans-serif;
             font-size: 18px;
             padding: 11px;
             color: #187de4;
@@ -148,7 +148,7 @@
             font-style: normal;
             line-height: 22px;
             width: auto;
-            text-align: center;">Generate Password</a></span></td>
+            text-align: center;">Reset Password</a></span></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -181,7 +181,7 @@
 
                                                         </tr>
                                                         <tr style="border-collapse:collapse">
-                                                            <td align="center" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#FFFFFF">RTGS Integrator<br>Haslevangen 15, 0579 Oslo, Norway<br><a style="color: #fff;" href="tel:+4745898989" >+47 458 98 989</a>&nbsp; &nbsp; | &nbsp; &nbsp; <a style="color: #fff;" href="mailto:support@intunor.com">support@intunor.com</a></p></td>
+                                                            <td align="center" style="text-align: center;padding:0;margin:0"><p style="text-align: center;margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#FFFFFF">RTGS Integrator<br>Haslevangen 15, 0579 Oslo, Norway<br><a style="color: #fff;" href="tel:+4745898989" >+47 458 98 989</a>&nbsp; &nbsp; | &nbsp; &nbsp; <a style="color: #fff;" href="mailto:support@intunor.com">support@intunor.com</a></p></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>

@@ -67,7 +67,7 @@
                     <div class="dropdown-divider"></div>
 
                     <div class="buttonsection" style="padding: 15px;">
-                        <a href="#" class="btn btnpopup"><i class="fa fa-user"
+                        <a href="{{ route('admin.profile') }}" class="btn btnpopup"><i class="fa fa-user"
                                 aria-hidden="true"></i> Profile</a>
                         <a href="{{ route('admin.logout') }}" class="btn btnpopup"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
                        

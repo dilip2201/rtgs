@@ -34,6 +34,7 @@ Route::get('admin-password/reset/{token}','Admin\ResetPasswordController@showRes
 
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::get('profile', ['as' => 'profile', 'uses' => 'Admin\ProfileController@index']);
     Route::get('logout', ['as' => 'logout', 'uses' => 'Admin\LoginController@logout']);
 
     /***************** Dashboard *************************/
@@ -41,6 +42,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     /******************** User Dev : Dilip 15-06 ***********************/
     Route::resource('companies', 'Admin\CompanyController');
     Route::group(['prefix' => 'companies', 'as' => 'companies.'], function () {
+
         Route::post('getall', ['as' => 'getall', 'uses' => 'Admin\CompanyController@getall']);
         Route::post('getmodal', ['as' => 'getmodal', 'uses' => 'Admin\CompanyController@getmodal']);
         Route::post('changestatus', ['as' => 'changestatus', 'uses' => 'Admin\CompanyController@changestatus']);
@@ -53,7 +55,15 @@ Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
     Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
     /******************** User Dev : Dilip 15-06 ***********************/
 
+
     Route::group(['namespace' => 'Company'], function () {
         Route::get('users', ['as' => 'users', 'uses' => 'UserController@user']);
     });
+
+
 });
+
+Route::get('profile', ['as' => 'profile', 'uses' => 'Admin\ProfileController@index']);
+Route::post('/admin/profileupdate', ['as' => 'profileupdate', 'uses' => 'Admin\ProfileController@profileupdate']);
+Route::post('/changepassword', ['as' => 'changepassword', 'uses' => 'Admin\ProfileController@changepassword']);
+
