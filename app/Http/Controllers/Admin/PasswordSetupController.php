@@ -22,13 +22,14 @@ class PasswordSetupController extends Controller
      * @return view
      */
 
-    public function setPassInvitationView($token,$id)
+    public function setPassInvitationView($token)
     {
 
         $decrypted = Crypt::decryptString($token);
+        
         $isuserexist = User::where('token',$decrypted)->count();
-        if($isuserexist == 1) {
-            return view('admin.company_password.index',compact('token','id'));
+        if($isuserexist > 0) {
+            return view('admin.company_password.index',compact('token'));
         } else {
             return view('admin.company_password.invalid-token');
         }
@@ -55,12 +56,8 @@ class PasswordSetupController extends Controller
                 $isuserexist->password = Hash::make($request->password);
                 $isuserexist->token = null;
                 $isuserexist->save();
-                $company_id = decrypt($request->id);
-                $companies = Company::find($company_id);
-                $companies->status = true;
-                $companies->save();
-                $msg = 'Password set successfully. Please login.';
-                return redirect()->route('login');
+                $msg = 'Your password has been set successfully! You can login now.';
+                return redirect()->route('login')->with('message', $msg);
             }
         }
     }

@@ -2,7 +2,7 @@
 @section('content')
 @section('pageTitle', 'Dashboard')
 
-<div class="container">
+<div class="container" style="max-width:100%; padding: 0px 20px; margin-top: 25px;">
    <!-- Info boxes -->
    <div class="row">
     

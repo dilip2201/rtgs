@@ -1,80 +1,160 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+<!DOCTYPE html>
+<html lang="en">
+   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+   <head>
+      <meta charset="utf-8" />
+      <title>Login | RTGS</title>
+      <meta name="description" content="Login page example" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      <!--begin::Fonts-->
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+      <!--end::Fonts-->
+      <!--begin::Page Custom Styles(used by this page)-->
+      <link rel="stylesheet" href="{{ URL::asset('public/assets/css/pages/login/classic/login-2afa4.css?v=7.2.0') }}">
+      <link rel="stylesheet" href="{{ URL::asset('public/assets/plugins/global/plugins.bundleafa4.css?v=7.2.0') }}">
+      <link rel="stylesheet" href="{{ URL::asset('public/assets/plugins/custom/prismjs/prismjs.bundleafa4.css?v=7.2.0') }}">
+      <link rel="stylesheet" href="{{ URL::asset('public/assets/css/style.bundleafa4.css?v=7.2.0') }}">
+      <link rel="icon" href="{{ URL::asset('public/images/logo/favicon.png') }}" type="image/png" sizes="16x16">
+      <style type="text/css">
+         .error{
+            color: #ff7084!important;
+         }
+      </style>
+   </head>
+   <!--end::Head-->
+   <!--begin::Body-->
+   <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed page-loading" style="width: 100%;">
+      <!-- Google Tag Manager (noscript) -->
+      <noscript>
+         <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5FS8GGP" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+      </noscript>
+      <!-- End Google Tag Manager (noscript) -->
+      <!--begin::Main-->
+      <div class="d-flex flex-column flex-root">
+         <!--begin::Login-->
+         <div class="login login-2 login-signin-on d-flex flex-column flex-lg-row flex-column-fluid bg-white" id="kt_login">
+            <!--begin::Aside-->
+            <div class="login-aside order-2 order-lg-1 d-flex flex-column-fluid flex-lg-row-auto bgi-size-cover bgi-no-repeat p-7 p-lg-10" style="max-width: 63%;">
+               <a href="#" class="mb-15 ">
+               <img src="{{ URL::asset('public/images/logo/Logo.svg') }}" style="width: 150px;">
+               </a>
+               <!--begin: Aside Container-->
+               <div class="d-flex flex-row-fluid flex-column justify-content-between">
+                  <!--begin::Aside body-->
+                  <div class="d-flex flex-column-fluid flex-column flex-center mt-5 mt-lg-0">
+                     <!--begin::Signin-->
+                     <div class="login-form login-signin">
+                        <div class=" mb-5 mb-lg-10">
+                           <h2 class="font-weight-bold" style="font-weight: 600; font-size: 34px;">Sign In</h2>
+                           <p class="text-muted font-weight-bold">Welcome, we missed you!</p>
                         </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
+                        @if(session()->has('message'))
+                            <div class="alert alert-success" style="background-color: snow;    border-color: #4a99ff;    color: #4a99ff;">
+                                {{ session()->get('message') }}
                             </div>
-                        </div>
+                        @endif
+                        <form method="POST" action="{{ route('login') }}" id="signup" >
+                           @csrf
+                           <div class="form-group py-3 m-0">
+                              <label style="color: #b5b5c3!important">Your Email</label>
+                              <input id="email" class="{{ $errors->has('email') ? ' is-invalid' : '' }} form-control h-auto border-0 px-0 placeholder-dark-75" type="Email" placeholder="Email" name="email" autocomplete="off"  required="" />
+                              @if ($errors->has('email'))
+                              <span class="invalid-feedback">
+                              <strong>{{ $errors->first('email') }}</strong>
+                              </span>
+                              @endif
+                           </div>
+                           <div class="form-group py-3 border-top m-0">
+                             
+                              <label style="color: #b5b5c3!important">Enter Your Password</label>
+                              <input id="password" type="password" class="{{ $errors->has('password') ? ' is-invalid' : '' }} form-control h-auto border-0 px-0 placeholder-dark-75" name="password" placeholder="Password" required="">
+                              <input id="password-confirm" type="password" placeholder="Confirm Password"
+                                 name="asaspassword_confirmation" autocomplete="new-password" style="display: none;">
+                              @if ($errors->has('password'))
+                              <span class="invalid-feedback">
+                              <strong>{{ $errors->first('password') }}</strong>
+                              </span>
+                              @endif
+                           </div>
+                           <div class="form-group flex-wrap justify-content-between align-items-center mt-2" style="text-align: right;  width: 100%;">
+                             
+                              <a href="{{ url('password/reset')}}" id="kt_login_forgot" class=" text-hover-primary" style="float: right; text-align: right;">Forgot Password ?</a>
+                           </div>
+                           <div class="form-group  flex-wrap justify-content-between align-items-center mt-2">
+                             
+                              <button id="kt_login_signin_submit" class="btn btn-primary font-weight-bold py-4 my-3" style="width: 100%;">Sign In</button>
+                           </div>
+                        </form>
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-4">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('auth.forgot') }}
-                                </a>
-                            </div>
-                        </div>
-
-                        <p class="text-center mb-3">
-                            Or Login with
-                        </p>
-
+                     </div>
                      
-
-                    </form>
-                </div>
+                  </div>
+                  
+               </div>
+               <!--end: Aside Container-->
             </div>
-        </div>
-    </div>
-</div>
-@endsection
-
-
-
-
+            <!--begin::Aside-->
+            <!--begin::Content-->
+            <div class="order-1 order-lg-2 flex-column-auto flex-lg-row-fluid d-flex flex-column p-7" style="background-image: url({{ URL::asset('public/images/logo/right-side-login.png') }}); background-repeat: no-repeat, repeat; background-size: contain;">
+            </div>
+            <!--end::Content-->
+         </div>
+         <!--end::Login-->
+      </div>
+      <!--end::Main-->
+      <!--end::Global Config-->
+      <!--begin::Global Theme Bundle(used by all pages)-->
+   </body>
+   <!--end::Body-->
+   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+   <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+   <script type="text/javascript">
+      $("#signup").validate({
+                 rules: {
+                     firstname: "required",
+                     email: "required",
+                     address1: "required",
+                     city: "required",
+                     county: "required",
+                     postcode: "required",
+      
+                     password_s: {
+                         required: true,
+                         minlength: 5
+                     },
+                     password_s_con: {
+                         required: true,
+                         minlength: 5,
+                         equalTo: "#password_s"
+                     },
+                     email: {
+                         required: true,
+                         email: true
+                     },
+      
+                     agree: "required"
+                 },
+                 messages: {
+                     firstname: "Please enter your first name",
+                     lastname: "Please enter your last name",
+                     email: "Please enter your addres",
+                     city: "Please enter your city/town",
+                     county: "Please enter your county",
+                     postcode: "Please enter your postcode",
+      
+                     password: {
+                         required: "Please provide a password",
+                         minlength: "Your password must be at least 5 characters long"
+                     },
+                     confirm_password: {
+                         required: "Please provide a password",
+                         minlength: "Your password must be at least 5 characters long",
+                         equalTo: "Please enter the same password as above"
+                     },
+                     email: "Please enter a valid email address",
+                     agree: "Please accept our policy"
+                 }
+             });
+   </script>
+   <!-- Mirrored from preview.keenthemes.com/metronic/demo13/custom/pages/login/classic/login-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 07 Feb 2021 11:59:29 GMT -->
+</html>

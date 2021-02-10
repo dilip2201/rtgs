@@ -19,6 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+/******************************* Invite User ****************************/
+Route::get('/invite/password/{token}', ['as' => 'newpasswordsetup', 'uses' => 'Admin\PasswordSetupController@setPassInvitationView']);
+Route::post('/invite/password/setnewpassword', ['as' => 'setnewpassword', 'uses' => 'Admin\PasswordSetupController@setNewPassword']);
+
 
 Route::get('admin/dashboard','AdminController@index')->name('admin.dashboard');
 Route::get('admin','Admin\LoginController@showLoginForm')->name('admin.login');
@@ -28,10 +32,11 @@ Route::get('admin-password/reset','Admin\ForgotPasswordController@showLinkReques
 Route::post('admin-password/reset','Admin\ResetPasswordController@reset');
 Route::get('admin-password/reset/{token}','Admin\ResetPasswordController@showResetForm')->name('admin.password.reset');
 
-Route::get('/invite/password/{token}/{id}', ['as' => 'newpasswordsetup', 'uses' => 'Admin\PasswordSetupController@setPassInvitationView']);
-Route::post('/invite/password/setnewpassword', ['as' => 'setnewpassword', 'uses' => 'Admin\PasswordSetupController@setNewPassword']);
+
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::get('logout', ['as' => 'logout', 'uses' => 'Admin\LoginController@logout']);
+
     /***************** Dashboard *************************/
     Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'AdminController@index']);
     /******************** User Dev : Dilip 15-06 ***********************/

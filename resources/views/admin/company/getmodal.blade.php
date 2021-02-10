@@ -17,9 +17,9 @@
         </div>
         <div class="col-sm-12 col-md-6">
             <div class="form-group">
-                <label>User name</label>
+                <label>Full name</label>
                 <input type="text" class="form-control " name="user_name"
-                       placeholder="User name"
+                       placeholder="Full name"
                        value="@if(!empty($company)){{ $company->user_name }}@endif" required="" maxlength="30">
             </div>
         </div>

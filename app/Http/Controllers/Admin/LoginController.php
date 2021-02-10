@@ -59,4 +59,10 @@ class LoginController extends Controller
     {
         return Auth::guard('admin');
     }
+
+        protected function logout()
+    {
+        auth('admin')->logout();
+        return redirect('admin');
+    }
 }

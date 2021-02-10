@@ -2,11 +2,11 @@
 @section('content')
 @section('pageTitle', 'Company')
 
-<div class="container">
+<div class="container" style="max-width: 100%; padding:0px 25px;">
     <!-- Info boxes -->
 
     <div class="row">
-        <div class="col-12" style="margin-top: -40px;">
+        <div class="col-12" style="margin-top: 15px; margin-bottom: 15px;">
         <a href="#" data-toggle="modal" data-typeid="" data-target=".add_modal"
                        class="btn btn-info btn-sm openaddmodal" data-id="" style="float: right; ">
                         <i class="fa fa-plus"></i> Add New
@@ -23,8 +23,8 @@
                                     </label>
                                     <select class="form-control status" id="status" name="status">
                                         <option value="">Select Status</option>
-                                        <option value="1">Active</option>
-                                        <option value="0">Inactive</option>
+                                        <option value="1">Enabled</option>
+                                        <option value="0">Disabled</option>
                                     </select>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                             <th>Comapnay name</th>
                             <th>User name</th>
                             <th>Email</th>
-                            <th>Address</th>
+                            <th style="width: 150px;">Address</th>
                             <th>Phone</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -269,9 +269,14 @@
         $('body').on('click', '.changestatus', function () {
             var id = $(this).data('id');
             var status = $(this).data('status');
+            if(status == 0){
+                var text = "disabled";
+            }else{
+                var text = "enabled";
+            }
             (new PNotify({
                 title: "Confirmation Needed",
-                text: "Are you sure you wants to "+ status +" this record?",
+                text: "Are you sure you wants to "+ text +" this company?",
                 icon: 'glyphicon glyphicon-question-sign',
                 hide: false,
                 confirm: {

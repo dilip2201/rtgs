@@ -17,7 +17,7 @@
         @include('admin.includes.header')
          <!-- Content Wrapper. Contains page content -->
          <div class="content-wrapper contentwrap">
-          @include('admin.includes.breadcrumbs')
+          
             <!-- Main content -->
             <section class="content">
                @yield('content')

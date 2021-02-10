@@ -1,65 +1,156 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
-                        @csrf
-
-                        <input type="hidden" name="token" value="{{ $token }}">
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
+<!DOCTYPE html>
+<html lang="en">
+   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+   <head>
+      <meta charset="utf-8" />
+      <title>Reset Password | RTGS</title>
+      <meta name="description" content="Reset Password" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      <!--begin::Fonts-->
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+      <!--end::Fonts-->
+      <!--begin::Page Custom Styles(used by this page)-->
+      <link rel="stylesheet" href="{{ URL::asset('public/assets/css/pages/login/classic/login-2afa4.css?v=7.2.0') }}">
+      <link rel="stylesheet" href="{{ URL::asset('public/assets/plugins/global/plugins.bundleafa4.css?v=7.2.0') }}">
+      <link rel="stylesheet" href="{{ URL::asset('public/assets/plugins/custom/prismjs/prismjs.bundleafa4.css?v=7.2.0') }}">
+      <link rel="stylesheet" href="{{ URL::asset('public/assets/css/style.bundleafa4.css?v=7.2.0') }}">
+      <link rel="icon" href="{{ URL::asset('public/images/logo/favicon.png') }}" type="image/png" sizes="16x16">
+      <style type="text/css">
+         .error{
+            color: #ff7084!important;
+         }
+      </style>
+   </head>
+   <!--end::Head-->
+   <!--begin::Body-->
+   <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed page-loading" style="width: 100%;">
+      <!-- Google Tag Manager (noscript) -->
+      <noscript>
+         <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5FS8GGP" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+      </noscript>
+      <!-- End Google Tag Manager (noscript) -->
+      <!--begin::Main-->
+      <div class="d-flex flex-column flex-root">
+         <!--begin::Login-->
+         <div class="login login-2 login-signin-on d-flex flex-column flex-lg-row flex-column-fluid bg-white" id="kt_login">
+            <!--begin::Aside-->
+            <div class="login-aside order-2 order-lg-1 d-flex flex-column-fluid flex-lg-row-auto bgi-size-cover bgi-no-repeat p-7 p-lg-10" style="max-width: 63%;">
+               <a href="#" class="mb-15 ">
+               <img src="{{ URL::asset('public/images/logo/Logo.svg') }}" style="width: 150px;">
+               </a>
+               <!--begin: Aside Container-->
+               <div class="d-flex flex-row-fluid flex-column justify-content-between">
+                  <!--begin::Aside body-->
+                  <div class="d-flex flex-column-fluid flex-column flex-center mt-5 mt-lg-0">
+                     <!--begin::Signin-->
+                     <div class="login-form login-signin">
+                        <div class=" mb-5 mb-lg-10">
+                           <h2 class="font-weight-bold" style="font-weight: 600; font-size: 34px;">Reset Password</h2>
+                           <p class="text-muted font-weight-bold">Reset your password!</p>
+                        </div>
+                        
+                        <form method="POST" action="{{ route('login') }}" id="signup" >
+                           @csrf
+                           <input type="hidden" name="token" value="{{ $token }}">
+                           <div class="form-group py-3 m-0">
+                              <label style="color: #b5b5c3!important">E-Mail Address</label>
+                              <input id="email" class="{{ $errors->has('email') ? ' is-invalid' : '' }} form-control h-auto border-0 px-0 placeholder-dark-75" type="Email" placeholder="E-Mail Address" name="email" autocomplete="off"  required="" />
+                              @if ($errors->has('email'))
+                              <span class="invalid-feedback">
+                              <strong>{{ $errors->first('email') }}</strong>
+                              </span>
+                              @endif
+                           </div>
+                           <div class="form-group py-3 border-top m-0">
+                             
+                              <label style="color: #b5b5c3!important">Enter Password</label>
+                              <input id="password_s" type="password" class="{{ $errors->has('password') ? ' is-invalid' : '' }} form-control h-auto border-0 px-0 placeholder-dark-75" name="password" placeholder="Password" required="">
+                              <input id="password-confirm" type="password" placeholder="Confirm Password"
+                                 name="asaspassword_confirmation" autocomplete="new-password" style="display: none;">
+                              @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
-                        </div>
+                           </div>
+                           <div class="form-group py-3 border-top m-0">
+                             
+                              <label style="color: #b5b5c3!important">Confirm Password</label>
+                              <input id="password" type="password" class="{{ $errors->has('password') ? ' is-invalid' : '' }} form-control h-auto border-0 px-0 placeholder-dark-75" name="password_confirmation" placeholder="Confirm Password" required="">
+                           </div>
+                           <div class="form-group flex-wrap justify-content-between align-items-center mt-2" style="text-align: right;  width: 100%;">
+                             
+                              <a href="{{ url('login')}}" id="kt_login_forgot" class=" text-hover-primary" style="float: right; text-align: right;">Login?</a>
+                           </div>
+                           <div class="form-group  flex-wrap justify-content-between align-items-center mt-2">
+                             
+                              <button id="kt_login_signin_submit" class="btn btn-primary font-weight-bold py-4 my-3" style="width: 100%;">Sign In</button>
+                           </div>
+                        </form>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                     </div>
+                     
+                  </div>
+                  
+               </div>
+               <!--end: Aside Container-->
             </div>
-        </div>
-    </div>
-</div>
-@endsection
+            <!--begin::Aside-->
+            <!--begin::Content-->
+            <div class="order-1 order-lg-2 flex-column-auto flex-lg-row-fluid d-flex flex-column p-7" style="background-image: url({{ URL::asset('public/images/logo/right-side-login.png') }}); background-repeat: no-repeat, repeat; background-size: contain;">
+            </div>
+            <!--end::Content-->
+         </div>
+         <!--end::Login-->
+      </div>
+      <!--end::Main-->
+      <!--end::Global Config-->
+      <!--begin::Global Theme Bundle(used by all pages)-->
+   </body>
+   <!--end::Body-->
+   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+   <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+   <script type="text/javascript">
+      $("#signup").validate({
+                 rules: {
+                     
+                     password: {
+                         required: true,
+                         minlength: 6
+                     },
+                     password_confirmation: {
+                         required: true,
+                         minlength: 5,
+                         equalTo: "#password_s"
+                     },
+                     email: {
+                         required: true,
+                         email: true
+                     },
+      
+                     agree: "required"
+                 },
+                 messages: {
+                     firstname: "Please enter your first name",
+                     lastname: "Please enter your last name",
+                     email: "Please enter your addres",
+                     city: "Please enter your city/town",
+                     county: "Please enter your county",
+                     postcode: "Please enter your postcode",
+      
+                     password: {
+                         required: "Please provide a password",
+                         minlength: "Your password must be at least 6 characters long"
+                     },
+                     confirm_password: {
+                         required: "Please provide a password",
+                         minlength: "Your password must be at least 6 characters long",
+                         equalTo: "Password & Confirm Password sould be same."
+                     },
+                     email: "Please enter a valid email address",
+                   
+                 }
+             });
+   </script>
+   <!-- Mirrored from preview.keenthemes.com/metronic/demo13/custom/pages/login/classic/login-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 07 Feb 2021 11:59:29 GMT -->
+</html>

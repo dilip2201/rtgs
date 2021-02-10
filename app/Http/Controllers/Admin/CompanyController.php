@@ -39,16 +39,15 @@ class CompanyController extends Controller
     public function getall(Request $request)
     {
 
-        $companies = Company::orderby('id', 'desc');
-        if (isset($request->status) && !empty($request->status)) {
-            $companies = $companies->where('status',$request->status);
-        }
-        if (isset($request->role) && !empty($request->role)) {
-            $companies = $companies->where('role',$request->role);
-        }
+        \DB::enableQueryLog();
+        $user = User::where('type','company')->orderby('id', 'desc');
         
-        $companies = $companies->get();
-        return DataTables::of($companies)
+        if ((isset($request->status) && !empty($request->status)) || $request->status == '0') {
+            $user = $user->where('status',$request->status);
+        }        
+        $user = $user->get();
+        
+        return DataTables::of($user)
             ->addColumn('action', function ($q) {
                 $id = encrypt($q->id);
                 $return = '<a title="Edit"  data-id="'.$id.'"   data-toggle="modal" data-target=".add_modal" class="btn btn-info btn-sm openaddmodal" href="javascript:void(0)"><i class="fas fa-pencil-alt"></i></a> | <a class="btn btn-danger btn-sm delete_record" data-id="'.$q->id.'" href="javascript:void(0)"> <i class="fas fa-trash"></i> </a>';
@@ -59,7 +58,7 @@ class CompanyController extends Controller
                 return $q->c_name;
             })
             ->addColumn('user_name', function ($q) {
-                return $q->user_name;
+                return $q->name;
             })
             ->addColumn('address', function ($q) {
                 return $q->address;
@@ -124,9 +123,9 @@ class CompanyController extends Controller
         ];
         if (isset($request->companyid)) {
             $company_id = decrypt($request->companyid);
-            $rules['email'] = 'required|email|unique:companies,email,'.$company_id;
+            $rules['email'] = 'required|email|unique:users,email,'.$company_id;
         }else{
-            $rules['email'] = 'required|email|unique:companies,email';
+            $rules['email'] = 'required|email|unique:users,email';
   
         }
         $validator = Validator::make($request->all(), $rules);
@@ -135,32 +134,32 @@ class CompanyController extends Controller
         } else {
             try {
                 if (isset($company_id)) {
-                    $companies = Company::find($company_id);
-                    $companies->user_name = $request->user_name;
-                    $companies->c_name = $request->c_name;
-                    $companies->address = $request->address;
-                    $companies->email = $request->email;
-                    $companies->phone = $request->phone;
-                    $companies->save();
+                    $user = User::find($company_id);
+                    $user->name = $request->user_name;
+                    $user->c_name = $request->c_name;
+                    $user->address = $request->address;
+                    $user->email = $request->email;
+                    $user->phone = $request->phone;
+                    $user->save();
                     $msg = "Company updated successfully.";
                 }else{
-                    $companies = new Company;
-                    $companies->user_name = $request->user_name;
-                    $companies->c_name = $request->c_name;
-                    $companies->address = $request->address;
-                    $companies->email = $request->email;
-                    $companies->phone = $request->phone;
-                    $companies->save();
-                    $last_c_id = $companies->id;
                     $token = random_int(10000000, 99999999);
-                    $encrypted = Crypt::encryptString($token);
+
                     $user = new User;
                     $user->name = $request->user_name;
+                    $user->c_name = $request->c_name;
+                    $user->address = $request->address;
                     $user->email = $request->email;
                     $user->token = $token;
+                    $user->type = 'company';
+                    $user->phone = $request->phone;
                     $user->save();
+
+                    
+                    $encrypted = Crypt::encryptString($token);
+                   
                     $last_u_id = $user->id;
-                    $resetpasslink = url('invite/password/'.$encrypted.'/'.encrypt($last_c_id));
+                    $resetpasslink = url('invite/password/'.$encrypted);
                     $data['name'] = $request->name;
                     $data['email'] = $request->email;
                     $data['url'] = $resetpasslink;
@@ -168,11 +167,8 @@ class CompanyController extends Controller
                     $view = 'company-invitation';
                     $subject = "RTGS Group! You're invited to register ";
                     sendmail($data,$subject);
-                    $msg = 'Invitation sent successfully.';
-                    $data = ['email' => $request->email, 'name' => $request->name];
+                    
                     $msg = "Company added successfully.";
-
-
                 }
 
 
@@ -208,12 +204,12 @@ class CompanyController extends Controller
 
         try {
             $id = decrypt($request->id);
-            $holiday = Company::find($id);
+            $holiday = User::find($id);
             if ($holiday) {
                 $holiday->update(['status' => $request->status]);
-                $arr = array("status" => 200, "msg" => 'Holiday status change successfully.');
+                $arr = array("status" => 200, "msg" => 'Company status change successfully.');
             } else {
-                $arr = array("status" => 400, "msg" => 'Holiday not found. please try again!');
+                $arr = array("status" => 400, "msg" => 'Company not found. please try again!');
             }
 
         } catch (\Illuminate\Database\QueryException $ex) {
@@ -277,7 +273,7 @@ class CompanyController extends Controller
     public function destroy($id)
     {
         try {
-            $company = Company::find($id);
+            $company = User::find($id);
             if ($company) {
                 $company->delete();
                 $arr = array("status" => 200, "msg" => 'Company deleted successfully.');

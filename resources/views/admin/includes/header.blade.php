@@ -69,12 +69,8 @@
                     <div class="buttonsection" style="padding: 15px;">
                         <a href="#" class="btn btnpopup"><i class="fa fa-user"
                                 aria-hidden="true"></i> Profile</a>
-                        <a href="{{ route('logout') }}"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                            class="btn btnpopup"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
+                        <a href="{{ route('admin.logout') }}" class="btn btnpopup"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+                       
                     </div>
 
                 </div>
