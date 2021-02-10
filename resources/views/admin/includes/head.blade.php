@@ -5,8 +5,8 @@
     <title>@yield('pageTitle') | RTGS </title>
 
     <!-- Font Awesome Icons -->
-    <link rel="icon" type="image/png" href="{{ URL::asset('public/images/logo/Logo.svg') }}"/>
-    <link rel="icon" type="image/png" href="{{ URL::asset('public/images/logo/Logo.svg') }}"/>
+    <link rel="icon" href="{{ URL::asset('public/images/logo/favicon.png') }}" type="image/png" sizes="16x16">
+    
     <link rel="stylesheet" href="{{ URL::asset('public/admin/plugins/fontawesome-free/css/all.min.css') }}">
     @stack('select')
     <!-- Theme style -->
