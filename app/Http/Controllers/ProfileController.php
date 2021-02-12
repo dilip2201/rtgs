@@ -96,7 +96,7 @@ class ProfileController extends Controller
             try {
                 $current_password = $input["current_password"];
                 $new_password = Hash::make($input["new_password"]);
-                $data = Admin::find($id);
+                $data = User::find($id);
                 if ($data) {
                     if (Hash::check($current_password, $data->password)) {
                         $data->password = $new_password;
