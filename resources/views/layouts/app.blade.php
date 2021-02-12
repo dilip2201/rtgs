@@ -76,7 +76,14 @@
             <!--begin::Header-->
             <div class="d-flex align-items-center ">
                <div class="symbol symbol-100 mr-5">
-                  <div class="symbol-label" style="background-image:url('../theme/html/demo13/dist/assets/media/users/300_21.jpg')"></div>
+               @php
+               if(!empty(auth()->user()->image)){
+               $image = auth()->user()->image;
+               }else{
+               $image = 'default.png';
+               }
+               @endphp
+                  <div class="symbol-label" style="background-image: url({{ URL::asset('public/company/employee/'.$image) }})"></div>
                   <i class="symbol-badge bg-success"></i>
                </div>
                <div class="d-flex flex-column">
@@ -122,17 +129,13 @@
                   <div class="navi-link">
                      <div class="symbol symbol-40 bg-light mr-3">
                         <div class="symbol-label">
-                           <span class="svg-icon svg-icon-md svg-icon-success">
-                              <!--begin::Svg Icon | path:/metronic/theme/html/demo13/dist/assets/media/svg/icons/General/Notification2.svg-->
-                              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <rect x="0" y="0" width="24" height="24" />
-                                    <path d="M13.2070325,4 C13.0721672,4.47683179 13,4.97998812 13,5.5 C13,8.53756612 15.4624339,11 18.5,11 C19.0200119,11 19.5231682,10.9278328 20,10.7929675 L20,17 C20,18.6568542 18.6568542,20 17,20 L7,20 C5.34314575,20 4,18.6568542 4,17 L4,7 C4,5.34314575 5.34314575,4 7,4 L13.2070325,4 Z" fill="#000000" />
-                                    <circle fill="#000000" opacity="0.3" cx="18.5" cy="5.5" r="2.5" />
-                                 </g>
-                              </svg>
-                              <!--end::Svg Icon-->
-                           </span>
+                        <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-02-01-052524/theme/html/demo13/dist/../src/media/svg/icons/General/User.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <polygon points="0 0 24 0 24 24 0 24"/>
+                                <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero"/>
+                            </g>
+                        </svg><!--end::Svg Icon--></span>
                         </div>
                      </div>
                      <div class="navi-text">
