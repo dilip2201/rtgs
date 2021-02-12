@@ -33,7 +33,7 @@
         </div>
         <div class="col-sm-12 col-md-6">
             <div class="form-group">
-                <label>Mobile No.</label>
+                <label>Phone No.</label>
                 <input type="text" class="form-control " name="phone"
                        placeholder="Mobile No."
                        value="@if(!empty($company)){{ $company->phone }}@endif" required="">

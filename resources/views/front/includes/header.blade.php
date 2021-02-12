@@ -22,6 +22,12 @@
                   <span class="menu-text">Users</span>
                   </a>
                </li>
+               <li class="menu-item menu-item-submenu menu-item-rel {{ activeMenucompany('benificiaries')}}" data-menu-toggle="click" aria-haspopup="true">
+                  <a href="{{ url('company/benificiaries') }}" class="menu-link ">
+                  <span class="menu-text">Benificiaries</span>
+                  </a>
+               </li>
+               
             </ul>
             <!--end::Header Nav-->
          </div>

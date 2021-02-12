@@ -58,6 +58,15 @@ Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
 
     Route::group(['namespace' => 'Company'], function () {
         Route::get('users', ['as' => 'users', 'uses' => 'UserController@user']);
+        Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
+            Route::post('getmodal', ['as' => 'getmodal', 'uses' => 'UserController@getmodal']);
+            Route::post('store', ['as' => 'store', 'uses' => 'UserController@store']);
+            Route::post('getall', ['as' => 'getall', 'uses' => 'UserController@getall']);
+            Route::post('changestatus', ['as' => 'changestatus', 'uses' => 'UserController@changestatus']);
+            Route::delete('delete/{id}', ['as' => 'delete', 'uses' => 'UserController@destroy']);
+        });
+
+        Route::get('benificiaries', ['as' => 'benificiaries', 'uses' => 'BenificiariesController@index']); 
     });
 
 
