@@ -22,6 +22,12 @@
                   <span class="menu-text">Users</span>
                   </a>
                </li>
+               <li class="menu-item menu-item-submenu menu-item-rel {{ activeMenucompany('benificiaries')}}" data-menu-toggle="click" aria-haspopup="true">
+                  <a href="{{ url('company/benificiaries') }}" class="menu-link ">
+                  <span class="menu-text">Benificiaries</span>
+                  </a>
+               </li>
+               
             </ul>
             <!--end::Header Nav-->
          </div>
@@ -35,7 +41,14 @@
                <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
                <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ auth()->user()->name }}</span>
                <span class="symbol symbol-35 symbol-light-success">
-               <span class="symbol-label font-size-h5 font-weight-bold">S</span>
+               @php
+               if(!empty(auth()->user()->image)){
+               $image = auth()->user()->image;
+               }else{
+               $image = 'default.png';
+               }
+               @endphp
+               <div class="symbol-label" style="background-image: url({{ URL::asset('public/company/employee/'.$image) }})"></div>
                </span>
             </div>
          </div>
