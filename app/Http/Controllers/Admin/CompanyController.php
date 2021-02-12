@@ -91,7 +91,7 @@ class CompanyController extends Controller
         $company = array();
         if (isset($request->id) && $request->id != '') {
             $id = decrypt($request->id);
-            $company = Company::where('id',$id)->first();
+            $company = User::where('id',$id)->first();
 
         }
         return view('admin.company.getmodal', compact('company'));

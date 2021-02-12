@@ -36,7 +36,7 @@ class UserController extends Controller
         $user = array();
         if (isset($request->id) && $request->id != '') {
             $id = decrypt($request->id);
-            $user = user::where('id',$id)->first();
+            $user = User::where('id',$id)->first();
 
         }
         return view('front.user.getmodal', compact('user'));
@@ -45,7 +45,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'c_name' => 'required',
+            
             'user_name' => 'required',
             'address' => 'required',
         ];
@@ -64,13 +64,14 @@ class UserController extends Controller
                 if (isset($company_id)) {
                     $user = User::find($company_id);
                     $user->name = $request->user_name;
-                    $user->c_name = $request->c_name;
+                    $user->c_name = auth()->user()->c_name;
                     $user->address = $request->address;
                     $user->email = $request->email;
                     $user->phone = $request->phone;
                     if(!empty($request->password)){
                     	$user->password = \Hash::make($request->password);
                     }
+
                     $user->save();
                     $msg = "User updated successfully.";
                 }else{
@@ -82,6 +83,7 @@ class UserController extends Controller
                     $user->address = $request->address;
                     $user->email = $request->email;
                    // $user->token = $token;
+                    $user->parent_id = auth()->user()->id;
                     $user->type = 'user';
                     $user->phone = $request->phone;
                     $user->password = \Hash::make($request->password);
@@ -132,7 +134,7 @@ class UserController extends Controller
     public function getall(Request $request)
     {
 
-        $user = User::where('type','company')->orderby('id', 'desc');
+        $user = User::where('type','user')->where('parent_id',auth()->user()->id)->orderby('id', 'desc');
         if ((isset($request->status) && !empty($request->status)) || $request->status == '0') {
             $user = $user->where('status',$request->status);
         }        
