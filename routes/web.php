@@ -46,13 +46,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::post('getall', ['as' => 'getall', 'uses' => 'Admin\CompanyController@getall']);
         Route::post('getmodal', ['as' => 'getmodal', 'uses' => 'Admin\CompanyController@getmodal']);
         Route::post('changestatus', ['as' => 'changestatus', 'uses' => 'Admin\CompanyController@changestatus']);
-        
+
     });
 });
 
 Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
     /***************** Dashboard *************************/
     Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
+    Route::post('loaddashboard', ['as' => 'loaddashboard', 'uses' => 'DashboardController@loadDashboard']);
     /******************** User Dev : Dilip 15-06 ***********************/
 
 
@@ -66,7 +67,7 @@ Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
             Route::delete('delete/{id}', ['as' => 'delete', 'uses' => 'UserController@destroy']);
         });
 
-        Route::get('benificiaries', ['as' => 'benificiaries', 'uses' => 'BenificiariesController@index']); 
+        Route::get('benificiaries', ['as' => 'benificiaries', 'uses' => 'BenificiariesController@index']);
     });
 
 
