@@ -23,16 +23,16 @@ class ProfileController extends Controller
     }
     public function profileupdate(Request $request){
         $input = $request->all();
-        echo '<pre>';
-        print_r($input);
-        exit;
+
         $rules = [
             'name' => 'required',
-            'email' => 'required|unique:users,email,' . Auth::guard('admin')->user()->id,
+            // 'email' => 'required|unique:users,email,' . Auth::user()->id,
+            'phone' => 'required|unique:users,phone,' . Auth::user()->id,
 
         ];
         $messages = [
             'name' => 'Please enter first name.',
+            'phone' => 'Please enter phone number.',
             //'image.mimes' => 'Upload image with valid extension. Only .jpg, .jpeg, .png and .gif extensions are allowed.',
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -42,11 +42,21 @@ class ProfileController extends Controller
         } else {
 
             try {
+                $user = User::find(Auth::user()->id);
+                $user->name = $request->name;
+                $user->phone = $request->phone;
+                if ($request->hasFile('profile_avatar')) {
+                    if(file_exists(public_path('company/employee/'.$user->image)) && $user->image!='') {
+                        unlink(public_path('company/employee/'.$user->image));
+                    }
+                    $destinationPath = public_path().'/company/employee/';
+                    $file = $request->profile_avatar;
+                    $fileName = time() . '.'.$file->clientExtension();
+                    $file->move($destinationPath, $fileName);
+                    $user->image = $fileName;
+                }
 
-                $admin = Admin::find(Auth::guard('admin')->user()->id);
-                $admin->name = $request->name;
-                $admin->email = $request->email;
-                $admin->save();
+                $user->save();
                 $msg = 'Profile updated successfully.';
                 $arr = array("status" => 200, "msg" => $msg);
 
@@ -69,7 +79,7 @@ class ProfileController extends Controller
     }
     public function changepassword(Request $request){
         $input = $request->all();
-        $id = Auth::guard('admin')->user()->id;
+        $id = Auth::user()->id;
         $rules =[
             'current_password' => "required",
             'new_password' => "required|min:6",
