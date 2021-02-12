@@ -61,8 +61,19 @@ class UserController extends Controller
             $arr = array("status" => 400, "msg" => $validator->errors()->first(), "result" => array());
         } else {
             try {
+
                 if (isset($company_id)) {
                     $user = User::find($company_id);
+                    if ($request->hasFile('profile_avatar')) {
+                        if(file_exists(public_path('company/employee/'.$user->image)) && $user->image!='') {
+                            unlink(public_path('company/employee/'.$user->image));
+                        }
+                        $destinationPath = public_path().'/company/employee/';
+                        $file = $request->profile_avatar;
+                        $fileName = time() . '.'.$file->clientExtension();
+                        $file->move($destinationPath, $fileName);
+                        $user->image = $fileName;
+                    }
                     $user->name = $request->user_name;
                     $user->c_name = auth()->user()->c_name;
                     $user->address = $request->address;
@@ -78,6 +89,18 @@ class UserController extends Controller
                     //$token = random_int(10000000, 99999999);
 
                     $user = new User;
+                    if ($request->hasFile('profile_avatar')) {
+                        $user = new User;
+                        if(file_exists(public_path('company/employee/'.$user->image)) && $user->image!='') {
+                            unlink(public_path('company/employee/'.$user->image));
+                        }
+                        $destinationPath = public_path().'/company/employee/';
+                        $file = $request->profile_avatar;
+                        $fileName = time() . '.'.$file->clientExtension();
+                        $file->move($destinationPath, $fileName);
+                        $user->image = $fileName;
+                        $user->save();
+                    }
                     $user->name = $request->user_name;
                     $user->c_name = $request->c_name;
                     $user->address = $request->address;
@@ -146,6 +169,13 @@ class UserController extends Controller
                 $return = '<a title="Edit"  data-id="'.$id.'"   data-toggle="modal" data-target=".add_modal" class="openaddmodal" href="javascript:void(0)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> <a class="delete_record" data-id="'.$q->id.'" href="javascript:void(0)"> <i class="fa fa-trash" aria-hidden="true"></i> </a>';
                 
                 return $return;
+            })
+            ->addColumn('image', function ($q) {
+             $image = url('public/company/employee/default.png'); 
+            if(file_exists(public_path().'/company/employee/'.$q->image) && !empty($q->image)) :
+                $image = url('public/company/employee/'.$q->image); 
+            endif;
+            return '<img class="profile-user-img img-fluid img-circle" src="'.$image.'" style="width:50px; height:50px; border-radius:50%;">';
             })
             ->addColumn('c_name', function ($q) {
                 return $q->c_name;

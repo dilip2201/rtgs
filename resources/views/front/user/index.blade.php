@@ -27,6 +27,7 @@
 			<thead>
 				<tr>
 					<th>#</th>
+                    <th>Image</th>
 					<th>Name</th>
 					<th>Phone Number</th>
 					<th>Email Address</th>
@@ -63,6 +64,7 @@
 <link href="{{ URL::asset('public/assets/css/pages/wizard/wizard-2afa4.css') }}" rel="stylesheet" type="text/css" />
 @endpush
 @push('script')
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="{{ URL::asset('public/assets/plugins/custom/datatables/datatables.bundle.rtlafa4.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ URL::asset('public/assets/plugins/custom/datatables/datatables.bundleafa4.css?v=7.2.0') }}" rel="stylesheet" type="text/css" />
@@ -187,6 +189,7 @@
             },
             columns: [
                 {data: 'DT_RowIndex', "orderable": false},
+                {data: 'image'},
                 {data: 'user_name'},
                 {data: 'phone_number'},
                 {data: 'email'},
