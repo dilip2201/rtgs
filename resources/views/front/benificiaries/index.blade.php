@@ -20,6 +20,16 @@
 @section('button')
 <a href="{{ route('company.benificiaries.create') }}" class="btn btn-light-success font-weight-bolder btn-sm">Add New</a> 
 @endsection
+@if(session()->has('status'))
+    <div class="alert alert-success" style="background-color: snow;    border-color: #4a99ff;    color: #4a99ff;">
+        {{ session()->get('status') }}
+    </div>
+@endif
+@if(session()->has('error'))
+    <div class="alert alert-danger" style="background-color: snow;    border-color: #4a99ff;    color: #4a99ff;">
+        {{ session()->get('error') }}
+    </div>
+@endif
 <!--begin::Card-->
 <div class="card card-custom">
 	<div class="card-header">
@@ -78,7 +88,7 @@
 
             Swal.fire({
                 title: "Do you want to delete this user?",
-                text: "By deleting this form, you would no longer be able to access it, and the information will be lost.",
+                text: "By deleting, you would no longer be able to access it, and the information will be lost.",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonText: "Yes, delete it!",
@@ -187,11 +197,11 @@
             },
             columns: [
                 {data: 'DT_RowIndex', "orderable": false},
-                {data: 'user_name'},
-                {data: 'phone_number'},
-                {data: 'email'},
-                {data: 'address'},
-                {data: 'status'},
+                {data: 'name'},
+                {data: 'nickname'},
+                {data: 'bank_name'},
+                {data: 'account_number'},
+                {data: 'is_remitter'},
                 {data: 'action'},
             ]
         });
@@ -270,10 +280,7 @@
                         toastr.error(data.msg)
                     }
                     if (data.status == 200) {
-                        $('.spinnermm').html('');
-                        $('.add_modal').modal('hide');
-                        $('#employee').DataTable().ajax.reload();
-                        //toastr.success(data.msg,'Success!')
+                        toastr.success(data.msg,'Success!')
                     }
                 },
             });
