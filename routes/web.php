@@ -77,6 +77,10 @@ Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
             Route::post('changestatus', ['as' => 'changestatus', 'uses' => 'BenificiariesController@changestatus']);
             Route::delete('delete/{id}', ['as' => 'delete', 'uses' => 'BenificiariesController@destroy']);
         });
+
+        Route::group(['prefix' => 'form', 'as' => 'form.'], function () {
+            Route::get('create', ['as' => 'create', 'uses' => 'FormController@create']);
+        });
     });
 
 

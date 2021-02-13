@@ -18,7 +18,8 @@
     }
 </style>
 @section('button')
-<a href="{{ route('company.benificiaries.create') }}" class="btn btn-light-success font-weight-bolder btn-sm">Add New</a> 
+<a href="{{ route('company.form.create') }}"  data-id="" class="btn btn-primary font-weight-bolder" >New Form<i style="font-size: 10px;
+    margin-left: 6px;" class="flaticon2-right-arrow"></i></a> 
 @endsection
 <!--begin::Card-->
 <div class="card card-custom">
