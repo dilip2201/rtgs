@@ -30,16 +30,6 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label><b>Type: </b>
-                                    </label>
-                                    <select class="form-control type" id="type" name="type">
-                                        <option value="company">company</option>
-                                        <option value="user">user</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
                                     <label><b>Company: </b>
                                     </label>
                                     <select class="form-control company" id="company" name="company">
