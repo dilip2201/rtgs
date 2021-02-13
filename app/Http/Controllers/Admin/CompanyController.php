@@ -173,6 +173,7 @@ class CompanyController extends Controller
                     $newTableName = $user->id."_benificiaries";
                     $createTableSqlString = "CREATE TABLE $newTableName (
                         id BIGINT(20) NOT NULL AUTO_INCREMENT,
+                        user_id int(11) DEFAULT NULL,
                         nickname VARCHAR(191) NULL DEFAULT NULL,
                         name VARCHAR(191) NULL DEFAULT NULL,
                         account_number VARCHAR(191) NULL DEFAULT NULL,

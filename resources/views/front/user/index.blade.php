@@ -6,6 +6,9 @@
 		color: #a51010!important;
 	}
 </style>
+@section('button')
+<a href="#" data-toggle="modal" data-target="#exampleModalSizeSm" data-id="" class="btn btn-light-success font-weight-bolder btn-sm openaddmodal" >Add New</a> 
+@endsection
 <!--begin::Card-->
 <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
 <div class="card card-custom">

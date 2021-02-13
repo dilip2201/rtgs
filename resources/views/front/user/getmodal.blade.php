@@ -42,8 +42,8 @@
                                     <input type="hidden" name="companyid" value="{{ encrypt($user->id) }}">
                                 @endif
                             <!--begin: Wizard Step 1-->
-                            <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
-                                <h4 class="mb-5 font-weight-bold text-dark">Enter your new user details</h4>
+                            <div class="pb-3" data-wizard-type="step-content" data-wizard-state="current">
+                                <h4 class="mb-3 font-weight-bold text-dark">Enter your new user details</h4>
                                 
                                 <div class="row">
                                     <div class="col-xl-6">

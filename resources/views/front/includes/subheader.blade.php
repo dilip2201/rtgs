@@ -6,9 +6,9 @@
 			<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">@yield('pageTitle')</h5>
 			<!--end::Page Title-->
 			<!--begin::Actions-->
-			<!-- <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div> -->
-			<!-- <span class="text-muted font-weight-bold mr-4">#XRS-45670</span> -->
-			<!-- <a href="#" class="btn btn-light-warning font-weight-bolder btn-sm">Add New</a> -->
+			 <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div> 
+				@yield('button')
+			 
 			<!--end::Actions-->
 		</div>
 		<!--end::Info-->
