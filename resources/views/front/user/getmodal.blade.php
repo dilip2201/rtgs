@@ -53,13 +53,13 @@
                                             <span class="form-text text-muted">Fill in the user name and surname.</span>
                                         </div>
                                     </div>
-                                    <div class="col-xl-6">
+<!--                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Password</b></label>
                                             <input type="password" class="form-control form-control-solid form-control-lg" name="lname" placeholder="Password"  @if(empty($user)) required @endif/>
                                             <span class="form-text text-muted">Fill in the user's password.</span>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="col-xl-6">
                                         <!--begin::Input-->
                                         <div class="form-group">
@@ -71,7 +71,9 @@
                                         </div>
                                         <!--end::Input-->
                                     </div>
-                                    <div class="col-xl-6">
+
+
+                                     <div class="col-xl-6">
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label><b>Phone</b></label>
@@ -80,21 +82,44 @@
                                         </div>
                                         <!--end::Input-->
                                     </div>
-                                    <div class="col-sm-12 col-md-12">
+                                    <div class="col-sm-6 col-md-6">
                                         <div class="form-group">
                                             <label>Address</label>
                                             <textarea class="form-control form-control-solid form-control-lg" name="address" placeholder="Address" required>@if(!empty($user)){{ $user->address }}@endif</textarea>
                                         </div>
                                     </div>
-                                    
-                                </div>
-                                <div class="row">
-                                    <div class="col-xl-12">
-                                         <button type="submit" class="btn btn-success " >Submit <span class="spinnermm"></span></button>
+                                    @php
+                                    if(!empty($user->image)){
+                                    $image = $user->image;
+                                    }else{
+                                    $image = 'default.png';
+                                    }
+                                    @endphp
+                                    <div class="col-xl-6">
+                                                <!--begin::Input-->
+                                        <div class="form-group">
+                                                 
+                                        <div class="image-input image-input-outline" id="kt_profile_avatar" style="background-image: url({{ URL::asset('public/admin/company/employee/'.$image) }})">
+                                         <div class="image-input-wrapper" style="background-image: url({{ URL::asset('public/company/employee/'.$image) }})"></div>
+                                         <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                                         <i class="fa fa-pencil icon-sm text-muted"></i>
+                                         <input type="file" name="profile_avatar" class="profile_avatar" id="profile_avatar" accept=".png, .jpg, .jpeg">
+                                         <input type="hidden" name="profile_avatar_remove">
+                                         </label>
+                                         <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="" data-original-title="Cancel avatar">
+                                         <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                         </span>
                                     </div>
-                                 </div>
+                                    <span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>
+                                    </div>  
+                                    </div>     
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-xl-12">
+                                        <button type="submit" class="btn btn-success " >Submit <span class="spinnermm"></span></button>
+                                    </div>
+                                </div>
                             </div>
-                            
                         </form>
                     </div>
                     <!--end: Wizard-->
@@ -106,6 +131,7 @@
         <!--end: Wizard-->
     </div>
 </div>
+<script type="text/javascript" src="https://preview.keenthemes.com/metronic/theme/html/demo13/dist/assets/js/pages/custom/profile/profile.js?v=7.2.0"></script>
 
 
 

@@ -16,50 +16,6 @@
 			<h3 class="card-label">Users</h3>
 		</div>
 		<div class="card-toolbar">
-			<!--begin::Dropdown-->
-			<!-- <div class="dropdown dropdown-inline mr-2"> -->
-				<!-- <button type="button" class="btn btn-light-primary font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<i class="la la-download"></i>Export</button> -->
-				<!--begin::Dropdown Menu-->
-				<!-- <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-					<ul class="nav flex-column nav-hover">
-						<li class="nav-header font-weight-bolder text-uppercase text-primary pb-2">Choose an option:</li>
-						<li class="nav-item">
-							<a href="#" class="nav-link">
-								<i class="nav-icon la la-print"></i>
-								<span class="nav-text">Print</span>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="#" class="nav-link">
-								<i class="nav-icon la la-copy"></i>
-								<span class="nav-text">Copy</span>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="#" class="nav-link">
-								<i class="nav-icon la la-file-excel-o"></i>
-								<span class="nav-text">Excel</span>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="#" class="nav-link">
-								<i class="nav-icon la la-file-text-o"></i>
-								<span class="nav-text">CSV</span>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="#" class="nav-link">
-								<i class="nav-icon la la-file-pdf-o"></i>
-								<span class="nav-text">PDF</span>
-							</a>
-						</li>
-					</ul>
-				</div> -->
-				<!--end::Dropdown Menu-->
-			<!-- </div> -->
-			<!--end::Dropdown-->
-			<!--begin::Button-->
 			<a href="#" data-toggle="modal" data-target="#exampleModalSizeSm" data-id="" class="btn btn-primary font-weight-bolder openaddmodal">
 			<i class="la la-plus"></i>New User</a>
 			<!--end::Button-->
@@ -71,6 +27,7 @@
 			<thead>
 				<tr>
 					<th>#</th>
+                    <th>Image</th>
 					<th>Name</th>
 					<th>Phone Number</th>
 					<th>Email Address</th>
@@ -107,6 +64,7 @@
 <link href="{{ URL::asset('public/assets/css/pages/wizard/wizard-2afa4.css') }}" rel="stylesheet" type="text/css" />
 @endpush
 @push('script')
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="{{ URL::asset('public/assets/plugins/custom/datatables/datatables.bundle.rtlafa4.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ URL::asset('public/assets/plugins/custom/datatables/datatables.bundleafa4.css?v=7.2.0') }}" rel="stylesheet" type="text/css" />
@@ -206,7 +164,7 @@
                             email: {
                                 required: true,
                                 email: true,
-                            }
+                            },
                         },
 
                     });
@@ -231,6 +189,7 @@
             },
             columns: [
                 {data: 'DT_RowIndex', "orderable": false},
+                {data: 'image'},
                 {data: 'user_name'},
                 {data: 'phone_number'},
                 {data: 'email'},

@@ -50,6 +50,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     });
 });
 
+Route::group(['middleware' => ['checkactivestatus']], function () {
 Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
     /***************** Dashboard *************************/
     Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
@@ -68,9 +69,17 @@ Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
         });
 
         Route::get('benificiaries', ['as' => 'benificiaries', 'uses' => 'BenificiariesController@index']);
+        Route::group(['prefix' => 'benificiaries', 'as' => 'benificiaries.'], function () {
+            Route::post('getmodal', ['as' => 'getmodal', 'uses' => 'BenificiariesController@getmodal']);
+            Route::post('store', ['as' => 'store', 'uses' => 'BenificiariesController@store']);
+            Route::post('getall', ['as' => 'getall', 'uses' => 'BenificiariesController@getall']);
+            Route::post('changestatus', ['as' => 'changestatus', 'uses' => 'BenificiariesController@changestatus']);
+            Route::delete('delete/{id}', ['as' => 'delete', 'uses' => 'BenificiariesController@destroy']);
+        });
     });
 
 
+});
 });
 
 Route::get('profile', ['as' => 'profile', 'uses' => 'ProfileController@index']);

@@ -54,6 +54,11 @@
                             </div>
                         @endif
                         <form method="POST" action="{{ route('login') }}" id="signup" >
+                         <!--  @if(Session::has('message'))
+                              <div class="loginerror {{ Session::get('alert-class', 'alert-info') }}">
+                                  <strong>{{ Session::get('message') }}</strong>
+                              </div>
+                          @endif -->
                            @csrf
                            <div class="form-group py-3 m-0">
                               <label style="color: #b5b5c3!important">Your Email</label>
