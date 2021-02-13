@@ -79,10 +79,10 @@
                 <!--begin: Wizard Form-->
                 <div class="row">
                     <div class="offset-xxl-2 col-xxl-8">
-                        <form class="form formsubmit" action="{{ route('company.users.store') }}" id="kt_form" method="post">
+                        <form class="form formsubmit" action="{{ route('company.benificiaries.store') }}" id="kt_form" method="post">
                                 {{ csrf_field() }}
-                                @if(isset($user) && !empty($user->id) )
-                                    <input type="hidden" name="companyid" value="{{ encrypt($user->id) }}">
+                                @if(isset($benificiary) && !empty($benificiary->id) )
+                                    <input type="hidden" name="b_id" value="{{ $benificiary->id }}">
                                 @endif
                             <!--begin: Wizard Step 1-->
                             <div class="pb-3" data-wizard-type="step-content" data-wizard-state="current">
@@ -92,14 +92,14 @@
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Name</b></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="user_name" value="@if(!empty($user)){{ $user->name }}@endif"  placeholder="Name" value="" required />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="name"  value="@if(!empty($benificiary)){{ $benificiary->name }}@endif" placeholder="Name" />
                                             <span class="form-text text-muted">Fill in the user name and surname.</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Nickname</b></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="nickname" value="@if(!empty($user)){{ $user->nickname }}@endif"  placeholder="Nickname" value="" required />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="nickname" value="@if(!empty($benificiary)){{ $benificiary->nickname }}@endif"   />
                                             <span class="form-text text-muted">Fill in the nickname.</span>
                                         </div>
                                     </div>
@@ -108,7 +108,7 @@
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label><b>E-mail</b></label>
-                                            <input type="email" value="@if(!empty($user)){{ $user->email }}@endif" class="form-control form-control-solid form-control-lg" name="email" placeholder="Email" />
+                                            <input type="email" value="@if(!empty($benificiary)){{ $benificiary->email }}@endif" class="form-control form-control-solid form-control-lg" name="email" placeholder="Email" />
                                             <span class="form-text text-muted">Fill in the email.</span>
                                         </div>
                                         <!--end::Input-->
@@ -119,7 +119,7 @@
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label><b>Phone No</b></label>
-                                            <input type="text" name="phone" class="form-control form-control-solid form-control-lg"  placeholder="phone" value="@if(!empty($user)){{ $user->phone }}@endif"  />
+                                            <input type="text" name="mobile_number" class="form-control form-control-solid form-control-lg"  placeholder="Mobile Number" value="@if(!empty($benificiary)){{ $benificiary->mobile_number }}@endif"  />
                                             <span class="form-text text-muted">Enter his phone number.</span>
                                         </div>
                                         <!--end::Input-->
@@ -129,7 +129,7 @@
                                             <label><b>Is a beneficiary?</b></label>
                                             <span class="switch">
                                                 <label>
-                                                    <input type="checkbox" name="select">
+                                                    <input type="checkbox" name="is_remitter" @if(!empty($benificiary) && $benificiary->is_remitter == 'yes') checked @endif">
                                                     <span></span>
                                                 </label>
                                             </span>
@@ -142,42 +142,42 @@
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Address</b></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="user_name" value="@if(!empty($user)){{ $user->name }}@endif"  placeholder="Address" value="" required />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="address" value="@if(!empty($benificiary)){{ $benificiary->address }}@endif"   placeholder="Address"  />
                                             <span class="form-text text-muted">Fill in the mail address.</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Address 2</b></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="user_name" value="@if(!empty($user)){{ $user->name }}@endif"  placeholder="Address 2" value="" required />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="address2" value="@if(!empty($benificiary)){{ $benificiary->address2 }}@endif"   placeholder="Address 2"   />
                                             <span class="form-text text-muted">Fill in the address details.</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Pin</b></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="user_name" value="@if(!empty($user)){{ $user->name }}@endif"  placeholder="Pin" value="" required />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="pin" value="@if(!empty($benificiary)){{ $benificiary->pin }}@endif"   placeholder="Pincode"   placeholder="Pin" value=""  />
                                             <span class="form-text text-muted">Enter the pin.</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Area</b></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="user_name" value="@if(!empty($user)){{ $user->name }}@endif"  placeholder="Area" value="" required />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="area" value="@if(!empty($benificiary)){{ $benificiary->area }}@endif"  placeholder="Area" value=""  />
                                             <span class="form-text text-muted">Fill in the area.</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>City</b></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="city" value="@if(!empty($user)){{ $user->name }}@endif"  placeholder="City" value="" required />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="city" value="@if(!empty($benificiary)){{ $benificiary->city }}@endif"  placeholder="City" value=""  />
                                             <span class="form-text text-muted">Enter the city.</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>State</b></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="city" value="@if(!empty($user)){{ $user->name }}@endif"  placeholder="State" value="" required />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="states" value="@if(!empty($benificiary)){{ $benificiary->state }}@endif" placeholder="State" value=""  />
                                             <span class="form-text text-muted">Enter in the state.</span>
                                         </div>
                                     </div>
@@ -191,7 +191,7 @@
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label>Account Number</label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="address1" placeholder="Account Number" value="Address Line 1" />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="account_number" placeholder="Account Number" value="@if(!empty($benificiary)){{ $benificiary->account_number }}@endif" />
                                             <span class="form-text text-muted">Fill the user's account number</span>
                                         </div>
                                         <!--end::Input-->
@@ -200,7 +200,7 @@
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label>IFSC</label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="address2" placeholder="form" value="Address Line 2" />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="ifsc" placeholder="form"  value="@if(!empty($benificiary)){{ $benificiary->ifsc }}@endif" />
                                             <span class="form-text text-muted">Enter the IFSC number.</span>
                                         </div>
                                         <!--end::Input-->
@@ -211,7 +211,7 @@
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label>Branch Name</label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="postcode" placeholder="Branch Name" value="3000" />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="branch_name" placeholder="Branch Name" value="@if(!empty($benificiary)){{ $benificiary->branch_name }}@endif"  />
                                             <span class="form-text text-muted">Fill in the user's bank branch name.</span>
                                         </div>
                                         <!--end::Input-->
@@ -220,7 +220,7 @@
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label>Bank Name</label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="city" placeholder="Bank Name" value="Melbourne" />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="bank_name" placeholder="Bank Name" value="@if(!empty($benificiary)){{ $benificiary->bank_name }}@endif"  />
                                             <span class="form-text text-muted">Fill in the user's bank name.</span>
                                         </div>
                                         <!--end::Input-->
@@ -233,7 +233,7 @@
                                     <button type="button" class="btn btn-light-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-prev">Previous</button>
                                 </div>
                                 <div>
-                                    <button type="button" class="btn btn-success font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-submit">Submit</button>
+                                    <button type="button" class="btn btn-success font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-submit">Submit <span class="spinnermm"></span></button> 
                                     <button type="button" class="btn btn-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-next">Next</button>
                                 </div>
                             </div>
@@ -284,182 +284,245 @@
 <script src="{{ URL::asset('public/admin/Pnotify/company/pnotify.custom.min.js') }}"></script>
 <script src="{{ URL::asset('public/assets/plugins/custom/datatables/datatables.bundleafa4.js') }}"></script>
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-<script src="{{ URL::asset('public/assets/js/pages/custom/wizard/wizard-2afa4.js') }}"></script>
 <script type="text/javascript">
-	$(document).ready(function(){
-
-         $('body').on('click', '.delete_record', function () {
-            var id = $(this).data('id');
-
-            Swal.fire({
-                title: "Do you want to delete this user?",
-                text: "By deleting this form, you would no longer be able to access it, and the information will be lost.",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Yes, delete it!",
-                cancelButtonText: "No, cancel!",
-                reverseButtons: true
-            }).then(function(result) {
-                if (result.value) {
-                    $.ajax({
-                    url: '{{ url("company/benificiaries/delete") }}/' + id,
-                    type: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    beforeSend: function () {
-                    },
-                    success: function (data) {
-                        if (data.status == 400) {
-                            toastr.error(data.msg, 'Oh No!');
-                        }
-                        if (data.status == 200) {
-                            Swal.fire(
-                                "Deleted!",
-                                "User has been deleted.",
-                                "success"
-                            )
-                            $("#employee").DataTable().ajax.reload();
-                        }
-                    },
-                    error: function () {
-                        toastr.error('Something went wrong!', 'Oh No!');
-                    }
-                });
-                    
-                    // result.dismiss can be "cancel", "overlay",
-                    // "close", and "timer"
-                } else if (result.dismiss === "cancel") {
-                    Swal.fire(
-                        "Cancelled",
-                        "Your User is safe :)",
-                        "error"
-                    )
-                }
-            });
-           
-        });
-
-        
 
 
-		$('body').on('click', '.openaddmodal', function () {
-            var id = $(this).data('id');
-            if (id == '') {
-                $('.modal-title').text('Add Benificiaries');
-            } else {
-                $('.modal-title').text('Edit Benificiaries');
-            }
-            $.ajax({
-                url: "{{ route('company.benificiaries.getmodal')}}",
-                type: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                data: {id: id},
-                success: function (data) {
-                    $('.addholidaybody').html(data);
-                    $(".formsubmit").validate({
-                        rules: {
-                            address: {
-                                required: true,
-                            },
-                            phone: {
-                                maxlength: 15,
-                                number: true,
-                            },
-                            c_name: {
-                                maxlength: 30,
-                            },
-                            user_name: {
-                                maxlength: 30,
-                            },
-                            email: {
-                                required: true,
-                                email: true,
+
+
+$(document).ready(function(){
+
+"use strict";
+var KTWizard2 = function() {
+    var t, e, i, r = [];
+    return {
+        init: function() {
+            t = KTUtil.getById("kt_wizard"), e = KTUtil.getById("kt_form"), (i = new KTWizard(t, {
+                startStep: 1,
+                clickableSteps: !1
+            })).on("change", (function(t) {
+                if (!(t.getStep() > t.getNewStep())) {
+                    var e = r[t.getStep() - 1];
+                    return e && e.validate().then((function(e) {
+                        "Valid" == e ? (t.goTo(t.getNewStep()), KTUtil.scrollTop()) : Swal.fire({
+                            text: "Sorry, looks like there are some errors detected, please try again.",
+                            icon: "error",
+                            buttonsStyling: !1,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light"
                             }
-                        },
+                        }).then((function() {
+                            KTUtil.scrollTop()
+                        }))
+                    })), !1
+                }
+            })), i.on("changed", (function(t) {
+                KTUtil.scrollTop()
+            })), i.on("submit", (function(t) {
+                Swal.fire({
+                    text: "All is good! Please confirm the form submission.",
+                    icon: "success",
+                    showCancelButton: !0,
+                    buttonsStyling: !1,
+                    confirmButtonText: "Yes, submit!",
+                    cancelButtonText: "No, cancel",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-primary",
+                        cancelButton: "btn font-weight-bold btn-default"
+                    }
+                }).then((function(t) {
 
-                    });
+                    t.value ? e.submit() : "cancel" === t.dismiss && Swal.fire({
+                        text: "Your form has not been submitted!.",
+                        icon: "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn font-weight-bold btn-primary"
+                        }
+                    })
+                    // toastr.success('Success!')
+                    // window.location.href = "{{ url('company/benificiaries') }}";
+                }))
+            })), r.push(FormValidation.formValidation(e, {
+                fields: {
+                    name: {
+                        validators: {
+                            notEmpty: {
+                                message: "First name is required"
+                            },
+                            stringLength: {
+                                max: 150,
+                                message: 'The full name must be less than 50 characters'
+                            },
+                        }
+                    },
+                    nickname: {
+                        validators: {
+                            notEmpty: {
+                                message: "Last Name is required"
+                            },
+                            stringLength: {
+                                max: 150,
+                                message: 'The Nick name must be less than 50 characters'
+                            },
+                        }
+                    },
+                    mobile_number   : {
+                        validators: {
+                            notEmpty: {
+                                message: "Phone is required"
+                            },
+                            numeric: {
+                            message: 'The value is not a number',
+                            // The default separators
+                            thousandsSeparator: '',
+                            decimalSeparator: '.'
+                        },
+                        stringLength: {
+                                max: 11,
+                                message: 'The Nick name must be less than 11 characters'
+                            },
+                        }
+                    },
+                    email: {
+                        validators: {
+                            notEmpty: {
+                                message: "Email is required"
+                            },
+                            emailAddress: {
+                                message: "The value is not a valid email address"
+                            }
+                        }
+                    },
+                    address: {
+                        validators: {
+                            notEmpty: {
+                                message: "Address is required"
+                            },
+                            stringLength: {
+                                max: 150,
+                                message: 'The Address must be less than 50 characters'
+                            },
+                        }
+                    },
+                    address2: {
+                        validators: {
+                            notEmpty: {
+                                message: "Address2 is required"
+                            },
+                            stringLength: {
+                                max: 150,
+                                message: 'The Address1 must be less than 50 characters'
+                            },
+                        }
+                    },
+                    area: {
+                        validators: {
+                            notEmpty: {
+                                message: "Area is required"
+                            },
+                            stringLength: {
+                                max: 50,
+                                message: 'The Area must be less than 50 characters'
+                            },
+                        }
+                    },
+                    city: {
+                        validators: {
+                            notEmpty: {
+                                message: "City is required"
+                            },
+                            stringLength: {
+                                max: 50,
+                                message: 'The City must be less than 50 characters'
+                            },
+                        }
+                    },
+                    pin: {
+                        validators: {
+                            notEmpty: {
+                                message: "Pin is required"
+                            },
+                            numeric: {
+                            message: 'The value is not a number',
+                            // The default separators
+                            thousandsSeparator: '',
+                            decimalSeparator: '.'
+                            },
+                            stringLength: {
+                                    max: 6,
+                                    message: 'The Pin must be less than 6 characters'
+                                },
+                            }
+                    },
 
                 },
-            });
-        });
-
-		$("#employee").DataTable({
-            "responsive": true,
-            "autoWidth": false,
-            processing: true,
-            serverSide: true,
-            stateSave: true,
-            ajax: {
-                'url': "{{ route('company.benificiaries.getall') }}",
-                'type': 'POST',
-                'data': function (d) {
-                    d._token = "{{ csrf_token() }}";
-                    d.status = $("#status").val();
+                plugins: {
+                    trigger: new FormValidation.plugins.Trigger,
+                    bootstrap: new FormValidation.plugins.Bootstrap({
+                        eleValidClass: ""
+                    })
                 }
-            },
-            columns: [
-                {data: 'DT_RowIndex', "orderable": false},
-                {data: 'user_name'},
-                {data: 'phone_number'},
-                {data: 'email'},
-                {data: 'address'},
-                {data: 'status'},
-                {data: 'action'},
-            ]
-        });
-
-        $('body').on('click', '.changestatus', function () {
-            var id = $(this).data('id');
-            var status = $(this).data('status');
-            if(status == 0){
-                var text = "disable";
-            }else{
-                var text = "enable";
-            }
-
-            Swal.fire({
-                title: "Confirmation Needed",
-                text: "Are you sure you wants to "+ text +" this user?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Yes, "+text+" it!",
-                cancelButtonText: "No, cancel!",
-                reverseButtons: true
-            }).then(function(result) {
-                if (result.value) {
-                    $.ajax({
-                        url: '{{ route("company.benificiaries.changestatus") }}',
-                        type: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                        data: {id: id, status: status},
-                        success: function (data) {
-                            $("#employee").DataTable().ajax.reload();
-                            Swal.fire(
-                                    text+"d",
-                                    "User has been "+text+"d.",
-                                    "success"
-                                )
-                        },
-                        error: function () {
-                            toastr.error('Something went wrong!', 'Oh No!');
-
+            })), r.push(FormValidation.formValidation(e, {
+                fields: {
+                     account_number: {
+                        validators: {
+                            notEmpty: {
+                                message: "Account number is required"
+                            },
+                            numeric: {
+                            message: 'The value is not a number',
+                            // The default separators
+                            thousandsSeparator: '',
+                            decimalSeparator: '.'
+                            },
+                            stringLength: {
+                                    max: 20,
+                                    message: 'The Account number must be less than 20 characters'
+                                },
+                            }
+                    },
+                    ifsc: {
+                        validators: {
+                            notEmpty: {
+                                message: "IFSC is required"
+                            },
+                            stringLength: {
+                                max: 15,
+                                message: 'The ifsc must be less than 50 characters'
+                            },
                         }
-                    });
-                } else if (result.dismiss === "cancel") {
-                    Swal.fire(
-                        "Cancelled",
-                        "Your User is safe :)",
-                        "error"
-                    )
+                    },
+                    branch_name: {
+                        validators: {
+                            notEmpty: {
+                                message: "Branch Name is required"
+                            }
+                        }
+                    },
+                    bank_name: {
+                        validators: {
+                            notEmpty: {
+                                message: "Bank Name is required"
+                            }
+                        }
+                    },
+                },
+                plugins: {
+                    trigger: new FormValidation.plugins.Trigger,
+                    bootstrap: new FormValidation.plugins.Bootstrap({
+                        eleValidClass: ""
+                    })
                 }
-            });
-        });
-                
+            }))
+        }
+    }
+}();
+jQuery(document).ready((function() {
+    KTWizard2.init()
+}));
+
         /*filter*/
         $('.searchdata').click(function () {
             event.preventDefault();
@@ -467,6 +530,7 @@
         })
     
         $('body').on('submit', '.formsubmit', function (e) {
+           
             e.preventDefault();
             $.ajax({
                 url: $(this).attr('action'),

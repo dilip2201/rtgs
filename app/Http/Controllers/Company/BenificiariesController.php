@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Validator;
 use App\User;
 use DataTables;
+use \Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 
 class BenificiariesController extends Controller
 {
@@ -24,8 +27,17 @@ class BenificiariesController extends Controller
     	return view('front.benificiaries.index');
     }
 
-    public function create(){
-        return view('front.benificiaries.create');
+    public function create($b_id = 0){
+
+        $id = 0;
+        if(auth()->user()->parent_id == null){
+            $id = auth()->user()->id;
+        }else{
+            $id = auth()->user()->parent_id;
+        }
+        $benificiary = DB::table($id.'_benificiaries')->where('id',$b_id)->first();
+
+        return view('front.benificiaries.create',compact('benificiary'));
     }
     
      /**
@@ -48,16 +60,32 @@ class BenificiariesController extends Controller
     
     public function store(Request $request)
     {
+        $id = Auth::user()->id;  
+
         $rules = [
-            
-            'user_name' => 'required',
+            'name' => 'required',
+            'nickname' => 'required',
+            'email' => 'required',
+            'mobile_number' => 'required',
             'address' => 'required',
+            'address2' => 'required',
+            'pin' => 'required',
+            'area' => 'required',
+            'city' => 'required',
+            'states' => 'required',
+            'account_number' => 'required',
+            'ifsc' => 'required',
+            'branch_name' => 'required',
+            'bank_name' => 'required',
         ];
-        if (isset($request->companyid)) {
-            $company_id = decrypt($request->companyid);
-            $rules['email'] = 'required|email|unique:users,email,'.$company_id;
+        $table = $id.'_benificiaries';
+        if (isset($request->b_id)) {
+            // $benificiary_id = $request->b_id;
+            $rules['email'] = 'required|email|unique:'.$table.',email,'.$request->b_id;
+            $rules['mobile_number'] = 'required|unique:'.$table.',mobile_number,'.$request->b_id;
+            $rules['account_number'] = 'required|unique:'.$table.',account_number,'.$request->b_id;
         }else{
-            $rules['email'] = 'required|email|unique:users,email';
+            //$rules['email'] = 'required|email|unique:users,email';
   
         }
         $validator = Validator::make($request->all(), $rules);
@@ -65,69 +93,55 @@ class BenificiariesController extends Controller
             $arr = array("status" => 400, "msg" => $validator->errors()->first(), "result" => array());
         } else {
             try {
-                if (isset($company_id)) {
-                    $user = User::find($company_id);
-                    $user->name = $request->user_name;
-                    $user->c_name = auth()->user()->c_name;
-                    $user->address = $request->address;
-                    $user->email = $request->email;
-                    $user->phone = $request->phone;
-                    if(!empty($request->password)){
-                        $user->password = \Hash::make($request->password);
-                    }
-
-                    $user->save();
-                    $msg = "User updated successfully.";
+               
+                $id = Auth::user()->id;      
+                if($request->is_remitter == ''){
+                    $remitter = "no";
                 }else{
-                    //$token = random_int(10000000, 99999999);
-
-                    $user = new User;
-                    $user->name = $request->user_name;
-                    $user->c_name = $request->c_name;
-                    $user->address = $request->address;
-                    $user->email = $request->email;
-                   // $user->token = $token;
-                    $user->parent_id = auth()->user()->id;
-                    $user->type = 'user';
-                    $user->phone = $request->phone;
-                    $user->password = \Hash::make($request->password);
-                    $user->save();
-
-                    
-                    /*$encrypted = Crypt::encryptString($token);
-                   
-                    $last_u_id = $user->id;
-                    $resetpasslink = url('invite/password/'.$encrypted);
-                    $data['name'] = $request->name;
-                    $data['email'] = $request->email;
-                    $data['url'] = $resetpasslink;
-                    $data['text'] = "Welcome to RTGS Group! You're invited by ".Auth::user()->name.". Please verify your account and generate password to login in Intunor Group.";
-                    $view = 'company-invitation';
-                    $subject = "RTGS Group! You're invited to register ";
-                    sendmail($data,$subject);*/
-                    
-                    $msg = "User added successfully.";
+                    $remitter = "yes";
                 }
+                if (isset($request->b_id)) {
 
+                    DB::table($id.'_benificiaries')->where('id',$request->b_id)->update(
+                        ['user_id' => Auth::user()->id,
+                        'name' => $request->name,
+                        'nickname' => $request->nickname,
+                        'email' => $request->email,
+                        'mobile_number' => $request->mobile_number,
+                        'is_remitter' => $request->is_remitter,
+                        'address' => $request->address,
+                        'address2' => $request->address2,
+                        'is_remitter'=>$remitter,
+                        'pin' => $request->pin,
+                        'area' => $request->area,
+                        'city' => $request->city,
+                        'state' => $request->states,
+                        'account_number' => $request->account_number,
+                        'ifsc' => $request->ifsc,
+                        'branch_name' => $request->branch_name,
+                        'bank_name' => $request->bank_name]);
+                    return redirect('company/benificiaries')->with('status', 'Benificiaries Update successfully.');
+                }else{
 
-
-                $arr = array("status" => 200, "msg" => $msg);
+                    DB::table($id.'_benificiaries')->insert(['user_id' => Auth::user()->id,'name' => $request->name,'nickname' => $request->nickname,'email' => $request->email,'mobile_number' => $request->mobile_number,'is_remitter' => $request->is_remitter,'address' => $request->address,'address2' => $request->address2,'is_remitter'=>$remitter, 'pin' => $request->pin,'area' => $request->area,'city' => $request->city,'state' => $request->state,'account_number' => $request->account_number,'ifsc' => $request->ifsc,'branch_name' => $request->branch_name,'bank_name' => $request->bank_name]);
+                    return redirect('company/benificiaries')->with('status', 'Benificiaries added successfully.');
+                }
+                
             } catch (\Illuminate\Database\QueryException $ex) {
                 $msg = $ex->getMessage();
                 if (isset($ex->errorInfo[2])) :
                     $msg = $ex->errorInfo[2];
                 endif;
-                $arr = array("status" => 400, "msg" => $msg, "result" => array());
+                return redirect('company/benificiaries')->with('error', 'Benificiaries added successfully.');
+
             } catch (Exception $ex) {
                 $msg = $ex->getMessage();
                 if (isset($ex->errorInfo[2])) :
                     $msg = $ex->errorInfo[2];
                 endif;
-                $arr = array("status" => 400, "msg" => $msg, "result" => array());
+                return redirect('company/benificiaries')->with('error', 'Benificiaries added successfully.');
             }
         }
-
-        return \Response::json($arr);
     }
 
         /**
@@ -137,44 +151,46 @@ class BenificiariesController extends Controller
      */
     public function getall(Request $request)
     {
-
-        $user = User::where('type','user')->where('parent_id',auth()->user()->id)->orderby('id', 'desc');
-        if ((isset($request->status) && !empty($request->status)) || $request->status == '0') {
-            $user = $user->where('status',$request->status);
-        }        
-        $user = $user->get();
+        $id = 0;
+        if(auth()->user()->parent_id == null){
+            $id = auth()->user()->id;
+        }else{
+            $id = auth()->user()->parent_id;
+        }
+        $benificiaries = DB::table($id.'_benificiaries')->orderby('id', 'desc');
+        $benificiaries = $benificiaries->get();
         
-        return DataTables::of($user)
+        return DataTables::of($benificiaries)
             ->addColumn('action', function ($q) {
                 $id = encrypt($q->id);
-                $return = '<a title="Edit"  data-id="'.$id.'"   data-toggle="modal" data-target=".add_modal" class="openaddmodal" href="javascript:void(0)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> <a class="delete_record" data-id="'.$q->id.'" href="javascript:void(0)"> <i class="fa fa-trash" aria-hidden="true"></i> </a>';
+                $return = '<a style="color:#000;"  href="'.route('company.benificiaries.edit',$q->id).'"  ><i class="fa fa-pencil"></i></a> ';
                 
                 return $return;
             })
-            ->addColumn('c_name', function ($q) {
-                return $q->c_name;
-            })
-            ->addColumn('user_name', function ($q) {
+            ->addColumn('name', function ($q) {
                 return $q->name;
             })
-            ->addColumn('email', function ($q) {
-                return $q->email;
+            ->addColumn('nickname', function ($q) {
+                return $q->nickname;
             })
-            ->addColumn('address', function ($q) {
-                return $q->address;
+            ->addColumn('bank_name', function ($q) {
+                return $q->bank_name;
             })
-            ->addColumn('phone_number', function ($q) {
-                return $q->phone;
+            ->addColumn('account_number', function ($q) {
+                return $q->account_number;
             })
-            ->addColumn('status', function ($q) {
-                $id = encrypt($q->id);
-                if ($q->status == '1') {
-                    return '<span class="label label-success label-dot mr-2"></span><span style="color:#1bc5bd!important; cursor:pointer;" class="font-weight-bold changestatus" data-status="0" data-id="' . $id . '" text-success">Enable</span>';
-                }
-                if ($q->status == '0') {
-                    return '<span class="label label-danger label-dot mr-2"></span><span  style="color:#f64e60!important; cursor:pointer;" class="font-weight-bold changestatus" data-status="1"  data-id="' . $id . '" text-success">Disable</span>';
-                }
+            ->addColumn('is_remitter', function ($q) {
+                return $q->is_remitter;
             })
+            // ->addColumn('status', function ($q) {
+            //     $id = encrypt($q->id);
+            //     if ($q->status == '1') {
+            //         return '<span class="label label-success label-dot mr-2"></span><span style="color:#1bc5bd!important; cursor:pointer;" class="font-weight-bold changestatus" data-status="0" data-id="' . $id . '" text-success">Enable</span>';
+            //     }
+            //     if ($q->status == '0') {
+            //         return '<span class="label label-danger label-dot mr-2"></span><span  style="color:#f64e60!important; cursor:pointer;" class="font-weight-bold changestatus" data-status="1"  data-id="' . $id . '" text-success">Disable</span>';
+            //     }
+            // })
             ->addIndexColumn()
             ->rawColumns(['image','status', 'action'])->make(true);
     }
