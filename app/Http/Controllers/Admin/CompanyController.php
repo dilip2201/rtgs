@@ -183,7 +183,7 @@ class CompanyController extends Controller
                         city VARCHAR(191) NULL DEFAULT NULL,
                         state VARCHAR(191) NULL DEFAULT NULL,
                         pin VARCHAR(6) NULL DEFAULT NULL,
-                        ifsc VARCHAR(11) NULL DEFAULT NULL,
+                        ifsc VARCHAR(30) NULL DEFAULT NULL,
                         bank_name VARCHAR(191) NULL DEFAULT NULL,
                         branch_name VARCHAR(191) NULL DEFAULT NULL,
                         mobile_number VARCHAR(191) NULL DEFAULT NULL,
