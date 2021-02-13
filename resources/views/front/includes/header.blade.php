@@ -17,7 +17,7 @@
                   <span class="menu-text">Dashboard</span>
                   </a>
                </li>
-               @if(Auth::user()->role == 'company')
+               @if(checkPermission(['company']))
                <li class="menu-item menu-item-submenu menu-item-rel {{ activeMenucompany('users')}}" data-menu-toggle="click" aria-haspopup="true">
                   <a href="{{ url('company/users') }}" class="menu-link ">
                   <span class="menu-text">Users</span>

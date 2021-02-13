@@ -47,6 +47,7 @@ class UserController extends Controller
     
     public function store(Request $request)
     {
+
         $rules = [
             
             'user_name' => 'required',
@@ -93,16 +94,11 @@ class UserController extends Controller
 
                     $user = new User;
                     if ($request->hasFile('profile_avatar')) {
-                        $user = new User;
-                        if(file_exists(public_path('company/employee/'.$user->image)) && $user->image!='') {
-                            unlink(public_path('company/employee/'.$user->image));
-                        }
                         $destinationPath = public_path().'/company/employee/';
                         $file = $request->profile_avatar;
                         $fileName = time() . '.'.$file->clientExtension();
                         $file->move($destinationPath, $fileName);
                         $user->image = $fileName;
-                        $user->save();
                     }
                     $user->name = $request->user_name;
                     $user->c_name = $request->c_name;

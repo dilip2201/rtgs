@@ -32,7 +32,7 @@ function activeMenucompany($uri = '') {
 function checkPermission($permissions){
 	if(auth()->check())
 	{
-		$userAccess = auth()->user()->role;
+		$userAccess = auth()->user()->type;
 		foreach ($permissions as $key => $value) {
 			if($value == $userAccess){
 				return true;
