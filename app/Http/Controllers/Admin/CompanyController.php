@@ -46,11 +46,8 @@ class CompanyController extends Controller
         if ((isset($request->status) && !empty($request->status)) || $request->status == '0') {
             $user = $user->where('status',$request->status);
         }
-        if (isset($request->type) && !empty($request->type)) {
-            $user = $user->where('type',$request->type);
-        }
         if (isset($request->company) && !empty($request->company)) {
-            $user = $user->where('parent_id',$request->company);
+            $user = $user->where('parent_id',$request->company)->orwhere('id',$request->company);
         }
         $user = $user->get();
 
@@ -62,7 +59,11 @@ class CompanyController extends Controller
                 return $return;
             })
             ->addColumn('c_name', function ($q) {
-                return $q->c_name;
+                $name  = $q->type;
+                if($q->type == 'company'){
+                    $name = $q->c_name.' '.' (Head)';
+                }
+                return  $name;
             })
             ->addColumn('user_name', function ($q) {
                 return $q->name;
