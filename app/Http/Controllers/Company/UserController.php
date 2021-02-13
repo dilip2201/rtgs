@@ -49,23 +49,30 @@ class UserController extends Controller
     {
 
         $rules = [
-            
             'user_name' => 'required',
             'address' => 'required',
+            'profile_avatar' =>'mimes:jpeg,jpg,png|required|max:5000',
+            'phone' => 'required|unique:users,phone',  
         ];
+        $message = [
+            'profile_avatar.mimes' => 'The type of the uploaded file should be an image.',
+            'profile_avatar.max' => 'Failed to upload an image. The image maximum size is 5MB.',
+        ];
+
         if (isset($request->companyid)) {
             $company_id = decrypt($request->companyid);
             $rules['email'] = 'required|email|unique:users,email,'.$company_id;
+            $rules['phone'] = 'required|unique:users,phone,'.$company_id;
+            $message['profile_avatar.max'] = 'Failed to upload an image. The image maximum size is 5MB.';
         }else{
             $rules['email'] = 'required|email|unique:users,email';
-  
         }
-        $validator = Validator::make($request->all(), $rules);
+
+        $validator = Validator::make($request->all(), $rules , $message);
         if ($validator->fails()) {
             $arr = array("status" => 400, "msg" => $validator->errors()->first(), "result" => array());
         } else {
             try {
-
                 if (isset($company_id)) {
                     $user = User::find($company_id);
                     if ($request->hasFile('profile_avatar')) {

@@ -80,6 +80,7 @@
                                         <div class="form-group">
                                             <label>Address</label>
                                             <textarea class="form-control form-control-solid form-control-lg" name="address" placeholder="Address" required>@if(!empty($user)){{ $user->address }}@endif</textarea>
+                                            <span class="form-text text-muted">Enter his Address.</span>
                                         </div>
                                     </div>
                                     @php
