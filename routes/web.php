@@ -71,6 +71,7 @@ Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
         Route::get('benificiaries', ['as' => 'benificiaries', 'uses' => 'BenificiariesController@index']);
         Route::group(['prefix' => 'benificiaries', 'as' => 'benificiaries.'], function () {
             Route::post('getmodal', ['as' => 'getmodal', 'uses' => 'BenificiariesController@getmodal']);
+            Route::get('create', ['as' => 'create', 'uses' => 'BenificiariesController@create']);
             Route::post('store', ['as' => 'store', 'uses' => 'BenificiariesController@store']);
             Route::post('getall', ['as' => 'getall', 'uses' => 'BenificiariesController@getall']);
             Route::post('changestatus', ['as' => 'changestatus', 'uses' => 'BenificiariesController@changestatus']);

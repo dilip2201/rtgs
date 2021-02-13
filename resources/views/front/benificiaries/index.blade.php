@@ -5,7 +5,21 @@
 	.error{
 		color: #a51010!important;
 	}
+    .switch input:checked~span:before{
+        border: 1px solid #4a99ff;
+        background:none;
+    }
+    .switch input:empty~span:before{
+        border: 1px solid #4a99ff;
+        background:none;
+    }
+    .switch input:empty~span:after{
+        background-color: #3699ff;
+    }
 </style>
+@section('button')
+<a href="{{ route('company.benificiaries.create') }}" class="btn btn-light-success font-weight-bolder btn-sm">Add New</a> 
+@endsection
 <!--begin::Card-->
 <div class="card card-custom">
 	<div class="card-header">
@@ -16,7 +30,7 @@
 			<h3 class="card-label">Benificiaries</h3>
 		</div>
 		<div class="card-toolbar">
-			<a href="#" data-toggle="modal" data-target="#exampleModalSizeSm" data-id="" class="btn btn-primary font-weight-bolder openaddmodal">
+			<a href="{{ route('company.benificiaries.create') }}"  class="btn btn-primary font-weight-bolder">
 			<i class="la la-plus"></i>New Benificiaries</a>
 			<!--end::Button-->
 		</div>
@@ -42,26 +56,12 @@
 <!--end::Card-->
 
 
-<div class="modal fade add_modal" id="exampleModalSizeSm" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-        <div class="modal-content">
-		<div class="modal-header">
-			<h5 class="modal-title" id="exampleModalLabel">User</h5>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<i aria-hidden="true" class="ki ki-close"></i>
-			</button>
-		</div>
-		<div class="modal-body addholidaybody" style="padding: 0px;">
-			
-		</div>
-		
-	</div>
-    </div>
-</div>
+
 @push('style')
 <link href="{{ URL::asset('public/assets/css/pages/wizard/wizard-2afa4.css') }}" rel="stylesheet" type="text/css" />
 @endpush
 @push('script')
+<script>var KTAppSettings = { "breakpoints": { "sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1400 }, "colors": { "theme": { "base": { "white": "#ffffff", "primary": "#3699FF", "secondary": "#E5EAEE", "success": "#1BC5BD", "info": "#8950FC", "warning": "#FFA800", "danger": "#F64E60", "light": "#E4E6EF", "dark": "#181C32" }, "light": { "white": "#ffffff", "primary": "#E1F0FF", "secondary": "#EBEDF3", "success": "#C9F7F5", "info": "#EEE5FF", "warning": "#FFF4DE", "danger": "#FFE2E5", "light": "#F3F6F9", "dark": "#D6D6E0" }, "inverse": { "white": "#ffffff", "primary": "#ffffff", "secondary": "#3F4254", "success": "#ffffff", "info": "#ffffff", "warning": "#ffffff", "danger": "#ffffff", "light": "#464E5F", "dark": "#ffffff" } }, "gray": { "gray-100": "#F3F6F9", "gray-200": "#EBEDF3", "gray-300": "#E4E6EF", "gray-400": "#D1D3E0", "gray-500": "#B5B5C3", "gray-600": "#7E8299", "gray-700": "#5E6278", "gray-800": "#3F4254", "gray-900": "#181C32" } }, "font-family": "Poppins" };</script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="{{ URL::asset('public/assets/plugins/custom/datatables/datatables.bundle.rtlafa4.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ URL::asset('public/assets/plugins/custom/datatables/datatables.bundleafa4.css?v=7.2.0') }}" rel="stylesheet" type="text/css" />
@@ -69,6 +69,7 @@
 <script src="{{ URL::asset('public/admin/Pnotify/company/pnotify.custom.min.js') }}"></script>
 <script src="{{ URL::asset('public/assets/plugins/custom/datatables/datatables.bundleafa4.js') }}"></script>
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script src="{{ URL::asset('public/assets/js/pages/custom/wizard/wizard-2afa4.js') }}"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 
@@ -130,9 +131,9 @@
 		$('body').on('click', '.openaddmodal', function () {
             var id = $(this).data('id');
             if (id == '') {
-                $('.modal-title').text('Add User');
+                $('.modal-title').text('Add Benificiaries');
             } else {
-                $('.modal-title').text('Edit User');
+                $('.modal-title').text('Edit Benificiaries');
             }
             $.ajax({
                 url: "{{ route('company.benificiaries.getmodal')}}",

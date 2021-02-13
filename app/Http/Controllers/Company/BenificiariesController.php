@@ -24,6 +24,10 @@ class BenificiariesController extends Controller
     	return view('front.benificiaries.index');
     }
 
+    public function create(){
+        return view('front.benificiaries.create');
+    }
+    
      /**
      * Get model for add edit user
      *
@@ -39,7 +43,7 @@ class BenificiariesController extends Controller
             $user = User::where('id',$id)->first();
 
         }
-        return view('front.user.getmodal', compact('user'));
+        return view('front.benificiaries.getmodal', compact('user'));
     }
     
     public function store(Request $request)
