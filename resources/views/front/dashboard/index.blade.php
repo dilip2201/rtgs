@@ -1,12 +1,11 @@
 @extends('layouts.app')
 @section('pageTitle', 'Dashboard')
 @section('content')
-<div class="d-flex flex-column-fluid">
-    <!--begin::Container-->
-    <div class="container loaddashboard">
-        <!--begin::Dashboard-->
-    </div>
+
+<!--begin::Dashboard-->
+<div class="loaddashboard"> 
 </div>
+   
 @push('script')
     <script>
         function loaddashboard(){

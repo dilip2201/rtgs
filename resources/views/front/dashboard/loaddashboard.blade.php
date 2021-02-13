@@ -1,72 +1,8 @@
 <div class="row">
-    <div class="col-xl-4">
+    <div class="col-xl-7">
         <!--begin::Mixed Widget 15-->
         <div class="card card-custom card-stretch gutter-b">
             <!--begin::Header-->
-            <div class="card-header border-0 pt-5">
-                <h3 class="card-title font-weight-bolder">Trends</h3>
-                <div class="card-toolbar">
-                    <div class="dropdown dropdown-inline">
-                        <a href="#" class="btn btn-clean btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="ki ki-bold-more-hor"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
-                            <!--begin::Naviigation-->
-                            <ul class="navi">
-                                <li class="navi-header font-weight-bold py-5">
-                                    <span class="font-size-lg">Add New:</span>
-                                    <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="" data-original-title="Click to learn more..."></i>
-                                </li>
-                                <li class="navi-separator mb-3 opacity-70"></li>
-                                <li class="navi-item">
-                                    <a href="#" class="navi-link">
-																		<span class="navi-icon">
-																			<i class="flaticon2-shopping-cart-1"></i>
-																		</span>
-                                        <span class="navi-text">Order</span>
-                                    </a>
-                                </li>
-                                <li class="navi-item">
-                                    <a href="#" class="navi-link">
-																		<span class="navi-icon">
-																			<i class="navi-icon flaticon2-calendar-8"></i>
-																		</span>
-                                        <span class="navi-text">Members</span>
-                                        <span class="navi-label">
-																			<span class="label label-light-danger label-rounded font-weight-bold">3</span>
-																		</span>
-                                    </a>
-                                </li>
-                                <li class="navi-item">
-                                    <a href="#" class="navi-link">
-																		<span class="navi-icon">
-																			<i class="navi-icon flaticon2-telegram-logo"></i>
-																		</span>
-                                        <span class="navi-text">Project</span>
-                                    </a>
-                                </li>
-                                <li class="navi-item">
-                                    <a href="#" class="navi-link">
-																		<span class="navi-icon">
-																			<i class="navi-icon flaticon2-new-email"></i>
-																		</span>
-                                        <span class="navi-text">Record</span>
-                                        <span class="navi-label">
-																			<span class="label label-light-success label-rounded font-weight-bold">5</span>
-																		</span>
-                                    </a>
-                                </li>
-                                <li class="navi-separator mt-3 opacity-70"></li>
-                                <li class="navi-footer pt-5 pb-4">
-                                    <a class="btn btn-light-primary font-weight-bolder btn-sm" href="#">More options</a>
-                                    <a class="btn btn-clean font-weight-bold btn-sm d-none" href="#" data-toggle="tooltip" data-placement="right" title="" data-original-title="Click to learn more...">Learn more</a>
-                                </li>
-                            </ul>
-                            <!--end::Naviigation-->
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!--end::Header-->
             <!--begin::Body-->
             <div class="card-body d-flex flex-column">
@@ -76,99 +12,27 @@
                     <div class="resize-triggers"><div class="expand-trigger"><div style="width: 356px; height: 204px;"></div></div><div class="contract-trigger"></div></div></div>
                 <!--end::Chart-->
                 <!--begin::Items-->
-                <div class="mt-5">
-                    <!--begin::Item-->
-                    <div class="d-flex align-items-center justify-content-between mb-5">
-                        <!--begin::Section-->
-                        <div class="d-flex align-items-center mr-2">
-                            <!--begin::Symbol-->
-                            <div class="symbol symbol-50 symbol-light mr-3 flex-shrink-0">
-                                <div class="symbol-label">
-                                    <img src="/metronic/theme/html/demo13/dist/assets/media/svg/misc/006-plurk.svg" class="h-50" alt="">
-                                </div>
-                            </div>
-                            <!--end::Symbol-->
-                            <!--begin::Title-->
-                            <div>
-                                <a href="#" class="font-size-h6 text-dark-75 text-hover-primary font-weight-bolder">Top Authors</a>
-                                <div class="font-size-sm text-muted font-weight-bold mt-1">Ricky Hunt, Sandra Trepp</div>
-                            </div>
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Section-->
-                        <!--begin::Label-->
-                        <div class="label label-light label-inline font-weight-bold text-dark-50 py-4 px-3 font-size-base">+82$</div>
-                        <!--end::Label-->
-                    </div>
-                    <!--end::Item-->
-                    <!--begin::Widget Item-->
-                    <div class="d-flex align-items-center justify-content-between mb-5">
-                        <!--begin::Section-->
-                        <div class="d-flex align-items-center mr-2">
-                            <!--begin::Symbol-->
-                            <div class="symbol symbol-50 symbol-light mr-3 flex-shrink-0">
-                                <div class="symbol-label">
-                                    <img src="/metronic/theme/html/demo13/dist/assets/media/svg/misc/015-telegram.svg" class="h-50" alt="">
-                                </div>
-                            </div>
-                            <!--end::Symbol-->
-                            <!--begin::Title-->
-                            <div>
-                                <a href="#" class="font-size-h6 text-dark-75 text-hover-primary font-weight-bolder">Top Sales</a>
-                                <div class="font-size-sm text-muted font-weight-bold mt-1">PitStop Emails</div>
-                            </div>
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Section-->
-                        <!--begin::Label-->
-                        <div class="label label-light label-inline font-weight-bold text-dark-50 py-4 px-3 font-size-base">+82$</div>
-                        <!--end::Label-->
-                    </div>
-                    <!--end::Widget Item-->
-                    <!--begin::Widget Item-->
-                    <div class="d-flex align-items-center justify-content-between">
-                        <!--begin::Section-->
-                        <div class="d-flex align-items-center mr-2">
-                            <!--begin::Symbol-->
-                            <div class="symbol symbol-50 symbol-light mr-3 flex-shrink-0">
-                                <div class="symbol-label">
-                                    <img src="/metronic/theme/html/demo13/dist/assets/media/svg/misc/003-puzzle.svg" class="h-50" alt="">
-                                </div>
-                            </div>
-                            <!--end::Symbol-->
-                            <!--begin::Title-->
-                            <div>
-                                <a href="#" class="font-size-h6 text-dark-75 text-hover-primary font-weight-bolder">Top Engagement</a>
-                                <div class="font-size-sm text-muted font-weight-bold mt-1">KT.com</div>
-                            </div>
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Section-->
-                        <!--begin::Label-->
-                        <div class="label label-light label-inline font-weight-bold text-dark-50 py-4 px-3 font-size-base">+82$</div>
-                        <!--end::Label-->
-                    </div>
-                    <!--end::Widget Item-->
-                </div>
+               
                 <!--end::Widget Items-->
             </div>
             <!--end::Body-->
         </div>
         <!--end::Mixed Widget 15-->
     </div>
-    <div class="col-xl-8">
+    <div class="col-xl-5">
         <!--begin::Advance Table Widget 1-->
         <div class="card card-custom card-stretch gutter-b">
             <!--begin::Header-->
             <div class="card-header border-0 py-5">
                 <h3 class="card-title align-items-start flex-column">
-                    <span class="card-label font-weight-bolder text-dark">New Users</span>
-                    <span class="text-muted mt-3 font-weight-bold font-size-sm">More than 400+ new members</span>
+                    <span class="card-label font-weight-bolder text-dark">Users</span>
                 </h3>
-                <div class="card-toolbar">
-                    <a href="{{ url('company/users') }}" class="btn btn-success font-weight-bolder font-size-sm">
-												<i class="fa fa-users"></i>	View More</a>
-                </div>
+               <div class="card-toolbar">
+            <a href="#" data-toggle="modal" data-target="#exampleModalSizeSm" data-id="" class="btn btn-primary font-weight-bolder openaddmodal">
+            <i class="la la-plus"></i>New User</a>
+            <!--end::Button-->
+        </div>
+
             </div>
             <!--end::Header-->
             <!--begin::Body-->

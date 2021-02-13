@@ -1,4 +1,5 @@
-<form  autocorrect="off" action="{{ route('admin.companies.store') }}" autocomplete="off" method="post" class="form-horizontal form-bordered formsubmit">
+<form  autocorrect="off" action="{{ route('admin.companies.store') }}" autocomplete="off" method="post" class="form-horizontal form-bordered
+formsubmit">
     {{ csrf_field() }}
 
     @if(isset($company) && !empty($company->id) )
@@ -34,7 +35,7 @@
         <div class="col-sm-12 col-md-6">
             <div class="form-group">
                 <label>Phone No.</label>
-                <input type="text" class="form-control " name="phone"
+                <input type="text" class="form-control phone" name="phone"
                        placeholder="Mobile No."
                        value="@if(!empty($company)){{ $company->phone }}@endif" required="">
             </div>

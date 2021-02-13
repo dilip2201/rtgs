@@ -123,7 +123,7 @@ class UserController extends Controller
                    
                     $last_u_id = $user->id;
                     $resetpasslink = url('invite/password/'.$encrypted);
-                    $data['name'] = $request->name;
+                    $data['name'] = $request->user_name;
                     $data['email'] = $request->email;
                     $data['url'] = $resetpasslink;
                     $data['text'] = "Welcome to RTGS Group! You're invited by ".Auth::user()->name.". Please verify your account and generate password to login in Intunor Group.";
