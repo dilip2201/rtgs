@@ -28,7 +28,8 @@ class CompanyController extends Controller
 
     public function index()
     {
-        return view('admin.company.index');
+        $companies = User::where('type','company')->get();
+        return view('admin.company.index',compact('companies'));
     }
 
     /**
@@ -40,10 +41,16 @@ class CompanyController extends Controller
     {
 
         \DB::enableQueryLog();
-        $user = User::where('type','company')->orderby('id', 'desc');
+        $user = User::orderby('id', 'desc');
 
         if ((isset($request->status) && !empty($request->status)) || $request->status == '0') {
             $user = $user->where('status',$request->status);
+        }
+        if (isset($request->type) && !empty($request->type)) {
+            $user = $user->where('type',$request->type);
+        }
+        if (isset($request->company) && !empty($request->company)) {
+            $user = $user->where('parent_id',$request->company);
         }
         $user = $user->get();
 
@@ -65,6 +72,14 @@ class CompanyController extends Controller
             })
             ->addColumn('phone', function ($q) {
                 return $q->phone;
+            })
+            ->addColumn('added_by', function ($q) {
+                if($q->type == 'user') {
+                    $user = User::whereId($q->parent_id)->first();
+                    return $user->c_name;
+                } else {
+                    return '-';
+                }
             })
             ->addColumn('status', function ($q) {
                 $id = encrypt($q->id);
@@ -179,15 +194,15 @@ class CompanyController extends Controller
                     DB::statement($createTableSqlString);
                     $encrypted = Crypt::encryptString($token);
 
-                       $last_u_id = $user->id;
-                       $resetpasslink = url('invite/password/'.$encrypted);
-                       $data['name'] = $request->user_name;
-                       $data['email'] = $request->email;
-                       $data['url'] = $resetpasslink;
-                       $data['text'] = "Welcome to RTGS Group! You're invited by ".Auth::user()->name.". Please verify your account and generate password to login in RTGS Group.";
-                       $view = 'company-invitation';
-                       $subject = "RTGS Group! You're invited to register ";
-                       sendmail($data,$subject);
+                    $last_u_id = $user->id;
+                    $resetpasslink = url('invite/password/'.$encrypted);
+                    $data['name'] = $request->name;
+                    $data['email'] = $request->email;
+                    $data['url'] = $resetpasslink;
+                    $data['text'] = "Welcome to RTGS Group! You're invited by ".Auth::user()->name.". Please verify your account and generate password to login in Intunor Group.";
+                    $view = 'company-invitation';
+                    $subject = "RTGS Group! You're invited to register ";
+                    sendmail($data,$subject);
 
                     $msg = "Company added successfully.";
                 }
