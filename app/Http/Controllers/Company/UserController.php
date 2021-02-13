@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Validator;
 use App\User;
 use DataTables;
+use \Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -79,14 +82,14 @@ class UserController extends Controller
                     $user->address = $request->address;
                     $user->email = $request->email;
                     $user->phone = $request->phone;
-                    if(!empty($request->password)){
-                    	$user->password = \Hash::make($request->password);
-                    }
+                    // if(!empty($request->password)){
+                    // 	$user->password = \Hash::make($request->password);
+                    // }
 
                     $user->save();
                     $msg = "User updated successfully.";
                 }else{
-                    //$token = random_int(10000000, 99999999);
+                    $token = random_int(10000000, 99999999);
 
                     $user = new User;
                     if ($request->hasFile('profile_avatar')) {
@@ -105,15 +108,15 @@ class UserController extends Controller
                     $user->c_name = $request->c_name;
                     $user->address = $request->address;
                     $user->email = $request->email;
-                   // $user->token = $token;
+                    $user->token = $token;
                     $user->parent_id = auth()->user()->id;
                     $user->type = 'user';
                     $user->phone = $request->phone;
-                    $user->password = \Hash::make($request->password);
+                    //$user->password = \Hash::make($request->password);
                     $user->save();
 
                     
-                    /*$encrypted = Crypt::encryptString($token);
+                    $encrypted = Crypt::encryptString($token);
                    
                     $last_u_id = $user->id;
                     $resetpasslink = url('invite/password/'.$encrypted);
@@ -123,7 +126,7 @@ class UserController extends Controller
                     $data['text'] = "Welcome to RTGS Group! You're invited by ".Auth::user()->name.". Please verify your account and generate password to login in Intunor Group.";
                     $view = 'company-invitation';
                     $subject = "RTGS Group! You're invited to register ";
-                    sendmail($data,$subject);*/
+                    sendmail($data,$subject);
                     
                     $msg = "User added successfully.";
                 }
