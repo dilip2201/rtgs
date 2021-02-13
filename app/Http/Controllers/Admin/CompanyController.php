@@ -154,7 +154,7 @@ class CompanyController extends Controller
                     $user->type = 'company';
                     $user->phone = $request->phone;
                     $user->save();
-                    $newTableName = "benificiaries_".$user->id;
+                    $newTableName = $user->id."_benificiaries";
                     $createTableSqlString = "CREATE TABLE $newTableName (
                         id BIGINT(20) NOT NULL AUTO_INCREMENT,
                         nickname VARCHAR(191) NULL DEFAULT NULL,
@@ -178,16 +178,16 @@ class CompanyController extends Controller
                     ) COLLATE='utf8_general_ci' ENGINE=InnoDB AUTO_INCREMENT=1;";
                     DB::statement($createTableSqlString);
                     $encrypted = Crypt::encryptString($token);
-//
-//                    $last_u_id = $user->id;
-//                    $resetpasslink = url('invite/password/'.$encrypted);
-//                    $data['name'] = $request->name;
-//                    $data['email'] = $request->email;
-//                    $data['url'] = $resetpasslink;
-//                    $data['text'] = "Welcome to RTGS Group! You're invited by ".Auth::user()->name.". Please verify your account and generate password to login in Intunor Group.";
-//                    $view = 'company-invitation';
-//                    $subject = "RTGS Group! You're invited to register ";
-//                    sendmail($data,$subject);
+
+                       $last_u_id = $user->id;
+                       $resetpasslink = url('invite/password/'.$encrypted);
+                       $data['name'] = $request->user_name;
+                       $data['email'] = $request->email;
+                       $data['url'] = $resetpasslink;
+                       $data['text'] = "Welcome to RTGS Group! You're invited by ".Auth::user()->name.". Please verify your account and generate password to login in RTGS Group.";
+                       $view = 'company-invitation';
+                       $subject = "RTGS Group! You're invited to register ";
+                       sendmail($data,$subject);
 
                     $msg = "Company added successfully.";
                 }
@@ -296,6 +296,7 @@ class CompanyController extends Controller
         try {
             $company = User::find($id);
             if ($company) {
+                User::where('parent_id',$company->id)->delete();
                 $company->delete();
                 $arr = array("status" => 200, "msg" => 'Company deleted successfully.');
             } else {
