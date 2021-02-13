@@ -10,6 +10,7 @@
 <a href="#" data-toggle="modal" data-target="#exampleModalSizeSm" data-id="" class="btn btn-light-success font-weight-bolder btn-sm openaddmodal" >Add New</a> 
 @endsection
 <!--begin::Card-->
+<meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
 <div class="card card-custom">
 	<div class="card-header">
 		<div class="card-title">
@@ -75,6 +76,7 @@
 <script src="{{ URL::asset('public/admin/Pnotify/company/pnotify.custom.min.js') }}"></script>
 <script src="{{ URL::asset('public/assets/plugins/custom/datatables/datatables.bundleafa4.js') }}"></script>
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/additional-methods.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 
@@ -130,7 +132,13 @@
            
         });
 
-        
+
+jQuery.validator.addMethod("accept", function(value, element, param) {
+ return value.match(new RegExp("." + param + "$"));
+});
+
+
+
 
 
 		$('body').on('click', '.openaddmodal', function () {
@@ -155,19 +163,26 @@
                                 required: true,
                             },
                             phone: {
-                                maxlength: 15,
+                                maxlength: 10,
                                 number: true,
                             },
                             c_name: {
+                                required: true,
                                 maxlength: 30,
                             },
                             user_name: {
+                                required: true,
                                 maxlength: 30,
                             },
                             email: {
                                 required: true,
                                 email: true,
                             },
+                            image: {
+                                required: true,
+                                extension: "jep | jpe | png",
+                                filesize : 5, // here we are working with MB
+                            }
                         },
 
                     });
@@ -175,6 +190,17 @@
                 },
             });
         });
+
+        $('.profile_avatar').change(
+
+                function () {
+                    var fileExtension = ['jpeg'];
+                    if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+                        alert("Only '.png' format is allowed.");
+                        this.value = ''; // Clean field
+                        return false;
+                    }
+                });
 
 		$("#employee").DataTable({
             "responsive": true,
