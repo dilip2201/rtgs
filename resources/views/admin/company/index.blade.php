@@ -28,6 +28,26 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label><b>Type: </b>
+                                    </label>
+                                    <select class="form-control status" id="status" name="status">
+                                        <option value="1">company</option>
+                                        <option value="2">users</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label><b>Company: </b>
+                                    </label>
+                                    <select class="form-control status" id="status" name="status">
+                                        <option value="1">company</option>
+                                        <option value="2">users</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-md-2" style="padding-left: 0px;">
                                 <button class="btn btn-success btn-sm searchdata"
                                         style="margin-top: 33px;padding: 6px 16px;">Search <span
@@ -44,7 +64,7 @@
                 <!-- /.card -->
             </div>
             <div class="card  card-outline">
-               
+
                 <div class="card-body">
                     <!-- /.card-header -->
                     <table id="employee" class="table table-bordered table-hover" style="background: #fff;">
@@ -202,7 +222,7 @@
                     $('.spinner').html('<i class="fa fa-spinner fa-spin"></i>')
                 },
                 success: function (data) {
-                   
+
                     if (data.status == 400) {
                         $('.spinner').html('');
                         toastr.error(data.msg)

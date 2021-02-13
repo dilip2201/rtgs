@@ -43,7 +43,7 @@
                                 @endif
                             <!--begin: Wizard Step 1-->
                             <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
-                                <h4 class="mb-10 font-weight-bold text-dark">Enter your new user details</h4>
+                                <h4 class="mb-5 font-weight-bold text-dark">Enter your new user details</h4>
                                 
                                 <div class="row">
                                     <div class="col-xl-6">
@@ -53,13 +53,7 @@
                                             <span class="form-text text-muted">Fill in the user name and surname.</span>
                                         </div>
                                     </div>
-<!--                                     <div class="col-xl-6">
-                                        <div class="form-group">
-                                            <label><b>Password</b></label>
-                                            <input type="password" class="form-control form-control-solid form-control-lg" name="lname" placeholder="Password"  @if(empty($user)) required @endif/>
-                                            <span class="form-text text-muted">Fill in the user's password.</span>
-                                        </div>
-                                    </div> -->
+
                                     <div class="col-xl-6">
                                         <!--begin::Input-->
                                         <div class="form-group">
@@ -100,7 +94,7 @@
                                         <div class="form-group">
                                                  
                                         <div class="image-input image-input-outline" id="kt_profile_avatar" style="background-image: url({{ URL::asset('public/admin/company/employee/'.$image) }})">
-                                         <div class="image-input-wrapper" style="background-image: url({{ URL::asset('public/company/employee/'.$image) }})"></div>
+                                         <div class="image-input-wrapper" style="background-image: url({{ URL::asset('public/company/employee/'.$image) }})" ></div>
                                          <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                          <i class="fa fa-pencil icon-sm text-muted"></i>
                                          <input type="file" name="profile_avatar" class="profile_avatar" id="profile_avatar" accept=".png, .jpg, .jpeg">

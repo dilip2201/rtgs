@@ -83,8 +83,8 @@
                $image = 'default.png';
                }
                @endphp
-                  <div class="symbol-label" style="background-image: url({{ URL::asset('public/company/employee/'.$image) }})"></div>
-                  <i class="symbol-badge bg-success"></i>
+                  <div class="symbol-label" style="background-image: url({{ URL::asset('public/company/employee/'.$image) }})" ></div>
+                  
                </div>
                <div class="d-flex flex-column">
                   <a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">{{ auth()->user()->name }}</a>
