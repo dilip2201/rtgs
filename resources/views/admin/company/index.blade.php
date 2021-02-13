@@ -32,9 +32,9 @@
                                 <div class="form-group">
                                     <label><b>Type: </b>
                                     </label>
-                                    <select class="form-control status" id="status" name="status">
-                                        <option value="1">company</option>
-                                        <option value="2">users</option>
+                                    <select class="form-control type" id="type" name="type">
+                                        <option value="company">company</option>
+                                        <option value="user">user</option>
                                     </select>
                                 </div>
                             </div>
@@ -42,9 +42,13 @@
                                 <div class="form-group">
                                     <label><b>Company: </b>
                                     </label>
-                                    <select class="form-control status" id="status" name="status">
-                                        <option value="1">company</option>
-                                        <option value="2">users</option>
+                                    <select class="form-control company" id="company" name="company">
+                                        <option></option>
+                                        @if(!empty($companies))
+                                            @foreach($companies as $company)
+                                                <option value="{{ $company->id }}">{{ $company->c_name }}</option>
+                                            @endforeach
+                                        @endif
                                     </select>
                                 </div>
                             </div>
@@ -76,6 +80,8 @@
                             <th>Email</th>
                             <th style="width: 150px;">Address</th>
                             <th>Phone</th>
+                            <th>Type</th>
+                            <th>Added By</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -114,9 +120,11 @@
 </div>
 <!-- /.modal -->
 
-
-
+@push('style')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+@endpush
 @push('script')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <script>
         function readURL(input, classes) {
@@ -132,7 +140,14 @@
         $('body').on('change', '.logo_image', function() {
             readURL(this, 'image_preview');
         });
+        $('body').on('change', '.company', function() {
+            $('#type').val('user');
+        });
         $(function () {
+            $('.company').select2({
+                placeholder: "Select Company",
+                allowClear: true
+            });
             /* datatable */
             $("#employee").DataTable({
                 "responsive": true,
@@ -146,6 +161,8 @@
                     'data': function (d) {
                         d._token = "{{ csrf_token() }}";
                         d.status = $("#status").val();
+                        d.type = $("#type").val();
+                        d.company = $("#company").val();
                     }
                 },
                 columns: [
@@ -155,12 +172,14 @@
                     {data: 'email'},
                     {data: 'address'},
                     {data: 'phone'},
+                    {data: 'type'},
+                    {data: 'added_by'},
                     {data: 'status'},
                     {data: 'action', orderable: false},
                 ]
             });
             /*filter*/
-            $('.searchdata').click(function () {
+            $('.searchdata').click(function (event) {
                 event.preventDefault();
                 $("#employee").DataTable().ajax.reload()
             })
@@ -189,13 +208,15 @@
                             },
                             phone: {
                                 maxlength: 15,
-                                number: true,
+                                minlength: 10,
                             },
                             c_name: {
                                 maxlength: 30,
+                                minlength: 6,
                             },
                             user_name: {
                                 maxlength: 30,
+                                minlength: 6,
                             },
                             email: {
                                 required: true,
@@ -208,7 +229,9 @@
                 },
             });
         });
-
+        $('body').on('keypress','.phone', function(key) {
+            if(key.charCode < 48 || key.charCode > 57) return false;
+        });
         $('body').on('submit', '.formsubmit', function (e) {
             e.preventDefault();
             $.ajax({
