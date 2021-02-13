@@ -7,7 +7,10 @@
 	}
 </style>
 @section('button')
-<a href="#" data-toggle="modal" data-target="#exampleModalSizeSm" data-id="" class="btn btn-light-success font-weight-bolder btn-sm openaddmodal" >Add New</a> 
+<a href="{{ route('company.form.create') }}"  class="btn btn-primary font-weight-bolder" >New Form<i style="font-size: 10px;
+    margin-left: 6px;" class="flaticon2-right-arrow"></i></a> 
+<a href="{{ route('company.benificiaries.create') }}"  style="margin-left: 15px;" data-id="" class="btn btn-light-primary font-weight-bold mr-2" >New beneficiary / remmiter<i style="font-size: 10px;
+    margin-left: 6px;" class="flaticon2-right-arrow"></i></a> 
 @endsection
 <!--begin::Card-->
 <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">

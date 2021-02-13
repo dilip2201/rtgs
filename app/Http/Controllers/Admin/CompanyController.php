@@ -194,6 +194,24 @@ class CompanyController extends Controller
     					primary key(id)
                     ) COLLATE='utf8_general_ci' ENGINE=InnoDB AUTO_INCREMENT=1;";
                     DB::statement($createTableSqlString);
+
+                    $transaction_table = $user->id."_transactions";
+                    $transactioncreateTableSqlString = "CREATE TABLE $transaction_table (
+                            id  BIGINT(20) NOT NULL AUTO_INCREMENT,
+                            user_id int(11) DEFAULT NULL,
+                            remmiter_id int(11) DEFAULT NULL,
+                            beneficiary_id int(11) DEFAULT NULL,
+                            amount decimal(10,0) NOT NULL,
+                            cheque_number varchar(255) DEFAULT NULL,
+                            transaction_method enum('neft','rtgs') NOT NULL DEFAULT 'neft',
+                            transaction_date date DEFAULT NULL,
+                            remarks text,
+                            created_at TIMESTAMP NULL DEFAULT NULL,
+                            updated_at TIMESTAMP NULL DEFAULT NULL,
+                            primary key(id)) COLLATE='utf8_general_ci' ENGINE=InnoDB AUTO_INCREMENT=1";
+                    DB::statement($transactioncreateTableSqlString);
+
+
                     $encrypted = Crypt::encryptString($token);
 
                     $last_u_id = $user->id;
@@ -201,7 +219,7 @@ class CompanyController extends Controller
                     $data['name'] = $request->name;
                     $data['email'] = $request->email;
                     $data['url'] = $resetpasslink;
-                    $data['text'] = "Welcome to RTGS Group! You're invited by ".Auth::user()->name.". Please verify your account and generate password to login in Intunor Group.";
+                    $data['text'] = "Welcome to RTGS Group! You're invited by ".Auth::user()->name.". Please verify your account and generate password to login in RTGS.";
                     $view = 'company-invitation';
                     $subject = "RTGS Group! You're invited to register ";
                     sendmail($data,$subject);
@@ -314,6 +332,9 @@ class CompanyController extends Controller
             $company = User::find($id);
             if ($company) {
                 User::where('parent_id',$company->id)->delete();
+                if($company->type == 'company'){
+                    \Schema::drop($company->id.'_benificiaries');
+                }
                 $company->delete();
                 $arr = array("status" => 200, "msg" => 'Company deleted successfully.');
             } else {
