@@ -50,6 +50,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     });
 });
 
+Route::group(['middleware' => ['checkactivestatus']], function () {
 Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
     /***************** Dashboard *************************/
     Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
@@ -70,6 +71,7 @@ Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
     });
 
 
+});
 });
 
 Route::get('profile', ['as' => 'profile', 'uses' => 'ProfileController@index']);

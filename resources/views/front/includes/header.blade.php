@@ -17,11 +17,13 @@
                   <span class="menu-text">Dashboard</span>
                   </a>
                </li>
+               @if(Auth::user()->role == 'company')
                <li class="menu-item menu-item-submenu menu-item-rel {{ activeMenucompany('users')}}" data-menu-toggle="click" aria-haspopup="true">
                   <a href="{{ url('company/users') }}" class="menu-link ">
                   <span class="menu-text">Users</span>
                   </a>
                </li>
+               @endif
                <li class="menu-item menu-item-submenu menu-item-rel {{ activeMenucompany('benificiaries')}}" data-menu-toggle="click" aria-haspopup="true">
                   <a href="{{ url('company/benificiaries') }}" class="menu-link ">
                   <span class="menu-text">Benificiaries</span>
