@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    
+
     /**
      * Create a new controller instance.
      *
@@ -23,7 +24,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('front.dashboard.index');    
+        return view('front.dashboard.index');
     }
 
     /**
@@ -90,5 +91,16 @@ class DashboardController extends Controller
     public function destroy($id)
     {
         //
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function loadDashboard(Request $request)
+    {
+        $users = User::where('type','user')->where(['parent_id'=>auth()->user()->id,'type' => 'user'])->orderby('id', 'desc')->take(5)->get();
+        return view('front.dashboard.loaddashboard',compact('users'));
     }
 }

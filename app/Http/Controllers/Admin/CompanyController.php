@@ -41,17 +41,17 @@ class CompanyController extends Controller
 
         \DB::enableQueryLog();
         $user = User::where('type','company')->orderby('id', 'desc');
-        
+
         if ((isset($request->status) && !empty($request->status)) || $request->status == '0') {
             $user = $user->where('status',$request->status);
-        }        
+        }
         $user = $user->get();
-        
+
         return DataTables::of($user)
             ->addColumn('action', function ($q) {
                 $id = encrypt($q->id);
                 $return = '<a title="Edit"  data-id="'.$id.'"   data-toggle="modal" data-target=".add_modal" class="btn btn-info btn-sm openaddmodal" href="javascript:void(0)"><i class="fas fa-pencil-alt"></i></a> | <a class="btn btn-danger btn-sm delete_record" data-id="'.$q->id.'" href="javascript:void(0)"> <i class="fas fa-trash"></i> </a>';
-                
+
                 return $return;
             })
             ->addColumn('c_name', function ($q) {
@@ -126,7 +126,7 @@ class CompanyController extends Controller
             $rules['email'] = 'required|email|unique:users,email,'.$company_id;
         }else{
             $rules['email'] = 'required|email|unique:users,email';
-  
+
         }
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
@@ -154,20 +154,41 @@ class CompanyController extends Controller
                     $user->type = 'company';
                     $user->phone = $request->phone;
                     $user->save();
-
-                    
+                    $newTableName = "benificiaries_".$user->id;
+                    $createTableSqlString = "CREATE TABLE $newTableName (
+                        id BIGINT(20) NOT NULL AUTO_INCREMENT,
+                        nickname VARCHAR(191) NULL DEFAULT NULL,
+                        name VARCHAR(191) NULL DEFAULT NULL,
+                        account_number VARCHAR(191) NULL DEFAULT NULL,
+                        address TEXT NULL DEFAULT NULL,
+                        address2 TEXT NULL DEFAULT NULL,
+                        area VARCHAR(191) NULL DEFAULT NULL,
+                        city VARCHAR(191) NULL DEFAULT NULL,
+                        state VARCHAR(191) NULL DEFAULT NULL,
+                        pin VARCHAR(6) NULL DEFAULT NULL,
+                        ifsc VARCHAR(11) NULL DEFAULT NULL,
+                        bank_name VARCHAR(191) NULL DEFAULT NULL,
+                        branch_name VARCHAR(191) NULL DEFAULT NULL,
+                        mobile_number VARCHAR(191) NULL DEFAULT NULL,
+                        email VARCHAR(191) NULL DEFAULT NULL,
+                        is_remitter ENUM('yes','no') NOT NULL DEFAULT 'yes',
+                        created_at TIMESTAMP NULL DEFAULT NULL,
+                        updated_at TIMESTAMP NULL DEFAULT NULL,
+    					primary key(id)
+                    ) COLLATE='utf8_general_ci' ENGINE=InnoDB AUTO_INCREMENT=1;";
+                    DB::statement($createTableSqlString);
                     $encrypted = Crypt::encryptString($token);
-                   
-                    $last_u_id = $user->id;
-                    $resetpasslink = url('invite/password/'.$encrypted);
-                    $data['name'] = $request->name;
-                    $data['email'] = $request->email;
-                    $data['url'] = $resetpasslink;
-                    $data['text'] = "Welcome to RTGS Group! You're invited by ".Auth::user()->name.". Please verify your account and generate password to login in Intunor Group.";
-                    $view = 'company-invitation';
-                    $subject = "RTGS Group! You're invited to register ";
-                    sendmail($data,$subject);
-                    
+//
+//                    $last_u_id = $user->id;
+//                    $resetpasslink = url('invite/password/'.$encrypted);
+//                    $data['name'] = $request->name;
+//                    $data['email'] = $request->email;
+//                    $data['url'] = $resetpasslink;
+//                    $data['text'] = "Welcome to RTGS Group! You're invited by ".Auth::user()->name.". Please verify your account and generate password to login in Intunor Group.";
+//                    $view = 'company-invitation';
+//                    $subject = "RTGS Group! You're invited to register ";
+//                    sendmail($data,$subject);
+
                     $msg = "Company added successfully.";
                 }
 
@@ -295,6 +316,6 @@ class CompanyController extends Controller
             $arr = array("status" => 400, "msg" => $msg, "result" => array());
         }
         return \Response::json($arr);
-    
+
     }
 }
