@@ -56,7 +56,8 @@
                     <th>Nickname</th>
 					<th>Bank Name </th>
 					<th>Account No.</th>
-					<th>Active / Inactive </th>
+                    <th>Is Remitter</th>
+					<th>Enabled / Disabled </th>
 					<th>Action</th>					
 				</tr>
 			</thead>
@@ -203,6 +204,7 @@
                 {data: 'bank_name'},
                 {data: 'account_number'},
                 {data: 'is_remitter'},
+                {data: 'status'},
                 {data: 'action'},
             ]
         });
@@ -210,15 +212,15 @@
         $('body').on('click', '.changestatus', function () {
             var id = $(this).data('id');
             var status = $(this).data('status');
-            if(status == '' && 'no'){
-                var text = "No";
+            if(status == 'disabled'){
+                var text = "Disabled";
             }else{
-                var text = "Yes";
+                var text = "Enabled";
             }
 
             Swal.fire({
                 title: "Confirmation Needed",
-                text: "Are you sure you wants to "+ text +" this user?",
+                text: "Are you sure you wants to "+ text +" this Benificiary?",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonText: "Yes, "+text+" it!",
@@ -237,7 +239,7 @@
                             $("#employee").DataTable().ajax.reload();
                             Swal.fire(
                                     text+"d",
-                                    "User has been "+text+"d.",
+                                    "Benificiary has been "+text+"d.",
                                     "success"
                                 )
                         },
@@ -249,7 +251,7 @@
                 } else if (result.dismiss === "cancel") {
                     Swal.fire(
                         "Cancelled",
-                        "Your User is safe :)",
+                        "Your Benificiary is safe :)",
                         "error"
                     )
                 }

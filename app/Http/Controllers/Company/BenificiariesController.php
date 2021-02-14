@@ -181,21 +181,23 @@ class BenificiariesController extends Controller
             ->addColumn('is_remitter', function ($q) {
                 $id = $q->id;
                 if ($q->is_remitter == 'yes') {
-                    return '<span class="label label-success label-dot mr-2"></span><span style="color:#1bc5bd!important; cursor:pointer;" class="font-weight-bold changestatus" data-status="no" data-id="' . $id . '" text-success">Yes</span>';
+                    return '<span class="label label-success label-dot mr-2"></span><span style="color:#1bc5bd!important; cursor:pointer;" class="font-weight-bold text-success">Yes</span>';
                 }else{
-                    return '<span class="label label-danger label-dot mr-2"></span><span  style="color:#f64e60!important; cursor:pointer;" class="font-weight-bold changestatus" data-status="yes"  data-id="' . $id . '" text-success">No</span>';
+                    return '<span class="label label-danger label-dot mr-2"></span><span  style="color:#f64e60!important; cursor:pointer;" class="font-weight-bold">No</span>';
                 }
                 return $remitter;
             })
-            // ->addColumn('status', function ($q) {
-            //     $id = encrypt($q->id);
-            //     if ($q->status == '1') {
-            //         return '<span class="label label-success label-dot mr-2"></span><span style="color:#1bc5bd!important; cursor:pointer;" class="font-weight-bold changestatus" data-status="0" data-id="' . $id . '" text-success">Enable</span>';
-            //     }
-            //     if ($q->status == '0') {
-            //         return '<span class="label label-danger label-dot mr-2"></span><span  style="color:#f64e60!important; cursor:pointer;" class="font-weight-bold changestatus" data-status="1"  data-id="' . $id . '" text-success">Disable</span>';
-            //     }
-            // })
+
+            ->addColumn('status', function ($q) {
+                $id = $q->id;
+                if ($q->status == 'enabled') {
+                    return '<span class="label label-success label-dot mr-2"></span><span style="color:#1bc5bd!important; cursor:pointer;" class="font-weight-bold changestatus" data-status="disabled" data-id="' . $id . '" text-success">Enabled</span>';
+                }else{
+                    return '<span class="label label-danger label-dot mr-2"></span><span  style="color:#f64e60!important; cursor:pointer;" class="font-weight-bold changestatus" data-status="enabled"  data-id="' . $id . '" text-success">Disabled</span>';
+                }
+                return $remitter;
+            })
+ 
             ->addIndexColumn()
             ->rawColumns(['image','status', 'action','is_remitter'])->make(true);
     }
@@ -219,7 +221,7 @@ class BenificiariesController extends Controller
             $b_id = $request->id;
             $benificiary =  DB::table($id.'_benificiaries')->where('id',$b_id);
             if ($benificiary) {
-                $benificiary->update(['is_remitter' => $request->status]);
+                $benificiary->update(['status' => $request->status]);
                 $arr = array("status" => 200, "msg" => 'Benificiary remitter status change successfully.');
             } else {
                 $arr = array("status" => 400, "msg" => 'Benificiary not found. please try again!');

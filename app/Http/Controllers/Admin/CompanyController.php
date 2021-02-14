@@ -189,6 +189,7 @@ class CompanyController extends Controller
                         mobile_number VARCHAR(191) NULL DEFAULT NULL,
                         email VARCHAR(191) NULL DEFAULT NULL,
                         is_remitter ENUM('yes','no') NOT NULL DEFAULT 'yes',
+                        status ENUM('enabled','disabled') NOT NULL DEFAULT 'enabled',
                         created_at TIMESTAMP NULL DEFAULT NULL,
                         updated_at TIMESTAMP NULL DEFAULT NULL,
     					primary key(id)
