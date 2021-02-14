@@ -303,18 +303,18 @@ $('.states').select2({
      placeholder: "Select a beneficiary",
 });
 "use strict";
-var KTWizard2 = function() {
-    var t, e, i, r = [];
+var KTWizard3 = function() {
+    var e, t, i, a = [];
     return {
         init: function() {
-            t = KTUtil.getById("kt_wizard"), e = KTUtil.getById("kt_form"), (i = new KTWizard(t, {
+            e = KTUtil.getById("kt_wizard"), t = KTUtil.getById("kt_form"), (i = new KTWizard(e, {
                 startStep: 1,
-                clickableSteps: !1
-            })).on("change", (function(t) {
-                if (!(t.getStep() > t.getNewStep())) {
-                    var e = r[t.getStep() - 1];
-                    return e && e.validate().then((function(e) {
-                        "Valid" == e ? (t.goTo(t.getNewStep()), KTUtil.scrollTop()) : Swal.fire({
+                clickableSteps: !0
+            })).on("change", (function(e) {
+                if (!(e.getStep() > e.getNewStep())) {
+                    var t = a[e.getStep() - 1];
+                    return t && t.validate().then((function(t) {
+                        "Valid" == t ? (e.goTo(e.getNewStep()), KTUtil.scrollTop()) : Swal.fire({
                             text: "Sorry, looks like there are some errors detected, please try again.",
                             icon: "error",
                             buttonsStyling: !1,
@@ -327,36 +327,25 @@ var KTWizard2 = function() {
                         }))
                     })), !1
                 }
-            })), i.on("changed", (function(t) {
+            })), i.on("changed", (function(e) {
                 KTUtil.scrollTop()
-            })), i.on("submit", (function(t) {
-                Swal.fire({
-                    text: "All is good! Please confirm the form submission.",
-                    icon: "success",
-                    showCancelButton: !0,
-                    buttonsStyling: !1,
-                    confirmButtonText: "Yes, submit!",
-                    cancelButtonText: "No, cancel",
-                    customClass: {
-                        confirmButton: "btn font-weight-bold btn-primary",
-                        cancelButton: "btn font-weight-bold btn-default"
-                    }
-                }).then((function(t) {
-
-                    t.value ? e.submit() : "cancel" === t.dismiss && Swal.fire({
-                        text: "Your form has not been submitted!.",
+            })), i.on("submit", (function(e) {
+                var i = a[e.getStep() - 1];
+                i && i.validate().then((function(e) {
+                    "Valid" == e ? t.submit() : Swal.fire({
+                        text: "Sorry, looks like there are some errors detected, please try again.",
                         icon: "error",
                         buttonsStyling: !1,
                         confirmButtonText: "Ok, got it!",
                         customClass: {
-                            confirmButton: "btn font-weight-bold btn-primary"
+                            confirmButton: "btn font-weight-bold btn-light"
                         }
-                    })
-                    // toastr.success('Success!')
-                    // window.location.href = "{{ url('company/benificiaries') }}";
+                    }).then((function() {
+                        KTUtil.scrollTop()
+                    }))
                 }))
-            })), r.push(FormValidation.formValidation(e, {
-                fields: {
+            })), a.push(FormValidation.formValidation(t, {
+fields: {
                     name: {
                         validators: {
                             notEmpty: {
@@ -486,8 +475,8 @@ var KTWizard2 = function() {
                         eleValidClass: ""
                     })
                 }
-            })), r.push(FormValidation.formValidation(e, {
-                fields: {
+            })), a.push(FormValidation.formValidation(t, {
+                                fields: {
                      account_number: {
                         validators: {
                             notEmpty: {
@@ -542,7 +531,7 @@ var KTWizard2 = function() {
     }
 }();
 jQuery(document).ready((function() {
-    KTWizard2.init()
+    KTWizard3.init()
 }));
 
         /*filter*/
