@@ -22,19 +22,17 @@ class FormController extends Controller
 
   
 
-    public function create(){
+    public function create($tid = 0){
     	$id = 0;
 		if(auth()->user()->parent_id == null){
 			$id = auth()->user()->id;	
-		}else{
+		} else {
 			$id = auth()->user()->parent_id;	
 		}
-
-
 		$benificiaries = \DB::table($id.'_benificiaries')->get();
         $remmiters = \DB::table($id.'_benificiaries')->where('is_remitter','yes')->get();
-
-    	return view('front.form.create',compact('benificiaries','remmiters'));
+        $transaction = \DB::table($id.'_transactions')->where('id',$tid)->first();
+    	return view('front.form.create',compact('benificiaries','remmiters','transaction'));
     }
 
     public function getdata(Request $request){
@@ -93,26 +91,17 @@ class FormController extends Controller
                 
                 
                 if (isset($request->transaction_id) && $request->transaction_id != '') {
-
-                    DB::table($id.'_transactions')->where('id',$request->b_id)->update(
+                    $t_id = decrypt($request->transaction_id);
+                    DB::table($id.'_transactions')->where('id',$t_id)->update(
                         ['user_id' => Auth::user()->id,
-                        'name' => $request->name,
-                        'nickname' => $request->nickname,
-                        'email' => $request->email,
-                        'mobile_number' => $request->mobile_number,
-                        'is_remitter' => $request->is_remitter,
-                        'address' => $request->address,
-                        'address2' => $request->address2,
-                        'is_remitter'=>$remitter,
-                        'pin' => $request->pin,
-                        'area' => $request->area,
-                        'city' => $request->city,
-                        'state' => $request->states,
-                        'account_number' => $request->account_number,
-                        'ifsc' => $request->ifsc,
-                        'branch_name' => $request->branch_name,
-                        'bank_name' => $request->bank_name]);
-                    return redirect('company/benificiaries')->with('status', 'Benificiaries Update successfully.');
+                        'remmiter_id' => $request->remmiter_id,
+                        'beneficiary_id' => $request->beneficiary_id,
+                        'amount' => $request->amount,
+                        'cheque_number' => $request->cheque_number,
+                        'transaction_method' => $request->transaction_method,
+                        'transaction_date' => date('Y-m-d',strtotime($request->transaction_date)),
+                        'remarks' => $request->remarks,'updated_at'=>Carbon::now()]);
+                    return redirect('company/transaction')->with('status', 'Transaction Update successfully.');
                 }else{
 
                     DB::table($id.'_transactions')->insert(['user_id' => Auth::user()->id,
@@ -122,8 +111,8 @@ class FormController extends Controller
                         'cheque_number' => $request->cheque_number,
                         'transaction_method' => $request->transaction_method,
                         'transaction_date' => date('Y-m-d',strtotime($request->transaction_date)),
-                        'remarks' => $request->remarks,'created_at'=>Carbon::now()]);
-                    return redirect('company/benificiaries')->with('status', 'Benificiaries added successfully.');
+                        'remarks' => $request->remarks,'created_at'=>Carbon::now(),'updated_at'=>Carbon::now()]);
+                    return redirect('company/transaction')->with('status', 'Transaction added successfully.');
                 }
                 
             } catch (\Illuminate\Database\QueryException $ex) {

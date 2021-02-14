@@ -46,6 +46,23 @@ function getusernamebenificiery($benificieryid, $id) {
     return $return;
 }
 
+function getbenificiary($benificieryid) {
+
+    $id = 0;
+    if(auth()->user()->parent_id == null){
+        $id = auth()->user()->id;   
+    } else {
+        $id = auth()->user()->parent_id;    
+    }
+    $user = \DB::table($id.'_benificiaries')->where('id',$benificieryid)->first();
+    $return = array();
+    if(!empty($user)){
+        $return = $user;
+    }
+    return $return;
+}
+
+
 
 
 

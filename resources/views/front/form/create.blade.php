@@ -17,7 +17,10 @@
         background-color: #3699ff;
     }
 </style>
-
+@section('button')
+<a href="{{ route('company.transaction') }}"  class="btn btn-primary font-weight-bolder" >Transaction<i style="font-size: 10px;
+    margin-left: 6px;" class="flaticon2-right-arrow"></i></a> 
+@endsection
 <!--begin::Card-->
 <div class="card card-custom">
       
@@ -79,9 +82,9 @@
                     <div class="offset-xxl-2 col-xxl-8">
                         <form class="form formsubmit" action="{{ route('company.form.store') }}" id="kt_form" method="post">
                                 {{ csrf_field() }}
-                                @if(isset($user) && !empty($user->id) )
-                                    <input type="hidden" name="transaction_id" value="{{ encrypt($transaction->id) }}">
-                                @endif
+                                
+                                <input type="hidden" name="transaction_id" value="@if(!empty($transaction)) {{ encrypt($transaction->id) }} @endif">
+                                
                             <!--begin: Wizard Step 1-->
                             <div class="pb-3" data-wizard-type="step-content" data-wizard-state="current">
                                 <h4 class="mb-3 font-weight-bold text-dark">Enter the remmiter's details</h4>
@@ -94,7 +97,7 @@
                                                 <option value="">Select a Remmiter</option>
                                                     @if(!empty($remmiters))
                                                         @foreach($remmiters as $remmiter)
-                                                        <option value="{{ $remmiter->id }}">{{ $remmiter->name }}</option>
+                                                        <option value="{{ $remmiter->id }}" @if(!empty($transaction) && $transaction->remmiter_id == $remmiter->id) {{ 'selected' }} @endif>{{ $remmiter->name }}</option>
                                                         @endforeach
                                                     @endif
                                                 </select>
@@ -115,7 +118,7 @@
                                                     <option value="">Select a Beneficiary</option>
                                                     @if(!empty($benificiaries))
                                                         @foreach($benificiaries as $benificiary)
-                                                        <option value="{{ $benificiary->id }}">{{ $benificiary->name }}</option>
+                                                        <option value="{{ $benificiary->id }}" @if(!empty($transaction) && $transaction->beneficiary_id == $benificiary->id) {{ 'selected' }} @endif>{{ $benificiary->name }}</option>
                                                         @endforeach
                                                     @endif
                                                 </select>
@@ -139,14 +142,14 @@
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Amount</b></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg amount" name="amount" value="@if(!empty($user)){{ $user->name }}@endif"  placeholder="Amount" value="" required />
+                                            <input type="text" class="form-control form-control-solid form-control-lg amount" name="amount" value="@if(!empty($transaction)){{ $transaction->amount }}@endif"  placeholder="Amount"  required />
                                             <span class="form-text text-muted">Fill in the amount to be transferred.</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Cheque No</b></label>
-                                            <input type="text" maxlength="6" class="form-control form-control-solid form-control-lg cheque_number" name="cheque_number"  placeholder="Cheque No" value="" required />
+                                            <input type="text" maxlength="6" class="form-control form-control-solid form-control-lg cheque_number" name="cheque_number"  placeholder="Cheque No" value="@if(!empty($transaction)){{ $transaction->cheque_number }}@endif" required />
                                             <span class="form-text text-muted">Fill in the cheque number</span>
                                         </div>
                                     </div>
@@ -155,10 +158,10 @@
                                             <label><b>Transaction method</b></label>
                                             <div class="radio-inline">
                                                             <label class="radio">
-                                                            <input type="radio" class="transaction_method" name="transaction_method" checked="" value="neft" />
+                                                            <input type="radio" class="transaction_method" name="transaction_method" @if(empty($transaction)) checked @endif @if(!empty($transaction->transaction_method) && $transaction->transaction_method == 'neft') checked @endif value="neft" />
                                                             <span></span>NEFT</label>
                                                             <label class="radio">
-                                                            <input type="radio" value="rtgs" class="transaction_method" name="transaction_method" />
+                                                            <input type="radio" value="rtgs" class="transaction_method" name="transaction_method" @if(!empty($transaction->transaction_method) && $transaction->transaction_method == 'rtgs') checked @endif/>
                                                             <span></span>RTGS</label>
                                                            
                                                         </div>
@@ -168,7 +171,7 @@
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Date</b></label>
-                                            <input type="date" class="form-control form-control-solid form-control-lg transaction_date" name="transaction_date" value="@if(!empty($user)){{ $user->name }}@endif"  placeholder="Date" value="" required />
+                                            <input type="date" class="form-control form-control-solid form-control-lg transaction_date" name="transaction_date" value="@if(!empty($transaction)){{ $transaction->transaction_date }}@endif"  placeholder="Date" value="" required />
                                             <span class="form-text text-muted">Edit the date if neccessary.</span>
                                         </div>
                                     </div>
@@ -182,26 +185,55 @@
                                     <div class="col-xl-4">
                                         <!--begin::Input-->
                                         <div class="form-group benificiary_detail" >
-                                            
+                                            @if(!empty($transaction))
+                                            @php $benificiary = getbenificiary($transaction->beneficiary_id)  @endphp
+
+                                            <label><b style="color: #000; font-size: 14px;">Benificiary's details</b></label><br>
+                                            <span class="benificiary_name" style="color: #9f9f9f;">{{ $benificiary->name ?? '-' }}</span><br>
+                                            <span class="benificiary_state" style="color: #9f9f9f;">{{ $benificiary->city ?? '-' }}, {{ $benificiary->state ?? '-' }}</span><br>
+                                            <span class="benificiary_citybank" style="color: #9f9f9f;">{{ $benificiary->bank_name ?? '-' }}</span><br>
+                                            <span class="benificiary_citybank" style="color: #9f9f9f;">{{ $benificiary->ifsc ?? '-' }}</span><br>
+                                            <span class="benificiary_citybank" style="color: #9f9f9f;">{{ $benificiary->account_number ?? '-' }}</span><br>
+                                            @endif
                                         </div>
                                         <!--end::Input-->
                                     </div>
                                     <div class="col-xl-4">
                                         <!--begin::Input-->
                                         <div class="form-group remmiter_detail">
-                                            
+                                            @if(!empty($transaction))
+                                            @php $benificiary = getbenificiary($transaction->remmiter_id)  @endphp
+
+                                            <label><b style="color: #000; font-size: 14px;">Remmiter details</b></label><br>
+                                            <span class="benificiary_name" style="color: #9f9f9f;">{{ $benificiary->name ?? '-' }}</span><br>
+                                            <span class="benificiary_state" style="color: #9f9f9f;">{{ $benificiary->city ?? '-' }}, {{ $benificiary->state ?? '-' }}</span><br>
+                                            <span class="benificiary_citybank" style="color: #9f9f9f;">{{ $benificiary->bank_name ?? '-' }}</span><br>
+                                            <span class="benificiary_citybank" style="color: #9f9f9f;">{{ $benificiary->ifsc ?? '-' }}</span><br>
+                                            <span class="benificiary_citybank" style="color: #9f9f9f;">{{ $benificiary->account_number ?? '-' }}</span><br>
+                                            @endif
                                         </div>
                                         <!--end::Input-->
                                     </div>
                                     <div class="col-xl-4">
                                         <!--begin::Input-->
                                         <div class="form-group transaction_detail">
-                                            <label><b style="color: #000; font-size: 14px;">Transaction details</b></label><br>
-                                            <span class="benificiary_name" style="color: #9f9f9f;">HBCS</span><br>
-                                            <span class="cheque_number_class" style="color: #9f9f9f;">31-343456677878</span><br>
-                                            <span class="amount_class" style="color: #9f9f9f;">1200$</span><br>
-                                            <span class="transaction_mode_class" style="color: #9f9f9f;">NEFT</span><br>
-                                            <span class="date_class" style="color: #9f9f9f;">31/01/201</span><br>
+                                            @if(!empty($transaction))
+                                                <label><b style="color: #000; font-size: 14px;">Transaction details</b></label><br>
+                                                <span class="benificiary_name" style="color: #9f9f9f;">HBCS</span><br>
+                                                <span class="cheque_number_class" style="color: #9f9f9f;">{{ $transaction->cheque_number }}</span><br>
+                                                <span class="amount_class" style="color: #9f9f9f;">{{ $transaction->amount }}</span><br>
+                                                <span class="transaction_mode_class" style="color: #9f9f9f;">{{ strtoupper($transaction->transaction_method) }}</span><br>
+                                                <span class="date_class" style="color: #9f9f9f;">{{ date('d M Y',strtotime($transaction->amount)) }}</span><br>
+
+                                            @else
+                                                <label><b style="color: #000; font-size: 14px;">Transaction details</b></label><br>
+                                                <span class="benificiary_name" style="color: #9f9f9f;">HBCS</span><br>
+                                                <span class="cheque_number_class" style="color: #9f9f9f;">31-343456677878</span><br>
+                                                <span class="amount_class" style="color: #9f9f9f;">1200$</span><br>
+                                                <span class="transaction_mode_class" style="color: #9f9f9f;">NEFT</span><br>
+                                                <span class="date_class" style="color: #9f9f9f;">31/01/201</span><br>
+
+                                            @endif
                                         </div>
                                         <!--end::Input-->
                                     </div>
@@ -211,7 +243,7 @@
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label>Remarks</label>
-                                            <textarea required="" class="form-control form-control-solid form-control-lg" name="remarks"></textarea>
+                                            <textarea required="" class="form-control form-control-solid form-control-lg" name="remarks">@if(!empty($transaction)){{ $transaction->remarks }}@endif</textarea>
                                             <span class="form-text text-muted">Add any remark to be kept.</span>
                                         </div>
                                         <!--end::Input-->
