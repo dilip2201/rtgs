@@ -64,13 +64,18 @@ class TransactionController extends Controller
                 return date('Y-m-d',strtotime($q->transaction_date));
             })
             ->addColumn('mode', function ($q) {
-                return $q->transaction_method;
+            	if($q->transaction_method == 'neft'){
+            		return '<div style="border:1px solid #8950fc; padding:5px 15px 5px 7px; float:left; border-radius:5px;"><span class="label label-success label-dot mr-2" style="background-color:#8950fc;"></span><span style="color:#8950fc!important; cursor:pointer;" class="font-weight-bold">NEFT</span></div>';
+            	}
+            	if($q->transaction_method == 'rtgs'){
+            		return '<div style="border:1px solid #ffa800; padding:5px 15px 5px 7px; float:left; border-radius:5px;"><span class="label label-success label-dot mr-2" style="background-color:#ffa800;"></span><span style="color:#ffa800!important; cursor:pointer;" class="font-weight-bold">RTGS</span></div>';
+            	}
             })
              ->addColumn('amount', function ($q) {
                 return $q->amount;
             })
             
             ->addIndexColumn()
-            ->rawColumns(['image','status', 'actions'])->make(true);
+            ->rawColumns(['image','status', 'actions','mode'])->make(true);
     }
 }
