@@ -42,7 +42,7 @@
 		</div>
 		<div class="card-toolbar">
 			<a href="{{ route('company.benificiaries.create') }}"  class="btn btn-primary font-weight-bolder">
-			<i class="la la-plus"></i>New Benificiaries</a>
+			<i class="la la-plus"></i>New beneficiary / remmiter</a>
 			<!--end::Button-->
 		</div>
 	</div>
