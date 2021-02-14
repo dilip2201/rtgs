@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Auth;
 
 class PasswordSetupController extends Controller
 {
@@ -25,6 +26,9 @@ class PasswordSetupController extends Controller
     public function setPassInvitationView($token)
     {
 
+        if(auth()->check()){
+            Auth::logout();
+        }
         $decrypted = Crypt::decryptString($token);
         
         $isuserexist = User::where('token',$decrypted)->count();

@@ -52,7 +52,7 @@ class UserController extends Controller
             'user_name' => 'required',
             'address' => 'required',
             'profile_avatar' =>'mimes:jpeg,jpg,png|nullable|max:5000',
-            'phone' => 'required|unique:users,phone',  
+            'phone' => 'required',  
         ];
         $message = [
             'profile_avatar.mimes' => 'The type of the uploaded file should be an image.',
@@ -62,7 +62,6 @@ class UserController extends Controller
         if (isset($request->companyid)) {
             $company_id = decrypt($request->companyid);
             $rules['email'] = 'required|email|unique:users,email,'.$company_id;
-            $rules['phone'] = 'required|unique:users,phone,'.$company_id;
             $message['profile_avatar.max'] = 'Failed to upload an image. The image maximum size is 5MB.';
         }else{
             $rules['email'] = 'required|email|unique:users,email';
@@ -86,7 +85,7 @@ class UserController extends Controller
                         $user->image = $fileName;
                     }
                     $user->name = $request->user_name;
-                    $user->c_name = auth()->user()->c_name;
+                    //$user->c_name = auth()->user()->c_name;
                     $user->address = $request->address;
                     $user->email = $request->email;
                     $user->phone = $request->phone;
@@ -108,7 +107,7 @@ class UserController extends Controller
                         $user->image = $fileName;
                     }
                     $user->name = $request->user_name;
-                    $user->c_name = $request->c_name;
+                    $user->c_name = auth()->user()->c_name;
                     $user->address = $request->address;
                     $user->email = $request->email;
                     $user->token = $token;

@@ -126,7 +126,7 @@
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group ">
-                                            <label><b>Is a beneficiary?</b></label>
+                                            <label><b>Is a remmiter?</b></label>
                                             <span class="switch">
                                                 <label>
                                                     <input type="checkbox" name="is_remitter" @if(!empty($benificiary) && $benificiary->is_remitter == 'yes') checked @endif">
@@ -181,7 +181,7 @@
                                                 <option value="">Select a State</option>
                                                     @if(!empty($states))
                                                         @foreach($states as $state)
-                                                        <option value="{{ $state->id }}" {{ ( $benificiary->state == $state->id) ? 'selected' : '' }}>{{ $state->state }}</option>
+                                                        <option value="{{ $state->id }}" @if(!empty($benificiary) && $benificiary->state == $state->id) selected @endif>{{ $state->state }}</option>
                                                         @endforeach
                                                     @endif
                                                 </select>
