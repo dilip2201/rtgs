@@ -97,4 +97,24 @@ function sendmail( $data, $subject)
         \Illuminate\Support\Facades\Log::info('Mail sent successfully to : '.$receiveremail.'.');
     }
 }
+function getstring2latter($str = "") {
+    $acronym = "";
+    $words = explode(" ", $str);
+
+    if(count($words) > 1){
+    foreach ($words as $w) {
+    $acronym .= $w[0];
+    }
+    }else{
+    $acronym = substr($str, 0,2);
+    }
+    return $acronym;
+}
+function random_color_part() {
+return str_pad( dechex( mt_rand( 0, 255 ) ), 2, '0', STR_PAD_LEFT);
+}
+
+function random_color() {
+return random_color_part() . random_color_part() . random_color_part();
+}
 ?>

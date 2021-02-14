@@ -79,6 +79,7 @@ Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
             Route::post('getall', ['as' => 'getall', 'uses' => 'BenificiariesController@getall']);
             Route::post('changestatus', ['as' => 'changestatus', 'uses' => 'BenificiariesController@changestatus']);
             Route::delete('delete/{id}', ['as' => 'delete', 'uses' => 'BenificiariesController@destroy']);
+            Route::get('show/{id}', ['as' => 'show', 'uses' => 'BenificiariesController@show']);
         });
 
         Route::group(['prefix' => 'form', 'as' => 'form.'], function () {
