@@ -210,10 +210,10 @@
         $('body').on('click', '.changestatus', function () {
             var id = $(this).data('id');
             var status = $(this).data('status');
-            if(status == 0){
-                var text = "disable";
+            if(status == '' && 'no'){
+                var text = "No";
             }else{
-                var text = "enable";
+                var text = "Yes";
             }
 
             Swal.fire({
