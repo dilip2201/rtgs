@@ -60,7 +60,12 @@ class BenificiariesController extends Controller
     
     public function store(Request $request)
     {
-        $id = Auth::user()->id;  
+        $id = 0;
+        if(auth()->user()->parent_id == null){
+            $id = auth()->user()->id;
+        }else{
+            $id = auth()->user()->parent_id;
+        }
 
         $rules = [
             'name' => 'required',
@@ -94,7 +99,7 @@ class BenificiariesController extends Controller
         } else {
             try {
                
-                $id = Auth::user()->id;      
+                
                 if($request->is_remitter == ''){
                     $remitter = "no";
                 }else{

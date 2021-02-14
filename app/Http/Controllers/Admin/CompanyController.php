@@ -334,6 +334,7 @@ class CompanyController extends Controller
                 User::where('parent_id',$company->id)->delete();
                 if($company->type == 'company'){
                     \Schema::drop($company->id.'_benificiaries');
+                    \Schema::drop($company->id.'+transactions');
                 }
                 $company->delete();
                 $arr = array("status" => 200, "msg" => 'Company deleted successfully.');
