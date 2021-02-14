@@ -122,8 +122,7 @@
                     }
                 });
                     
-                    // result.dismiss can be "cancel", "overlay",
-                    // "close", and "timer"
+                 
                 } else if (result.dismiss === "cancel") {
                     Swal.fire(
                         "Cancelled",
@@ -134,11 +133,6 @@
             });
            
         });
-
-
-jQuery.validator.addMethod("accept", function(value, element, param) {
- return value.match(new RegExp("." + param + "$"));
-});
 
 
 
@@ -181,11 +175,7 @@ jQuery.validator.addMethod("accept", function(value, element, param) {
                                 required: true,
                                 email: true,
                             },
-                            image: {
-                                required: true,
-                                extension: "jep | jpe | png",
-                                filesize : 5, // here we are working with MB
-                            }
+                            
                         },
 
                     });
@@ -194,17 +184,7 @@ jQuery.validator.addMethod("accept", function(value, element, param) {
             });
         });
 
-        $('.profile_avatar').change(
-
-                function () {
-                    var fileExtension = ['jpeg'];
-                    if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-                        alert("Only '.png' format is allowed.");
-                        this.value = ''; // Clean field
-                        return false;
-                    }
-                });
-
+       
 		$("#employee").DataTable({
             "responsive": true,
             "autoWidth": false,

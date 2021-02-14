@@ -16,6 +16,7 @@
       <!--begin::Advance Table Widget 1-->
       <div class="card card-custom card-stretch gutter-b">
          <!--begin::Header-->
+         @if(count($users) != 0)
          <div class="card-header border-0 ">
             <h3 class="card-title align-items-start flex-column" style="padding: 23px 0px 0px 16px;">
                <span class="card-label font-weight-bolder text-dark">Users</span>
@@ -26,6 +27,7 @@
                <!--end::Button-->
             </div>
          </div>
+         @endif
          <!--end::Header-->
          <!--begin::Body-->
          <div class="card-body py-0">
@@ -75,6 +77,12 @@
                         </td>
                      </tr>
                      @endforeach
+                     @endif
+
+                     @if(count($users) == 0)
+                        <tr>
+                           <td colspan="4" style="text-align: center;">No data found.</td>
+                        </tr>
                      @endif
                   </tbody>
                </table>
