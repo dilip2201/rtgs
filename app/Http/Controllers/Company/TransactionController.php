@@ -23,6 +23,10 @@ class TransactionController extends Controller
     	return view('front.transaction.index');
     }
 
+    public function getmodal(){
+        return view('front.transaction.getmodal');
+    }
+
         /**
      * Get all the users
      * @param Request $request
@@ -38,13 +42,13 @@ class TransactionController extends Controller
         }
         
 
-        $transactions = DB::table($id.'_transactions')->orderby('id', 'desc');
+        $transactions = DB::table($id.'_transactions')->orderby('id', 'desc')->where('is_deleted','no');
         $transactions = $transactions->get();
         	
         return DataTables::of($transactions)
             ->addColumn('actions', function ($q) {
                 $id = encrypt($q->id);
-                $return = '<a style="color:#000;"  href="'.route('company.form.edit',$q->id).'"  ><i class="fa fa-pencil"></i></a> ';
+                $return = '<a style="color:#000; margin-right:10px;"  href="#"  ><i class="fas fa-copy" style="color:#616161;"></i></a> <a style="color:#000; margin-right:10px;"  data-id="'.$id.'"   data-toggle="modal" data-target=".add_modal" class="openaddmodal"   ><i class="fas fa-history" style="color:#616161;"></i></a>  <a style="color:#000; margin-right:10px;"  href="#"  ><i class="fas fa-download" style="color:#616161;"></i></a> <a style="color:#000; margin-right:10px;"  href="'.route('company.form.edit',$q->id).'"  ><i class="fas fa-pen" style="color:#616161;"></i></a> <a class="delete_record" style="color:#000;cursor:pointer; margin-right:10px;" data-id="'.$q->id.'"><i class="fas fa-trash" style="color:#616161;"></i></a> ';
                 
                 return $return;
             })
@@ -77,5 +81,43 @@ class TransactionController extends Controller
             
             ->addIndexColumn()
             ->rawColumns(['image','status', 'actions','mode'])->make(true);
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($tid)
+    {
+        try {
+
+            $id = 0;
+            if(auth()->user()->parent_id == null){
+                $id = auth()->user()->id;
+            }else{
+                $id = auth()->user()->parent_id;
+            }
+
+            $transactions = DB::table($id.'_transactions')->where('id', $tid)->update(['is_deleted'=>'yes']);
+            $arr = array("status" => 200, "msg" => 'Company deleted successfully.');
+
+        } catch (\Illuminate\Database\QueryException $ex) {
+            $msg = 'You can not delete this as related data are there in system.';
+            if (isset($ex->errorInfo[2])) {
+                $msg = $ex->errorInfo[2];
+            }
+            $arr = array("status" => 400, "msg" => $msg, "result" => array());
+        } catch (Exception $ex) {
+            $msg = 'You can not delete this as related data are there in system.';
+            if (isset($ex->errorInfo[2])) {
+                $msg = $ex->errorInfo[2];
+            }
+            $arr = array("status" => 400, "msg" => $msg, "result" => array());
+        }
+        return \Response::json($arr);
+
     }
 }

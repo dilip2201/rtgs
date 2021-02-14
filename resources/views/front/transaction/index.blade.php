@@ -33,6 +33,7 @@
         {{ session()->get('error') }}
     </div>
 @endif
+
 <!--begin::Card-->
 <div class="card card-custom">
 	<div class="card-header">
@@ -71,7 +72,22 @@
 <!--end::Card-->
 
 
-
+<div class="modal fade add_modal" id="exampleModalSizeSm" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Logs</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i aria-hidden="true" class="ki ki-close"></i>
+            </button>
+        </div>
+        <div class="modal-body addholidaybody" style="padding: 0px;">
+            
+        </div>
+        
+    </div>
+    </div>
+</div>
 
 @push('script')
 <script>var KTAppSettings = { "breakpoints": { "sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1400 }, "colors": { "theme": { "base": { "white": "#ffffff", "primary": "#3699FF", "secondary": "#E5EAEE", "success": "#1BC5BD", "info": "#8950FC", "warning": "#FFA800", "danger": "#F64E60", "light": "#E4E6EF", "dark": "#181C32" }, "light": { "white": "#ffffff", "primary": "#E1F0FF", "secondary": "#EBEDF3", "success": "#C9F7F5", "info": "#EEE5FF", "warning": "#FFF4DE", "danger": "#FFE2E5", "light": "#F3F6F9", "dark": "#D6D6E0" }, "inverse": { "white": "#ffffff", "primary": "#ffffff", "secondary": "#3F4254", "success": "#ffffff", "info": "#ffffff", "warning": "#ffffff", "danger": "#ffffff", "light": "#464E5F", "dark": "#ffffff" } }, "gray": { "gray-100": "#F3F6F9", "gray-200": "#EBEDF3", "gray-300": "#E4E6EF", "gray-400": "#D1D3E0", "gray-500": "#B5B5C3", "gray-600": "#7E8299", "gray-700": "#5E6278", "gray-800": "#3F4254", "gray-900": "#181C32" } }, "font-family": "Poppins" };</script>
@@ -88,7 +104,7 @@
             var id = $(this).data('id');
 
             Swal.fire({
-                title: "Do you want to delete this user?",
+                title: "Do you want to delete this Transaction?",
                 text: "By deleting, you would no longer be able to access it, and the information will be lost.",
                 icon: "warning",
                 showCancelButton: true,
@@ -98,7 +114,7 @@
             }).then(function(result) {
                 if (result.value) {
                     $.ajax({
-                    url: '{{ url("company/benificiaries/delete") }}/' + id,
+                    url: '{{ url("company/transaction/delete") }}/' + id,
                     type: 'DELETE',
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -128,7 +144,7 @@
                 } else if (result.dismiss === "cancel") {
                     Swal.fire(
                         "Cancelled",
-                        "Your User is safe :)",
+                        "Your Transaction is safe :)",
                         "error"
                     )
                 }
@@ -141,13 +157,9 @@
 
 		$('body').on('click', '.openaddmodal', function () {
             var id = $(this).data('id');
-            if (id == '') {
-                $('.modal-title').text('Add Benificiaries');
-            } else {
-                $('.modal-title').text('Edit Benificiaries');
-            }
+          
             $.ajax({
-                url: "{{ route('company.benificiaries.getmodal')}}",
+                url: "{{ route('company.transaction.getmodal')}}",
                 type: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'

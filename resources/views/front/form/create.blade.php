@@ -307,18 +307,36 @@
 <script src="{{ URL::asset('public/assets/js/pages/crud/forms/widgets/select2afa4.js') }}"></script>
 <script type="text/javascript">
     "use strict";
-    var KTWizard2 = function() {
-    var t, e, i, r = [];
-    return {
-        init: function() {
-            t = KTUtil.getById("kt_wizard"), e = KTUtil.getById("kt_form"), (i = new KTWizard(t, {
-                startStep: 1,
-                clickableSteps: !1
-            })).on("change", (function(t) {
-                if (!(t.getStep() > t.getNewStep())) {
-                    var e = r[t.getStep() - 1];
-                    return e && e.validate().then((function(e) {
-                        "Valid" == e ? (t.goTo(t.getNewStep()), KTUtil.scrollTop()) : Swal.fire({
+    var KTWizard3 = function() {
+        var e, t, i, a = [];
+        return {
+            init: function() {
+                e = KTUtil.getById("kt_wizard"), t = KTUtil.getById("kt_form"), (i = new KTWizard(e, {
+                    startStep: 1,
+                    clickableSteps: !0
+                })).on("change", (function(e) {
+                    if (!(e.getStep() > e.getNewStep())) {
+                        var t = a[e.getStep() - 1];
+                        return t && t.validate().then((function(t) {
+                            "Valid" == t ? (e.goTo(e.getNewStep()), KTUtil.scrollTop()) : Swal.fire({
+                                text: "Sorry, looks like there are some errors detected, please try again.",
+                                icon: "error",
+                                buttonsStyling: !1,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light"
+                                }
+                            }).then((function() {
+                                KTUtil.scrollTop()
+                            }))
+                        })), !1
+                    }
+                })), i.on("changed", (function(e) {
+                    KTUtil.scrollTop()
+                })), i.on("submit", (function(e) {
+                    var i = a[e.getStep() - 1];
+                    i && i.validate().then((function(e) {
+                        "Valid" == e ? t.submit() : Swal.fire({
                             text: "Sorry, looks like there are some errors detected, please try again.",
                             icon: "error",
                             buttonsStyling: !1,
@@ -329,114 +347,86 @@
                         }).then((function() {
                             KTUtil.scrollTop()
                         }))
-                    })), !1
-                }
-            })), i.on("changed", (function(t) {
-                KTUtil.scrollTop()
-            })), i.on("submit", (function(t) {
-                Swal.fire({
-                    text: "All is good! Please confirm the form submission.",
-                    icon: "success",
-                    showCancelButton: !0,
-                    buttonsStyling: !1,
-                    confirmButtonText: "Yes, submit!",
-                    cancelButtonText: "No, cancel",
-                    customClass: {
-                        confirmButton: "btn font-weight-bold btn-primary",
-                        cancelButton: "btn font-weight-bold btn-default"
+                    }))
+                })), a.push(FormValidation.formValidation(t, {
+                    fields: {
+                        remmiter_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Select at least one Remmiter."
+                                }
+                            }
+                        },
+                        beneficiary_id: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Select at least one Beneficiary."
+                                }
+                            }
+                        },
+                        amount: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Amount field is required."
+                                },
+                                numeric : {
+                                    message: 'The value is not a number',
+                                    thousandsSeparator: '',
+                                    decimalSeparator: '.'
+                                }
+                            }
+                        },
+                        cheque_number: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Cheque No is required"
+                                },
+                                numeric : {
+                                    message: 'The value is not a number',
+                                }
+                            }
+                        },
+                        transaction_date: {
+                            validators: {
+                                notEmpty: {
+                                    message: "date is required"
+                                },
+                            }
+                        },
+
+                    },
+                    plugins: {
+                        trigger: new FormValidation.plugins.Trigger,
+                        bootstrap: new FormValidation.plugins.Bootstrap({
+                            eleValidClass: ""
+                        })
                     }
-                }).then((function(t) {
-
-                    t.value ? e.submit() : "cancel" === t.dismiss && Swal.fire({
-                        text: "Your form has not been submitted!.",
-                        icon: "error",
-                        buttonsStyling: !1,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn font-weight-bold btn-primary"
-                        }
-                    })
-                    // toastr.success('Success!')
-                    // window.location.href = "{{ url('company/benificiaries') }}";
+                })), a.push(FormValidation.formValidation(t, {
+                   fields: {
+                        remarks: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Account number is required"
+                                },
+                                
+                            }
+                        },
+                    },
+                    plugins: {
+                        trigger: new FormValidation.plugins.Trigger,
+                        bootstrap: new FormValidation.plugins.Bootstrap({
+                            eleValidClass: ""
+                        })
+                    }
                 }))
-            })), r.push(FormValidation.formValidation(e, {
-                fields: {
-                    remmiter_id: {
-                        validators: {
-                            notEmpty: {
-                                message: "Select at least one Remmiter."
-                            }
-                        }
-                    },
-                    beneficiary_id: {
-                        validators: {
-                            notEmpty: {
-                                message: "Select at least one Beneficiary."
-                            }
-                        }
-                    },
-                    amount: {
-                        validators: {
-                            notEmpty: {
-                                message: "Amount field is required."
-                            },
-                            numeric : {
-                                message: 'The value is not a number',
-                                thousandsSeparator: '',
-                                decimalSeparator: '.'
-                            }
-                        }
-                    },
-                    cheque_number: {
-                        validators: {
-                            notEmpty: {
-                                message: "Cheque No is required"
-                            },
-                            numeric : {
-                                message: 'The value is not a number',
-                            }
-                        }
-                    },
-                    transaction_date: {
-                        validators: {
-                            notEmpty: {
-                                message: "date is required"
-                            },
-                        }
-                    },
-
-                },
-                plugins: {
-                    trigger: new FormValidation.plugins.Trigger,
-                    bootstrap: new FormValidation.plugins.Bootstrap({
-                        eleValidClass: ""
-                    })
-                }
-            })), r.push(FormValidation.formValidation(e, {
-                fields: {
-                    remarks: {
-                        validators: {
-                            notEmpty: {
-                                message: "Account number is required"
-                            },
-                            
-                        }
-                    },
-                   
-                },
-                plugins: {
-                    trigger: new FormValidation.plugins.Trigger,
-                    bootstrap: new FormValidation.plugins.Bootstrap({
-                        eleValidClass: ""
-                    })
-                }
-            }))
+            }
         }
-    }
     }();
     jQuery(document).ready((function() {
-        KTWizard2.init()
+        KTWizard3.init()
     }));
+
+    
 	$(document).ready(function(){
     
         $('.benificiaries').select2({

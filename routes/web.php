@@ -94,6 +94,8 @@ Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
         Route::get('transaction', ['as' => 'transaction', 'uses' => 'TransactionController@index']);
         Route::group(['prefix' => 'transaction', 'as' => 'transaction.'], function () {
             Route::post('getall', ['as' => 'getall', 'uses' => 'TransactionController@getall']);
+            Route::delete('delete/{id}', ['as' => 'delete', 'uses' => 'TransactionController@destroy']);
+            Route::post('getmodal', ['as' => 'getmodal', 'uses' => 'TransactionController@getmodal']);
         });
     });
 

@@ -199,6 +199,7 @@ class CompanyController extends Controller
                     $transaction_table = $user->id."_transactions";
                     $transactioncreateTableSqlString = "CREATE TABLE $transaction_table (
                             id  BIGINT(20) NOT NULL AUTO_INCREMENT,
+                            form_number int(11) DEFAULT NULL,
                             user_id int(11) DEFAULT NULL,
                             remmiter_id int(11) DEFAULT NULL,
                             beneficiary_id int(11) DEFAULT NULL,
@@ -207,6 +208,7 @@ class CompanyController extends Controller
                             transaction_method enum('neft','rtgs') NOT NULL DEFAULT 'neft',
                             transaction_date date DEFAULT NULL,
                             remarks text,
+                            is_deleted enum('yes','no') NOT NULL DEFAULT 'no',
                             created_at TIMESTAMP NULL DEFAULT NULL,
                             updated_at TIMESTAMP NULL DEFAULT NULL,
                             primary key(id)) COLLATE='utf8_general_ci' ENGINE=InnoDB AUTO_INCREMENT=1";
@@ -217,7 +219,7 @@ class CompanyController extends Controller
 
                     $last_u_id = $user->id;
                     $resetpasslink = url('invite/password/'.$encrypted);
-                    $data['name'] = $request->name;
+                    $data['name'] = $request->user_name;
                     $data['email'] = $request->email;
                     $data['url'] = $resetpasslink;
                     $data['text'] = "Welcome to RTGS Group! You're invited by ".Auth::user()->name.". Please verify your account and generate password to login in RTGS.";
@@ -334,8 +336,8 @@ class CompanyController extends Controller
             if ($company) {
                 User::where('parent_id',$company->id)->delete();
                 if($company->type == 'company'){
-                    \Schema::drop($company->id.'_benificiaries');
-                    \Schema::drop($company->id.'+transactions');
+                    \Schema::dropIfExists($company->id.'_benificiaries');
+                    \Schema::dropIfExists($company->id.'_transactions');
                 }
                 $company->delete();
                 $arr = array("status" => 200, "msg" => 'Company deleted successfully.');
