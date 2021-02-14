@@ -77,10 +77,10 @@
                 <!--begin: Wizard Form-->
                 <div class="row">
                     <div class="offset-xxl-2 col-xxl-8">
-                        <form class="form formsubmit" action="{{ route('company.users.store') }}" id="kt_form" method="post">
+                        <form class="form formsubmit" action="{{ route('company.form.store') }}" id="kt_form" method="post">
                                 {{ csrf_field() }}
                                 @if(isset($user) && !empty($user->id) )
-                                    <input type="hidden" name="companyid" value="{{ encrypt($user->id) }}">
+                                    <input type="hidden" name="transaction_id" value="{{ encrypt($transaction->id) }}">
                                 @endif
                             <!--begin: Wizard Step 1-->
                             <div class="pb-3" data-wizard-type="step-content" data-wizard-state="current">

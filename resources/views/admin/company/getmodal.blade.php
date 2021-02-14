@@ -21,7 +21,7 @@ formsubmit">
                 <label>Full name</label>
                 <input type="text" class="form-control " name="user_name"
                        placeholder="Full name"
-                       value="@if(!empty($company)){{ $company->user_name }}@endif" required="" maxlength="30">
+                       value="@if(!empty($company)){{ $company->name }}@endif" required="" maxlength="30">
             </div>
         </div>
         <div class="col-sm-12 col-md-6">

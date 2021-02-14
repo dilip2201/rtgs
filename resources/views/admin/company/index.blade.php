@@ -197,7 +197,7 @@
                                 required: true,
                             },
                             phone: {
-                                maxlength: 15,
+                                maxlength: 11,
                                 minlength: 10,
                             },
                             c_name: {

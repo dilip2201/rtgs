@@ -28,6 +28,27 @@ function activeMenucompany($uri = '') {
     return $active;
 }
 
+function getusername($uid) {
+    $user = \DB::table('users')->where('id',$uid)->first();
+    $return = '-';
+    if(!empty($user)){
+        $return = $user->name;
+    }
+    return $return;
+}
+
+function getusernamebenificiery($benificieryid, $id) {
+    $user = \DB::table($id.'_benificiaries')->where('id',$benificieryid)->first();
+    $return = '-';
+    if(!empty($user)){
+        $return = $user->name;
+    }
+    return $return;
+}
+
+
+
+
 
 function checkPermission($permissions){
 	if(auth()->check())
