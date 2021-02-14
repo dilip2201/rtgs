@@ -10,6 +10,8 @@ use DataTables;
 use \Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use App\StateList;
+use Carbon\Carbon;
 
 class BenificiariesController extends Controller
 {
@@ -35,9 +37,10 @@ class BenificiariesController extends Controller
         }else{
             $id = auth()->user()->parent_id;
         }
+        $states = StateList::get();
         $benificiary = DB::table($id.'_benificiaries')->where('id',$b_id)->first();
 
-        return view('front.benificiaries.create',compact('benificiary'));
+        return view('front.benificiaries.create',compact('benificiary','states'));
     }
     
      /**
@@ -83,23 +86,13 @@ class BenificiariesController extends Controller
             'branch_name' => 'required',
             'bank_name' => 'required',
         ];
-        $table = $id.'_benificiaries';
-        if (isset($request->b_id)) {
-            // $benificiary_id = $request->b_id;
-            $rules['email'] = 'required|email|unique:'.$table.',email,'.$request->b_id;
-            $rules['mobile_number'] = 'required|unique:'.$table.',mobile_number,'.$request->b_id;
-            $rules['account_number'] = 'required|unique:'.$table.',account_number,'.$request->b_id;
-        }else{
-            //$rules['email'] = 'required|email|unique:users,email';
-  
-        }
+
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             $arr = array("status" => 400, "msg" => $validator->errors()->first(), "result" => array());
         } else {
             try {
                
-                
                 if($request->is_remitter == ''){
                     $remitter = "no";
                 }else{
@@ -124,11 +117,12 @@ class BenificiariesController extends Controller
                         'account_number' => $request->account_number,
                         'ifsc' => $request->ifsc,
                         'branch_name' => $request->branch_name,
+                        'updated_at' => Carbon::now(),
                         'bank_name' => $request->bank_name]);
                     return redirect('company/benificiaries')->with('status', 'Benificiaries Update successfully.');
                 }else{
 
-                    DB::table($id.'_benificiaries')->insert(['user_id' => Auth::user()->id,'name' => $request->name,'nickname' => $request->nickname,'email' => $request->email,'mobile_number' => $request->mobile_number,'is_remitter' => $request->is_remitter,'address' => $request->address,'address2' => $request->address2,'is_remitter'=>$remitter, 'pin' => $request->pin,'area' => $request->area,'city' => $request->city,'state' => $request->state,'account_number' => $request->account_number,'ifsc' => $request->ifsc,'branch_name' => $request->branch_name,'bank_name' => $request->bank_name]);
+                    DB::table($id.'_benificiaries')->insert(['user_id' => Auth::user()->id,'name' => $request->name,'nickname' => $request->nickname,'email' => $request->email,'mobile_number' => $request->mobile_number,'is_remitter' => $request->is_remitter,'address' => $request->address,'address2' => $request->address2,'is_remitter'=>$remitter, 'pin' => $request->pin,'area' => $request->area,'city' => $request->city,'state' => $request->states,'account_number' => $request->account_number,'ifsc' => $request->ifsc,'branch_name' => $request->branch_name,'bank_name' => $request->bank_name,'created_at' => Carbon::now()]);
                     return redirect('company/benificiaries')->with('status', 'Benificiaries added successfully.');
                 }
                 
@@ -137,14 +131,14 @@ class BenificiariesController extends Controller
                 if (isset($ex->errorInfo[2])) :
                     $msg = $ex->errorInfo[2];
                 endif;
-                return redirect('company/benificiaries')->with('error', 'Benificiaries added successfully.');
+                return redirect('company/benificiaries')->with('error', $msg);
 
             } catch (Exception $ex) {
                 $msg = $ex->getMessage();
                 if (isset($ex->errorInfo[2])) :
                     $msg = $ex->errorInfo[2];
                 endif;
-                return redirect('company/benificiaries')->with('error', 'Benificiaries added successfully.');
+                return redirect('company/benificiaries')->with('error', $msg);
             }
         }
     }
@@ -185,7 +179,13 @@ class BenificiariesController extends Controller
                 return $q->account_number;
             })
             ->addColumn('is_remitter', function ($q) {
-                return $q->is_remitter;
+                $id = $q->id;
+                if ($q->is_remitter == 'yes') {
+                    return '<span class="label label-success label-dot mr-2"></span><span style="color:#1bc5bd!important; cursor:pointer;" class="font-weight-bold changestatus" data-status="no" data-id="' . $id . '" text-success">Yes</span>';
+                }else{
+                    return '<span class="label label-danger label-dot mr-2"></span><span  style="color:#f64e60!important; cursor:pointer;" class="font-weight-bold changestatus" data-status="yes"  data-id="' . $id . '" text-success">No</span>';
+                }
+                return $remitter;
             })
             // ->addColumn('status', function ($q) {
             //     $id = encrypt($q->id);
@@ -197,7 +197,7 @@ class BenificiariesController extends Controller
             //     }
             // })
             ->addIndexColumn()
-            ->rawColumns(['image','status', 'action'])->make(true);
+            ->rawColumns(['image','status', 'action','is_remitter'])->make(true);
     }
 
         /**
@@ -210,13 +210,19 @@ class BenificiariesController extends Controller
     {
 
         try {
-            $id = decrypt($request->id);
-            $holiday = User::find($id);
-            if ($holiday) {
-                $holiday->update(['status' => $request->status]);
-                $arr = array("status" => 200, "msg" => 'Company status change successfully.');
+            $id = 0;
+            if(auth()->user()->parent_id == null){
+                $id = auth()->user()->id;
+            }else{
+                $id = auth()->user()->parent_id;
+            }
+            $b_id = $request->id;
+            $benificiary =  DB::table($id.'_benificiaries')->where('id',$b_id);
+            if ($benificiary) {
+                $benificiary->update(['is_remitter' => $request->status]);
+                $arr = array("status" => 200, "msg" => 'Benificiary remitter status change successfully.');
             } else {
-                $arr = array("status" => 400, "msg" => 'Company not found. please try again!');
+                $arr = array("status" => 400, "msg" => 'Benificiary not found. please try again!');
             }
 
         } catch (\Illuminate\Database\QueryException $ex) {

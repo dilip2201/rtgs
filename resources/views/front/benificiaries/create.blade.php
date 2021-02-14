@@ -156,29 +156,38 @@
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Pin</b></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="pin" value="@if(!empty($benificiary)){{ $benificiary->pin }}@endif"   placeholder="Pincode"   placeholder="Pin" value=""  />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="pin" value="@if(!empty($benificiary)){{ $benificiary->pin }}@endif"   placeholder="Pincode"   placeholder="Pin" />
                                             <span class="form-text text-muted">Enter the pin.</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Area</b></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="area" value="@if(!empty($benificiary)){{ $benificiary->area }}@endif"  placeholder="Area" value=""  />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="area" value="@if(!empty($benificiary)){{ $benificiary->area }}@endif"  placeholder="Area" />
                                             <span class="form-text text-muted">Fill in the area.</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>City</b></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="city" value="@if(!empty($benificiary)){{ $benificiary->city }}@endif"  placeholder="City" value=""  />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="city" value="@if(!empty($benificiary)){{ $benificiary->city }}@endif"  placeholder="City"   />
                                             <span class="form-text text-muted">Enter the city.</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>State</b></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="states" value="@if(!empty($benificiary)){{ $benificiary->state }}@endif" placeholder="State" value=""  />
-                                            <span class="form-text text-muted">Enter in the state.</span>
+                                             <select class="form-control states"  name="states">
+                                                <option value="">Select a State</option>
+                                                    @if(!empty($states))
+                                                        @foreach($states as $state)
+                                                        <option value="{{ $state->id }}" {{ ( $benificiary->state == $state->id) ? 'selected' : '' }}>{{ $state->state }}</option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            
+                                           
+                                            <span class="form-text text-muted">select the remmiter's name.</span>
                                         </div>
                                     </div>
                                     </div>
@@ -290,7 +299,9 @@
 
 
 $(document).ready(function(){
-
+$('.states').select2({
+     placeholder: "Select a beneficiary",
+});
 "use strict";
 var KTWizard2 = function() {
     var t, e, i, r = [];
@@ -425,6 +436,17 @@ var KTWizard2 = function() {
                             stringLength: {
                                 max: 50,
                                 message: 'The Area must be less than 50 characters'
+                            },
+                        }
+                    },
+                    states: {
+                        validators: {
+                            notEmpty: {
+                                message: "State is required"
+                            },
+                            stringLength: {
+                                max: 50,
+                                message: 'The State must be less than 50 characters'
                             },
                         }
                     },
