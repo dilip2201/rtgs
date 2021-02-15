@@ -19,6 +19,18 @@ function activeMenu($uri = '') {
     return $active;
 }
 
+function lastnameemail(){
+    $name = '';
+    $emaildata = \DB::table('password_resets')->orderby('created_at','desc')->first();
+    if(!empty($emaildata)){
+        $user = \DB::table('users')->where('email',$emaildata->email)->first();
+        if(!empty($user)){
+            $name = $user->name;
+        }
+    }
+    return $name;
+}
+
 function activeMenucompany($uri = '') {
 
     $active = '';

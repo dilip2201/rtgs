@@ -202,11 +202,11 @@
                             },
                             c_name: {
                                 maxlength: 30,
-                                minlength: 6,
+                                
                             },
                             user_name: {
                                 maxlength: 30,
-                                minlength: 6,
+                              
                             },
                             email: {
                                 required: true,

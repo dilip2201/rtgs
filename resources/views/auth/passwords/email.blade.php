@@ -48,6 +48,12 @@
                            <h2 class="font-weight-bold" style="font-weight: 600; font-size: 34px;">Forgot Password?</h2>
                            <p class="text-muted font-weight-bold">Enter the email address associated with your account.</p>
                         </div>
+
+                        @if (session('status'))
+                          <div class="alert alert-success" style="background-color: snow;    border-color: #4a99ff;    color: #4a99ff;">
+                              {{ session('status') }}
+                          </div>
+                      @endif
                         @if(session()->has('message'))
                             <div class="alert alert-success" style="background-color: snow;    border-color: #4a99ff;    color: #4a99ff;">
                                 {{ session()->get('message') }}
@@ -71,7 +77,7 @@
                            </div>
                            <div class="form-group  flex-wrap justify-content-between align-items-center mt-2">
                              
-                              <button id="kt_login_signin_submit" class="btn btn-primary font-weight-bold py-4 my-3" style="width: 100%;">Sign In</button>
+                              <button id="kt_login_signin_submit" class="btn btn-primary font-weight-bold py-4 my-3" style="width: 100%;">Send Password Reset Link</button>
                            </div>
                         </form>
 

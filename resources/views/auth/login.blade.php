@@ -62,17 +62,18 @@
                            @csrf
                            <div class="form-group py-3 m-0">
                               <label style="color: #b5b5c3!important">Your Email</label>
-                              <input id="email" class="{{ $errors->has('email') ? ' is-invalid' : '' }} form-control h-auto border-0 px-0 placeholder-dark-75" type="Email" placeholder="Email" name="email" autocomplete="off"  required="" />
+                              <input id="email" class="{{ $errors->has('email') ? ' is-invalid' : '' }} form-control h-auto border-0 px-0 placeholder-dark-75" style="    border-bottom: 1px solid #ccc!important;" type="Email" placeholder="Email" name="email" autocomplete="off"  required="" />
                               @if ($errors->has('email'))
                               <span class="invalid-feedback">
                               <strong>{{ $errors->first('email') }}</strong>
                               </span>
                               @endif
                            </div>
-                           <div class="form-group py-3 border-top m-0">
+                           <div class="form-group py-3  m-0" style="position: relative;">
                              
                               <label style="color: #b5b5c3!important">Enter Your Password</label>
-                              <input id="password" type="password" class="{{ $errors->has('password') ? ' is-invalid' : '' }} form-control h-auto border-0 px-0 placeholder-dark-75" name="password" placeholder="Password" required="">
+                              <input id="pass_log_id" style="    border-bottom: 1px solid #ccc!important;" type="password" class="{{ $errors->has('password') ? ' is-invalid' : '' }} form-control h-auto border-0 px-0 placeholder-dark-75" name="password" placeholder="Password" required="">
+                              <span toggle="#password-field" style="position: absolute; cursor: pointer; top: 46px;    right: 15px;" class="fa fa-fw fa-eye field_icon toggle-password"></span>
                               <input id="password-confirm" type="password" placeholder="Confirm Password"
                                  name="asaspassword_confirmation" autocomplete="new-password" style="display: none;">
                               @if ($errors->has('password'))
@@ -114,6 +115,13 @@
    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
    <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
    <script type="text/javascript">
+    $(document).on('click', '.toggle-password', function() {
+
+        $(this).toggleClass("fa-eye fa-eye-slash");
+    
+        var input = $("#pass_log_id");
+          input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
+        });
       $("#signup").validate({
                  rules: {
                      firstname: "required",
