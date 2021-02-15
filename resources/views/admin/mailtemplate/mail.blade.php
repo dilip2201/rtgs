@@ -150,9 +150,13 @@
             width: auto;
             text-align: center;">Generate Password</a></span></td>
                                                         </tr>
-                                                    </table></td>
+                                                    </table>
+<p style="word-break: break-all; Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:16px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#777777"><b>Copytable Link </b>: <a href="{{ $data['url'] }}">{{ $data['url'] }}</a> </p>
+                                                </td>
                                             </tr>
-                                        </table></td>
+                                        </table>
+
+                                    </td>
                                 </tr>
                             </table></td>
                     </tr>
@@ -181,7 +185,7 @@
 
                                                         </tr>
                                                         <tr style="border-collapse:collapse">
-                                                            <td align="center" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#FFFFFF">RTGS Integrator<br>Haslevangen 15, 0579 Oslo, Norway<br><a style="color: #fff;" href="tel:+4745898989" >+47 458 98 989</a>&nbsp; &nbsp; | &nbsp; &nbsp; <a style="color: #fff;" href="mailto:support@intunor.com">support@intunor.com</a></p></td>
+                                                            <td align="center" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#FFFFFF">Skybeat Consultancy Private Limited<br>38- 4th Floor, Shree Krishna Centre Opp. Navrangpura Temple Navrangpura Ahmedabad Ahmedabad GJ 380009 IN<br><a style="color: #fff;" href="tel:+4745898989" >+99 9999999999</a>&nbsp; &nbsp; | &nbsp; &nbsp; <a style="color: #fff;" href="mailto:support@intunor.com">Skybeat@skybeat.com</a></p></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
