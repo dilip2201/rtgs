@@ -8,6 +8,7 @@
    }
 </style>
 <div class="row">
+   @if(auth()->user()->type == 'company')
    <div class="col-xl-7">
       <!--begin::Mixed Widget 15-->
       <!--end::Mixed Widget 15-->
@@ -93,4 +94,5 @@
       </div>
       <!--end::Advance Table Widget 1-->
    </div>
+   @endif
 </div>

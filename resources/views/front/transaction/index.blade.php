@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('pageTitle', 'Reports')
+@section('pageTitle', 'Transactions')
 @section('content')
 <style type="text/css">
 	.error{
@@ -41,7 +41,7 @@
 			<span class="card-icon">
 				<i class="flaticon-avatar text-primary"></i>
 			</span>
-			<h3 class="card-label">Reports</h3>
+			<h3 class="card-label">Transactions</h3>
 		</div>
 		<div class="card-toolbar">
 			<a href="{{ route('company.form.create') }}"  class="btn btn-primary font-weight-bolder">

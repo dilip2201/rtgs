@@ -17,12 +17,9 @@
         background-color: #3699ff;
     }
 </style>
-@section('button')
-<a href="{{ route('company.transaction') }}"  class="btn btn-primary font-weight-bolder" >Transaction<i style="font-size: 10px;
-    margin-left: 6px;" class="flaticon2-right-arrow"></i></a> 
-@endsection
+
 <!--begin::Card-->
-<div class="card card-custom">
+<div class="card card-custom">.
       
     <div class="card-body p-0">
         <!--begin: Wizard-->
@@ -103,7 +100,7 @@
                                                 </select>
                                             
                                            
-                                            <span class="form-text text-muted">select the remmiter's name.</span>
+                                            <span class="form-text text-muted">select the remmiter's name</span>
                                         </div>
                                     </div>
                                 </div>
@@ -143,7 +140,7 @@
                                         <div class="form-group">
                                             <label><b>Amount</b></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg amount" name="amount" value="@if(!empty($transaction)){{ $transaction->amount }}@endif"  placeholder="Amount"  required />
-                                            <span class="form-text text-muted">Fill in the amount to be transferred.</span>
+                                            <span class="form-text text-muted">Fill in the amount to be transferred</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
@@ -165,14 +162,14 @@
                                                             <span></span>RTGS</label>
                                                            
                                                         </div>
-                                            <span class="form-text text-muted">Select the mode.</span>
+                                            <span class="form-text text-muted">Select the mode</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Date</b></label>
                                             <input type="date" class="form-control form-control-solid form-control-lg transaction_date" name="transaction_date" value="@if(!empty($transaction)){{ $transaction->transaction_date }}@endif"  placeholder="Date" value="" required />
-                                            <span class="form-text text-muted">Edit the date if neccessary.</span>
+                                            <span class="form-text text-muted">Edit the date if neccessary</span>
                                         </div>
                                     </div>
                                     </div>
@@ -244,7 +241,7 @@
                                         <div class="form-group">
                                             <label>Remarks</label>
                                             <textarea required="" class="form-control form-control-solid form-control-lg" name="remarks">@if(!empty($transaction)){{ $transaction->remarks }}@endif</textarea>
-                                            <span class="form-text text-muted">Add any remark to be kept.</span>
+                                            <span class="form-text text-muted">Add any remark to be kept</span>
                                         </div>
                                         <!--end::Input-->
                                     </div>

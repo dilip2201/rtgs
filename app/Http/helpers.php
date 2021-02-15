@@ -19,6 +19,7 @@ function activeMenu($uri = '') {
     return $active;
 }
 
+
 function lastnameemail(){
     $name = '';
     $emaildata = \DB::table('password_resets')->orderby('created_at','desc')->first();
@@ -40,6 +41,13 @@ function activeMenucompany($uri = '') {
     return $active;
 }
 
+function parentidlogin($uid){
+    $user = \DB::table('users')->where('id',$uid)->first();
+    if(!empty($user->parent_id)){
+        $user = \DB::table('users')->where('id',$user->parent_id)->first();
+    }
+    return $user->status;
+}
 function getusername($uid) {
     $user = \DB::table('users')->where('id',$uid)->first();
     $return = '-';

@@ -93,14 +93,14 @@
                                         <div class="form-group">
                                             <label><b>Name</b></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg" name="name"  value="@if(!empty($benificiary)){{ $benificiary->name }}@endif" placeholder="Name" />
-                                            <span class="form-text text-muted">Fill in the user name and surname.</span>
+                                            <span class="form-text text-muted">Enter beneficiary name as per bank records</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Nickname</b></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg" name="nickname" value="@if(!empty($benificiary)){{ $benificiary->nickname }}@endif"   />
-                                            <span class="form-text text-muted">Fill in the nickname.</span>
+                                            <span class="form-text text-muted">Fill in the nickname</span>
                                         </div>
                                     </div>
 
@@ -109,7 +109,7 @@
                                         <div class="form-group">
                                             <label><b>E-mail</b></label>
                                             <input type="email" value="@if(!empty($benificiary)){{ $benificiary->email }}@endif" class="form-control form-control-solid form-control-lg" name="email" placeholder="Email" />
-                                            <span class="form-text text-muted">Fill in the email.</span>
+                                            <span class="form-text text-muted">Fill in the email</span>
                                         </div>
                                         <!--end::Input-->
                                     </div>
@@ -120,7 +120,7 @@
                                         <div class="form-group">
                                             <label><b>Phone No</b></label>
                                             <input type="text" name="mobile_number" class="form-control form-control-solid form-control-lg"  placeholder="Mobile Number" value="@if(!empty($benificiary)){{ $benificiary->mobile_number }}@endif"  />
-                                            <span class="form-text text-muted">Enter his phone number.</span>
+                                            <span class="form-text text-muted">Enter mobile number</span>
                                         </div>
                                         <!--end::Input-->
                                     </div>
@@ -133,7 +133,7 @@
                                                     <span></span>
                                                 </label>
                                             </span>
-                                           <span class="form-text text-muted">Turn on if is a beneficiary only.</span>
+                                           <span class="form-text text-muted">Turn on if the beneficiary is Remitter/Transferor too</span>
                                         </div>
                                     </div>
                                     </div>
@@ -143,35 +143,35 @@
                                         <div class="form-group">
                                             <label><b>Address</b></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg" name="address" value="@if(!empty($benificiary)){{ $benificiary->address }}@endif"   placeholder="Address"  />
-                                            <span class="form-text text-muted">Fill in the mail address.</span>
+                                            <span class="form-text text-muted">Fill in the mail address</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Address 2</b></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg" name="address2" value="@if(!empty($benificiary)){{ $benificiary->address2 }}@endif"   placeholder="Address 2"   />
-                                            <span class="form-text text-muted">Fill in the address details.</span>
+                                            <span class="form-text text-muted">Fill in the address details</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Pin</b></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg" name="pin" value="@if(!empty($benificiary)){{ $benificiary->pin }}@endif"   placeholder="Pincode"   placeholder="Pin" />
-                                            <span class="form-text text-muted">Enter the pin.</span>
+                                            <span class="form-text text-muted">Enter the pin</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Area</b></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg" name="area" value="@if(!empty($benificiary)){{ $benificiary->area }}@endif"  placeholder="Area" />
-                                            <span class="form-text text-muted">Fill in the area.</span>
+                                            <span class="form-text text-muted">Fill in the area</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>City</b></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg" name="city" value="@if(!empty($benificiary)){{ $benificiary->city }}@endif"  placeholder="City"   />
-                                            <span class="form-text text-muted">Enter the city.</span>
+                                            <span class="form-text text-muted">Enter the city</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
@@ -187,7 +187,7 @@
                                                 </select>
                                             
                                            
-                                            <span class="form-text text-muted">select the remmiter's name.</span>
+                                            <span class="form-text text-muted">select the remmiter's name</span>
                                         </div>
                                     </div>
                                     </div>
@@ -210,7 +210,7 @@
                                         <div class="form-group">
                                             <label>IFSC</label>
                                             <input type="text" class="form-control form-control-solid form-control-lg" name="ifsc" placeholder="form"  value="@if(!empty($benificiary)){{ $benificiary->ifsc }}@endif" />
-                                            <span class="form-text text-muted">Enter the IFSC number.</span>
+                                            <span class="form-text text-muted">Enter the IFSC number</span>
                                         </div>
                                         <!--end::Input-->
                                     </div>
@@ -221,7 +221,7 @@
                                         <div class="form-group">
                                             <label>Branch Name</label>
                                             <input type="text" class="form-control form-control-solid form-control-lg" name="branch_name" placeholder="Branch Name" value="@if(!empty($benificiary)){{ $benificiary->branch_name }}@endif"  />
-                                            <span class="form-text text-muted">Fill in the user's bank branch name.</span>
+                                            <span class="form-text text-muted">Fill in the user's bank branch name</span>
                                         </div>
                                         <!--end::Input-->
                                     </div>
@@ -230,7 +230,7 @@
                                         <div class="form-group">
                                             <label>Bank Name</label>
                                             <input type="text" class="form-control form-control-solid form-control-lg" name="bank_name" placeholder="Bank Name" value="@if(!empty($benificiary)){{ $benificiary->bank_name }}@endif"  />
-                                            <span class="form-text text-muted">Fill in the user's bank name.</span>
+                                            <span class="form-text text-muted">Fill in the user's bank name</span>
                                         </div>
                                         <!--end::Input-->
                                     </div>

@@ -19,6 +19,8 @@
 </style>
 @section('button')
 <a href="{{ route('company.form.create') }}"  data-id="" class="btn btn-primary font-weight-bolder" >New Form<i style="font-size: 10px;
+    margin-left: 6px;" class="flaticon2-right-arrow"></i></a>
+    <a href="{{ route('company.benificiaries.create') }}"  style="margin-left: 15px;" data-id="" class="btn btn-light-primary font-weight-bold mr-2" >New beneficiary / remmiter<i style="font-size: 10px;
     margin-left: 6px;" class="flaticon2-right-arrow"></i></a> 
 @endsection
 @if(session()->has('status'))

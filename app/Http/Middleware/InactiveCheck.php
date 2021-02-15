@@ -17,10 +17,10 @@ class InactiveCheck
     public function handle($request, Closure $next)
     {
 
-        if(Auth::check() && auth()->user()->status == '0'){
+        if((Auth::check() && auth()->user()->status == '0') || parentidlogin(auth()->user()->id) == '0'){
             Auth::guard('web')->logout();
-            return redirect('/login')->with('message', 'Contact admin to active your account');
-        }
+            return redirect('/login')->with('message', 'Contact admin to active your account.');
+        } 
         return $next($request);
     }
 }
