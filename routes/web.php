@@ -105,6 +105,7 @@ Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
 
 Route::get('profile', ['as' => 'profile', 'uses' => 'ProfileController@index']);
 Route::post('changepswrd', ['as' => 'changepswrd', 'uses' => 'ProfileController@changepassword']);
+Route::post('remove_profile', ['as' => 'remove_profile', 'uses' => 'ProfileController@remove_profile']);
 Route::post('profileupdt', ['as' => 'profileupdt', 'uses' => 'ProfileController@profileupdate']);
 Route::post('/admin/profileupdate', ['as' => 'profileupdate', 'uses' => 'Admin\ProfileController@profileupdate']);
 Route::post('/changepassword', ['as' => 'changepassword', 'uses' => 'Admin\ProfileController@changepassword']);

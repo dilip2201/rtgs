@@ -122,15 +122,15 @@
                                         <label class="col-sm-3 col-form-label">New Password <span
                                                 style="color: red;">*</span></label>
                                         <div class="col-sm-6">
-                                            <input type="password" class="form-control" name="new_password"
-                                                placeholder="New Password" value="" required>
+                                            <input type="password" class="form-control new_password" name="new_password"
+                                                placeholder="New Password" id="new_password" value="" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">Confirm Password <span
                                                 style="color: red;">*</span></label>
                                         <div class="col-sm-6">
-                                            <input type="password" class="form-control" name="password_confirmation"
+                                            <input type="password" class="form-control password_confirmation" name="password_confirmation" id="password_confirmation" 
                                                 placeholder="Confirm Password" value="" required>
                                         </div>
                                     </div>
@@ -191,16 +191,22 @@ $(".formsubmit").validate({
     }
 
 });
+
+
 $(".passwordformsubmit").validate({
-    rules : {
-            new_password : {
-                minlength : 8
-            },
-            password_confirmation : {
-                minlength : 8,
-                equalTo : '[name="new_password"]'
+       rules : {
+               new_password : {
+                   minlength : 6
+               },
+               password_confirmation : {
+                   minlength : 6,
+                   equalTo : '#new_password',
+               }
+           },
+           messages: {
+                new_password: "Please enter at least 6 characters.",
+                password_confirmation: "New password and Confirm new password do not match"
             }
-        }
 });
 $('body').on('submit', '.formsubmit', function(e) {
    

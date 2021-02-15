@@ -131,6 +131,14 @@ class ProfileController extends Controller
        
     }
 
+    public function remove_profile(Request $request){
+        $user = User::find(Auth::user()->id);
+        $user->image = '';
+        $user->save();
+        if(file_exists(public_path('company/employee/'.$user->image)) && $user->image!='') {
+                        unlink(public_path('company/employee/'.$user->image));
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
