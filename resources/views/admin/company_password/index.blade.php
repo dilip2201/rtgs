@@ -131,7 +131,7 @@
                      password_confirmation: {
                          required: true,
                          minlength: 6,
-                         equalTo: "#password_s"
+                         equalTo: "#password_co"
                      },
                      email: {
                          required: true,

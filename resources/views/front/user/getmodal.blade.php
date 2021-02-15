@@ -48,18 +48,18 @@
                                 <div class="row">
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>Name</b></label>
+                                            <label><b>Name</b> <span style="color: red">*</span></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg" name="user_name" value="@if(!empty($user)){{ $user->name }}@endif"  placeholder="Name" value="" required />
-                                            <span class="form-text text-muted">Fill in the user name and surname.</span>
+                                            <span class="form-text text-muted">Fill in the user name and surname</span>
                                         </div>
                                     </div>
 
                                     <div class="col-xl-6">
                                         <!--begin::Input-->
                                         <div class="form-group">
-                                            <label><b>Email</b></label>
-                                            <input type="email" value="@if(!empty($user)){{ $user->email }}@endif" class="form-control form-control-solid form-control-lg" name="email" placeholder="Email" />
-                                            <span class="form-text text-muted">Fill in the user's email.</span>
+                                            <label><b>Email ID</b> <span style="color: red">*</span></label>
+                                            <input type="email" value="@if(!empty($user)){{ $user->email }}@endif" class="form-control form-control-solid form-control-lg" name="email" placeholder="Email ID" />
+                                            <span class="form-text text-muted">Fill in the user's email</span>
                                             <input id="password-confirm" type="password" placeholder="Confirm Password"
                                  name="asaspassword_confirmation" autocomplete="new-password" style="display: none;">
                                         </div>
@@ -70,19 +70,13 @@
                                      <div class="col-xl-6">
                                         <!--begin::Input-->
                                         <div class="form-group">
-                                            <label><b>Phone</b></label>
-                                            <input type="text" name="phone" class="form-control form-control-solid form-control-lg phone"  placeholder="phone" value="@if(!empty($user)){{ $user->phone }}@endif"  />
-                                            <span class="form-text text-muted">Enter his phone number.</span>
+                                            <label><b>Phone No</b> <span style="color: red">*</span></label>
+                                            <input type="text" name="phone" class="form-control form-control-solid form-control-lg phone"  placeholder="Phone No" value="@if(!empty($user)){{ $user->phone }}@endif"  />
+                                            <span class="form-text text-muted">Enter his phone number</span>
                                         </div>
                                         <!--end::Input-->
                                     </div>
-<!--                                     <div class="col-sm-6 col-md-6">
-                                        <div class="form-group">
-                                            <label>Address</label>
-                                            <textarea class="form-control form-control-solid form-control-lg" name="address" placeholder="Address" required>@if(!empty($user)){{ $user->address }}@endif</textarea>
-                                            <span class="form-text text-muted">Enter his Address.</span>
-                                        </div>
-                                    </div> -->
+
                                     @php
                                     if(!empty($user->image)){
                                     $image = $user->image;

@@ -1,6 +1,11 @@
 @extends('layouts.app')
 @section('pageTitle', 'Profile')
 @section('content')
+<style type="text/css">
+   .error{
+      color:red!important;
+   }
+</style>
 <div class="row">
    <div class="col-md-4">
       <div class="flex-row-auto offcanvas-mobile" id="kt_profile_aside">
@@ -230,22 +235,25 @@
                      <div class="card-body">
                         <!--begin::Alert-->
                         <!--end::Alert-->
-                        <div class="form-group row">
+                        <div class="form-group row" style="position: relative;">
                            <label class="col-xl-3 col-lg-3 col-form-label text-alert">Current Password</label>
-                           <div class="col-lg-9 col-xl-6">
-                              <input type="password" name="current_password" class="form-control form-control-lg form-control-solid mb-2" value="" placeholder="Current password" required="">
+                           <div class="col-lg-9 col-xl-6" >
+                              <input type="password" name="current_password" class="form-control form-control-lg form-control-solid mb-2" id="old_pw" value="" placeholder="Current password" required="">
+                               <span toggle="#password-field" style="position: absolute; cursor: pointer; top: 17px;    right: 27px;" class="fa fa-fw fa-eye field_icon toggle-passwordo"></span>
                            </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" style="position: relative;">
                            <label class="col-xl-3 col-lg-3 col-form-label text-alert">New Password</label>
                            <div class="col-lg-9 col-xl-6">
                               <input type="password" name="new_password" class="form-control form-control-lg form-control-solid new_password" id="new_password" value="" placeholder="New password" required=>
+                              <span toggle="#password-field" style="position: absolute; cursor: pointer; top: 17px;    right: 27px;" class="fa fa-fw fa-eye field_icon toggle-passwords"></span>
                            </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" style="position: relative;">
                            <label class="col-xl-3 col-lg-3 col-form-label text-alert">Verify Password</label>
                            <div class="col-lg-9 col-xl-6">
                               <input type="password" id="password_confirmation"    name="password_confirmation" class="form-control form-control-lg form-control-solid password_confirmation" value="" placeholder="Verify password"  required="">
+                               <span toggle="#password-field" style="position: absolute; cursor: pointer; top: 17px;    right: 27px;" class="fa fa-fw fa-eye field_icon toggle-password"></span>
                            </div>
                         </div>
                      </div>
@@ -263,7 +271,27 @@
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <script type="text/javascript">
    $( document ).ready(function() {
-   	
+      $(document).on('click', '.toggle-passwordo', function() {
+
+        $(this).toggleClass("fa-eye fa-eye-slash");
+    
+        var input = $("#old_pw");
+          input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
+        });
+      $(document).on('click', '.toggle-passwords', function() {
+
+        $(this).toggleClass("fa-eye fa-eye-slash");
+    
+        var input = $("#new_password");
+          input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
+        });
+   	  $(document).on('click', '.toggle-password', function() {
+
+        $(this).toggleClass("fa-eye fa-eye-slash");
+    
+        var input = $("#password_confirmation");
+          input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
+        });
        $(".passwordformsubmit").validate({
        rules : {
                new_password : {
@@ -280,26 +308,26 @@
             }
       });
    });
-   // $(".formsubmit").validate({
-   //     rules: {
-   //         name : {
-   //             required:true,
-   //             maxlength: 20,
-   //         },
-   //         lastname:{
-   //             required:true,
-   //             maxlength: 20,
-   //         },
-   //         phone: {
-   //             required:true,
-   //             number: true,
-   //             maxlength: 10,
-   //             minlength: 10,
+   $(".formsubmit").validate({
+       rules: {
+           name : {
+               required:true,
+               maxlength: 20,
+           },
+           lastname:{
+               required:true,
+               maxlength: 20,
+           },
+           phone: {
+               required:true,
+               number: true,
+               maxlength: 10,
+               minlength: 10,
    
-   //         }
-   //     }
+           }
+       }
    
-   // });
+   });
 
         $('body').on('click', '#profile_remove', function (e) {
          var id = $(this).data('id');

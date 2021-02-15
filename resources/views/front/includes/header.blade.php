@@ -8,7 +8,7 @@
             <!--begin::Header Nav-->
             <ul class="menu-nav">
                <li class="menu-item" aria-haspopup="true" style="margin-right: 35px;">
-                  <a href="index.html" class="menu-link">
+                  <a href="{{ url('company/dashboard') }}" class="menu-link">
                   <img src="{{ URL::asset('public/images/logo/Logo.svg') }}" style="width: 100px;">
                   </a>
                </li>
