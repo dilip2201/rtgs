@@ -61,22 +61,24 @@
                               </span>
                               @endif
                            </div>
-                           <div class="form-group py-3 border-top m-0">
+                           <div class="form-group py-3 border-top m-0" style="position: relative;">
                              
                               <label style="color: #b5b5c3!important">Enter Password</label>
                               <input id="password_s" type="password" class="{{ $errors->has('password') ? ' is-invalid' : '' }} form-control h-auto border-0 px-0 placeholder-dark-75" name="password" placeholder="Password" required="">
                               <input id="password-confirm" type="password" placeholder="Confirm Password"
                                  name="asaspassword_confirmation" autocomplete="new-password" style="display: none;">
+                              <span toggle="#password-field" style="position: absolute; cursor: pointer; top: 46px;    right: 15px;" class="fa fa-fw fa-eye field_icon toggle-password"></span>
                               @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                            </div>
-                           <div class="form-group py-3 border-top m-0">
+                           <div class="form-group py-3 border-top m-0" style="position: relative;">
                              
                               <label style="color: #b5b5c3!important">Confirm Password</label>
-                              <input id="password" type="password" class="{{ $errors->has('password') ? ' is-invalid' : '' }} form-control h-auto border-0 px-0 placeholder-dark-75" name="password_confirmation" placeholder="Confirm Password" required="">
+                              <input id="password_con" type="password" class="{{ $errors->has('password') ? ' is-invalid' : '' }} form-control h-auto border-0 px-0 placeholder-dark-75" name="password_confirmation" placeholder="Confirm Password" required="">
+                              <span toggle="#password-co" style="position: absolute; cursor: pointer; top: 46px;    right: 15px;" class="fa fa-fw fa-eye field_icon toggle-co"></span>
                            </div>
                            <div class="form-group flex-wrap justify-content-between align-items-center mt-2" style="text-align: right;  width: 100%;">
                              
@@ -111,6 +113,19 @@
    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
    <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
    <script type="text/javascript">
+    $(document).ready(function(){
+        $(document).on('click', '.toggle-password', function() {
+          $(this).toggleClass("fa-eye fa-eye-slash");
+          var input = $("#password_s");
+          input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
+        });
+
+        $(document).on('click', '.toggle-co', function() {
+          $(this).toggleClass("fa-eye fa-eye-slash");
+          var input = $("#password_con");
+          input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
+        });
+    })
       $("#signup").validate({
                  rules: {
                      
@@ -120,7 +135,7 @@
                      },
                      password_confirmation: {
                          required: true,
-                         minlength: 5,
+                         minlength: 6,
                          equalTo: "#password_s"
                      },
                      email: {
@@ -131,23 +146,18 @@
                      agree: "required"
                  },
                  messages: {
-                     firstname: "Please enter your first name",
-                     lastname: "Please enter your last name",
-                     email: "Please enter your addres",
-                     city: "Please enter your city/town",
-                     county: "Please enter your county",
-                     postcode: "Please enter your postcode",
-      
+                    
+                     email: "Please enter valid email address.",
                      password: {
-                         required: "Please provide a password",
-                         minlength: "Your password must be at least 6 characters long"
+                         required: "Please provide a password.",
+                         minlength: "Your password must be at least 6 characters long."
                      },
-                     confirm_password: {
-                         required: "Please provide a password",
-                         minlength: "Your password must be at least 6 characters long",
-                         equalTo: "Password & Confirm Password sould be same."
+                     password_confirmation: {
+                         required: "Please provide Confirm Password a password.",
+                         minlength: "Your password must be at least 6 characters long.",
+                         equalTo: "Password and Confirm new password do not match."
                      },
-                     email: "Please enter a valid email address",
+                     email: "Please enter a valid email address.",
                    
                  }
              });

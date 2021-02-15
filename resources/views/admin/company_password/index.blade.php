@@ -51,19 +51,20 @@
                         <form method="POST" action="{{ route('setnewpassword') }}" id="resetpassform" >
                            @csrf
                            <input type="hidden" name="token" value="{{ $token }}">
-                           <div class="form-group py-3 m-0">
+                           <div class="form-group py-3 m-0" style="position: relative;">
                               <label style="color: #b5b5c3!important">Password</label>
-                              <input id="password" type="password" class="form-control h-auto border-0 px-0 placeholder-dark-75" name="password" placeholder="Password" required="">
+                              <input id="password_co" type="password" class="form-control h-auto border-0 px-0 placeholder-dark-75" name="password" placeholder="Password" required="">
+                              <span toggle="#password-co" style="position: absolute; cursor: pointer; top: 46px;    right: 15px;" class="fa fa-fw fa-eye field_icon password-co"></span>
                               @error('password')
                                <span role="alert" class="colorwhite"
                                    style="color: #fff;margin-bottom: 15px; margin-left: 15px; float: left; width: 100%;">{{ $message }}</span>
                                @enderror
                            </div>
-                           <div class="form-group py-3 border-top m-0">
+                           <div class="form-group py-3 border-top m-0" style="position: relative;">
                              
                               <label style="color: #b5b5c3!important">Confirm Password</label>
-                              <input id="password_confirmation" type="password" class="form-control h-auto border-0 px-0 placeholder-dark-75" name="password_confirmation" placeholder="Confirm Password" required="">
-                             
+                              <input id="password_confirmation" style="    border-bottom: 1px solid #ccc!important;" type="password" class="form-control h-auto border-0 px-0 placeholder-dark-75" name="password_confirmation" placeholder="Confirm Password" required="">
+                             <span toggle="#password-field" style="position: absolute; cursor: pointer; top: 46px;    right: 15px;" class="fa fa-fw fa-eye field_icon toggle-password"></span>
                            </div>
                            <div class="form-group flex-wrap justify-content-between align-items-center mt-2" style="text-align: right;  width: 100%;">
                              
@@ -107,20 +108,55 @@
    <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
    <script type="text/javascript">
         $(document).ready(function () {
+          $(document).on('click', '.password-co', function() {
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $("#password_co");
+            input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
+          });
 
-        $('#resetpassform').validate({ // initialize the plugin
-            rules: {
-                password: {
-                    required: true,
-                    minlength: 6
-                },
-                password_confirmation: {
-                    required: true,
-                    minlength: 6,
-                    equalTo: "#password"
-                }
-            }
-        });
+
+          $(document).on('click', '.toggle-password', function() {
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $("#password_confirmation");
+            input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
+          });
+
+          $("#resetpassform").validate({
+                 rules: {
+                     
+                     password: {
+                         required: true,
+                         minlength: 6
+                     },
+                     password_confirmation: {
+                         required: true,
+                         minlength: 6,
+                         equalTo: "#password_s"
+                     },
+                     email: {
+                         required: true,
+                         email: true
+                     },
+      
+                     agree: "required"
+                 },
+                 messages: {
+                    
+                     email: "Please enter valid email address.",
+                     password: {
+                         required: "Please provide a password.",
+                         minlength: "Your password must be at least 6 characters long."
+                     },
+                     password_confirmation: {
+                         required: "Please provide Confirm Password a password.",
+                         minlength: "Your password must be at least 6 characters long.",
+                         equalTo: "Password and Confirm new password do not match."
+                     },
+                     email: "Please enter a valid email address.",
+                   
+                 }
+             });
+
 
     });
    </script>

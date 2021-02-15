@@ -25,9 +25,13 @@ class PasswordSetupController extends Controller
 
     public function setPassInvitationView($token)
     {
-
-        if(auth()->check()){
-            Auth::logout();
+        
+        if(Auth::guard('admin')){
+           
+            auth('admin')->logout();
+        }
+        if(Auth::check()){
+               Auth::logout();
         }
         $decrypted = Crypt::decryptString($token);
         
