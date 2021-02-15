@@ -166,7 +166,7 @@ class BenificiariesController extends Controller
         return DataTables::of($benificiaries)
             ->addColumn('action', function ($q) {
                 $id = encrypt($q->id);
-                $return = '<a title="Edit"  data-id="'.$id.'"   data-toggle="modal" data-target="#exampleModalSizeLg" class="btn btn-info btn-sm openaddmodal" href="javascript:void(0)"><i class="fas fa-pencil-alt"></i></a> | <a style="color:#000;"  href="'.route('company.benificiaries.edit',$q->id).'"  ><i class="fa fa-pencil"></i></a> ';
+                $return = '<a title="Edit"  data-id="'.$id.'"   data-toggle="modal" data-target="#exampleModalSizeLg" class="openaddmodal" href="javascript:void(0)"><i class="fa fa-eye"></i></a>  <a style="color:#000;"  href="'.route('company.benificiaries.edit',$q->id).'"  ><i class="fa fa-pencil"></i></a> ';
                 
                 return $return;
             })
@@ -194,12 +194,12 @@ class BenificiariesController extends Controller
 
             ->addColumn('status', function ($q) {
                 $id = $q->id;
-                // if ($q->status == 'enabled') {
-                //     return '<span class="label label-success label-dot mr-2"></span><span style="color:#1bc5bd!important; cursor:pointer;" class="font-weight-bold changestatus" data-status="disabled" data-id="' . $id . '" text-success">Enabled</span>';
-                // }else{
-                //     return '<span class="label label-danger label-dot mr-2"></span><span  style="color:#f64e60!important; cursor:pointer;" class="font-weight-bold changestatus" data-status="enabled"  data-id="' . $id . '" text-success">Disabled</span>';
-                // }
-                return '';
+                if ($q->status == 'enabled') {
+                    return '<span class="label label-success label-dot mr-2"></span><span style="color:#1bc5bd!important; cursor:pointer;" class="font-weight-bold changestatus" data-status="disabled" data-id="' . $id . '" text-success">Enabled</span>';
+                }else{
+                    return '<span class="label label-danger label-dot mr-2"></span><span  style="color:#f64e60!important; cursor:pointer;" class="font-weight-bold changestatus" data-status="enabled"  data-id="' . $id . '" text-success">Disabled</span>';
+                }
+                
                
             })
  
