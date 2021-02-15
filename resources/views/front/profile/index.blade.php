@@ -186,8 +186,8 @@
                            $image = 'default.png';
                            }
                            @endphp
-                           <label class="col-xl-2 col-lg-2 col-form-label">Avatar</label>
-                           <div class="col-md-4">
+                           <label class="col-xl-2 col-lg-2 col-form-label">Profile Picture</label>
+<!--                            <div class="col-md-4">
                               <div class="image-input image-input-outline" id="kt_profile_avatar" style="background-image: url({{ URL::asset('public/admin/company/employee/'.$image) }})">
                                  <div class="image-input-wrapper" style="background-image: url({{ URL::asset('public/company/employee/'.$image) }})"></div>
                                  <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
@@ -200,7 +200,23 @@
                                  </span>
                               </div>
                               <span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>
-                           </div>
+                           </div> -->
+                           <div class="image-input image-input-outline" id="kt_profile_avatar" style="background-image: url({{ URL::asset('public/company/employee/default.png') }})">
+                                <div class="image-input-wrapper" style="background-image: url({{ URL::asset('public/\/company/employee/'.$image) }})"></div>
+                                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                                  <i class="fa fa-pen icon-sm text-muted"></i>
+                                  <input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg">
+                                  <input type="hidden" name="profile_avatar_remove" class="">
+                                </label>
+                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="" data-original-title="Cancel avatar">
+                                  <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                </span>
+                                @if(!empty(Auth::user()->image))
+                                <span class="profile_remove btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"  id="profile_remove" data-action="remove" data-toggle="tooltip" title="" data-original-title="Remove avatar">
+                                  <i class="ki ki-bold-close icon-xs text-muted" ></i>
+                                </span>
+                                @endif
+                              </div>
                         </div>
                      </div>
                      <button type="submit" class="btn btn-success mr-2">Save Changes<span class="spinner1"></span></button>
@@ -251,14 +267,18 @@
        $(".passwordformsubmit").validate({
        rules : {
                new_password : {
-                   minlength : 8
+                   minlength : 6
                },
                password_confirmation : {
-                   minlength : 8,
+                   minlength : 6,
                    equalTo : '#new_password',
                }
-           }
-   });
+           },
+           messages: {
+                new_password: "Please enter at least 6 characters.",
+                password_confirmation: "New password and Confirm new password do not match"
+            }
+      });
    });
    // $(".formsubmit").validate({
    //     rules: {
@@ -280,6 +300,26 @@
    //     }
    
    // });
+
+        $('body').on('click', '#profile_remove', function (e) {
+         var id = $(this).data('id');
+            e.preventDefault();
+            $.ajax({
+                    url: '{{ route("remove_profile") }}',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    data: {id: id},
+                    success: function (data) {
+                        
+                    },
+                    error: function () {
+                        toastr.error('Something went wrong!', 'Oh No!');
+
+                    }
+            });
+        });
    
    $('body').on('submit', '.formsubmit', function(e) {
       
@@ -303,7 +343,7 @@
                if (data.status == 200) {
    
                    $('.spinner1').html('');
-                   toastr.success(data.msg)
+                   location.reload();
                }
            },
        });

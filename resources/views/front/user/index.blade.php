@@ -38,7 +38,6 @@
 					<th>Name</th>
 					<th>Phone Number</th>
 					<th>Email Address</th>
-					<th>Address</th>
 					<th>Active?</th>
 					<th>Action</th>
 					
@@ -156,10 +155,8 @@
                     $('.addholidaybody').html(data);
                     $(".formsubmit").validate({
                         rules: {
-                            address: {
-                                required: true,
-                            },
                             phone: {
+                                required: true,
                                 maxlength: 10,
                                 number: true,
                             },
@@ -205,7 +202,6 @@
                 {data: 'user_name'},
                 {data: 'phone_number'},
                 {data: 'email'},
-                {data: 'address'},
                 {data: 'status'},
                 {data: 'action'},
             ]

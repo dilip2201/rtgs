@@ -50,7 +50,6 @@ class UserController extends Controller
 
         $rules = [
             'user_name' => 'required',
-            'address' => 'required',
             'profile_avatar' =>'mimes:jpeg,jpg,png|nullable|max:5000',
             'phone' => 'required',  
         ];
@@ -125,7 +124,7 @@ class UserController extends Controller
                     $data['name'] = $request->user_name;
                     $data['email'] = $request->email;
                     $data['url'] = $resetpasslink;
-                    $data['text'] = "Welcome to RTGS Group! You're invited by ".Auth::user()->name.". Please verify your account and generate password to login in RTGS.";
+                    $data['text'] = " You can now make RTGS/NEFT form in just few seconds. Kindly click below to generate the password and lets get started!";
                     $view = 'company-invitation';
                     $subject = "RTGS Group! You're invited to register ";
                     sendmail($data,$subject);
@@ -190,9 +189,6 @@ class UserController extends Controller
             })
             ->addColumn('email', function ($q) {
                 return $q->email;
-            })
-            ->addColumn('address', function ($q) {
-                return $q->address;
             })
             ->addColumn('phone_number', function ($q) {
                 return $q->phone;

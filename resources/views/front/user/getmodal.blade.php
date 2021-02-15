@@ -71,18 +71,18 @@
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label><b>Phone</b></label>
-                                            <input type="text" name="phone" class="form-control form-control-solid form-control-lg"  placeholder="phone" value="@if(!empty($user)){{ $user->phone }}@endif"  />
+                                            <input type="text" name="phone" class="form-control form-control-solid form-control-lg phone"  placeholder="phone" value="@if(!empty($user)){{ $user->phone }}@endif"  />
                                             <span class="form-text text-muted">Enter his phone number.</span>
                                         </div>
                                         <!--end::Input-->
                                     </div>
-                                    <div class="col-sm-6 col-md-6">
+<!--                                     <div class="col-sm-6 col-md-6">
                                         <div class="form-group">
                                             <label>Address</label>
                                             <textarea class="form-control form-control-solid form-control-lg" name="address" placeholder="Address" required>@if(!empty($user)){{ $user->address }}@endif</textarea>
                                             <span class="form-text text-muted">Enter his Address.</span>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     @php
                                     if(!empty($user->image)){
                                     $image = $user->image;
