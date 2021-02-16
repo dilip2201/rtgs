@@ -221,6 +221,7 @@
                                   <i class="ki ki-bold-close icon-xs text-muted" ></i>
                                 </span>
                                 @endif
+                                <input type="hidden" name="profile_deleted" class="profile_deleted" value="0">
                               </div>
                         </div>
                      </div>
@@ -250,9 +251,9 @@
                            </div>
                         </div>
                         <div class="form-group row" style="position: relative;">
-                           <label class="col-xl-3 col-lg-3 col-form-label text-alert">Verify Password</label>
+                           <label class="col-xl-3 col-lg-3 col-form-label text-alert">Confirm new password</label>
                            <div class="col-lg-9 col-xl-6">
-                              <input type="password" id="password_confirmation"    name="password_confirmation" class="form-control form-control-lg form-control-solid password_confirmation" value="" placeholder="Verify password"  required="">
+                              <input type="password" id="password_confirmation"    name="password_confirmation" class="form-control form-control-lg form-control-solid password_confirmation" value="" placeholder="Confirm new password"  required="">
                                <span toggle="#password-field" style="position: absolute; cursor: pointer; top: 17px;    right: 27px;" class="fa fa-fw fa-eye field_icon toggle-password"></span>
                            </div>
                         </div>
@@ -330,23 +331,7 @@
    });
 
         $('body').on('click', '#profile_remove', function (e) {
-         var id = $(this).data('id');
-            e.preventDefault();
-            $.ajax({
-                    url: '{{ route("remove_profile") }}',
-                    type: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    data: {id: id},
-                    success: function (data) {
-                        
-                    },
-                    error: function () {
-                        toastr.error('Something went wrong!', 'Oh No!');
-
-                    }
-            });
+            $('.profile_deleted').val('1');
         });
    
    $('body').on('submit', '.formsubmit', function(e) {

@@ -151,7 +151,7 @@
             text-align: center;">Generate Password</a></span></td>
                                                         </tr>
                                                     </table>
-<p style="word-break: break-all; Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:16px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#777777"><b>Copytable Link </b>: <a href="{{ $data['url'] }}">{{ $data['url'] }}</a> </p>
+<p style="margin-top: 15px!important; word-break: break-all; Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:16px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#777777"><b>Copytable Link </b>: <a href="{{ $data['url'] }}">{{ $data['url'] }}</a> </p>
                                                 </td>
                                             </tr>
                                         </table>

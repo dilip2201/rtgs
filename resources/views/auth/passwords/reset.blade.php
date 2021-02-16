@@ -49,7 +49,7 @@
                            <p class="text-muted font-weight-bold">Reset your password!</p>
                         </div>
                         
-                        <form method="POST" action="{{ route('login') }}" id="signup" >
+                        <form method="POST" action="{{ url('password/reset') }}" id="signup" >
                            @csrf
                            <input type="hidden" name="token" value="{{ $token }}">
                            <div class="form-group py-3 m-0">
@@ -65,10 +65,12 @@
                              
                               <label style="color: #b5b5c3!important">Enter Password</label>
                               <input id="password_s" type="password" class="{{ $errors->has('password') ? ' is-invalid' : '' }} form-control h-auto border-0 px-0 placeholder-dark-75" name="password" placeholder="Password" required="">
+
+
                               <input id="password-confirm" type="password" placeholder="Confirm Password"
                                  name="asaspassword_confirmation" autocomplete="new-password" style="display: none;">
                               <span toggle="#password-field" style="position: absolute; cursor: pointer; top: 46px;    right: 15px;" class="fa fa-fw fa-eye field_icon toggle-password"></span>
-                              @error('email')
+                              @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -86,7 +88,7 @@
                            </div>
                            <div class="form-group  flex-wrap justify-content-between align-items-center mt-2">
                              
-                              <button id="kt_login_signin_submit" class="btn btn-primary font-weight-bold py-4 my-3" style="width: 100%;">Sign In</button>
+                              <button id="kt_login_signin_submit" class="btn btn-primary font-weight-bold py-4 my-3" style="width: 100%;">Reset Password</button>
                            </div>
                         </form>
 

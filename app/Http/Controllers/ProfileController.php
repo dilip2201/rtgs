@@ -27,7 +27,7 @@ class ProfileController extends Controller
         $rules = [
             'name' => 'required',
             // 'email' => 'required|unique:users,email,' . Auth::user()->id,
-            'phone' => 'required|unique:users,phone,' . Auth::user()->id,
+            'phone' => 'required',
 
         ];
         $messages = [
@@ -45,6 +45,9 @@ class ProfileController extends Controller
                 $user = User::find(Auth::user()->id);
                 $user->name = $request->name;
                 $user->phone = $request->phone;
+                if($request->profile_deleted == '1'){
+                    $user->image = null;
+                }
                 if ($request->hasFile('profile_avatar')) {
                     if(file_exists(public_path('company/employee/'.$user->image)) && $user->image!='') {
                         unlink(public_path('company/employee/'.$user->image));
