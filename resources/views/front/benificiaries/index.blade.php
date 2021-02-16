@@ -161,11 +161,7 @@
 
 		$('body').on('click', '.openaddmodal', function () {
             var id = $(this).data('id');
-            if (id == '') {
-                $('.modal-title').text('Add Benificiaries');
-            } else {
-                $('.modal-title').text('Edit Benificiaries');
-            }
+            $('.modal-title').text('Benificiaries Detail');
             $.ajax({
                 url: "{{ route('company.benificiaries.getmodal')}}",
                 type: 'POST',
@@ -201,6 +197,9 @@
                 },
             });
         });
+
+
+
 
 		$("#employee").DataTable({
             "responsive": true,

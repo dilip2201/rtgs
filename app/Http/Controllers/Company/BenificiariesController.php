@@ -45,8 +45,45 @@ class BenificiariesController extends Controller
 
 
      public function show($id){
-         return view('front.benificiaries.view');
+
+        return view('front.benificiaries.view',compact('benificiary'));
      }
+
+    public function pincode(Request $request) {
+        try {
+            $pincode = $request->pincode;
+            $get_data = callAPI('GET', 'https://api.worldpostallocations.com/pincode?postalcode='.$pincode.'&countrycode=IN', false);
+            $response = json_decode($get_data, true);
+            $arr = array('status'=>401);
+            if(!empty($response) && $response['status'] == 1){
+                if(!empty($response['result'])){
+                    $result = $response['result'];
+                    if(!empty($result)){
+                        $final = $result[0];
+                        $arr = array('status'=>200,'data'=>array('postalLocation'=>$final['postalLocation'],'district'=>$final['district'],'state'=>$final['state'],'country'=>'India'));
+                    }
+                } 
+            }
+            
+        } catch (\Illuminate\Database\QueryException $ex) {
+            $msg = $ex->getMessage();
+            if (isset($ex->errorInfo[2])) :
+                $msg = $ex->errorInfo[2];
+            endif;
+
+            $arr = array("status" => 400, "msg" => $msg, "result" => array());
+        } catch (Exception $ex) {
+            $msg = $ex->getMessage();
+            if (isset($ex->errorInfo[2])) :
+                $msg = $ex->errorInfo[2];
+            endif;
+
+            $arr = array("status" => 400, "msg" => $msg, "result" => array());
+        }
+        
+
+        return \Response::json($arr);
+    }
      /**
      * Get model for add edit user
      *
@@ -55,14 +92,14 @@ class BenificiariesController extends Controller
      */
     public function getmodal(Request $request)
     {
-
-        $user = array();
-        if (isset($request->id) && $request->id != '') {
-            $id = decrypt($request->id);
-            $user = User::where('id',$id)->first();
-
+        $id = 0;
+        if(auth()->user()->parent_id == null){
+            $id = auth()->user()->id;
+        }else{
+            $id = auth()->user()->parent_id;
         }
-        return view('front.benificiaries.view', compact('user'));
+        $benificiary =  DB::table($id.'_benificiaries')->where('id',$request->id)->first();
+        return view('front.benificiaries.view', compact('benificiary'));
     }
     
     public function store(Request $request)
@@ -165,8 +202,7 @@ class BenificiariesController extends Controller
         
         return DataTables::of($benificiaries)
             ->addColumn('action', function ($q) {
-                $id = encrypt($q->id);
-                $return = '<a title="Edit"  data-id="'.$id.'"   data-toggle="modal" data-target="#exampleModalSizeLg" class="openaddmodal" href="javascript:void(0)"><i class="fa fa-eye"></i></a>  <a style="color:#000;"  href="'.route('company.benificiaries.edit',$q->id).'"  ><i class="fa fa-pencil"></i></a> ';
+                $return = '<a title="Edit"  data-id="'.$q->id.'"   data-toggle="modal" data-target="#exampleModalSizeLg" class="openaddmodal" href="javascript:void(0)"><i class="fa fa-eye"></i></a>  <a style="color:#000;"  href="'.route('company.benificiaries.edit',$q->id).'"  ><i class="fa fa-pencil"></i></a> ';
                 
                 return $return;
             })

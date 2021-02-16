@@ -79,7 +79,7 @@
                 <!--begin: Wizard Form-->
                 <div class="row">
                     <div class="offset-xxl-2 col-xxl-8">
-                        <form class="form formsubmit" action="{{ route('company.benificiaries.store') }}" id="kt_form" method="post">
+                        <form class="form formsubmit" action="{{ route('company.benificiaries.store') }}" id="kt_form" method="post" autocomplete="off">
                                 {{ csrf_field() }}
                                 @if(isset($benificiary) && !empty($benificiary->id) )
                                     <input type="hidden" name="b_id" value="{{ $benificiary->id }}">
@@ -142,35 +142,36 @@
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Address</b></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="address" value="@if(!empty($benificiary)){{ $benificiary->address }}@endif"   placeholder="Address"  />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="address" value="@if(!empty($benificiary)){{ $benificiary->address }}@endif" autocomplete="none"  placeholder="Address"  />
                                             <span class="form-text text-muted">Fill in the mail address</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Address 2</b></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="address2" value="@if(!empty($benificiary)){{ $benificiary->address2 }}@endif"   placeholder="Address 2"   />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="address2" value="@if(!empty($benificiary)){{ $benificiary->address2 }}@endif" autocomplete="none"  placeholder="Address 2"   />
                                             <span class="form-text text-muted">Fill in the address details</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Pin</b></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="pin" value="@if(!empty($benificiary)){{ $benificiary->pin }}@endif"   placeholder="Pincode"   placeholder="Pin" />
+                                            <span  style="position: absolute; cursor: pointer; top: 40px;    right: 15px;" class="spinners"></span>
+                                            <input type="text" class="form-control form-control-solid form-control-lg pincode_data" name="pin" value="@if(!empty($benificiary)){{ $benificiary->pin }}@endif"   placeholder="Pincode"   placeholder="Pin" />
                                             <span class="form-text text-muted">Enter the pin</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Area</b></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="area" value="@if(!empty($benificiary)){{ $benificiary->area }}@endif"  placeholder="Area" />
+                                            <input type="text" class="form-control form-control-solid form-control-lg area_data" name="area" value="@if(!empty($benificiary)){{ $benificiary->area }}@endif"  placeholder="Area" />
                                             <span class="form-text text-muted">Fill in the area</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>City</b></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="city" value="@if(!empty($benificiary)){{ $benificiary->city }}@endif"  placeholder="City"   />
+                                            <input type="text" class="form-control form-control-solid form-control-lg city_data" name="city" value="@if(!empty($benificiary)){{ $benificiary->city }}@endif"  placeholder="City"   />
                                             <span class="form-text text-muted">Enter the city</span>
                                         </div>
                                     </div>
@@ -299,6 +300,29 @@
 
 
 $(document).ready(function(){
+$('body').on('keyup', '.pincode_data', function () {
+    if($(this).val().length > 5) {
+        var pincode = $('.pincode_data').val();
+        $.ajax({
+            url: "{{ route('company.benificiaries.pincode')}}",
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            data: {pincode: pincode},
+            beforeSend: function () {
+                    $('.spinners').html('<i class="fa fa-spinner fa-spin"></i>')
+            },
+            success: function (data) {
+                console.log(data.data.district)
+                $('.spinners').html('')
+                $('.city_data').val(data.data.district);
+                $('.area_data').val(data.data.postalLocation);
+            },
+        });
+    }
+    
+});
 $('.states').select2({
      placeholder: "Select a beneficiary",
 });

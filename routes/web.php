@@ -80,6 +80,7 @@ Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
             Route::post('changestatus', ['as' => 'changestatus', 'uses' => 'BenificiariesController@changestatus']);
             Route::delete('delete/{id}', ['as' => 'delete', 'uses' => 'BenificiariesController@destroy']);
             Route::get('show/{id}', ['as' => 'show', 'uses' => 'BenificiariesController@show']);
+            Route::post('pincode', ['as' => 'pincode', 'uses' => 'BenificiariesController@pincode']);
         });
 
         Route::group(['prefix' => 'form', 'as' => 'form.'], function () {
