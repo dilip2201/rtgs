@@ -210,7 +210,7 @@
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label>IFSC</label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="ifsc" placeholder="form"  value="@if(!empty($benificiary)){{ $benificiary->ifsc }}@endif" />
+                                            <input type="text" class="form-control form-control-solid form-control-lg ifsc" name="ifsc" placeholder="form"  value="@if(!empty($benificiary)){{ $benificiary->ifsc }}@endif" />
                                             <span class="form-text text-muted">Enter the IFSC number</span>
                                         </div>
                                         <!--end::Input-->
@@ -300,6 +300,26 @@
 
 
 $(document).ready(function(){
+// $(".ifsc").change(function () {      
+// var inputvalues = $(this).val();      
+//   var reg = /[A-Z|a-z]{4}[0][a-zA-Z0-9]{6}$/;    
+//                 if (inputvalues.match(reg)) {    
+//                       $('.emsg').addClass('hidden');
+//                 }    
+//                 else {    
+//                      $(".ifsc").val(""); 
+
+//                     $('.emsg').removeClass('hidden');
+//                  $('.emsg').show();   
+//                     toastr.error('invalida IFSC')   
+                   
+//                 }    
+// });   
+   
+    
+
+
+
 $('body').on('keyup', '.pincode_data', function () {
     if($(this).val().length > 5) {
         var pincode = $('.pincode_data').val();
@@ -369,7 +389,7 @@ var KTWizard3 = function() {
                     }))
                 }))
             })), a.push(FormValidation.formValidation(t, {
-fields: {
+                fields: {
                     name: {
                         validators: {
                             notEmpty: {
@@ -378,7 +398,7 @@ fields: {
                             stringLength: {
                                 max: 150,
                                 message: 'The full name must be less than 50 characters'
-                            },
+                            }
                         }
                     },
                     nickname: {
@@ -500,7 +520,7 @@ fields: {
                     })
                 }
             })), a.push(FormValidation.formValidation(t, {
-                                fields: {
+                fields: {
                      account_number: {
                         validators: {
                             notEmpty: {
@@ -524,9 +544,13 @@ fields: {
                                 message: "IFSC is required"
                             },
                             stringLength: {
-                                max: 15,
+                                max: 11,
                                 message: 'The ifsc must be less than 50 characters'
                             },
+                            regexp: {
+                                regexp: /^([a-zA-Z]{4}[0]{1}[a-zA-Z0-9]{6})$/,
+                                message: '11 Chararcters. first 4 characters, 5th digit must be "0" last 6 can be characters or numbers'
+                            }
                         }
                     },
                     branch_name: {
