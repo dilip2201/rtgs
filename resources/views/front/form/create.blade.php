@@ -400,14 +400,7 @@
                     }
                 })), a.push(FormValidation.formValidation(t, {
                    fields: {
-                        remarks: {
-                            validators: {
-                                notEmpty: {
-                                    message: "Account number is required"
-                                },
-                                
-                            }
-                        },
+                        
                     },
                     plugins: {
                         trigger: new FormValidation.plugins.Trigger,
