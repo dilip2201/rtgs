@@ -89,7 +89,7 @@
                                 <div class="row">
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>Remmiter</b></label>
+                                            <label><b>Remitter / Transferor</b></label>
                                              <select class="form-control remmiter"  name="remmiter_id">
                                                 <option value="">Select a Remmiter</option>
                                                     @if(!empty($remmiters))

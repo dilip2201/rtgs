@@ -20,7 +20,15 @@ class TransactionController extends Controller
     }
 
     public function index(){
-    	return view('front.transaction.index');
+        $id = 0;
+        if(auth()->user()->parent_id == null){
+            $id = auth()->user()->id;   
+        } else {
+            $id = auth()->user()->parent_id;    
+        }
+        $remmiters = \DB::table($id.'_benificiaries')->where('is_remitter','yes')->get();
+        $benificiaries = \DB::table($id.'_benificiaries')->get();
+    	return view('front.transaction.index',compact('remmiters','benificiaries'));
     }
 
     public function getmodal(){
@@ -41,8 +49,36 @@ class TransactionController extends Controller
             $id = auth()->user()->parent_id;
         }
         
+        $benificiaries = DB::table($id.'_benificiaries')->orderby('id', 'desc');
+        $getstartdate = $request->startdate;
+        $startdate = explode("GMT", $getstartdate);
+        $chkstartdate = date('Y-m-d', strtotime($startdate[0]));
 
-        $transactions = DB::table($id.'_transactions')->orderby('id', 'desc')->where('is_deleted','no');
+
+        $getenddate = $request->enddate;
+        $enddate = explode("GMT", $getenddate);
+        $chkenddate = date('Y-m-d', strtotime($enddate[0]));
+
+        $transactions = DB::table($id.'_transactions');
+
+
+
+        if (isset($request->startdate) && !empty($request->startdate) && isset($request->enddate) && !empty($request->enddate)) {
+            $transactions = $transactions->orderby('id', 'desc')->where('is_deleted','no')->whereBetween('created_at', [$chkstartdate, $chkenddate]);
+        }
+
+        if($request->remmiter  && !empty($request->remmiter)){
+            $transactions = $transactions->leftJoin($id.'_benificiaries', $id.'_transactions'.'.beneficiary_id', '=', $id.'_benificiaries'.'.id')->orderby($id.'_transactions'.'.id', 'desc')->where($id.'_transactions'.'.is_deleted','no')->where($id.'_transactions'.'.remmiter_id',$request->remmiter);
+        }
+
+        if($request->beneficiary  && !empty($request->beneficiary)){
+            $transactions = $transactions->leftJoin($id.'_benificiaries', $id.'_transactions'.'.beneficiary_id', '=', $id.'_benificiaries'.'.id')->orderby($id.'_transactions'.'.id', 'desc')->where($id.'_transactions'.'.is_deleted','no')->where($id.'_transactions'.'.beneficiary_id',$request->beneficiary);
+        }
+
+        if($request->mode  && !empty($request->mode)){
+            $transactions = $transactions->orderby('id', 'desc')->where('is_deleted','no')->where('transaction_method',$request->mode);
+        }
+
         $transactions = $transactions->get();
         	
         return DataTables::of($transactions)

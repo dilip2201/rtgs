@@ -108,7 +108,7 @@
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label><b>E-mail</b></label>
-                                            <input type="email" value="@if(!empty($benificiary)){{ $benificiary->email }}@endif" class="form-control form-control-solid form-control-lg" name="email" placeholder="Email" />
+                                            <input type="email" value="@if(!empty($benificiary)){{ $benificiary->email }}@endif" class="form-control form-control-solid form-control-lg" name="email" autocomplete="none"  placeholder="Email" />
                                             <span class="form-text text-muted">Fill in the email</span>
                                         </div>
                                         <!--end::Input-->
@@ -118,8 +118,8 @@
                                      <div class="col-xl-6">
                                         <!--begin::Input-->
                                         <div class="form-group">
-                                            <label><b>Phone No</b></label>
-                                            <input type="text" name="mobile_number" class="form-control form-control-solid form-control-lg"  placeholder="Mobile Number" value="@if(!empty($benificiary)){{ $benificiary->mobile_number }}@endif"  />
+                                            <label><b>Mobile No.</b></label>
+                                            <input type="text" name="mobile_number" class="form-control form-control-solid form-control-lg"  placeholder="Mobile Number" autocomplete="none"  value="@if(!empty($benificiary)){{ $benificiary->mobile_number }}@endif"  />
                                             <span class="form-text text-muted">Enter mobile number</span>
                                         </div>
                                         <!--end::Input-->
@@ -157,21 +157,21 @@
                                         <div class="form-group">
                                             <label><b>Pin</b></label>
                                             <span  style="position: absolute; cursor: pointer; top: 40px;    right: 15px;" class="spinners"></span>
-                                            <input type="text" class="form-control form-control-solid form-control-lg pincode_data" name="pin" value="@if(!empty($benificiary)){{ $benificiary->pin }}@endif"   placeholder="Pincode"   placeholder="Pin" />
+                                            <input type="text" class="form-control form-control-solid form-control-lg pincode_data" name="pin" value="@if(!empty($benificiary)){{ $benificiary->pin }}@endif"   placeholder="Pincode"   autocomplete="none"  />
                                             <span class="form-text text-muted">Enter the pin</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Area</b></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg area_data" name="area" value="@if(!empty($benificiary)){{ $benificiary->area }}@endif"  placeholder="Area" />
+                                            <input type="text" class="form-control form-control-solid form-control-lg area_data" name="area" value="@if(!empty($benificiary)){{ $benificiary->area }}@endif" autocomplete="none"   placeholder="Area" />
                                             <span class="form-text text-muted">Fill in the area</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>City</b></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg city_data" name="city" value="@if(!empty($benificiary)){{ $benificiary->city }}@endif"  placeholder="City"   />
+                                            <input type="text" class="form-control form-control-solid form-control-lg city_data" name="city" value="@if(!empty($benificiary)){{ $benificiary->city }}@endif" autocomplete="none"   placeholder="City"   />
                                             <span class="form-text text-muted">Enter the city</span>
                                         </div>
                                     </div>
@@ -201,7 +201,7 @@
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label>Account Number</label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="account_number" placeholder="Account Number" value="@if(!empty($benificiary)){{ $benificiary->account_number }}@endif" />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="account_number" placeholder="Account Number" value="@if(!empty($benificiary)){{ $benificiary->account_number }}@endif" autocomplete="none" />
                                             <span class="form-text text-muted">Fill the user's account number</span>
                                         </div>
                                         <!--end::Input-->
@@ -210,7 +210,7 @@
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label>IFSC</label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg ifsc" name="ifsc" placeholder="form"  value="@if(!empty($benificiary)){{ $benificiary->ifsc }}@endif" />
+                                            <input type="text" class="form-control form-control-solid form-control-lg ifsc" name="ifsc" placeholder="form"  value="@if(!empty($benificiary)){{ $benificiary->ifsc }}@endif" autocomplete="none" />
                                             <span class="form-text text-muted">Enter the IFSC number</span>
                                         </div>
                                         <!--end::Input-->
@@ -221,7 +221,7 @@
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label>Branch Name</label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="branch_name" placeholder="Branch Name" value="@if(!empty($benificiary)){{ $benificiary->branch_name }}@endif"  />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="branch_name" placeholder="Branch Name" value="@if(!empty($benificiary)){{ $benificiary->branch_name }}@endif" autocomplete="none"  />
                                             <span class="form-text text-muted">Fill in the user's bank branch name</span>
                                         </div>
                                         <!--end::Input-->
@@ -230,7 +230,8 @@
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label>Bank Name</label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="bank_name" placeholder="Bank Name" value="@if(!empty($benificiary)){{ $benificiary->bank_name }}@endif"  />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="bank_name" placeholder="Bank Name" value="@if(!empty($benificiary)){{ $benificiary->bank_name }}@endif"
+                                              autocomplete="none" />
                                             <span class="form-text text-muted">Fill in the user's bank name</span>
                                         </div>
                                         <!--end::Input-->
@@ -397,7 +398,7 @@ var KTWizard3 = function() {
                             },
                             stringLength: {
                                 max: 150,
-                                message: 'The full name must be less than 50 characters'
+                                message: 'The first name must be less than 50 characters'
                             }
                         }
                     },
@@ -408,14 +409,14 @@ var KTWizard3 = function() {
                             },
                             stringLength: {
                                 max: 150,
-                                message: 'The Nick name must be less than 50 characters'
+                                message: 'The last name must be less than 50 characters'
                             },
                         }
                     },
                     mobile_number   : {
                         validators: {
                             notEmpty: {
-                                message: "Phone is required"
+                                message: "Mobile No. is required"
                             },
                             numeric: {
                             message: 'The value is not a number',
@@ -424,8 +425,8 @@ var KTWizard3 = function() {
                             decimalSeparator: '.'
                         },
                         stringLength: {
-                                max: 11,
-                                message: 'The Nick name must be less than 11 characters'
+                                max: 10,
+                                message: 'The mobile number must be less than 11 characters'
                             },
                         }
                     },
@@ -526,11 +527,15 @@ var KTWizard3 = function() {
                             notEmpty: {
                                 message: "Account number is required"
                             },
-                            numeric: {
-                            message: 'The value is not a number',
-                            // The default separators
-                            thousandsSeparator: '',
-                            decimalSeparator: '.'
+                            // numeric: {
+                            // message: 'The value is not a number',
+                            // // The default separators
+                            // thousandsSeparator: '',
+                            // decimalSeparator: '.'
+                            // },
+                            regexp: {
+                                regexp: /^[a-zA-Z0-9]+$/i,
+                                message: 'The Account number can consist of alphabetical characters and numbers'
                             },
                             stringLength: {
                                     max: 20,
@@ -549,7 +554,7 @@ var KTWizard3 = function() {
                             },
                             regexp: {
                                 regexp: /^([a-zA-Z]{4}[0]{1}[a-zA-Z0-9]{6})$/,
-                                message: '11 Chararcters. first 4 characters, 5th digit must be "0" last 6 can be characters or numbers'
+                                message: 'IFSC must be 11 characters long and 5th digit has to be “0”'
                             }
                         }
                     },

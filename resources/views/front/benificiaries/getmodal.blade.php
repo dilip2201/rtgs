@@ -110,7 +110,7 @@
                                                     <span></span>
                                                 </label>
                                             </span>
-                                           <span class="form-text text-muted">Turn on if is a beneficiary only.</span>
+                                           <span class="form-text text-muted">Turn on if the beneficiary is Remitter/Transferor too.</span>
                                         </div>
                                     </div>
                                     </div>

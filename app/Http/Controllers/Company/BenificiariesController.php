@@ -198,6 +198,19 @@ class BenificiariesController extends Controller
             $id = auth()->user()->parent_id;
         }
         $benificiaries = DB::table($id.'_benificiaries')->orderby('id', 'desc');
+        $getstartdate = $request->startdate;
+        $startdate = explode("GMT", $getstartdate);
+        $chkstartdate = date('Y-m-d', strtotime($startdate[0]));
+
+
+        $getenddate = $request->enddate;
+        $enddate = explode("GMT", $getenddate);
+        $chkenddate = date('Y-m-d', strtotime($enddate[0]));
+
+        if (isset($request->startdate) && !empty($request->startdate) && isset($request->enddate) && !empty($request->enddate)) {
+            $benificiaries = $benificiaries->whereBetween('created_at', [$chkstartdate, $chkenddate]);
+        }
+
         $benificiaries = $benificiaries->get();
         
         return DataTables::of($benificiaries)
