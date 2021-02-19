@@ -50,6 +50,69 @@
 		</div>
 	</div>
 	<div class="card-body">
+        <div class="mb-7">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-12">
+                                                    <div class="row align-items-center">
+                                                     <div class="col-md-3 my-2 my-md-0">
+                                                            <div class="d-flex align-items-center">
+                                                             
+                                                         <div class="input-group" id="kt_daterangepicker_2">
+                  <input type="text" class="form-control" readonly="readonly" placeholder="Select date range">
+                  <input type="hidden" name="startdate" class="startdate">
+                  <input type="hidden" name="enddate" class="enddate">
+                  <div class="input-group-append">
+                     <span class="input-group-text">
+                     <i class="la la-calendar-check-o"></i>
+                     </span>
+                  </div>
+               </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2 my-2 my-md-0">
+                                                            <div class="d-flex align-items-center">
+                                                             
+                                             <select class="form-control remmiter"  name="remmiter">
+                                                <option value="">Select a Remmiter</option>
+                                               
+                                                    @if(!empty($remmiters))
+                                                        @foreach($remmiters as $remmiter)
+                                                        <option value="{{ $remmiter->id }}" @if(!empty($transaction) && $transaction->remmiter_id == $remmiter->id) {{ 'selected' }} @endif>{{ $remmiter->nickname }}</option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                                            </div>
+                                                        </div>
+                                                          <div class="col-md-2 my-2 my-md-0">
+                                                            <div class="d-flex align-items-center">
+                                                             
+                                             <select class="form-control beneficiary"  name="beneficiary">
+                                                <option value="">Select a Beneficiary</option>
+                                                    @if(!empty($benificiaries))
+                                                        @foreach($benificiaries as $benificiary)
+                                                        <option value="{{ $benificiary->id }}" @if(!empty($transaction) && $transaction->beneficiary_id == $benificiary->id) {{ 'selected' }} @endif>{{ $benificiary->name }}</option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                                            </div>
+                                                        </div>
+                                                           <div class="col-md-2 my-2 my-md-0">
+                                                            <div class="d-flex align-items-center">
+                                                             
+                                             <select class="form-control mode"  name="mode">
+                                                                    <option value="rtgs">RTGS</option>
+                                                                    <option value="neft">NEFT</option>
+                                                                
+                                                </select>
+                                                            </div>
+                                                        </div>
+                                                         
+                                                 
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
 		<!--begin: Datatable-->
 		<table class="table table-bordered table-hover table-checkable" id="employee" style="margin-top: 13px !important">
 			<thead>
@@ -96,10 +159,23 @@
 <link href="{{ URL::asset('public/assets/plugins/custom/datatables/datatables.bundleafa4.css?v=7.2.0') }}" rel="stylesheet" type="text/css" />
 <script src="{{ URL::asset('public/assets/plugins/custom/datatables/datatables.bundleafa4.js') }}"></script>
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script src="{{ URL::asset('public/assets/js/pages/crud/forms/widgets/bootstrap-daterangepickerafa4.js') }}"></script>
+<script src="{{ URL::asset('public/assets/js/pages/crud/forms/widgets/select2afa4.js') }}"></script>
 
 <script type="text/javascript">
 	$(document).ready(function(){
 
+        $('.remmiter').select2({
+             placeholder: "Select a remmiter",
+        });
+        $('.mode').select2({
+             placeholder: "Select a Mode",
+             minimumResultsForSearch: -1
+        });
+        $('.beneficiary').select2({
+             placeholder: "Select a Beneficiary",
+        });
+        
          $('body').on('click', '.delete_record', function () {
             var id = $(this).data('id');
 
@@ -128,7 +204,7 @@
                         if (data.status == 200) {
                             Swal.fire(
                                 "Deleted!",
-                                "User has been deleted.",
+                                "Transaction has been deleted successfully",
                                 "success"
                             )
                             $("#employee").DataTable().ajax.reload();
@@ -206,6 +282,11 @@
                 'data': function (d) {
                     d._token = "{{ csrf_token() }}";
                     d.status = $("#status").val();
+                    d.startdate = $('.startdate').val();
+                    d.enddate = $('.enddate').val();
+                    d.remmiter = $('.remmiter').val();
+                    d.beneficiary = $('.beneficiary').val();
+                    d.mode = $('.mode').val();
                 }
             },
             columns: [
@@ -220,6 +301,23 @@
                 {data: 'actions'},
             ]
         });
+
+        $('body').on('click', '.applyBtn', function () {
+            $("#employee").DataTable().ajax.reload()
+        })
+
+
+        $('body').on('change', '.remmiter', function () {
+            $("#employee").DataTable().ajax.reload()
+        })
+
+        $('body').on('change', '.beneficiary', function () {
+            $("#employee").DataTable().ajax.reload()
+        })
+
+        $('body').on('change', '.mode', function () {
+            $("#employee").DataTable().ajax.reload()
+        })
 
         $('body').on('click', '.changestatus', function () {
             var id = $(this).data('id');
@@ -301,6 +399,113 @@
             });
         });
        
+
+var KTBootstrapDaterangepicker = {
+    init: function() {
+        ! function() {
+            $("#kt_daterangepicker_1, #kt_daterangepicker_1_modal").daterangepicker({
+                buttonClasses: " btn",
+                applyClass: "btn-primary",
+                cancelClass: "btn-secondary"
+            }), $("#kt_daterangepicker_2").daterangepicker({
+                buttonClasses: " btn",
+                applyClass: "btn-primary",
+                cancelClass: "btn-secondary"
+            }, (function(a, t, e) {
+                $("#kt_daterangepicker_2 .form-control").val(a.format("YYYY-MM-DD") + " / " + t.format("YYYY-MM-DD"))
+                 $('.startdate').val(a.format('D-MMM-YYYY'));
+                    $('.enddate').val(t.format('D-MMM-YYYY'));
+            })), $("#kt_daterangepicker_2_modal").daterangepicker({
+                buttonClasses: " btn",
+                applyClass: "btn-primary",
+                cancelClass: "btn-secondary"
+            }, (function(a, t, e) {
+                $("#kt_daterangepicker_2 .form-control").val(a.format("YYYY-MM-DD") + " / " + t.format("YYYY-MM-DD"))
+            })), $("#kt_daterangepicker_3").daterangepicker({
+                buttonClasses: " btn",
+                applyClass: "btn-primary",
+                cancelClass: "btn-secondary"
+            }, (function(a, t, e) {
+                $("#kt_daterangepicker_3 .form-control").val(a.format("YYYY-MM-DD") + " / " + t.format("YYYY-MM-DD"))
+            })), $("#kt_daterangepicker_3_modal").daterangepicker({
+                buttonClasses: " btn",
+                applyClass: "btn-primary",
+                cancelClass: "btn-secondary"
+            }, (function(a, t, e) {
+                $("#kt_daterangepicker_3 .form-control").val(a.format("YYYY-MM-DD") + " / " + t.format("YYYY-MM-DD"))
+            })), $("#kt_daterangepicker_4").daterangepicker({
+                buttonClasses: " btn",
+                applyClass: "btn-primary",
+                cancelClass: "btn-secondary",
+                timePicker: !0,
+                timePickerIncrement: 30,
+                locale: {
+                    format: "MM/DD/YYYY h:mm A"
+                }
+            }, (function(a, t, e) {
+                $("#kt_daterangepicker_4 .form-control").val(a.format("MM/DD/YYYY h:mm A") + " / " + t.format("MM/DD/YYYY h:mm A"))
+            })), $("#kt_daterangepicker_5").daterangepicker({
+                buttonClasses: " btn",
+                applyClass: "btn-primary",
+                cancelClass: "btn-secondary",
+                singleDatePicker: !0,
+                showDropdowns: !0,
+                locale: {
+                    format: "MM/DD/YYYY"
+                }
+            }, (function(a, t, e) {
+                $("#kt_daterangepicker_5 .form-control").val(a.format("MM/DD/YYYY") + " / " + t.format("MM/DD/YYYY"))
+            }));
+            var a = moment().subtract(29, "days"),
+                t = moment();
+            $("#kt_daterangepicker_6").daterangepicker({
+                buttonClasses: " btn",
+                applyClass: "btn-primary",
+                cancelClass: "btn-secondary",
+                startDate: a,
+                endDate: t,
+                ranges: {
+                    Today: [moment(), moment()],
+                    Yesterday: [moment().subtract(1, "days"), moment().subtract(1, "days")],
+                    "Last 7 Days": [moment().subtract(6, "days"), moment()],
+                    "Last 30 Days": [moment().subtract(29, "days"), moment()],
+                    "This Month": [moment().startOf("month"), moment().endOf("month")],
+                    "Last Month": [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf("month")]
+                }
+            }, (function(a, t, e) {
+                $("#kt_daterangepicker_6 .form-control").val(a.format("MM/DD/YYYY") + " / " + t.format("MM/DD/YYYY"))
+            }))
+        }(), $("#kt_daterangepicker_1_validate").daterangepicker({
+            buttonClasses: " btn",
+            applyClass: "btn-primary",
+            cancelClass: "btn-secondary"
+        }, (function(a, t, e) {
+            $("#kt_daterangepicker_1_validate .form-control").val(a.format("YYYY-MM-DD") + " / " + t.format("YYYY-MM-DD"))
+        })), $("#kt_daterangepicker_2_validate").daterangepicker({
+            buttonClasses: " btn",
+            applyClass: "btn-primary",
+            cancelClass: "btn-secondary"
+        }, (function(a, t, e) {
+            $("#kt_daterangepicker_3_validate .form-control").val(a.format("YYYY-MM-DD") + " / " + t.format("YYYY-MM-DD"))
+        })), $("#kt_daterangepicker_3_validate").daterangepicker({
+            buttonClasses: " btn",
+            applyClass: "btn-primary",
+            cancelClass: "btn-secondary"
+        }, (function(a, t, e) {
+            $("#kt_daterangepicker_3_validate .form-control").val(a.format("YYYY-MM-DD") + " / " + t.format("YYYY-MM-DD"))
+        }))
+    }
+};
+jQuery(document).ready((function() {
+    KTBootstrapDaterangepicker.init()
+}));
+
+
+
+
+
+
+
 
 	})
 </script>
