@@ -84,6 +84,36 @@ class BenificiariesController extends Controller
 
         return \Response::json($arr);
     }
+
+
+    public function ifsccode(Request $request) {
+        try {
+                $ifsccode = $request->ifsccode;
+                $get_data = callAPI('GET', 'https://ifsc.razorpay.com/'.$ifsccode, false);
+                $response = json_decode($get_data, true);
+                $arr = array('status'=>401);
+                if($response !== 'Not Found' && !empty($response)){
+                    $arr = array('status'=>200,'data'=>array('BRANCH'=>$response['BRANCH'],'BANK'=>$response['BANK']));
+                }
+        } catch (\Illuminate\Database\QueryException $ex) {
+            $msg = $ex->getMessage();
+            if (isset($ex->errorInfo[2])) :
+                $msg = $ex->errorInfo[2];
+            endif;
+
+            $arr = array("status" => 400, "msg" => $msg, "result" => array());
+        } catch (Exception $ex) {
+            $msg = $ex->getMessage();
+            if (isset($ex->errorInfo[2])) :
+                $msg = $ex->errorInfo[2];
+            endif;
+
+            $arr = array("status" => 400, "msg" => $msg, "result" => array());
+        }
+        
+
+        return \Response::json($arr);
+    }
      /**
      * Get model for add edit user
      *
@@ -110,10 +140,10 @@ class BenificiariesController extends Controller
         }else{
             $id = auth()->user()->parent_id;
         }
-
+        $table = $id.'_benificiaries';
         $rules = [
             'name' => 'required',
-            'nickname' => 'required',
+            'nickname' => 'required|unique:'.$table.'',
             'email' => 'required',
             'mobile_number' => 'required',
             'address' => 'required',
@@ -131,9 +161,9 @@ class BenificiariesController extends Controller
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             $arr = array("status" => 400, "msg" => $validator->errors()->first(), "result" => array());
+            return redirect('company/benificiaries/create')->with('error', $arr['msg']);
         } else {
             try {
-               
                 if($request->is_remitter == ''){
                     $remitter = "no";
                 }else{

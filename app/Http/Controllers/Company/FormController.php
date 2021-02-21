@@ -8,6 +8,8 @@ use Validator;
 use DB;
 use Auth;
 use Carbon\Carbon;
+use PDF;
+
 class FormController extends Controller
 {
     /**
@@ -33,6 +35,22 @@ class FormController extends Controller
         $remmiters = \DB::table($id.'_benificiaries')->where('is_remitter','yes')->get();
         $transaction = \DB::table($id.'_transactions')->where('id',$tid)->first();
     	return view('front.form.create',compact('benificiaries','remmiters','transaction'));
+    }
+
+    public function formpdf($id = 0,Request $request){
+       
+        // $pdf = PDF::loadView('front.form.formpdf');
+        // return $pdf->stream('report.pdf');
+        $id = 0;
+        if(auth()->user()->parent_id == null){
+            $id = auth()->user()->id;   
+        }else{
+            $id = auth()->user()->parent_id;    
+        }
+        $data = [];
+        $data = DB::table($id.'_transactions')->leftJoin($id.'_benificiaries', $id.'_transactions'.'.beneficiary_id', '=', $id.'_benificiaries'.'.id')->orderby($id.'_transactions'.'.id', 'desc')->where($id.'_transactions'.'.is_deleted','no')->where($id.'_transactions'.'.id', 1)->first();
+
+         return view('front.form.formpdf',compact('data'));
     }
 
     public function getdata(Request $request){

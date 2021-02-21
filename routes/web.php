@@ -81,6 +81,7 @@ Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
             Route::delete('delete/{id}', ['as' => 'delete', 'uses' => 'BenificiariesController@destroy']);
             Route::get('show/{id}', ['as' => 'show', 'uses' => 'BenificiariesController@show']);
             Route::post('pincode', ['as' => 'pincode', 'uses' => 'BenificiariesController@pincode']);
+            Route::post('ifsccode', ['as' => 'ifsccode', 'uses' => 'BenificiariesController@ifsccode']);
         });
 
         Route::group(['prefix' => 'form', 'as' => 'form.'], function () {
@@ -89,6 +90,7 @@ Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
             Route::post('getdata', ['as' => 'getdata', 'uses' => 'FormController@getdata']);
             Route::post('getdatabenificiaries', ['as' => 'getdatabenificiaries', 'uses' => 'FormController@getdatabenificiaries']);
             Route::post('store', ['as' => 'store', 'uses' => 'FormController@store']);
+            Route::get('formpdf/{id}', ['as' => 'formpdf', 'uses' => 'FormController@formpdf']);
             
         });
 

@@ -91,14 +91,14 @@
                                 <div class="row">
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>Name</b></label>
+                                            <label><b>Name</b> <span style="color: red">*</span></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg" name="name"  value="@if(!empty($benificiary)){{ $benificiary->name }}@endif" placeholder="Name" />
                                             <span class="form-text text-muted">Enter beneficiary name as per bank records</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>Nickname</b></label>
+                                            <label><b>Nickname</b> <span style="color: red">*</span></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg" name="nickname" value="@if(!empty($benificiary)){{ $benificiary->nickname }}@endif"   />
                                             <span class="form-text text-muted">Fill in the nickname</span>
                                         </div>
@@ -107,7 +107,7 @@
                                     <div class="col-xl-6">
                                         <!--begin::Input-->
                                         <div class="form-group">
-                                            <label><b>E-mail</b></label>
+                                            <label><b>E-mail</b> <span style="color: red">*</span></label>
                                             <input type="email" value="@if(!empty($benificiary)){{ $benificiary->email }}@endif" class="form-control form-control-solid form-control-lg" name="email" autocomplete="none"  placeholder="Email" />
                                             <span class="form-text text-muted">Fill in the email</span>
                                         </div>
@@ -118,7 +118,7 @@
                                      <div class="col-xl-6">
                                         <!--begin::Input-->
                                         <div class="form-group">
-                                            <label><b>Mobile No.</b></label>
+                                            <label><b>Mobile No.</b> <span style="color: red">*</span></label>
                                             <input type="text" name="mobile_number" class="form-control form-control-solid form-control-lg"  placeholder="Mobile Number" autocomplete="none"  value="@if(!empty($benificiary)){{ $benificiary->mobile_number }}@endif"  />
                                             <span class="form-text text-muted">Enter mobile number</span>
                                         </div>
@@ -126,7 +126,7 @@
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group ">
-                                            <label><b>Is a remmiter?</b></label>
+                                            <label><b>Is a remmiter?</b> <span style="color: red">*</span></label>
                                             <span class="switch">
                                                 <label>
                                                     <input type="checkbox" name="is_remitter" @if(!empty($benificiary) && $benificiary->is_remitter == 'yes') checked @endif">
@@ -141,21 +141,21 @@
                                     <div class="row">
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>Address</b></label>
+                                            <label><b>Address</b> <span style="color: red">*</span></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg" name="address" value="@if(!empty($benificiary)){{ $benificiary->address }}@endif" autocomplete="none"  placeholder="Address"  />
                                             <span class="form-text text-muted">Fill in the mail address</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>Address 2</b></label>
+                                            <label><b>Address 2</b> <span style="color: red">*</span></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg" name="address2" value="@if(!empty($benificiary)){{ $benificiary->address2 }}@endif" autocomplete="none"  placeholder="Address 2"   />
                                             <span class="form-text text-muted">Fill in the address details</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>Pin</b></label>
+                                            <label><b>Pin</b> <span style="color: red">*</span></label>
                                             <span  style="position: absolute; cursor: pointer; top: 40px;    right: 15px;" class="spinners"></span>
                                             <input type="text" class="form-control form-control-solid form-control-lg pincode_data" name="pin" value="@if(!empty($benificiary)){{ $benificiary->pin }}@endif"   placeholder="Pincode"   autocomplete="none"  />
                                             <span class="form-text text-muted">Enter the pin</span>
@@ -163,32 +163,31 @@
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>Area</b></label>
+                                            <label><b>Area</b> <span style="color: red">*</span></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg area_data" name="area" value="@if(!empty($benificiary)){{ $benificiary->area }}@endif" autocomplete="none"   placeholder="Area" />
                                             <span class="form-text text-muted">Fill in the area</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>City</b></label>
+                                            <label><b>City</b> <span style="color: red">*</span></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg city_data" name="city" value="@if(!empty($benificiary)){{ $benificiary->city }}@endif" autocomplete="none"   placeholder="City"   />
                                             <span class="form-text text-muted">Enter the city</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>State</b></label>
-                                             <select class="form-control states"  name="states">
+                                            <label><b>State</b> <span style="color: red">*</span></label>
+                                            <!--  <select class="form-control states"  name="states">
                                                 <option value="">Select a State</option>
                                                     @if(!empty($states))
                                                         @foreach($states as $state)
                                                         <option value="{{ $state->id }}" @if(!empty($benificiary) && $benificiary->state == $state->id) selected @endif>{{ $state->state }}</option>
                                                         @endforeach
                                                     @endif
-                                                </select>
-                                            
-                                           
-                                            <span class="form-text text-muted">select the remmiter's name</span>
+                                                </select> -->
+                                            <input type="text" class="form-control form-control-solid form-control-lg state_data" name="states" value="@if(!empty($benificiary)){{ $benificiary->state }}@endif" autocomplete="none"   placeholder="State"   />
+                                            <span class="form-text text-muted">Enter the state</span>
                                         </div>
                                     </div>
                                     </div>
@@ -200,7 +199,7 @@
                                     <div class="col-xl-6">
                                         <!--begin::Input-->
                                         <div class="form-group">
-                                            <label>Account Number</label>
+                                            <label>Account Number <span style="color: red">*</span></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg" name="account_number" placeholder="Account Number" value="@if(!empty($benificiary)){{ $benificiary->account_number }}@endif" autocomplete="none" />
                                             <span class="form-text text-muted">Fill the user's account number</span>
                                         </div>
@@ -209,7 +208,8 @@
                                     <div class="col-xl-6">
                                         <!--begin::Input-->
                                         <div class="form-group">
-                                            <label>IFSC</label>
+                                            <label>IFSC <span style="color: red">*</span></label>
+                                            <span  style="position: absolute; cursor: pointer; top: 40px;    right: 15px;" class="spinners"></span>
                                             <input type="text" class="form-control form-control-solid form-control-lg ifsc" name="ifsc" placeholder="form"  value="@if(!empty($benificiary)){{ $benificiary->ifsc }}@endif" autocomplete="none" />
                                             <span class="form-text text-muted">Enter the IFSC number</span>
                                         </div>
@@ -220,8 +220,8 @@
                                     <div class="col-xl-6">
                                         <!--begin::Input-->
                                         <div class="form-group">
-                                            <label>Branch Name</label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="branch_name" placeholder="Branch Name" value="@if(!empty($benificiary)){{ $benificiary->branch_name }}@endif" autocomplete="none"  />
+                                            <label>Branch Name <span style="color: red">*</span></label>
+                                            <input type="text" class="form-control form-control-solid form-control-lg branch_name" name="branch_name" placeholder="Branch Name" value="@if(!empty($benificiary)){{ $benificiary->branch_name }}@endif" autocomplete="none"  />
                                             <span class="form-text text-muted">Fill in the user's bank branch name</span>
                                         </div>
                                         <!--end::Input-->
@@ -229,8 +229,8 @@
                                     <div class="col-xl-6">
                                         <!--begin::Input-->
                                         <div class="form-group">
-                                            <label>Bank Name</label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="bank_name" placeholder="Bank Name" value="@if(!empty($benificiary)){{ $benificiary->bank_name }}@endif"
+                                            <label>Bank Name <span style="color: red">*</span></label>
+                                            <input type="text" class="form-control form-control-solid form-control-lg bank_name" name="bank_name" placeholder="Bank Name" value="@if(!empty($benificiary)){{ $benificiary->bank_name }}@endif"
                                               autocomplete="none" />
                                             <span class="form-text text-muted">Fill in the user's bank name</span>
                                         </div>
@@ -339,11 +339,39 @@ $('body').on('keyup', '.pincode_data', function () {
                 $('.spinners').html('')
                 $('.city_data').val(data.data.district);
                 $('.area_data').val(data.data.postalLocation);
+                $('.state_data').val(data.data.state);
             },
         });
     }
     
 });
+$('body').on('keyup', '.ifsc', function () {
+   
+        var ifsccode = $('.ifsc').val();
+        if($(this).val().length > 10) {
+        $.ajax({
+            url: "{{ route('company.benificiaries.ifsccode')}}",
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            data: {ifsccode: ifsccode},
+            beforeSend: function () {
+                    $('.spinners').html('<i class="fa fa-spinner fa-spin"></i>')
+            },
+            success: function (data) {
+                 console.log(data)
+                $('.spinners').html('')
+                $('.bank_name').val(data.data.BANK);
+                $('.branch_name').val(data.data.BRANCH);
+            },
+        });
+    
+    }   
+});
+
+
+
 $('.states').select2({
      placeholder: "Select a beneficiary",
 });
@@ -614,7 +642,7 @@ jQuery(document).ready((function() {
                     }
                     if (data.status == 200) {
                         $('.spinnermm').html('');
-                        $('.add_modal').modal('hide');
+                        $('.bank_name').modal('hide');
                         $('#employee').DataTable().ajax.reload();
                         //toastr.success(data.msg,'Success!')
                     }

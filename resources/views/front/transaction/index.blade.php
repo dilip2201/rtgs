@@ -36,101 +36,93 @@
 
 <!--begin::Card-->
 <div class="card card-custom">
-	<div class="card-header">
-		<div class="card-title">
-			<span class="card-icon">
-				<i class="flaticon-avatar text-primary"></i>
-			</span>
-			<h3 class="card-label">Transactions</h3>
-		</div>
-		<div class="card-toolbar">
-			<a href="{{ route('company.form.create') }}"  class="btn btn-primary font-weight-bolder">
-			<i class="la la-plus"></i>New Form</a>
-			<!--end::Button-->
-		</div>
-	</div>
-	<div class="card-body">
-        <div class="mb-7">
-                                            <div class="row align-items-center">
-                                                <div class="col-md-12">
-                                                    <div class="row align-items-center">
-                                                     <div class="col-md-3 my-2 my-md-0">
-                                                            <div class="d-flex align-items-center">
-                                                             
-                                                         <div class="input-group" id="kt_daterangepicker_2">
-                  <input type="text" class="form-control" readonly="readonly" placeholder="Select date range">
-                  <input type="hidden" name="startdate" class="startdate">
-                  <input type="hidden" name="enddate" class="enddate">
-                  <div class="input-group-append">
-                     <span class="input-group-text">
-                     <i class="la la-calendar-check-o"></i>
-                     </span>
+   <div class="card-header">
+      <div class="card-title">
+         <span class="card-icon">
+         <i class="flaticon-avatar text-primary"></i>
+         </span>
+         <h3 class="card-label">Transactions</h3>
+      </div>
+      <div class="card-toolbar">
+         <a href="{{ route('company.form.create') }}"  class="btn btn-primary font-weight-bolder">
+         <i class="la la-plus"></i>New Form</a>
+         <!--end::Button-->
+      </div>
+   </div>
+   <div class="card-body">
+      <div class="mb-7">
+         <div class="row align-items-center">
+            <div class="col-md-12">
+               <div class="row align-items-center">
+                  <div class="col-md-3 my-2 my-md-0">
+                     <div class="d-flex align-items-center">
+                        <div class="input-group" id="kt_daterangepicker_2">
+                           <input type="text" class="form-control" readonly="readonly" placeholder="Select date range">
+                           <input type="hidden" name="startdate" class="startdate">
+                           <input type="hidden" name="enddate" class="enddate">
+                           <div class="input-group-append">
+                              <span class="input-group-text">
+                              <i class="la la-calendar-check-o"></i>
+                              </span>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-2 my-2 my-md-0">
+                     <div class="d-flex align-items-center">
+                        <select class="form-control remmiter"  name="remmiter">
+                           <option value="">Select a Remmiter</option>
+                           @if(!empty($remmiters))
+                           @foreach($remmiters as $remmiter)
+                           <option value="{{ $remmiter->id }}" @if(!empty($transaction) && $transaction->remmiter_id == $remmiter->id) {{ 'selected' }} @endif>{{ $remmiter->nickname }}</option>
+                           @endforeach
+                           @endif
+                        </select>
+                     </div>
+                  </div>
+                  <div class="col-md-2 my-2 my-md-0">
+                     <div class="d-flex align-items-center">
+                        <select class="form-control beneficiary"  name="beneficiary">
+                           <option value="">Select a Beneficiary</option>
+                           @if(!empty($benificiaries))
+                           @foreach($benificiaries as $benificiary)
+                           <option value="{{ $benificiary->id }}" @if(!empty($transaction) && $transaction->beneficiary_id == $benificiary->id) {{ 'selected' }} @endif>{{ $benificiary->name }}</option>
+                           @endforeach
+                           @endif
+                        </select>
+                     </div>
+                  </div>
+                  <div class="col-md-2 my-2 my-md-0">
+                     <div class="d-flex align-items-center">
+                        <select class="form-control mode"  name="mode">
+                           <option value="">Select Mode</option>
+                           <option value="rtgs">RTGS</option>
+                           <option value="neft">NEFT</option>
+                        </select>
+                     </div>
                   </div>
                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2 my-2 my-md-0">
-                                                            <div class="d-flex align-items-center">
-                                                             
-                                             <select class="form-control remmiter"  name="remmiter">
-                                                <option value="">Select a Remmiter</option>
-                                               
-                                                    @if(!empty($remmiters))
-                                                        @foreach($remmiters as $remmiter)
-                                                        <option value="{{ $remmiter->id }}" @if(!empty($transaction) && $transaction->remmiter_id == $remmiter->id) {{ 'selected' }} @endif>{{ $remmiter->nickname }}</option>
-                                                        @endforeach
-                                                    @endif
-                                                </select>
-                                                            </div>
-                                                        </div>
-                                                          <div class="col-md-2 my-2 my-md-0">
-                                                            <div class="d-flex align-items-center">
-                                                             
-                                             <select class="form-control beneficiary"  name="beneficiary">
-                                                <option value="">Select a Beneficiary</option>
-                                                    @if(!empty($benificiaries))
-                                                        @foreach($benificiaries as $benificiary)
-                                                        <option value="{{ $benificiary->id }}" @if(!empty($transaction) && $transaction->beneficiary_id == $benificiary->id) {{ 'selected' }} @endif>{{ $benificiary->name }}</option>
-                                                        @endforeach
-                                                    @endif
-                                                </select>
-                                                            </div>
-                                                        </div>
-                                                           <div class="col-md-2 my-2 my-md-0">
-                                                            <div class="d-flex align-items-center">
-                                                             
-                                             <select class="form-control mode"  name="mode">
-                                                                    <option value="rtgs">RTGS</option>
-                                                                    <option value="neft">NEFT</option>
-                                                                
-                                                </select>
-                                                            </div>
-                                                        </div>
-                                                         
-                                                 
-                                                    </div>
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
-		<!--begin: Datatable-->
-		<table class="table table-bordered table-hover table-checkable" id="employee" style="margin-top: 13px !important">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>User</th>
-                    <th>Beneficiary</th>
-					<th>Remmiter</th>
-					<th>Bank</th>
-					<th>Date</th>
-					<th>Mode</th>
-                    <th>Amount</th>
-                    <th>Actions</th>
-				</tr>
-			</thead>
-		</table>
-		<!--end: Datatable-->
-	</div>
+            </div>
+         </div>
+      </div>
+      <!--begin: Datatable-->
+      <table class="table table-bordered table-hover table-checkable" id="employee" style="margin-top: 13px !important">
+         <thead>
+            <tr>
+               <th>#</th>
+               <th>User</th>
+               <th>Beneficiary</th>
+               <th>Remmiter</th>
+               <th>Bank</th>
+               <th>Date</th>
+               <th>Mode</th>
+               <th>Amount</th>
+               <th>Actions</th>
+            </tr>
+         </thead>
+      </table>
+      <!--end: Datatable-->
+   </div>
 </div>
 <!--end::Card-->
 

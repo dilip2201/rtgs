@@ -89,7 +89,7 @@
                                 <div class="row">
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>Remitter / Transferor</b></label>
+                                            <label><b>Remitter / Transferor</b> <span style="color: red">*</span></label>
                                              <select class="form-control remmiter"  name="remmiter_id">
                                                 <option value="">Select a Remmiter</option>
                                                     @if(!empty($remmiters))
@@ -109,7 +109,7 @@
                                     <div class="col-xl-6">
                                         <!--begin::Input-->
                                         <div class="form-group">
-                                            <label><b>Beneficiary</b></label>
+                                            <label><b>Beneficiary</b> <span style="color: red">*</span></label>
                                             <div class="form-group ">
                                                 <select class="form-control benificiaries"  name="beneficiary_id">
                                                     <option value="">Select a Beneficiary</option>
@@ -138,21 +138,21 @@
                                     <div class="row">
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>Amount</b></label>
+                                            <label><b>Amount</b> <span style="color: red">*</span></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg amount" name="amount" value="@if(!empty($transaction)){{ $transaction->amount }}@endif"  placeholder="Amount"  required />
                                             <span class="form-text text-muted">Fill in the amount to be transferred</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>Cheque No</b></label>
+                                            <label><b>Cheque No</b> <span style="color: red">*</span></label>
                                             <input type="text" maxlength="6" class="form-control form-control-solid form-control-lg cheque_number" name="cheque_number"  placeholder="Cheque No" value="@if(!empty($transaction)){{ $transaction->cheque_number }}@endif" required />
                                             <span class="form-text text-muted">Fill in the cheque number</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>Transaction method</b></label>
+                                            <label><b>Transaction method</b> <span style="color: red">*</span></label>
                                             <div class="radio-inline">
                                                             <label class="radio">
                                                             <input type="radio" class="transaction_method" name="transaction_method" @if(empty($transaction)) checked @endif @if(!empty($transaction->transaction_method) && $transaction->transaction_method == 'neft') checked @endif value="neft" />
@@ -167,7 +167,7 @@
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>Date</b></label>
+                                            <label><b>Date</b> <span style="color: red">*</span></label>
                                             <input type="date" class="form-control form-control-solid form-control-lg transaction_date" name="transaction_date" value="@if(!empty($transaction)){{ $transaction->transaction_date }}@endif"  placeholder="Date" value="" required />
                                             <span class="form-text text-muted">Edit the date if neccessary</span>
                                         </div>

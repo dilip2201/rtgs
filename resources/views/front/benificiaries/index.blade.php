@@ -29,7 +29,8 @@
     </div>
 @endif
 @if(session()->has('error'))
-    <div class="alert alert-danger" style="background-color: snow;    border-color: #4a99ff;    color: #4a99ff;">
+    <div class="alert alert-danger" style="background-color: #ffbebe!important;border-color: #f64e60;
+    color: red;">
         {{ session()->get('error') }}
     </div>
 @endif

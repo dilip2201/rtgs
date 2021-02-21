@@ -59,24 +59,24 @@ class TransactionController extends Controller
         $enddate = explode("GMT", $getenddate);
         $chkenddate = date('Y-m-d', strtotime($enddate[0]));
 
-        $transactions = DB::table($id.'_transactions');
+        $transactions = DB::table($id.'_transactions')->leftJoin($id.'_benificiaries', $id.'_transactions'.'.beneficiary_id', '=', $id.'_benificiaries'.'.id')->orderby($id.'_transactions'.'.id', 'desc')->where($id.'_transactions'.'.is_deleted','no');
 
 
 
         if (isset($request->startdate) && !empty($request->startdate) && isset($request->enddate) && !empty($request->enddate)) {
-            $transactions = $transactions->orderby('id', 'desc')->where('is_deleted','no')->whereBetween('created_at', [$chkstartdate, $chkenddate]);
+            $transactions = $transactions->whereBetween($id.'_transactions'.'.created_at', [$chkstartdate, $chkenddate]);
         }
 
         if($request->remmiter  && !empty($request->remmiter)){
-            $transactions = $transactions->leftJoin($id.'_benificiaries', $id.'_transactions'.'.beneficiary_id', '=', $id.'_benificiaries'.'.id')->orderby($id.'_transactions'.'.id', 'desc')->where($id.'_transactions'.'.is_deleted','no')->where($id.'_transactions'.'.remmiter_id',$request->remmiter);
+            $transactions = $transactions->where($id.'_transactions'.'.remmiter_id',$request->remmiter);
         }
 
         if($request->beneficiary  && !empty($request->beneficiary)){
-            $transactions = $transactions->leftJoin($id.'_benificiaries', $id.'_transactions'.'.beneficiary_id', '=', $id.'_benificiaries'.'.id')->orderby($id.'_transactions'.'.id', 'desc')->where($id.'_transactions'.'.is_deleted','no')->where($id.'_transactions'.'.beneficiary_id',$request->beneficiary);
+            $transactions = $transactions->where($id.'_transactions'.'.beneficiary_id',$request->beneficiary);
         }
 
         if($request->mode  && !empty($request->mode)){
-            $transactions = $transactions->orderby('id', 'desc')->where('is_deleted','no')->where('transaction_method',$request->mode);
+            $transactions = $transactions->where($id.'_transactions'.'.transaction_method',$request->mode);
         }
 
         $transactions = $transactions->get();
@@ -84,7 +84,7 @@ class TransactionController extends Controller
         return DataTables::of($transactions)
             ->addColumn('actions', function ($q) {
                 $id = encrypt($q->id);
-                $return = '<a style="color:#000; margin-right:10px;"  href="#"  ><i class="fas fa-copy" style="color:#616161;"></i></a> <a style="color:#000; margin-right:10px;"  data-id="'.$id.'"   data-toggle="modal" data-target=".add_modal" class="openaddmodal"   ><i class="fas fa-history" style="color:#616161;"></i></a>  <a style="color:#000; margin-right:10px;"  href="#"  ><i class="fas fa-download" style="color:#616161;"></i></a> <a style="color:#000; margin-right:10px;"  href="'.route('company.form.edit',$q->id).'"  ><i class="fas fa-pen" style="color:#616161;"></i></a> <a class="delete_record" style="color:#000;cursor:pointer; margin-right:10px;" data-id="'.$q->id.'"><i class="fas fa-trash" style="color:#616161;"></i></a> ';
+                $return = '<a style="color:#000; margin-right:10px;"  href="'.route('company.form.formpdf',['id'=>'pdf']).'"><i class="fas fa-copy" style="color:#616161;"></i></a> <a style="color:#000; margin-right:10px;"  data-id="'.$id.'"   data-toggle="modal" data-target=".add_modal" class="openaddmodal"   ><i class="fas fa-history" style="color:#616161;"></i></a>  <a style="color:#000; margin-right:10px;"  href="#"  ><i class="fas fa-download" style="color:#616161;"></i></a> <a style="color:#000; margin-right:10px;"  href="'.route('company.form.edit',$q->id).'"  ><i class="fas fa-pen" style="color:#616161;"></i></a> <a class="delete_record" style="color:#000;cursor:pointer; margin-right:10px;" data-id="'.$q->id.'"><i class="fas fa-trash" style="color:#616161;"></i></a> ';
                 
                 return $return;
             })
@@ -98,7 +98,7 @@ class TransactionController extends Controller
                 return getusernamebenificiery($q->remmiter_id,$id);
             })
             ->addColumn('bank', function ($q) {
-                return 'ICIC Bank';
+                return $q->bank_name;
             })
             ->addColumn('date', function ($q) {
                 return date('Y-m-d',strtotime($q->transaction_date));
