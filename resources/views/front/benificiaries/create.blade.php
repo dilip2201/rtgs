@@ -99,7 +99,7 @@
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Nickname</b> <span style="color: red">*</span></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="nickname" value="@if(!empty($benificiary)){{ $benificiary->nickname }}@endif"   />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="nickname" placeholder="Nickname" value="@if(!empty($benificiary)){{ $benificiary->nickname }}@endif"   />
                                             <span class="form-text text-muted">Fill in the nickname</span>
                                         </div>
                                     </div>
@@ -108,8 +108,8 @@
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label><b>E-mail</b> <span style="color: red">*</span></label>
-                                            <input type="email" value="@if(!empty($benificiary)){{ $benificiary->email }}@endif" class="form-control form-control-solid form-control-lg" name="email" autocomplete="none"  placeholder="Email" />
-                                            <span class="form-text text-muted">Fill in the email</span>
+                                            <input type="email" value="@if(!empty($benificiary)){{ $benificiary->email }}@endif" class="form-control form-control-solid form-control-lg" name="email" autocomplete="none"  placeholder="E-mail" />
+                                            
                                         </div>
                                         <!--end::Input-->
                                     </div>
@@ -119,8 +119,8 @@
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label><b>Mobile No.</b> <span style="color: red">*</span></label>
-                                            <input type="text" name="mobile_number" class="form-control form-control-solid form-control-lg"  placeholder="Mobile Number" autocomplete="none"  value="@if(!empty($benificiary)){{ $benificiary->mobile_number }}@endif"  />
-                                            <span class="form-text text-muted">Enter mobile number</span>
+                                            <input type="text" name="mobile_number" class="form-control form-control-solid form-control-lg"  placeholder="Mobile No." autocomplete="none"  value="@if(!empty($benificiary)){{ $benificiary->mobile_number }}@endif"  maxlength="10" />
+                                            
                                         </div>
                                         <!--end::Input-->
                                     </div>
@@ -143,14 +143,14 @@
                                         <div class="form-group">
                                             <label><b>Address</b> <span style="color: red">*</span></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg" name="address" value="@if(!empty($benificiary)){{ $benificiary->address }}@endif" autocomplete="none"  placeholder="Address"  />
-                                            <span class="form-text text-muted">Fill in the mail address</span>
+                                            
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Address 2</b> <span style="color: red">*</span></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg" name="address2" value="@if(!empty($benificiary)){{ $benificiary->address2 }}@endif" autocomplete="none"  placeholder="Address 2"   />
-                                            <span class="form-text text-muted">Fill in the address details</span>
+                                            
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
@@ -158,21 +158,21 @@
                                             <label><b>Pin</b> <span style="color: red">*</span></label>
                                             <span  style="position: absolute; cursor: pointer; top: 40px;    right: 15px;" class="spinners"></span>
                                             <input type="text" class="form-control form-control-solid form-control-lg pincode_data" name="pin" value="@if(!empty($benificiary)){{ $benificiary->pin }}@endif"   placeholder="Pincode"   autocomplete="none"  />
-                                            <span class="form-text text-muted">Enter the pin</span>
+                                            
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Area</b> <span style="color: red">*</span></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg area_data" name="area" value="@if(!empty($benificiary)){{ $benificiary->area }}@endif" autocomplete="none"   placeholder="Area" />
-                                            <span class="form-text text-muted">Fill in the area</span>
+                                            
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>City</b> <span style="color: red">*</span></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg city_data" name="city" value="@if(!empty($benificiary)){{ $benificiary->city }}@endif" autocomplete="none"   placeholder="City"   />
-                                            <span class="form-text text-muted">Enter the city</span>
+                                            
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
@@ -187,7 +187,7 @@
                                                     @endif
                                                 </select> -->
                                             <input type="text" class="form-control form-control-solid form-control-lg state_data" name="states" value="@if(!empty($benificiary)){{ $benificiary->state }}@endif" autocomplete="none"   placeholder="State"   />
-                                            <span class="form-text text-muted">Enter the state</span>
+                                            
                                         </div>
                                     </div>
                                     </div>
@@ -201,7 +201,7 @@
                                         <div class="form-group">
                                             <label>Account Number <span style="color: red">*</span></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg" name="account_number" placeholder="Account Number" value="@if(!empty($benificiary)){{ $benificiary->account_number }}@endif" autocomplete="none" />
-                                            <span class="form-text text-muted">Fill the user's account number</span>
+                                            
                                         </div>
                                         <!--end::Input-->
                                     </div>
@@ -210,8 +210,8 @@
                                         <div class="form-group">
                                             <label>IFSC <span style="color: red">*</span></label>
                                             <span  style="position: absolute; cursor: pointer; top: 40px;    right: 15px;" class="spinners"></span>
-                                            <input type="text" class="form-control form-control-solid form-control-lg ifsc" name="ifsc" placeholder="form"  value="@if(!empty($benificiary)){{ $benificiary->ifsc }}@endif" autocomplete="none" />
-                                            <span class="form-text text-muted">Enter the IFSC number</span>
+                                            <input type="text" class="form-control form-control-solid form-control-lg ifsc" name="ifsc" placeholder="IFSC"  value="@if(!empty($benificiary)){{ $benificiary->ifsc }}@endif" autocomplete="none" />
+                                            
                                         </div>
                                         <!--end::Input-->
                                     </div>
@@ -222,7 +222,7 @@
                                         <div class="form-group">
                                             <label>Branch Name <span style="color: red">*</span></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg branch_name" name="branch_name" placeholder="Branch Name" value="@if(!empty($benificiary)){{ $benificiary->branch_name }}@endif" autocomplete="none"  />
-                                            <span class="form-text text-muted">Fill in the user's bank branch name</span>
+                                            
                                         </div>
                                         <!--end::Input-->
                                     </div>
@@ -232,7 +232,7 @@
                                             <label>Bank Name <span style="color: red">*</span></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg bank_name" name="bank_name" placeholder="Bank Name" value="@if(!empty($benificiary)){{ $benificiary->bank_name }}@endif"
                                               autocomplete="none" />
-                                            <span class="form-text text-muted">Fill in the user's bank name</span>
+                                            
                                         </div>
                                         <!--end::Input-->
                                     </div>
@@ -283,6 +283,7 @@
 	</div>
     </div>
 </div>
+<input type="hidden" class="emails" value="{{ implode(',',$emails) }}">
 @push('style')
 <link href="{{ URL::asset('public/assets/css/pages/wizard/wizard-2afa4.css') }}" rel="stylesheet" type="text/css" />
 @endpush
@@ -295,31 +296,17 @@
 <script src="{{ URL::asset('public/admin/Pnotify/company/pnotify.custom.min.js') }}"></script>
 <script src="{{ URL::asset('public/assets/plugins/custom/datatables/datatables.bundleafa4.js') }}"></script>
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
 
 
 
 
 $(document).ready(function(){
-// $(".ifsc").change(function () {      
-// var inputvalues = $(this).val();      
-//   var reg = /[A-Z|a-z]{4}[0][a-zA-Z0-9]{6}$/;    
-//                 if (inputvalues.match(reg)) {    
-//                       $('.emsg').addClass('hidden');
-//                 }    
-//                 else {    
-//                      $(".ifsc").val(""); 
 
-//                     $('.emsg').removeClass('hidden');
-//                  $('.emsg').show();   
-//                     toastr.error('invalida IFSC')   
-                   
-//                 }    
-// });   
-   
-    
-
-
+var emails = $('.emails').val();
+var finalemails = emails.split(',');
+ console.log(finalemails);
 
 $('body').on('keyup', '.pincode_data', function () {
     if($(this).val().length > 5) {
@@ -439,6 +426,26 @@ var KTWizard3 = function() {
                                 max: 150,
                                 message: 'The last name must be less than 50 characters'
                             },
+                            callback: {
+                                callback: function(input) {
+                                   
+                                    if(finalemails.includes(input.value)){
+                                        return {
+                                            valid: false,
+                                            message: 'Nickname should be Unique.',
+                                        };
+                                    } else{
+                                        return {
+                                            valid: true,
+                                            
+                                        };
+                                    }
+                                    
+                                    
+                                    
+                                    
+                                }
+                            }
                         }
                     },
                     mobile_number   : {
@@ -453,10 +460,11 @@ var KTWizard3 = function() {
                             decimalSeparator: '.'
                         },
                         stringLength: {
-                                max: 10,
-                                message: 'The mobile number must be less than 11 characters'
+                                min: 10,
+                                message: 'The mobile number must be 10 characters'
                             },
-                        }
+                        },
+
                     },
                     email: {
                         validators: {

@@ -84,7 +84,7 @@
                                 
                             <!--begin: Wizard Step 1-->
                             <div class="pb-3" data-wizard-type="step-content" data-wizard-state="current">
-                                <h4 class="mb-3 font-weight-bold text-dark">Enter the remmiter's details</h4>
+                                
                                 
                                 <div class="row">
                                     <div class="col-xl-6">
@@ -94,7 +94,7 @@
                                                 <option value="">Select a Remmiter</option>
                                                     @if(!empty($remmiters))
                                                         @foreach($remmiters as $remmiter)
-                                                        <option value="{{ $remmiter->id }}" @if(!empty($transaction) && $transaction->remmiter_id == $remmiter->id) {{ 'selected' }} @endif>{{ $remmiter->name }}</option>
+                                                        <option value="{{ $remmiter->id }}" @if(!empty($transaction) && $transaction->remmiter_id == $remmiter->id) {{ 'selected' }} @endif>{{ $remmiter->nickname }}</option>
                                                         @endforeach
                                                     @endif
                                                 </select>
@@ -104,7 +104,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <h4 class="mb-3 font-weight-bold text-dark">Enter the benificiary's details</h4>
+                                
                                 <div class="row">
                                     <div class="col-xl-6">
                                         <!--begin::Input-->
@@ -179,13 +179,14 @@
                                 <h4 class="mb-5 font-weight-bold text-dark" >Review & confirm</h4>
                                 <h4 data-wizard-type="action-prev" class="mb-5 font-weight-bold text-dark" style="cursor: pointer; color: #3699ff!important;"><i class="flaticon2-left-arrow-1" style="color: #3699ff!important; margin-right: 10px;"></i>Back and edit</h4>
                                 <div class="row">
+                                    
                                     <div class="col-xl-4">
                                         <!--begin::Input-->
-                                        <div class="form-group benificiary_detail" >
+                                        <div class="form-group remmiter_detail">
                                             @if(!empty($transaction))
-                                            @php $benificiary = getbenificiary($transaction->beneficiary_id)  @endphp
+                                            @php $benificiary = getbenificiary($transaction->remmiter_id)  @endphp
 
-                                            <label><b style="color: #000; font-size: 14px;">Benificiary's details</b></label><br>
+                                            <label><b style="color: #000; font-size: 14px;">Remmiter details</b></label><br>
                                             <span class="benificiary_name" style="color: #9f9f9f;">{{ $benificiary->name ?? '-' }}</span><br>
                                             <span class="benificiary_state" style="color: #9f9f9f;">{{ $benificiary->city ?? '-' }}, {{ $benificiary->state ?? '-' }}</span><br>
                                             <span class="benificiary_citybank" style="color: #9f9f9f;">{{ $benificiary->bank_name ?? '-' }}</span><br>
@@ -197,11 +198,11 @@
                                     </div>
                                     <div class="col-xl-4">
                                         <!--begin::Input-->
-                                        <div class="form-group remmiter_detail">
+                                        <div class="form-group benificiary_detail" >
                                             @if(!empty($transaction))
-                                            @php $benificiary = getbenificiary($transaction->remmiter_id)  @endphp
+                                            @php $benificiary = getbenificiary($transaction->beneficiary_id)  @endphp
 
-                                            <label><b style="color: #000; font-size: 14px;">Remmiter details</b></label><br>
+                                            <label><b style="color: #000; font-size: 14px;">Benificiary's details</b></label><br>
                                             <span class="benificiary_name" style="color: #9f9f9f;">{{ $benificiary->name ?? '-' }}</span><br>
                                             <span class="benificiary_state" style="color: #9f9f9f;">{{ $benificiary->city ?? '-' }}, {{ $benificiary->state ?? '-' }}</span><br>
                                             <span class="benificiary_citybank" style="color: #9f9f9f;">{{ $benificiary->bank_name ?? '-' }}</span><br>

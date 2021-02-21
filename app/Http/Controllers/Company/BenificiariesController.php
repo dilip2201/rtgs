@@ -39,9 +39,13 @@ class BenificiariesController extends Controller
         }
         $states = StateList::get();
         $benificiary = DB::table($id.'_benificiaries')->where('id',$b_id)->first();
+        $emails = DB::table($id.'_benificiaries')->pluck('nickname')->toArray();
 
-        return view('front.benificiaries.create',compact('benificiary','states'));
+        
+        return view('front.benificiaries.create',compact('benificiary','states','emails'));
     }
+
+
 
 
      public function show($id){
@@ -49,6 +53,10 @@ class BenificiariesController extends Controller
         return view('front.benificiaries.view',compact('benificiary'));
      }
 
+    public function validemail(Request $request) {
+        $arr = array("status" => 400);
+        return \Response::json($arr);
+    }
     public function pincode(Request $request) {
         try {
             $pincode = $request->pincode;

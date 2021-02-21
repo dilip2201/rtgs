@@ -82,6 +82,8 @@ Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
             Route::get('show/{id}', ['as' => 'show', 'uses' => 'BenificiariesController@show']);
             Route::post('pincode', ['as' => 'pincode', 'uses' => 'BenificiariesController@pincode']);
             Route::post('ifsccode', ['as' => 'ifsccode', 'uses' => 'BenificiariesController@ifsccode']);
+            Route::post('validemail', ['as' => 'validemail', 'uses' => 'BenificiariesController@validemail']);
+            
         });
 
         Route::group(['prefix' => 'form', 'as' => 'form.'], function () {
