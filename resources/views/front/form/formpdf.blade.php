@@ -15,23 +15,10 @@ $amount_word = number_to_word($data->amount);
 ?>
 <!DOCTYPE html><!--  This site was created in Webflow. http://www.webflow.com  -->
 <!--  Last Published: Fri Feb 05 2021 15:08:21 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="5f7f31d3fe19c0eded6c9f6f" data-wf-site="5f7f31d3fe19c050e26c9f6e">
+
 <head>
-  <meta charset="utf-8">
-  <title>Bank A4 Form</title>
-  <meta content="width=device-width, initial-scale=1" name="viewport">
-  <meta content="Webflow" name="generator">
-
-  <link rel="stylesheet" href="{{ URL::asset('public/assets/css/normalize.css') }}">
   <link rel="stylesheet" href="{{ URL::asset('public/assets/css/webflow.css') }}">
-  <link rel="stylesheet" href="{{ URL::asset('public/assets/css/bank-form.webflow.css') }}">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
-  <script type="text/javascript">WebFont.load({  google: {    families: ["Poppins:regular,500,600,700,800"]  }});</script>
-  <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
-  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
-  <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
-  <link href="images/webclip.png" rel="apple-touch-icon">
+  <link rel="stylesheet" href="{{ URL::asset('public/assets/css/bank-form.webflow.css') }}">  
   <style type="text/css">
     .field-letter{
           text-align: center;
@@ -39,8 +26,8 @@ $amount_word = number_to_word($data->amount);
     }
   </style>
 </head>
-<body class="body">
-  <div class="a4-wrapper">
+<body class="body" id="sdsds">
+  <div class="a4-wrapper" >
     <div class="page1-form"><img src="{{ URL::asset('public/assets/media/icici/icici_bank_logo_symbol.png') }}" loading="lazy" sizes="150px" srcset="{{ URL::asset('public/assets/media/icici/icici_bank_logo_symbol-p-500.png') }} 500w, {{ URL::asset('public/assets/media/icici/icici_bank_logo_symbol-p-800.png') }} 800w, {{ URL::asset('public/assets/media/icici/icici_bank_logo_symbol-p-1080.png') }} 1080w, {{ URL::asset('public/assets/media/icici/icici_bank_logo_symbol-p-1600.png') }} 1600w, {{ URL::asset('public/assets/media/icici/icici_bank_logo_symbol-p-2000.png') }} 2000w, {{ URL::asset('public/assets/media/icici/icici_bank_logo_symbol-p-2600.png') }} 2600w, {{ URL::asset('public/assets/media/icici/icici_bank_logo_symbol-p-3200w.png') }} 3200w, {{ URL::asset('public/assets/media/icici/icici_bank_logo_symbol') }} 3400w" alt="" class="image">
       <div class="tittle-form">
         <h1>Application for Funds Transfer through RTGS / NEFT</h1>
@@ -419,9 +406,17 @@ $amount_word = number_to_word($data->amount);
       </div>
     </div>
   </div>
-  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=5f7f31d3fe19c050e26c9f6e" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-  <script src="js/webflow.js" type="text/javascript"></script>
-  <script src="{{ URL::asset('public/assets/js/webflow.js') }}"></script>
+  
   <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 </body>
 </html>
+
+<script type="text/javascript">
+  var prtContent = document.getElementById("sdsds");
+var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+WinPrint.document.write(prtContent.innerHTML);
+WinPrint.document.close();
+WinPrint.focus();
+WinPrint.print();
+WinPrint.close();
+</script>

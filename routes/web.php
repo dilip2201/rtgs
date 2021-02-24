@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('downloadpdf','PDFController@download');
 
 /******************************* Invite User ****************************/
 Route::get('/invite/password/{token}', ['as' => 'newpasswordsetup', 'uses' => 'Admin\PasswordSetupController@setPassInvitationView']);
