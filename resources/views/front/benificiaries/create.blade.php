@@ -92,14 +92,15 @@
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Name</b> <span style="color: red">*</span></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="name"  value="@if(!empty($benificiary)){{ $benificiary->name }}@endif" placeholder="Name" />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="name"  value="@if(!empty($benificiary)){{ $benificiary->name }}@endif" placeholder="Name" maxlength="150"/>
                                             <span class="form-text text-muted">Enter beneficiary name as per bank records</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Nickname</b> <span style="color: red">*</span></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="nickname" placeholder="Nickname" value="@if(!empty($benificiary)){{ $benificiary->nickname }}@endif"   />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="nickname" placeholder="Nickname" value="@if(!empty($benificiary)){{ $benificiary->nickname }}@endif"
+                                            maxlength="150"   />
                                             <span class="form-text text-muted">Fill in the nickname</span>
                                         </div>
                                     </div>
@@ -142,14 +143,14 @@
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Address</b> <span style="color: red">*</span></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="address" value="@if(!empty($benificiary)){{ $benificiary->address }}@endif" autocomplete="none"  placeholder="Address"  />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="address" value="@if(!empty($benificiary)){{ $benificiary->address }}@endif" autocomplete="none"  placeholder="Address"  maxlength="150"/>
                                             
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Address 2</b> <span style="color: red">*</span></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="address2" value="@if(!empty($benificiary)){{ $benificiary->address2 }}@endif" autocomplete="none"  placeholder="Address 2"   />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="address2" value="@if(!empty($benificiary)){{ $benificiary->address2 }}@endif" autocomplete="none"  placeholder="Address 2"   maxlength="150"/>
                                             
                                         </div>
                                     </div>
@@ -157,21 +158,21 @@
                                         <div class="form-group">
                                             <label><b>Pin</b> <span style="color: red">*</span></label>
                                             <span  style="position: absolute; cursor: pointer; top: 40px;    right: 15px;" class="spinners"></span>
-                                            <input type="text" class="form-control form-control-solid form-control-lg pincode_data" name="pin" value="@if(!empty($benificiary)){{ $benificiary->pin }}@endif"   placeholder="Pincode"   autocomplete="none"  />
+                                            <input type="text" class="form-control form-control-solid form-control-lg pincode_data" name="pin" value="@if(!empty($benificiary)){{ $benificiary->pin }}@endif"   placeholder="Pincode"   autocomplete="none"  maxlength="6"/>
                                             
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Area</b> <span style="color: red">*</span></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg area_data" name="area" value="@if(!empty($benificiary)){{ $benificiary->area }}@endif" autocomplete="none"   placeholder="Area" />
+                                            <input type="text" class="form-control form-control-solid form-control-lg area_data" name="area" value="@if(!empty($benificiary)){{ $benificiary->area }}@endif" autocomplete="none"   placeholder="Area" maxlength="50"/>
                                             
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>City</b> <span style="color: red">*</span></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg city_data" name="city" value="@if(!empty($benificiary)){{ $benificiary->city }}@endif" autocomplete="none"   placeholder="City"   />
+                                            <input type="text" class="form-control form-control-solid form-control-lg city_data" name="city" value="@if(!empty($benificiary)){{ $benificiary->city }}@endif" autocomplete="none"   placeholder="City"  maxlength="50" />
                                             
                                         </div>
                                     </div>
@@ -186,7 +187,7 @@
                                                         @endforeach
                                                     @endif
                                                 </select> -->
-                                            <input type="text" class="form-control form-control-solid form-control-lg state_data" name="states" value="@if(!empty($benificiary)){{ $benificiary->state }}@endif" autocomplete="none"   placeholder="State"   />
+                                            <input type="text" class="form-control form-control-solid form-control-lg state_data" name="states" value="@if(!empty($benificiary)){{ $benificiary->state }}@endif" autocomplete="none"   placeholder="State"   maxlength="50"/>
                                             
                                         </div>
                                     </div>
@@ -200,7 +201,7 @@
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label>Account Number <span style="color: red">*</span></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="account_number" placeholder="Account Number" value="@if(!empty($benificiary)){{ $benificiary->account_number }}@endif" autocomplete="none" />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="account_number" placeholder="Account Number" value="@if(!empty($benificiary)){{ $benificiary->account_number }}@endif" autocomplete="none" maxlength="20"/>
                                             
                                         </div>
                                         <!--end::Input-->
@@ -210,7 +211,7 @@
                                         <div class="form-group">
                                             <label>IFSC <span style="color: red">*</span></label>
                                             <span  style="position: absolute; cursor: pointer; top: 40px;    right: 15px;" class="spinners"></span>
-                                            <input type="text" class="form-control form-control-solid form-control-lg ifsc" name="ifsc" placeholder="IFSC"  value="@if(!empty($benificiary)){{ $benificiary->ifsc }}@endif" autocomplete="none" />
+                                            <input type="text" class="form-control form-control-solid form-control-lg ifsc" name="ifsc" placeholder="IFSC"  value="@if(!empty($benificiary)){{ $benificiary->ifsc }}@endif" autocomplete="none" maxlength="11"/>
                                             
                                         </div>
                                         <!--end::Input-->

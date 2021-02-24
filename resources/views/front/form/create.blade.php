@@ -94,7 +94,7 @@
                                                 <option value="">Select a Remmiter</option>
                                                     @if(!empty($remmiters))
                                                         @foreach($remmiters as $remmiter)
-                                                        <option value="{{ $remmiter->id }}" @if(!empty($transaction) && $transaction->remmiter_id == $remmiter->id) {{ 'selected' }} @endif>{{ $remmiter->nickname }}</option>
+                                                        <option value="{{ $remmiter->id }}" @if(!empty($transaction) && $transaction->remmiter_id == $remmiter->id) {{ 'selected' }} @endif>{{ $remmiter->name }}</option>
                                                         @endforeach
                                                     @endif
                                                 </select>
@@ -115,7 +115,7 @@
                                                     <option value="">Select a Beneficiary</option>
                                                     @if(!empty($benificiaries))
                                                         @foreach($benificiaries as $benificiary)
-                                                        <option value="{{ $benificiary->id }}" @if(!empty($transaction) && $transaction->beneficiary_id == $benificiary->id) {{ 'selected' }} @endif>{{ $benificiary->name }}</option>
+                                                        <option value="{{ $benificiary->id }}" @if(!empty($transaction) && $transaction->beneficiary_id == $benificiary->id) {{ 'selected' }} @endif>{{ $benificiary->nickname }}</option>
                                                         @endforeach
                                                     @endif
                                                 </select>

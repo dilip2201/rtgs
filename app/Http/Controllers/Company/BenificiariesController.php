@@ -39,9 +39,12 @@ class BenificiariesController extends Controller
         }
         $states = StateList::get();
         $benificiary = DB::table($id.'_benificiaries')->where('id',$b_id)->first();
-        $emails = DB::table($id.'_benificiaries')->pluck('nickname')->toArray();
+        $emails = DB::table($id.'_benificiaries');
 
-        
+        if($b_id != 0){
+            $emails= $emails->where('id','!=',$b_id);
+        }
+        $emails= $emails->pluck('nickname')->toArray();
         return view('front.benificiaries.create',compact('benificiary','states','emails'));
     }
 

@@ -15,7 +15,9 @@
     }
     .switch input:empty~span:after{
         background-color: #3699ff;
-    }
+    }.font-size-lg {
+    font-size: 13px;
+}
 </style>
 @section('button')
 <a href="{{ route('company.form.create') }}"  data-id="" class="btn btn-primary font-weight-bolder" >New Form<i style="font-size: 10px;
@@ -56,8 +58,8 @@
                <div class="row align-items-center">
                   <div class="col-md-3 my-2 my-md-0">
                      <div class="d-flex align-items-center">
-                        <div class="input-group" id="kt_daterangepicker_2">
-                           <input type="text" class="form-control" readonly="readonly" placeholder="Select date range">
+                        <div class="input-group daternge" id="kt_daterangepicker_2">
+                           <input type="text" class="form-control daternge" readonly="readonly" placeholder="Select date range">
                            <input type="hidden" name="startdate" class="startdate">
                            <input type="hidden" name="enddate" class="enddate">
                            <div class="input-group-append">
@@ -101,6 +103,10 @@
                         </select>
                      </div>
                   </div>
+                  <div class="col-md-2 my-2 my-md-0">
+                         
+                          <a href="#" class="btn btn-secondary font-weight-boldest resetdata"><i class="flaticon2-refresh"></i></a>
+                  </div>
                </div>
             </div>
          </div>
@@ -128,7 +134,7 @@
 
 
 <div class="modal fade add_modal" id="exampleModalSizeSm" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered " role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Form's History</h5>
@@ -167,8 +173,19 @@
         $('.beneficiary').select2({
              placeholder: "Select a Beneficiary",
         });
-        
-         $('body').on('click', '.delete_record', function () {
+        $('.resetdata').click(function () {
+            event.preventDefault();
+
+            $('.daternge').val('').trigger('change');
+            $('.remmiter').val('').trigger('change');
+            $('.beneficiary').val('').trigger('change');
+            $('.mode').val('').trigger('change');
+       
+            $("#employee").DataTable().ajax.reload();
+        });
+
+
+        $('body').on('click', '.delete_record', function () {
             var id = $(this).data('id');
 
             Swal.fire({
