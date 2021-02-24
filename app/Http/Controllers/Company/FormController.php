@@ -39,14 +39,15 @@ class FormController extends Controller
             'transaction_method' => $data->transaction_method,
             'transaction_date' => date('Y-m-d',strtotime($data->transaction_date)),
             'remarks' => $data->remarks,'created_at'=>Carbon::now(),'updated_at'=>Carbon::now()]);
+        
+            $last_id = \DB::getPdo()->lastInsertId();
+            DB::table($id.'_transaction_logs')->insert([
+                'user_id' => Auth::user()->id,
+                'type' => 'created',
+                'form_id' => $last_id,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()]);
         }
-       /* $last_id = $inser_table->id;
-        DB::table($id.'transaction_logs')->insert([
-            'user_id' => Auth::user()->id,
-            'type' => 'created',
-            'form_id' => $last_id,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()]);*/
        
         return redirect('company/transaction')->with('status', 'Transaction copied successfully.');
     }
@@ -160,15 +161,7 @@ class FormController extends Controller
                             'created_at' => Carbon::now(),
                             'updated_at' => Carbon::now()]);
                     }
-                    if($first_transaction->user_id !== Auth::user()->id){
-                        DB::table($id.'_transaction_updated_logs')->insert([
-                            'log_id' => $last_trans_id,
-                            'type' => 'user_id',
-                            'old_value' => $first_transaction->user_id,
-                            'new_value' => Auth::user()->id,
-                            'created_at' => Carbon::now(),
-                            'updated_at' => Carbon::now()]);
-                    }
+                    
                     if($first_transaction->remmiter_id != $request->remmiter_id){
                         DB::table($id.'_transaction_updated_logs')->insert([
                             'log_id' => $last_trans_id,

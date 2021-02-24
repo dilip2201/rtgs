@@ -6,27 +6,31 @@
         @if(!empty($transactions))
          @foreach ($transactions as $transaction) 
          @if($transaction->type == 'created')
-         <!--begin::Item-->
-         <div class="timeline-item align-items-start">
-            <!--begin::Label-->
-            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg" style="    font-size: 11px;">
-               {{ date('d-M',strtotime($transaction->created_at)  ) }}  
-               <div class="font-size-sm text-muted font-weight-bold" style="    font-size: 10px;"> {{ date('h:i',strtotime($transaction->created_at)  ) }}</div>
-            </div>
-            <!--end::Label-->
-            <!--begin::Badge-->
-            <div class="timeline-badge">
-               <i class="fa fa-genderless text-success icon-xl"></i>
-            </div>
-            <!--end::Badge-->
-            <!--begin::Text-->
-            <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3">The form was created by <span class="font-weight-bolder font-size-lg text-dark-75">{{ getnamebyuserid($transaction->user_id)  }}</span></div>
-            <!--end::Text-->
-         </div>
+             <div class="timeline-item align-items-start">
+                <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg" style="    font-size: 11px;">
+                   {{ date('d-M',strtotime($transaction->created_at)  ) }}  
+                   <div class="font-size-sm text-muted font-weight-bold" style="    font-size: 10px;"> {{ date('h:i',strtotime($transaction->created_at)  ) }}</div>
+                </div>
+                <div class="timeline-badge">
+                   <i class="fa fa-genderless text-success icon-xl"></i>
+                </div>
+                <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3">The form was created by <span class="font-weight-bolder font-size-lg text-dark-75">{{ getnamebyuserid($transaction->user_id)  }}</span></div>
+             </div>
          @endif
          <!--end::Item-->
          <!--begin::Item-->
          @if($transaction->type == 'updated')
+
+         <div class="timeline-item align-items-start"  style="margin-bottom: 5px;">
+            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg" style="    font-size: 11px;">
+               {{ date('d-M',strtotime($transaction->updated_at)  ) }}  
+               <div class="font-size-sm text-muted font-weight-bold" style="    font-size: 10px;"> {{ date('h:i',strtotime($transaction->updated_at)  ) }}</div>
+            </div>
+            <div class="timeline-badge">
+               <i class="fa fa-genderless text-success icon-xl"></i>
+            </div>
+            <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3">The form was Updated by <span class="font-weight-bolder font-size-lg text-dark-75">{{ getnamebyuserid($transaction->user_id)  }}</span></div>
+         </div>
          @php
          $update_values =  getupdatedvalue($transaction->id);
          $data = $update_values->toArray();
@@ -51,20 +55,6 @@
          @endif
          @if(count($update_values) > 0)  
          @foreach ($update_values as $update_value)
-         <div class="timeline-item align-items-start">
-            <!--begin::Label-->
-            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"  style="    font-size: 11px;">
-               {{ date('d-M',strtotime($update_value->created_at)  ) }}  
-               <div class="font-size-sm text-muted font-weight-bold"  style="    font-size: 9px;"> {{ date('h:i',strtotime($update_value->created_at)  ) }}</div>
-            </div>
-            <!--end::Label-->
-            <!--begin::Badge-->
-            <div class="timeline-badge">
-               <i class="fa fa-genderless text-warning  icon-xl"></i>
-            </div>
-            <!--end::Badge-->
-            <!--begin::Desc-->
-
              <?php
                 $type = $update_value->type;
                 if($update_value->type == 'cheque_number'){
@@ -78,12 +68,12 @@
                 }
                ?>
 
-            <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3">
+            <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3" style="margin-left: 70px;">
                <span class="font-weight-bolder font-size-lg text-dark-75">{{ ucfirst($type) }} </span> Changed <span class="font-weight-bolder font-size-lg text-dark-75"> {{ $update_value->old_value }} </span>  To <span class="font-weight-bolder font-size-lg text-dark-75"> {{  $update_value->new_value  }}</span>
                <!-- a href="#" class="text-primary">USD 700</a>. to ESL</div> --> 
             </div>
             <!--end::Desc-->
-         </div>
+         
          @endforeach
          @endif
          @endif

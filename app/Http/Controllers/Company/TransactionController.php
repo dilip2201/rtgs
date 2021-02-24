@@ -40,7 +40,7 @@ class TransactionController extends Controller
         } else {
             $id = auth()->user()->parent_id;    
         }
-        $transactions = DB::table($id.'_transaction_logs')->where( $id.'_transaction_logs'.'.form_id', $request->id)->get();
+        $transactions = DB::table($id.'_transaction_logs')->where( $id.'_transaction_logs'.'.form_id', $request->id)->orderby('id','desc')->get();
         return view('front.transaction.getmodal',compact('transactions'));
     }
 

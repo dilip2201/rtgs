@@ -9,13 +9,13 @@
   font-family: Hind;
   font-style: normal;
   font-weight: normal;
-  src: url(http://localhost/rtgs_php/public/bank/Hind-Regular.ttf) format('truetype');
+  src: url(http://3.23.151.152/rtgs_php/public/bank/Hind-Regular.ttf) format('truetype');
 },
  @font-face {
   font-family: Arial;
   font-style: normal;
   font-weight: normal;
-  src: url(http://localhost/rtgs_php/public/Arial-regular.ttf) format('truetype');
+  src: url(http://3.23.151.152/rtgs_php/public/Arial-regular.ttf) format('truetype');
 },
 .hindi { 
   font-family: Hind, DejaVu Sans, sans-serif;
