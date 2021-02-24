@@ -22,7 +22,34 @@ class FormController extends Controller
         $this->middleware('auth');
     }
 
-  
+    public function copy($copyid){
+        $id = 0;
+        if(auth()->user()->parent_id == null){
+            $id = auth()->user()->id;   
+        }else{
+            $id = auth()->user()->parent_id;    
+        }
+        $data = DB::table($id.'_transactions')->where('id', $copyid)->first();
+        if(!empty($data)){
+            $inser_table = DB::table($id.'_transactions')->insert(['user_id' => Auth::user()->id,
+            'remmiter_id' => $data->remmiter_id,
+            'beneficiary_id' => $data->beneficiary_id,
+            'amount' => $data->amount,
+            'cheque_number' => $data->cheque_number,
+            'transaction_method' => $data->transaction_method,
+            'transaction_date' => date('Y-m-d',strtotime($data->transaction_date)),
+            'remarks' => $data->remarks,'created_at'=>Carbon::now(),'updated_at'=>Carbon::now()]);
+        }
+       /* $last_id = $inser_table->id;
+        DB::table($id.'transaction_logs')->insert([
+            'user_id' => Auth::user()->id,
+            'type' => 'created',
+            'form_id' => $last_id,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()]);*/
+       
+        return redirect('company/transaction')->with('status', 'Transaction copied successfully.');
+    }
 
     public function create($tid = 0){
     	$id = 0;

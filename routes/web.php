@@ -89,6 +89,7 @@ Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
 
         Route::group(['prefix' => 'form', 'as' => 'form.'], function () {
             Route::get('create', ['as' => 'create', 'uses' => 'FormController@create']);
+            Route::get('copy/{id}', ['as' => 'copy', 'uses' => 'FormController@copy']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'FormController@create']);
             Route::post('getdata', ['as' => 'getdata', 'uses' => 'FormController@getdata']);
             Route::post('getdatabenificiaries', ['as' => 'getdatabenificiaries', 'uses' => 'FormController@getdatabenificiaries']);

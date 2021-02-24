@@ -12,7 +12,7 @@ class PDFController extends Controller
 		define("DOMPDF_UNICODE_ENABLED", true);
 		$data = array();
 		$pdf = PDF::setPaper('a4', 'portrait')->loadView('page', $data);
-		return $pdf->stream('invoice.pdf');
+		return $pdf->download('icic.pdf');
 	}
     
 }
