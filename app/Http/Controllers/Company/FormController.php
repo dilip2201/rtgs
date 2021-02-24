@@ -122,7 +122,7 @@ class FormController extends Controller
                     return redirect('company/transaction')->with('status', 'Transaction Update successfully.');
                 }else{
 
-                    DB::table($id.'_transactions')->insert(['user_id' => Auth::user()->id,
+                   $inser_table = DB::table($id.'_transactions')->insert(['user_id' => Auth::user()->id,
                         'remmiter_id' => $request->remmiter_id,
                         'beneficiary_id' => $request->beneficiary_id,
                         'amount' => $request->amount,
@@ -130,6 +130,16 @@ class FormController extends Controller
                         'transaction_method' => $request->transaction_method,
                         'transaction_date' => date('Y-m-d',strtotime($request->transaction_date)),
                         'remarks' => $request->remarks,'created_at'=>Carbon::now(),'updated_at'=>Carbon::now()]);
+
+                   $last_id = $inser_table->id;
+
+                   DB::table($id.'transaction_logs')->insert([
+                        'user_id' => Auth::user()->id,
+                        'type' => 'created',
+                        'form_id' => $last_id,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()]);
+                   
                     return redirect('company/transaction')->with('status', 'Transaction added successfully.');
                 }
                 

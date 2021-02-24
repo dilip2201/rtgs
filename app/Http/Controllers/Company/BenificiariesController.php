@@ -169,7 +169,7 @@ class BenificiariesController extends Controller
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             $arr = array("status" => 400, "msg" => $validator->errors()->first(), "result" => array());
-            return redirect('company/benificiaries/create')->with('error', $arr['msg']);
+            return redirect('company/benificiaries')->with('error', $arr['msg']);
         } else {
             try {
                 if($request->is_remitter == ''){

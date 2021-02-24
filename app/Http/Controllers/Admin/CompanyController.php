@@ -214,6 +214,30 @@ class CompanyController extends Controller
                             primary key(id)) COLLATE='utf8_general_ci' ENGINE=InnoDB AUTO_INCREMENT=1";
                     DB::statement($transactioncreateTableSqlString);
 
+                    $transaction_logs_table = $user->id."_transaction_logs";
+                    $transactionlogscreateTableSqlString = "CREATE TABLE $transaction_logs_table (
+                            id  BIGINT(20) NOT NULL AUTO_INCREMENT,
+                            type enum('created','updated','deleted') NOT NULL,
+                            user_id int(11) NOT NULL,
+                            form_id int(11) NOT NULL,
+                            created_at TIMESTAMP NULL DEFAULT NULL,
+                            updated_at TIMESTAMP NULL DEFAULT NULL,
+                            primary key(id)
+                     ) COLLATE='utf8_general_ci' ENGINE=InnoDB AUTO_INCREMENT=1";
+                     DB::statement($transactionlogscreateTableSqlString);
+
+                    $transactionupdatedlogs_table = $user->id."_transaction_updated_logs";
+                    $transactionupdatedlogscreateTableSqlString = "CREATE TABLE $transactionupdatedlogs_table (
+                            id  BIGINT(20) NOT NULL AUTO_INCREMENT,
+                            log_id  int(50) NOT NULL,
+                            type VARCHAR(191) NOT NULL,
+                            old_value VARCHAR(191) NOT NULL,
+                            new_value VARCHAR(191) NOT NULL,
+                            created_at TIMESTAMP NULL DEFAULT NULL,
+                            updated_at TIMESTAMP NULL DEFAULT NULL,
+                            primary key(id)
+                     ) COLLATE='utf8_general_ci' ENGINE=InnoDB AUTO_INCREMENT=1";
+                     DB::statement($transactionupdatedlogscreateTableSqlString);
 
                     $encrypted = Crypt::encryptString($token);
 
