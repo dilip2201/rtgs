@@ -19,6 +19,33 @@ function activeMenu($uri = '') {
     return $active;
 }
 
+function getupdatedvalue($logid) {
+    $id = 0;
+    if(auth()->user()->parent_id == null){
+        $id = auth()->user()->id;   
+    } else {
+        $id = auth()->user()->parent_id;    
+    }
+
+    $updated_val =  DB::table($id.'_transaction_updated_logs')->where('log_id',$logid)->get();
+
+    return $updated_val;
+
+}
+
+function getnamebyuserid($userid) {
+    $id = 0;
+    if(auth()->user()->parent_id == null){
+        $id = auth()->user()->id;   
+    } else {
+        $id = auth()->user()->parent_id;    
+    }
+    $u_name = User::where('id',$userid)->first();
+
+    return $u_name->name;
+
+}
+
 
 function lastnameemail(){
     $name = '';

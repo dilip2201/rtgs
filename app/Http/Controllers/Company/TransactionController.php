@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use DB;
 use DataTables;
 use Auth;
+use Carbon\Carbon;
+
 class TransactionController extends Controller
 {
      /**
@@ -31,8 +33,15 @@ class TransactionController extends Controller
     	return view('front.transaction.index',compact('remmiters','benificiaries'));
     }
 
-    public function getmodal(){
-        return view('front.transaction.getmodal');
+    public function getmodal(Request $request){
+        $id = 0;
+        if(auth()->user()->parent_id == null){
+            $id = auth()->user()->id;   
+        } else {
+            $id = auth()->user()->parent_id;    
+        }
+        $transactions = DB::table($id.'_transaction_logs')->where( $id.'_transaction_logs'.'.form_id', $request->id)->get();
+        return view('front.transaction.getmodal',compact('transactions'));
     }
 
         /**
@@ -59,7 +68,7 @@ class TransactionController extends Controller
         $enddate = explode("GMT", $getenddate);
         $chkenddate = date('Y-m-d', strtotime($enddate[0]));
 
-        $transactions = DB::table($id.'_transactions')->leftJoin($id.'_benificiaries', $id.'_transactions'.'.beneficiary_id', '=', $id.'_benificiaries'.'.id')->orderby($id.'_transactions'.'.id', 'desc')->where($id.'_transactions'.'.is_deleted','no');
+        $transactions = DB::table($id.'_transactions')->select([$id.'_transactions.*',$id.'_benificiaries.*',$id.'_transactions'.'.id'])->leftJoin($id.'_benificiaries', $id.'_transactions'.'.beneficiary_id', '=', $id.'_benificiaries'.'.id')->orderby($id.'_transactions'.'.id', 'desc')->where($id.'_transactions'.'.is_deleted','no');
 
 
 
@@ -83,8 +92,9 @@ class TransactionController extends Controller
         	
         return DataTables::of($transactions)
             ->addColumn('actions', function ($q) {
-                $id = encrypt($q->id);
+                $id = $q->id;
                 $return = '<a style="color:#000; margin-right:10px;"  href="'.route('company.form.copy',$q->id).'"><i class="fas fa-copy" style="color:#616161;"></i></a> <a style="color:#000; margin-right:10px;"  data-id="'.$id.'"   data-toggle="modal" data-target=".add_modal" class="openaddmodal"   ><i class="fas fa-history" style="color:#616161;"></i></a>  <a style="color:#000; margin-right:10px;"  href="'.url('downloadpdf').'"  ><i class="fas fa-download" style="color:#616161;"></i></a> <a style="color:#000; margin-right:10px;"  href="'.route('company.form.edit',$q->id).'"  ><i class="fas fa-pen" style="color:#616161;"></i></a> <a class="delete_record" style="color:#000;cursor:pointer; margin-right:10px;" data-id="'.$q->id.'"><i class="fas fa-trash" style="color:#616161;"></i></a> ';
+
                 
                 return $return;
             })
@@ -136,7 +146,12 @@ class TransactionController extends Controller
             }else{
                 $id = auth()->user()->parent_id;
             }
-
+                   DB::table($id.'_transaction_logs')->insert([
+                        'user_id' => Auth::user()->id,
+                        'type' => 'deleted',
+                        'form_id' => $tid,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()]);
             $transactions = DB::table($id.'_transactions')->where('id', $tid)->update(['is_deleted'=>'yes']);
             $arr = array("status" => 200, "msg" => 'Company deleted successfully.');
 

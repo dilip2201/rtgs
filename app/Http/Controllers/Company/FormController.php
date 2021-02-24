@@ -137,6 +137,93 @@ class FormController extends Controller
                 
                 if (isset($request->transaction_id) && $request->transaction_id != '') {
                     $t_id = decrypt($request->transaction_id);
+
+                    $first_transaction = DB::table($id.'_transactions')->where('id',$t_id)->first();
+
+                    DB::table($id.'_transaction_logs')->insert([
+                        'user_id' => Auth::user()->id,
+                        'type' => 'updated',
+                        'form_id' => $t_id,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()]);
+
+
+                    $last_trans_id = DB::getPdo()->lastInsertId();
+
+
+                    if($first_transaction->form_number !== $request->form_number){
+                        DB::table($id.'_transaction_updated_logs')->insert([
+                            'log_id' => $last_trans_id,
+                            'type' => 'form_number',
+                            'old_value' => $first_transaction->form_number,
+                            'new_value' => $request->form_number,
+                            'created_at' => Carbon::now(),
+                            'updated_at' => Carbon::now()]);
+                    }
+                    if($first_transaction->user_id !== Auth::user()->id){
+                        DB::table($id.'_transaction_updated_logs')->insert([
+                            'log_id' => $last_trans_id,
+                            'type' => 'user_id',
+                            'old_value' => $first_transaction->user_id,
+                            'new_value' => Auth::user()->id,
+                            'created_at' => Carbon::now(),
+                            'updated_at' => Carbon::now()]);
+                    }
+                    if($first_transaction->remmiter_id != $request->remmiter_id){
+                        DB::table($id.'_transaction_updated_logs')->insert([
+                            'log_id' => $last_trans_id,
+                            'type' => 'remmiter_id',
+                            'old_value' => $first_transaction->remmiter_id,
+                            'new_value' => $request->remmiter_id,
+                            'created_at' => Carbon::now(),
+                            'updated_at' => Carbon::now()]);
+
+                    }
+                    if($first_transaction->beneficiary_id != $request->beneficiary_id){
+                        DB::table($id.'_transaction_updated_logs')->insert([
+                            'log_id' => $last_trans_id,
+                            'type' => 'beneficiary_id',
+                            'old_value' => $first_transaction->beneficiary_id,
+                            'new_value' => $request->beneficiary_id,
+                            'created_at' => Carbon::now(),
+                            'updated_at' => Carbon::now()]);
+                    }
+                    if($first_transaction->amount !== $request->amount){
+                        DB::table($id.'_transaction_updated_logs')->insert([
+                            'log_id' => $last_trans_id,
+                            'type' => 'amount',
+                            'old_value' => $first_transaction->amount,
+                            'new_value' => $request->amount,
+                            'created_at' => Carbon::now(),
+                            'updated_at' => Carbon::now()]);
+                    }
+                    if($first_transaction->cheque_number !== $request->cheque_number){
+                        DB::table($id.'_transaction_updated_logs')->insert([
+                            'log_id' => $last_trans_id,
+                            'type' => 'cheque_number',
+                            'old_value' => $first_transaction->cheque_number,
+                            'new_value' => $request->cheque_number,
+                            'created_at' => Carbon::now(),
+                            'updated_at' => Carbon::now()]);
+                    }
+                    if($first_transaction->transaction_method !== $request->transaction_method){
+                        DB::table($id.'_transaction_updated_logs')->insert([
+                            'log_id' => $last_trans_id,
+                            'type' => 'transaction_method',
+                            'old_value' => $first_transaction->transaction_method,
+                            'new_value' => $request->transaction_method,
+                            'created_at' => Carbon::now(),
+                            'updated_at' => Carbon::now()]);
+                    }
+                    if($first_transaction->transaction_date !== $request->transaction_date){
+                        DB::table($id.'_transaction_updated_logs')->insert([
+                            'log_id' => $last_trans_id,
+                            'type' => 'transaction_date',
+                            'old_value' => $first_transaction->transaction_date,
+                            'new_value' => $request->transaction_date,
+                            'created_at' => Carbon::now(),
+                            'updated_at' => Carbon::now()]);
+                    }
                     DB::table($id.'_transactions')->where('id',$t_id)->update(
                         ['user_id' => Auth::user()->id,
                         'remmiter_id' => $request->remmiter_id,
@@ -149,7 +236,7 @@ class FormController extends Controller
                     return redirect('company/transaction')->with('status', 'Transaction Update successfully.');
                 }else{
 
-                   $inser_table = DB::table($id.'_transactions')->insert(['user_id' => Auth::user()->id,
+                    DB::table($id.'_transactions')->insert(['user_id' => Auth::user()->id,
                         'remmiter_id' => $request->remmiter_id,
                         'beneficiary_id' => $request->beneficiary_id,
                         'amount' => $request->amount,
@@ -158,15 +245,15 @@ class FormController extends Controller
                         'transaction_date' => date('Y-m-d',strtotime($request->transaction_date)),
                         'remarks' => $request->remarks,'created_at'=>Carbon::now(),'updated_at'=>Carbon::now()]);
 
-                   $last_id = $inser_table->id;
+                   $last_id = DB::getPdo()->lastInsertId();
 
-                   DB::table($id.'transaction_logs')->insert([
+                   DB::table($id.'_transaction_logs')->insert([
                         'user_id' => Auth::user()->id,
                         'type' => 'created',
                         'form_id' => $last_id,
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()]);
-                   
+
                     return redirect('company/transaction')->with('status', 'Transaction added successfully.');
                 }
                 
@@ -175,14 +262,14 @@ class FormController extends Controller
                 if (isset($ex->errorInfo[2])) :
                     $msg = $ex->errorInfo[2];
                 endif;
-                return redirect('company/benificiaries')->with('error', 'Benificiaries added successfully.');
+                return redirect('company/transaction')->with('error', $msg);
 
             } catch (Exception $ex) {
                 $msg = $ex->getMessage();
                 if (isset($ex->errorInfo[2])) :
                     $msg = $ex->errorInfo[2];
                 endif;
-                return redirect('company/benificiaries')->with('error', 'Benificiaries added successfully.');
+                return redirect('company/transaction')->with('error', $msg);
             }
         }
     }
