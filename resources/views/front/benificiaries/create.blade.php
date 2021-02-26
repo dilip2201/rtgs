@@ -16,6 +16,10 @@
     .switch input:empty~span:after{
         background-color: #3699ff;
     }
+    .select2-container {
+        width: 100% !important;
+        padding: 0;
+    }
 </style>
 @section('button')
 <a href="{{ route('company.benificiaries') }}" class="btn btn-light-primary font-weight-bolder btn-sm">Benificiaries List</a> 
@@ -109,13 +113,9 @@
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label><b>E-mail</b> <span style="color: red">*</span></label>
-                                            <input type="email" value="@if(!empty($benificiary)){{ $benificiary->email }}@endif" class="form-control form-control-solid form-control-lg" name="email" autocomplete="none"  placeholder="E-mail" />
-                                            
+                                            <input type="email" value="@if(!empty($benificiary)){{ $benificiary->email }}@endif" class="form-control form-control-solid form-control-lg" name="email" autocomplete="none"  placeholder="E-mail" /> 
                                         </div>
-                                        <!--end::Input-->
                                     </div>
-
-
                                      <div class="col-xl-6">
                                         <!--begin::Input-->
                                         <div class="form-group">
@@ -179,20 +179,10 @@
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>State</b> <span style="color: red">*</span></label>
-                                            <!--  <select class="form-control states"  name="states">
-                                                <option value="">Select a State</option>
-                                                    @if(!empty($states))
-                                                        @foreach($states as $state)
-                                                        <option value="{{ $state->id }}" @if(!empty($benificiary) && $benificiary->state == $state->id) selected @endif>{{ $state->state }}</option>
-                                                        @endforeach
-                                                    @endif
-                                                </select> -->
                                             <input type="text" class="form-control form-control-solid form-control-lg state_data" name="states" value="@if(!empty($benificiary)){{ $benificiary->state }}@endif" autocomplete="none"   placeholder="State"   maxlength="50"/>
-                                            
                                         </div>
                                     </div>
                                     </div>
-                                   
                             </div>
                             <div class="pb-5" data-wizard-type="step-content">
                                 <h4 class="mb-10 font-weight-bold text-dark">Enter the beneficiary bank details</h4>
@@ -235,7 +225,22 @@
                                               autocomplete="none" />
                                             
                                         </div>
-                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        <div class="form-group">
+                                            <label>Bank Name <span style="color: red">*</span></label>
+                                            <select class="form-control form-control-solid form-control-lg account_type"  name="account_type">
+                                                    <option value="">Select Account Type</option>
+                                                    <option value="current">Current</option>
+                                                    <option value="savings">Savings</option>
+                                                    <option value="overdraft">Overdraft</option>
+                                                    <option value="cash_credit">Cash Credit</option>
+                                                    <option value="nro">NRO</option>
+                                                    <option value="nre">NRE</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 
@@ -298,6 +303,8 @@
 <script src="{{ URL::asset('public/assets/plugins/custom/datatables/datatables.bundleafa4.js') }}"></script>
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="{{ URL::asset('public/assets/js/pages/crud/forms/widgets/select2afa4.js') }}"></script>
+<script src="{{ URL::asset('public/assets/js/pages/crud/forms/widgets/select2afa4.js') }}"></script>
 <script type="text/javascript">
 
 
@@ -307,7 +314,11 @@ $(document).ready(function(){
 
 var emails = $('.emails').val();
 var finalemails = emails.split(',');
- console.log(finalemails);
+console.log(finalemails);
+$('.account_ype').select2({
+ placeholder: "Select Account Type",
+ minimumResultsForSearch: -1
+});
 
 $('body').on('keyup', '.pincode_data', function () {
     if($(this).val().length > 5) {
