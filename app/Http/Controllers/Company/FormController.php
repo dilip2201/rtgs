@@ -22,6 +22,35 @@ class FormController extends Controller
         $this->middleware('auth');
     }
 
+    
+    public function download($downloadid){
+
+        $id = 0;
+        if(auth()->user()->parent_id == null){
+            $id = auth()->user()->id;   
+        }else{
+            $id = auth()->user()->parent_id;    
+        }
+        $transactiontable = $id.'_transactions';
+        $benificiarytable = $id.'_benificiaries';
+        
+       
+
+
+        define("DOMPDF_UNICODE_ENABLED", true);
+         $rdata = DB::table($transactiontable)
+        ->join($benificiarytable.' as b','b.id',$transactiontable.'.beneficiary_id')
+        ->join($benificiarytable.' as r','r.id',$transactiontable.'.remmiter_id')
+        ->where($transactiontable.'.id', $downloadid)
+        ->select([$transactiontable.'.*','b.name as bname','r.name as rname','r.mobile_number as rmobile_number','b.account_number as baccount_number','b.bank_name as bbank_name','b.account_number as baccount_number','r.account_number as raccount_number'])
+        ->first();
+        /*echo '<pre>';
+        print_r($rdata);
+        exit;*/
+        $pdf = PDF::setPaper('a4', 'portrait')->loadView('page', ['data'=>$rdata]);
+        return $pdf->stream('icic.pdf');
+    }
+
     public function copy($copyid){
         $id = 0;
         if(auth()->user()->parent_id == null){

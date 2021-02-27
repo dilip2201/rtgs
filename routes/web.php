@@ -95,6 +95,8 @@ Route::group(['prefix' => 'company', 'as' => 'company.'], function () {
             Route::post('getdatabenificiaries', ['as' => 'getdatabenificiaries', 'uses' => 'FormController@getdatabenificiaries']);
             Route::post('store', ['as' => 'store', 'uses' => 'FormController@store']);
             Route::get('formpdf/{id}', ['as' => 'formpdf', 'uses' => 'FormController@formpdf']);
+            Route::get('download/{id}', ['as' => 'download', 'uses' => 'FormController@download']);
+            
             
         });
 
