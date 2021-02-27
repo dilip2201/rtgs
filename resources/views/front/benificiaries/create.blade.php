@@ -83,7 +83,7 @@
                 <!--begin: Wizard Form-->
                 <div class="row">
                     <div class="offset-xxl-2 col-xxl-8">
-                        <form class="form formsubmit" action="{{ route('company.benificiaries.store') }}" id="kt_form" method="post" autocomplete="off">
+                        <form class="form formsubmit" action="{{ route('company.benificiaries.store') }}" id="kt_form" method="post" autocomplete="off" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 @if(isset($benificiary) && !empty($benificiary->id) )
                                     <input type="hidden" name="b_id" value="{{ $benificiary->id }}">
@@ -182,7 +182,7 @@
                                             <input type="text" class="form-control form-control-solid form-control-lg state_data" name="states" value="@if(!empty($benificiary)){{ $benificiary->state }}@endif" autocomplete="none"   placeholder="State"   maxlength="50"/>
                                         </div>
                                     </div>
-                                    </div>
+                                </div>
                             </div>
                             <div class="pb-5" data-wizard-type="step-content">
                                 <h4 class="mb-10 font-weight-bold text-dark">Enter the beneficiary bank details</h4>
@@ -233,17 +233,60 @@
                                             <label>Bank Name <span style="color: red">*</span></label>
                                             <select class="form-control form-control-solid form-control-lg account_type"  name="account_type">
                                                     <option value="">Select Account Type</option>
-                                                    <option value="current">Current</option>
-                                                    <option value="savings">Savings</option>
-                                                    <option value="overdraft">Overdraft</option>
-                                                    <option value="cash_credit">Cash Credit</option>
-                                                    <option value="nro">NRO</option>
-                                                    <option value="nre">NRE</option>
+
+
+                                                    <option value="current" @if(!empty($benificiary->account_type )) {{$benificiary->account_type == 'current'}} selected @endif>Current</option>
+
+
+                                                    <option value="savings"@if(!empty($benificiary->account_type )){{$benificiary->account_type == 'savings'}} selected @endif>Savings</option>
+                                                    <option value="overdraft"
+
+
+                                                    @if(!empty($benificiary->account_type )){{$benificiary->account_type == 'overdraft'}} selected @endif @>Overdraft</option>
+                                                    <option value="cash_credit" 
+
+
+                                                    @if(!empty($benificiary->account_type )) {{$benificiary->account_type == 'current'}} selected @endif>Cash Credit</option>
+                                                    <option value="nro" 
+
+
+                                                    @if(!empty($benificiary->account_type )) {{$benificiary->account_type == 'current'}} selected @endif>NRO</option>
+                                                    <option value="nre" 
+
+
+                                                    @if(!empty($benificiary->account_type )) {{$benificiary->account_type == 'current'}} selected @endif>NRE</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
-                                
+                                <div class="col-xl-6">
+                                <div class="form-group">
+                                   @php
+                                   if(!empty($benificiary->check_book_image)){
+                                   $image = $benificiary->check_book_image;
+                                   }else{
+                                   $image = 'bank_check.jpg';
+                                   }
+                                   @endphp
+                                   <div class="image-input image-input-outline" id="kt_profile_avatar" style="background-size: 437px 218px;width: 100%;background-image: url({{ URL::asset('public/images/logo/bank_check.jpg') }})">
+                                        <div class="image-input-wrapper" style="background-size: 437px 177px;width: 100%;height: 182px;background-image: url({{ URL::asset('public/images/logo/'.$image) }})"></div>
+                                        <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                                          <i class="fa fa-pencil icon-sm text-muted"></i>
+                                          <input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg">
+                                          <input type="hidden" name="profile_avatar_remove" class="">
+                                        </label>
+                                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="" data-original-title="Cancel avatar">
+                                          <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                        </span>
+                                        @if(!empty($benificiary->check_book_image))
+                                        <span class="profile_remove btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"  id="profile_remove" data-action="remove" data-toggle="tooltip" title="" data-original-title="Remove avatar">
+                                          <i class="ki ki-bold-close icon-xs text-muted" ></i>
+                                        </span>
+                                        @endif
+                                        <input type="hidden" name="profile_deleted" class="profile_deleted" value="0">
+                                      </div>
+                                </div>
+                            </div> 
                             </div>
                             <div class="d-flex justify-content-between border-top mt-5 pt-10">
                                 <div class="mr-2">
@@ -294,6 +337,7 @@
 <link href="{{ URL::asset('public/assets/css/pages/wizard/wizard-2afa4.css') }}" rel="stylesheet" type="text/css" />
 @endpush
 @push('script')
+<script type="text/javascript" src="https://preview.keenthemes.com/metronic/theme/html/demo13/dist/assets/js/pages/custom/profile/profile.js?v=7.2.0"></script>
 <script>var KTAppSettings = { "breakpoints": { "sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1400 }, "colors": { "theme": { "base": { "white": "#ffffff", "primary": "#3699FF", "secondary": "#E5EAEE", "success": "#1BC5BD", "info": "#8950FC", "warning": "#FFA800", "danger": "#F64E60", "light": "#E4E6EF", "dark": "#181C32" }, "light": { "white": "#ffffff", "primary": "#E1F0FF", "secondary": "#EBEDF3", "success": "#C9F7F5", "info": "#EEE5FF", "warning": "#FFF4DE", "danger": "#FFE2E5", "light": "#F3F6F9", "dark": "#D6D6E0" }, "inverse": { "white": "#ffffff", "primary": "#ffffff", "secondary": "#3F4254", "success": "#ffffff", "info": "#ffffff", "warning": "#ffffff", "danger": "#ffffff", "light": "#464E5F", "dark": "#ffffff" } }, "gray": { "gray-100": "#F3F6F9", "gray-200": "#EBEDF3", "gray-300": "#E4E6EF", "gray-400": "#D1D3E0", "gray-500": "#B5B5C3", "gray-600": "#7E8299", "gray-700": "#5E6278", "gray-800": "#3F4254", "gray-900": "#181C32" } }, "font-family": "Poppins" };</script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="{{ URL::asset('public/assets/plugins/custom/datatables/datatables.bundle.rtlafa4.css') }}" rel="stylesheet" type="text/css" />

@@ -145,6 +145,7 @@ class BenificiariesController extends Controller
     
     public function store(Request $request)
     {
+
         $id = 0;
         if(auth()->user()->parent_id == null){
             $id = auth()->user()->id;
@@ -154,7 +155,6 @@ class BenificiariesController extends Controller
         $table = $id.'_benificiaries';
         $rules = [
             'name' => 'required',
-            'nickname' => 'required|unique:'.$table.'',
             'email' => 'required',
             'mobile_number' => 'required',
             'address' => 'required',
@@ -175,13 +175,24 @@ class BenificiariesController extends Controller
             return redirect('company/benificiaries')->with('error', $arr['msg']);
         } else {
             try {
+               
+                $fileName = '';
                 if($request->is_remitter == ''){
                     $remitter = "no";
                 }else{
                     $remitter = "yes";
                 }
                 if (isset($request->b_id)) {
-
+                    $user = DB::table($id.'_benificiaries')->where('id',$request->b_id)->first();
+                    if ($request->hasFile('profile_avatar')) {
+                        if(file_exists(public_path('images/logo/'.$user->check_book_image)) && $user->check_book_image!='') {
+                            unlink(public_path('images/logo/'.$user->check_book_image));
+                        }
+                        $destinationPath = public_path().'/images/logo/';
+                        $file = $request->profile_avatar;
+                        $fileName = time() . '.'.$file->clientExtension();
+                        $file->move($destinationPath, $fileName);
+                    }
                     DB::table($id.'_benificiaries')->where('id',$request->b_id)->update(
                         ['user_id' => Auth::user()->id,
                         'name' => $request->name,
@@ -201,11 +212,18 @@ class BenificiariesController extends Controller
                         'account_type'=>$request->account_type,
                         'branch_name' => $request->branch_name,
                         'updated_at' => Carbon::now(),
+                        'check_book_image' => $fileName,
                         'bank_name' => $request->bank_name]);
                     return redirect('company/benificiaries')->with('status', 'Benificiaries Update successfully.');
                 }else{
 
-                    DB::table($id.'_benificiaries')->insert(['user_id' => Auth::user()->id,'name' => $request->name,'nickname' => $request->nickname,'email' => $request->email,'mobile_number' => $request->mobile_number,'is_remitter' => $request->is_remitter,'address' => $request->address,'address2' => $request->address2,'is_remitter'=>$remitter, 'pin' => $request->pin,'area' => $request->area,'city' => $request->city,'account_type'=>$request->account_type,'state' => $request->states,'account_number' => $request->account_number,'ifsc' => $request->ifsc,'branch_name' => $request->branch_name,'bank_name' => $request->bank_name,'created_at' => Carbon::now()]);
+                    if ($request->hasFile('profile_avatar')) {
+                        $destinationPath = public_path().'/images/logo/';
+                        $file = $request->profile_avatar;
+                        $fileName = time() . '.'.$file->clientExtension();
+                        $file->move($destinationPath, $fileName);
+                    }
+                    DB::table($id.'_benificiaries')->insert(['user_id' => Auth::user()->id,'name' => $request->name,'nickname' => $request->nickname,'email' => $request->email,'mobile_number' => $request->mobile_number,'is_remitter' => $request->is_remitter,'address' => $request->address,'address2' => $request->address2,'is_remitter'=>$remitter, 'pin' => $request->pin,'area' => $request->area,'city' => $request->city,'account_type'=>$request->account_type,'state' => $request->states,'account_number' => $request->account_number,'check_book_image' => $fileName,'ifsc' => $request->ifsc,'branch_name' => $request->branch_name,'bank_name' => $request->bank_name,'created_at' => Carbon::now()]);
                     return redirect('company/benificiaries')->with('status', 'Benificiaries added successfully.');
                 }
                 

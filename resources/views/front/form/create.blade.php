@@ -242,7 +242,7 @@
                                         <div class="form-group">
                                             <label>Remarks</label>
                                             <textarea required="" class="form-control form-control-solid form-control-lg" name="remarks">@if(!empty($transaction)){{ $transaction->remarks }}@endif</textarea>
-                                            <span class="form-text text-muted">Add any remark to be kept</span>
+                                            <span class="form-text text-muted">Enter payment reference / Narration</span>
                                         </div>
                                         <!--end::Input-->
                                     </div>

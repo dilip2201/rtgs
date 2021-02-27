@@ -213,7 +213,7 @@
 
                           </div>
 
-                          <div class="col-md-6">
+                          <div class="col-md-6" style="    margin-bottom: 10px;">
                               <a href="#" class="text-muted font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
                               <span class="svg-icon svg-icon-md svg-icon-gray-500 mr-1">
                               <i class="flaticon-support font-size-lg"></i>
@@ -225,7 +225,7 @@
 
                           </div>
 
-                          <div class="col-md-6">
+                          <div class="col-md-6" style="    margin-bottom: 10px;">
                               <a href="#" class="text-muted font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
                               <span class="svg-icon svg-icon-md svg-icon-gray-500 mr-1">
                               <i class="flaticon-support font-size-lg"></i>
@@ -234,6 +234,43 @@
                               
                               {{ $benificiary->bank_name ?? 'N/A' }}
                               </a>
+                          </div>
+
+                          <div class="col-md-12" style="    margin-bottom: 10px;" >
+                              <a href="#" class="text-muted font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
+                              <span class="svg-icon svg-icon-md svg-icon-gray-500 mr-1">
+                              <i class="flaticon-support font-size-lg"></i>
+                              </span>
+                              <b style="color: #3F4254!important;">Account Type : </b>
+                              
+                              @if($benificiary->account_type == 'current')
+                                @php $type = 'Current'; @endphp
+                              @elseif($benificiary->account_type == 'savings')
+                                @php $type = 'Savings'; @endphp
+                              @elseif($benificiary->account_type == 'overdraft')
+                                @php $type = 'Overdraft'; @endphp
+                              @elseif($benificiary->account_type == 'cash_credit')
+                                @php $type = 'Cash Credit'; @endphp
+                              @elseif($benificiary->account_type == 'nro')
+                                @php $type = 'NRO'; @endphp
+                              @elseif($benificiary->account_type == 'nre')
+                                @php $type = 'NRE'; @endphp
+                              @endif
+                            
+                              {{ $type ?? 'N/A' }}
+                              </a>
+                          </div>
+
+                                       @php
+                                       if(!empty($benificiary->check_book_image)){
+                                       $image = $benificiary->check_book_image;
+                                       }else{
+                                       $image = 'bank_check.jpg';
+                                       }
+                                        @endphp
+                          <div class="col-md-6">
+                        
+                          <img src="{{ URL::asset('public/images/logo/'.$image) }}" alt="image">
                           </div>
                            </div>
                </div>
