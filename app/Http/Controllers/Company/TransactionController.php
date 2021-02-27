@@ -73,7 +73,7 @@ class TransactionController extends Controller
 
 
         if (isset($request->startdate) && !empty($request->startdate) && isset($request->enddate) && !empty($request->enddate)) {
-            $transactions = $transactions->whereBetween($id.'_transactions'.'.created_at', [$chkstartdate, $chkenddate]);
+            $transactions = $transactions->whereBetween($id.'_transactions'.'.transaction_date', [$chkstartdate, $chkenddate]);
         }
 
         if($request->remmiter  && !empty($request->remmiter)){

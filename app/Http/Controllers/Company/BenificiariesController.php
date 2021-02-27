@@ -198,13 +198,14 @@ class BenificiariesController extends Controller
                         'state' => $request->states,
                         'account_number' => $request->account_number,
                         'ifsc' => $request->ifsc,
+                        'account_type'=>$request->account_type,
                         'branch_name' => $request->branch_name,
                         'updated_at' => Carbon::now(),
                         'bank_name' => $request->bank_name]);
                     return redirect('company/benificiaries')->with('status', 'Benificiaries Update successfully.');
                 }else{
 
-                    DB::table($id.'_benificiaries')->insert(['user_id' => Auth::user()->id,'name' => $request->name,'nickname' => $request->nickname,'email' => $request->email,'mobile_number' => $request->mobile_number,'is_remitter' => $request->is_remitter,'address' => $request->address,'address2' => $request->address2,'is_remitter'=>$remitter, 'pin' => $request->pin,'area' => $request->area,'city' => $request->city,'state' => $request->states,'account_number' => $request->account_number,'ifsc' => $request->ifsc,'branch_name' => $request->branch_name,'bank_name' => $request->bank_name,'created_at' => Carbon::now()]);
+                    DB::table($id.'_benificiaries')->insert(['user_id' => Auth::user()->id,'name' => $request->name,'nickname' => $request->nickname,'email' => $request->email,'mobile_number' => $request->mobile_number,'is_remitter' => $request->is_remitter,'address' => $request->address,'address2' => $request->address2,'is_remitter'=>$remitter, 'pin' => $request->pin,'area' => $request->area,'city' => $request->city,'account_type'=>$request->account_type,'state' => $request->states,'account_number' => $request->account_number,'ifsc' => $request->ifsc,'branch_name' => $request->branch_name,'bank_name' => $request->bank_name,'created_at' => Carbon::now()]);
                     return redirect('company/benificiaries')->with('status', 'Benificiaries added successfully.');
                 }
                 

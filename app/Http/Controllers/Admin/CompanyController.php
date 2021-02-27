@@ -177,6 +177,7 @@ class CompanyController extends Controller
                         nickname VARCHAR(191) NULL DEFAULT NULL,
                         name VARCHAR(191) NULL DEFAULT NULL,
                         account_number VARCHAR(191) NULL DEFAULT NULL,
+                        account_type enum('current','savings','overdraft','cash_credit','nro','nre') NOT NULL DEFAULT 'savings',
                         address TEXT NULL DEFAULT NULL,
                         address2 TEXT NULL DEFAULT NULL,
                         area VARCHAR(191) NULL DEFAULT NULL,
