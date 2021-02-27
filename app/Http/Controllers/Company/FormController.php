@@ -100,7 +100,7 @@ class FormController extends Controller
         define("DOMPDF_UNICODE_ENABLED", true);
         $data = array();
         $rand_num = rand(10,100);
-        $pdf = PDF::setPaper('a4', 'portrait')->loadView('page', $data);
+        $pdf = PDF::setPaper('a4', 'portrait')->loadView('pagetwo', $data);
         $filename = $rand_num.".pdf";
         $pdf->save('public/pdf/'.$filename);
         return view('front.form.pdfload',compact('rand_num'));
