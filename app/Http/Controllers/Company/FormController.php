@@ -65,6 +65,18 @@ class FormController extends Controller
     	return view('front.form.create',compact('benificiaries','remmiters','transaction'));
     }
 
+    public function printsectionmodal(){
+
+
+        define("DOMPDF_UNICODE_ENABLED", true);
+        $data = array();
+        $rand_num = rand(10,100);
+        $pdf = PDF::setPaper('a4', 'portrait')->loadView('page', $data);
+        $filename = $rand_num.".pdf";
+        $pdf->save('public/pdf/'.$filename);
+        return view('front.form.pdfload',compact('rand_num'));
+    }
+
     public function formpdf($id = 0,Request $request){
        
         // $pdf = PDF::loadView('front.form.formpdf');
