@@ -253,6 +253,7 @@
                                 <div class="mr-2">
                                 </div>
                                 <div>
+                                    <a href="#" class="btn btn-success printsection font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-prev" data-toggle="modal" data-target=".printmodal">Preview & Print</a>
                                     <button type="button" class="btn btn-success font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-submit">Submit</button>
                                     <button type="button" class="btn btn-primary font-weight-bolder text-uppercase px-9 py-4 clicknext" data-wizard-type="action-next">Next</button>
                                 </div>
@@ -271,7 +272,22 @@
 
 
 
-
+<div class="modal fade printmodal" id="exampleModalSizeSm" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeSm" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Preview</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i aria-hidden="true" class="ki ki-close"></i>
+            </button>
+        </div>
+        <div class="modal-body " style="padding: 0px;">
+            
+        </div>
+        
+    </div>
+    </div>
+</div>
 
 <!--end::Card-->
 
@@ -419,7 +435,9 @@
 
     
 	$(document).ready(function(){
-    
+        $('body').on('click','.printsection',function(){
+            
+        })
         $('.benificiaries').select2({
              placeholder: "Select a beneficiary",
         });
