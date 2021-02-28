@@ -28,9 +28,8 @@
                         </li>
 
                         <li class="list-group-item">
-                            <b>Status</b> <a class="float-right">@if(Auth::guard('admin')->user()->status == 'active')<i
-                                    class="fa fa-check" style="font-size: 16px; color: green"></i> @else <i
-                                    class="fa fa-times" style="font-size: 16px; color: red"></i> @endif</a>
+                            <b>Status</b> <a class="float-right"><i
+                                    class="fa fa-check" style="font-size: 16px; color: green"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -177,9 +176,10 @@ $(".formsubmit").validate({
             required:true,
             maxlength: 20,
         },
-        lastname:{
+        email:{
             required:true,
             maxlength: 20,
+            email: true,
         },
         phone: {
             required:true,

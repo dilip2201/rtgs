@@ -40,7 +40,7 @@ class ProfileController extends Controller
         $input = $request->all();
         $rules = [
             'name' => 'required',
-            'email' => 'required|unique:users,email,' . Auth::guard('admin')->user()->id,
+            'email' => 'required',
 
         ];
         $messages = [
