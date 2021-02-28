@@ -116,6 +116,7 @@
          <thead>
             <tr>
                <th>#</th>
+               <th>Form ID</th>
                <th>User</th>
                <th>Beneficiary</th>
                <th>Remmiter</th>
@@ -300,6 +301,7 @@
             },
             columns: [
                 {data: 'DT_RowIndex', "orderable": false},
+                {data: 'form_id'},
                 {data: 'user'},
                 {data: 'beneficiary'},
                 {data: 'remmiter'},
