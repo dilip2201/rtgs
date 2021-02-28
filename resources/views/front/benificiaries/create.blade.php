@@ -177,9 +177,23 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
                                             <label><b>State</b> <span style="color: red">*</span></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg state_data" name="states" value="@if(!empty($benificiary)){{ $benificiary->state }}@endif" autocomplete="none"   placeholder="State"   maxlength="50"/>
+                                        </div> -->
+                                    <div class="form-group">
+                                            <label><b>States</b> <span style="color: red">*</span></label>
+                                             <select class="form-control states"  name="states">
+                                                <option value="">Select a state</option>
+                                                    @if(!empty($states))
+                                                        @foreach($states as $state)
+                                                        <option value="{{ $state->state }}" @if(!empty($transaction) && $transaction->state == strtoupper($state->state)) {{ 'selected' }} @endif>{{ strtoupper($state->state) }}</option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            
+                                           
+                                            <span class="form-text text-muted">select the remmiter's name</span>
                                         </div>
                                     </div>
                                 </div>
@@ -382,7 +396,10 @@ $('body').on('keyup', '.pincode_data', function () {
                 $('.spinners').html('')
                 $('.city_data').val(data.data.district);
                 $('.area_data').val(data.data.postalLocation);
-                $('.state_data').val(data.data.state);
+                $('.states').val(data.data.state);
+                //$(".states").select2("val",data.data.state);
+                $(".select2-selection__rendered").text(data.data.state);
+                //$('select[name^="states"] option[value=GUJARAT]').attr("selected","selected");
             },
         });
     }

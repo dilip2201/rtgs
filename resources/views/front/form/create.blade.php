@@ -278,9 +278,10 @@
         <div class="modal-content">
         <div class="modal-body printmodaldata" style="padding: 0px;">
 
-            <div class="d-flex justify-content-center loaderspin" style="margin-top: 10%;">
+            <div class="d-flex justify-content-center loaderspin" style="margin-top: 11%;">
               
-               <img src="{{ URL::asset('public/spinner.gif') }}">
+               <img src="{{ URL::asset('public/spinner1.gif') }}" style="height: 139px;
+    width: auto;">
              
             </div>
                 

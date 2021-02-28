@@ -71,7 +71,7 @@ class BenificiariesController extends Controller
                     $result = $response['result'];
                     if(!empty($result)){
                         $final = $result[0];
-                        $arr = array('status'=>200,'data'=>array('postalLocation'=>$final['postalLocation'],'district'=>$final['district'],'state'=>$final['state'],'country'=>'India'));
+                        $arr = array('status'=>200,'data'=>array('postalLocation'=>$final['postalLocation'],'district'=>$final['district'],'state'=>strtoupper($final['state']),'country'=>'India'));
                     }
                 } 
             }
@@ -145,6 +145,10 @@ class BenificiariesController extends Controller
     
     public function store(Request $request)
     {
+
+        echo '<pre>';
+        print_r($request->all());
+        exit();
 
         $id = 0;
         if(auth()->user()->parent_id == null){
