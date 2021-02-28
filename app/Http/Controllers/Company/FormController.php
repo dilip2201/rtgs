@@ -39,11 +39,10 @@ class FormController extends Controller
         ->join($benificiarytable.' as b','b.id',$transactiontable.'.beneficiary_id')
         ->join($benificiarytable.' as r','r.id',$transactiontable.'.remmiter_id')
         ->where($transactiontable.'.id', $downloadid)
-        ->select([$transactiontable.'.*','b.name as bname','r.name as rname','r.address as raddress','r.address2 as raddress2','r.area as rarea','r.city as rcity','r.state as rstate','r.pin as rpin','r.mobile_number as rmobile_number','b.account_number as baccount_number','b.bank_name as bbank_name','b.account_number as baccount_number','r.account_number as raccount_number'])
+        ->select([$transactiontable.'.*','b.name as bname','r.name as rname','r.address as raddress','r.address2 as raddress2','r.area as rarea','r.city as rcity','r.state as rstate','r.pin as rpin','r.mobile_number as rmobile_number','b.account_number as baccount_number','b.bank_name as bbank_name','b.ifsc as bifsc','b.branch_name as bbranch_name','r.account_number as raccount_number'])
         ->first();
-
         $pdf = PDF::setPaper('a4', 'portrait')->loadView('page', ['data'=>$rdata]);
-        return $pdf->stream('icic.pdf');
+        return $pdf->download('icic.pdf');
     }
 
     public function copy($copyid){
