@@ -80,6 +80,7 @@
                     <div class="offset-xxl-2 col-xxl-8">
                         <form class="form formsubmit" action="{{ route('company.form.store') }}" id="kt_form" method="post">
                                 {{ csrf_field() }}
+                                <input type="hidden" name="type" value="{{$type}}">
                                 
                                 <input type="hidden" name="transaction_id" value="@if(!empty($transaction)) {{ encrypt($transaction->id) }} @endif">
                                 
@@ -144,10 +145,23 @@
                                             <span class="form-text text-muted">Fill in the amount to be transferred</span>
                                         </div>
                                     </div>
+                                    @php
+                                    $cheque_number = '';
+                                    @endphp 
+                                    @if(!empty($transaction) && $type == 'create')
+                                    @php
+                                    $cheque_number = $transaction->cheque_number 
+                                    @endphp
+                                    @endif
+                                    @if(!empty($transaction) && $type == 'copy')
+                                    @php
+                                    $cheque_number = $transaction->cheque_number  + 1;
+                                    @endphp 
+                                    @endif
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Cheque No</b> <span style="color: red">*</span></label>
-                                            <input type="text" maxlength="6" class="form-control form-control-solid form-control-lg cheque_number" name="cheque_number"  placeholder="Cheque No" value="@if(!empty($transaction)){{ $transaction->cheque_number }}@endif" required />
+                                            <input type="text" maxlength="6" class="form-control form-control-solid form-control-lg cheque_number" name="cheque_number"  placeholder="Cheque No" value="{{ $cheque_number }}" required />
                                             <span class="form-text text-muted">Fill in the cheque number</span>
                                         </div>
                                     </div>
@@ -166,10 +180,18 @@
                                             <span class="form-text text-muted">Select the mode</span>
                                         </div>
                                     </div>
+                                    @php
+                                        $date = date('Y-m-d');
+                                    @endphp
+                                    @if(!empty($transaction) && $type == 'create')
+                                    @php
+                                        $date = $transaction->transaction_date;
+                                    @endphp
+                                    @endif
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Date</b> <span style="color: red">*</span></label>
-                                            <input type="date" class="form-control form-control-solid form-control-lg transaction_date" name="transaction_date" value="@if(!empty($transaction)){{ $transaction->transaction_date }}@endif"  placeholder="Date" value="" required />
+                                            <input type="date" class="form-control form-control-solid form-control-lg transaction_date" name="transaction_date" value="{{ $date }}"  placeholder="Date" value="" required />
                                             <span class="form-text text-muted">Edit the date if neccessary</span>
                                         </div>
                                     </div>
@@ -254,8 +276,14 @@
                                 <div class="mr-2">
                                 </div>
                                 <div>
+
                                     <a href="#" class="btn btn-success printsection font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-prev" data-toggle="modal" data-target=".printmodal">Preview & Print</a>
+                                    @if($type == 'create')
                                     <button type="button" class="btn btn-success font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-submit">Submit</button>
+                                    @endif
+                                    @if($type == 'copy')
+                                    <button type="button" class="btn btn-success font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-submit">Copy</button>
+                                    @endif
                                     <button type="button" class="btn btn-primary font-weight-bolder text-uppercase px-9 py-4 clicknext" data-wizard-type="action-next">Next</button>
                                 </div>
                             </div>

@@ -146,10 +146,6 @@ class BenificiariesController extends Controller
     public function store(Request $request)
     {
 
-        echo '<pre>';
-        print_r($request->all());
-        exit();
-
         $id = 0;
         if(auth()->user()->parent_id == null){
             $id = auth()->user()->id;

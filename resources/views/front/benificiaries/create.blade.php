@@ -187,7 +187,7 @@
                                                 <option value="">Select a state</option>
                                                     @if(!empty($states))
                                                         @foreach($states as $state)
-                                                        <option value="{{ $state->state }}" @if(!empty($transaction) && $transaction->state == strtoupper($state->state)) {{ 'selected' }} @endif>{{ strtoupper($state->state) }}</option>
+                                                        <option value="{{ $state->state }}" @if(!empty($benificiary) && $benificiary->state == strtoupper($state->state)) {{ 'selected' }} @endif>{{ strtoupper($state->state) }}</option>
                                                         @endforeach
                                                     @endif
                                                 </select>
