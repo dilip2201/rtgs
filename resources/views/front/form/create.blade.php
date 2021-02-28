@@ -141,7 +141,7 @@
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Amount</b> <span style="color: red">*</span></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg amount" name="amount" value="@if(!empty($transaction)){{ $transaction->amount }}@endif"  placeholder="Amount"  required />
+                                            <input type="text" class="form-control form-control-solid form-control-lg amount" maxlength="10" name="amount" value="@if(!empty($transaction)){{ $transaction->amount }}@endif"  placeholder="Amount"  required />
                                             <span class="form-text text-muted">Fill in the amount to be transferred</span>
                                         </div>
                                     </div>

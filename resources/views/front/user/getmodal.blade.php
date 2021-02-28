@@ -49,7 +49,7 @@
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Name</b> <span style="color: red">*</span></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="user_name" value="@if(!empty($user)){{ $user->name }}@endif"  placeholder="Name" value="" required />
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="user_name" value="@if(!empty($user)){{ $user->name }}@endif"  placeholder="Name" value="" maxlength="30" required />
                                             <span class="form-text text-muted">Fill in the user name and surname</span>
                                         </div>
                                     </div>
@@ -58,7 +58,7 @@
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label><b>Email ID</b> <span style="color: red">*</span></label>
-                                            <input type="email" value="@if(!empty($user)){{ $user->email }}@endif" class="form-control form-control-solid form-control-lg" name="email" placeholder="Email ID" />
+                                            <input type="email" value="@if(!empty($user)){{ $user->email }}@endif" class="form-control form-control-solid form-control-lg" name="email" placeholder="Email ID" maxlength="50" />
                                             <span class="form-text text-muted">Fill in the user's email</span>
                                             <input id="password-confirm" type="password" placeholder="Confirm Password"
                                  name="asaspassword_confirmation" autocomplete="new-password" style="display: none;">
@@ -71,7 +71,7 @@
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label><b>Phone No</b> <span style="color: red">*</span></label>
-                                            <input type="text" name="phone" class="form-control form-control-solid form-control-lg phone"  placeholder="Phone No" value="@if(!empty($user)){{ $user->phone }}@endif"  />
+                                            <input type="text" name="phone" class="form-control form-control-solid form-control-lg phone"  maxlength="10" placeholder="Phone No" value="@if(!empty($user)){{ $user->phone }}@endif"  />
                                             <span class="form-text text-muted">Enter his phone number</span>
                                         </div>
                                         <!--end::Input-->

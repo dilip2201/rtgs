@@ -364,6 +364,8 @@ class CompanyController extends Controller
                 if($company->type == 'company'){
                     \Schema::dropIfExists($company->id.'_benificiaries');
                     \Schema::dropIfExists($company->id.'_transactions');
+                    \Schema::dropIfExists($company->id.'_transaction_logs');
+                    \Schema::dropIfExists($company->id.'_transaction_updated_logs');
                 }
                 $company->delete();
                 $arr = array("status" => 200, "msg" => 'Company deleted successfully.');

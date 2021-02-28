@@ -33,20 +33,14 @@ class FormController extends Controller
         }
         $transactiontable = $id.'_transactions';
         $benificiarytable = $id.'_benificiaries';
-        
-       
-
 
         define("DOMPDF_UNICODE_ENABLED", true);
          $rdata = DB::table($transactiontable)
         ->join($benificiarytable.' as b','b.id',$transactiontable.'.beneficiary_id')
         ->join($benificiarytable.' as r','r.id',$transactiontable.'.remmiter_id')
         ->where($transactiontable.'.id', $downloadid)
-        ->select([$transactiontable.'.*','b.name as bname','r.name as rname','r.mobile_number as rmobile_number','b.account_number as baccount_number','b.bank_name as bbank_name','b.account_number as baccount_number','r.account_number as raccount_number'])
+        ->select([$transactiontable.'.*','b.name as bname','r.name as rname','r.address as raddress','r.address2 as raddress2','r.area as rarea','r.city as rcity','r.state as rstate','r.pin as rpin','r.mobile_number as rmobile_number','b.account_number as baccount_number','b.bank_name as bbank_name','b.ifsc as bifsc','b.branch_name as bbranch_name','r.account_number as raccount_number'])
         ->first();
-        /*echo '<pre>';
-        print_r($rdata);
-        exit;*/
         $pdf = PDF::setPaper('a4', 'portrait')->loadView('page', ['data'=>$rdata]);
         return $pdf->download('icic.pdf');
     }
@@ -89,8 +83,8 @@ class FormController extends Controller
 		} else {
 			$id = auth()->user()->parent_id;	
 		}
-		$benificiaries = \DB::table($id.'_benificiaries')->get();
-        $remmiters = \DB::table($id.'_benificiaries')->where('is_remitter','yes')->get();
+		$benificiaries = \DB::table($id.'_benificiaries')->where('status','enabled')->get();
+        $remmiters = \DB::table($id.'_benificiaries')->where('is_remitter','yes')->where('status','enabled')->get();
         $transaction = \DB::table($id.'_transactions')->where('id',$tid)->first();
     	return view('front.form.create',compact('benificiaries','remmiters','transaction','type'));
     }
@@ -193,7 +187,7 @@ class FormController extends Controller
                     $t_id = decrypt($request->transaction_id);
 
                     $first_transaction = DB::table($id.'_transactions')->where('id',$t_id)->first();
-
+                    
                     DB::table($id.'_transaction_logs')->insert([
                         'user_id' => Auth::user()->id,
                         'type' => 'updated',
@@ -205,15 +199,6 @@ class FormController extends Controller
                     $last_trans_id = DB::getPdo()->lastInsertId();
 
 
-                    if($first_transaction->form_number !== $request->form_number){
-                        DB::table($id.'_transaction_updated_logs')->insert([
-                            'log_id' => $last_trans_id,
-                            'type' => 'form_number',
-                            'old_value' => $first_transaction->form_number,
-                            'new_value' => $request->form_number,
-                            'created_at' => Carbon::now(),
-                            'updated_at' => Carbon::now()]);
-                    }
                     
                     if($first_transaction->remmiter_id != $request->remmiter_id){
                         DB::table($id.'_transaction_updated_logs')->insert([
@@ -235,6 +220,7 @@ class FormController extends Controller
                             'updated_at' => Carbon::now()]);
                     }
                     if($first_transaction->amount !== $request->amount){
+                       
                         DB::table($id.'_transaction_updated_logs')->insert([
                             'log_id' => $last_trans_id,
                             'type' => 'amount',

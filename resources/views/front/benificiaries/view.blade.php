@@ -270,7 +270,7 @@
                                         @endphp
                           <div class="col-md-6">
                         
-                          <img src="{{ URL::asset('public/images/logo/'.$image) }}" alt="image">
+                          <img src="{{ URL::asset('public/images/logo/'.$image) }}" style="width: 190px; height: 112px" alt="image">
                           </div>
                            </div>
                </div>
