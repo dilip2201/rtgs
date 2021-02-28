@@ -96,7 +96,7 @@
                                     <div class="col-xl-6">
                                         <div class="form-group">
                                             <label><b>Name</b> <span style="color: red">*</span></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg" name="name"  value="@if(!empty($benificiary)){{ $benificiary->name }}@endif" placeholder="Name" maxlength="150"/>
+                                            <input type="text" class="form-control form-control-solid form-control-lg" name="name"  value="@if(!empty($benificiary)){{ $benificiary->name }}@endif" placeholder="Name" maxlength="38"/>
                                             <span class="form-text text-muted">Enter beneficiary name as per bank records</span>
                                         </div>
                                     </div>
@@ -270,8 +270,8 @@
                                    $image = 'bank_check.jpg';
                                    }
                                    @endphp
-                                   <div class="image-input image-input-outline" id="kt_profile_avatar" style="background-size: 437px 218px;width: 100%;background-image: url({{ URL::asset('public/images/logo/bank_check.jpg') }})">
-                                        <div class="image-input-wrapper" style="background-size: 437px 177px;width: 100%;height: 182px;background-image: url({{ URL::asset('public/images/logo/'.$image) }})"></div>
+                                   <div class="image-input image-input-outline" id="kt_profile_avatar" style="background-size: 190px 112px;width: 190px;background-image: url({{ URL::asset('public/images/logo/bank_check.jpg') }})">
+                                        <div class="image-input-wrapper" style="background-size: 190px 112px;width: 190px;height: 112px;background-image: url({{ URL::asset('public/images/logo/'.$image) }})"></div>
                                         <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                           <i class="fa fa-pencil icon-sm text-muted"></i>
                                           <input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg">
