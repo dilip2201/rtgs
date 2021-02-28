@@ -281,6 +281,11 @@ class FormController extends Controller
                         'remarks' => $request->remarks,'updated_at'=>Carbon::now()]);
                     return redirect('company/transaction')->with('status', 'Transaction Update successfully.');
                 }else{
+                    $form_id = '1001';
+                    $qry = DB::table($id.'_transactions')->orderby('id','desc')->first();
+                    if(!empty($qry)){
+                        $form_id = $qry->form_number +1;
+                    }
                     DB::table($id.'_transactions')->insert(['user_id' => Auth::user()->id,
                         'remmiter_id' => $request->remmiter_id,
                         'beneficiary_id' => $request->beneficiary_id,
@@ -288,6 +293,7 @@ class FormController extends Controller
                         'cheque_number' => $request->cheque_number,
                         'transaction_method' => $request->transaction_method,
                         'transaction_date' => date('Y-m-d',strtotime($request->transaction_date)),
+                        'form_number' => $form_id,
                         'remarks' => $request->remarks,'created_at'=>Carbon::now(),'updated_at'=>Carbon::now()]);
 
                         $last_id = DB::getPdo()->lastInsertId();

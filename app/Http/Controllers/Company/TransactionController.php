@@ -98,6 +98,9 @@ class TransactionController extends Controller
                 
                 return $return;
             })
+            ->addColumn('form_id', function ($q) {
+                return 'INV - '.$q->form_number;
+            })
             ->addColumn('user', function ($q) {
                 return getusername($q->user_id);
             })
