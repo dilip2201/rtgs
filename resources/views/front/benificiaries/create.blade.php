@@ -421,7 +421,7 @@ $('body').on('keyup', '.ifsc', function () {
 
 
 $('.states').select2({
-     placeholder: "Select a beneficiary",
+     placeholder: "Select a state",
 });
 "use strict";
 var KTWizard3 = function() {
@@ -574,11 +574,7 @@ var KTWizard3 = function() {
                         validators: {
                             notEmpty: {
                                 message: "State is required"
-                            },
-                            stringLength: {
-                                max: 50,
-                                message: 'The State must be less than 50 characters'
-                            },
+                            }
                         }
                     },
                     city: {
@@ -666,6 +662,13 @@ var KTWizard3 = function() {
                         validators: {
                             notEmpty: {
                                 message: "Bank Name is required"
+                            }
+                        }
+                    },
+                    account_type: {
+                        validators: {
+                            notEmpty: {
+                                message: "Account type is required"
                             }
                         }
                     },
