@@ -244,31 +244,19 @@
                                 <div class="row">
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label>Bank Name <span style="color: red">*</span></label>
+                                            <label>Account Type <span style="color: red">*</span></label>
                                             <select class="form-control form-control-solid form-control-lg account_type"  name="account_type">
                                                     <option value="">Select Account Type</option>
 
 
-                                                    <option value="current" @if(!empty($benificiary->account_type )) {{$benificiary->account_type == 'current'}} selected @endif>Current</option>
+                                                    <option value="current" @if(!empty($benificiary->account_type) && $benificiary->account_type == 'current') selected @endif>Current</option>
 
 
-                                                    <option value="savings"@if(!empty($benificiary->account_type )){{$benificiary->account_type == 'savings'}} selected @endif>Savings</option>
-                                                    <option value="overdraft"
-
-
-                                                    @if(!empty($benificiary->account_type )){{$benificiary->account_type == 'overdraft'}} selected @endif @>Overdraft</option>
-                                                    <option value="cash_credit" 
-
-
-                                                    @if(!empty($benificiary->account_type )) {{$benificiary->account_type == 'current'}} selected @endif>Cash Credit</option>
-                                                    <option value="nro" 
-
-
-                                                    @if(!empty($benificiary->account_type )) {{$benificiary->account_type == 'current'}} selected @endif>NRO</option>
-                                                    <option value="nre" 
-
-
-                                                    @if(!empty($benificiary->account_type )) {{$benificiary->account_type == 'current'}} selected @endif>NRE</option>
+                                                    <option value="savings" @if(!empty($benificiary->account_type) && $benificiary->account_type == 'savings') selected @endif>Savings</option>
+                                                    <option value="overdraft"@if(!empty($benificiary->account_type) && $benificiary->account_type == 'overdraft') selected @endif >Overdraft</option>
+                                                    <option value="cash_credit" @if(!empty($benificiary->account_type) && $benificiary->account_type == 'cash_credit') selected @endif >Cash Credit</option>
+                                                    <option value="nro" @if(!empty($benificiary->account_type) && $benificiary->account_type == 'nro') selected @endif>NRO</option>
+                                                    <option value="nre" @if(!empty($benificiary->account_type) && $benificiary->account_type == 'nre') selected @endif >NRE</option>
                                             </select>
                                         </div>
                                     </div>

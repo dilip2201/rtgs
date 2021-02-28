@@ -48,7 +48,7 @@ class FormController extends Controller
         print_r($rdata);
         exit;*/
         $pdf = PDF::setPaper('a4', 'portrait')->loadView('page', ['data'=>$rdata]);
-        return $pdf->stream('icic.pdf');
+        return $pdf->download('icic.pdf');
     }
 
     public function copy($copyid){
