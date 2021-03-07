@@ -192,7 +192,7 @@
                            	<div class="col-md-6" style="    margin-bottom: 10px;">
                               <a href="#" class="text-muted font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
                               <span class="svg-icon svg-icon-md svg-icon-gray-500 mr-1">
-                              <i class="flaticon2-calendar-3 font-size-lg"></i>
+                              <i class="flaticon2-list-2 font-size-lg"></i>
                               </span>
                               <b style="color: #3F4254 !important">Account Number : </b>
                              
@@ -203,11 +203,11 @@
 <div class="col-md-6" style="    margin-bottom: 10px;">
                               <a href="#" class="text-muted font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
                               <span class="svg-icon svg-icon-md svg-icon-gray-500 mr-1">
-                              <i class="flaticon2-new-email font-size-lg"></i>
+                              <i class="flaticon2-list-2 font-size-lg"></i>
                               </span>
                               <b style="color: #3F4254!important;"> IFSC : </b>
                              
-                            {{ $benificiary->ifsc ?? 'N/A' }}
+                              {{ $benificiary->ifsc ?? 'N/A' }}
                               </a>
 
 
@@ -216,7 +216,7 @@
                           <div class="col-md-6" style="    margin-bottom: 10px;">
                               <a href="#" class="text-muted font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
                               <span class="svg-icon svg-icon-md svg-icon-gray-500 mr-1">
-                              <i class="flaticon-support font-size-lg"></i>
+                               <i class="flaticon2-list-2 font-size-lg"></i>
                               </span>
                               <b style="color: #3F4254!important;"> Branch Name  : </b>
                               
@@ -228,7 +228,7 @@
                           <div class="col-md-6" style="    margin-bottom: 10px;">
                               <a href="#" class="text-muted font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
                               <span class="svg-icon svg-icon-md svg-icon-gray-500 mr-1">
-                              <i class="flaticon-support font-size-lg"></i>
+                               <i class="flaticon2-list-2 font-size-lg"></i>
                               </span>
                               <b style="color: #3F4254!important;">Bank Name : </b>
                               
@@ -239,7 +239,7 @@
                           <div class="col-md-12" style="    margin-bottom: 10px;" >
                               <a href="#" class="text-muted font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
                               <span class="svg-icon svg-icon-md svg-icon-gray-500 mr-1">
-                              <i class="flaticon-support font-size-lg"></i>
+                               <i class="flaticon2-list-2 font-size-lg"></i>
                               </span>
                               <b style="color: #3F4254!important;">Account Type : </b>
                               

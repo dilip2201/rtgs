@@ -177,7 +177,7 @@
             $('.beneficiary').val('').trigger('change');
             $('.mode').val('').trigger('change');
        
-            $("#employee").DataTable().ajax.reload();
+            location.reload(true);
         });
 
 

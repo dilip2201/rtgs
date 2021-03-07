@@ -182,7 +182,9 @@
                                                 </select>
                                             
                                            
-                                            <span class="form-text new-textmute text-muted">select the remmiter's name</span>
+
+                                            <span class="form-text new-textmute text-muted">select the remmiter's state</span>
+
                                         </div>
                                     </div>
                                 </div>
@@ -259,8 +261,8 @@
                                    $image = 'bank_check.jpg';
                                    }
                                    @endphp
-                                   <div class="image-input image-input-outline" id="kt_profile_avatar" style="background-size: 190px 112px;width: 190px;background-image: url({{ URL::asset('public/images/logo/bank_check.jpg') }})">
-                                        <div class="image-input-wrapper" style="background-size: 190px 112px;width: 190px;height: 112px;background-image: url({{ URL::asset('public/images/logo/'.$image) }})"></div>
+                                   <div class="image-input image-input-outline" id="kt_profile_avatar" style="background-size: 185px 112px;width: 190px;background-image: url({{ URL::asset('public/images/logo/bank_check.jpg') }})">
+                                        <div class="image-input-wrapper" style="background-size: 185px 112px;width: 190px;height: 112px;background-image: url({{ URL::asset('public/images/logo/'.$image) }})"></div>
                                         <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                           <i class="fa fa-pencil icon-sm  new-textmute text-muted"></i>
                                           <input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg">
@@ -411,7 +413,11 @@ $('body').on('keyup', '.ifsc', function () {
 
 
 $('.states').select2({
+<<<<<<< HEAD
      placeholder: "Select a states",
+=======
+     placeholder: "Select a state",
+>>>>>>> c92b4a68cf85f1d0f157eace71193ea91a5e788c
 });
 "use strict";
 var KTWizard3 = function() {
@@ -564,11 +570,7 @@ var KTWizard3 = function() {
                         validators: {
                             notEmpty: {
                                 message: "State is required"
-                            },
-                            stringLength: {
-                                max: 50,
-                                message: 'The State must be less than 50 characters'
-                            },
+                            }
                         }
                     },
                     city: {
@@ -656,6 +658,13 @@ var KTWizard3 = function() {
                         validators: {
                             notEmpty: {
                                 message: "Bank Name is required"
+                            }
+                        }
+                    },
+                    account_type: {
+                        validators: {
+                            notEmpty: {
+                                message: "Account type is required"
                             }
                         }
                     },
