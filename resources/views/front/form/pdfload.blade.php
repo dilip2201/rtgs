@@ -1,5 +1,5 @@
 <?php 
-$pdf_path = $rand_num.".pdf";
+$pdf_path = $filename;
 ?>
 
 

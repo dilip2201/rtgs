@@ -15,7 +15,7 @@
         @if(!empty($transactions))
          @foreach ($transactions as $transaction) 
          @if($transaction->type == 'created')
-             <div class="timeline-item align-items-start">
+             <div class="timeline-item align-items-start" style="margin:0px;">
                 <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg" style="    font-size: 11px;">
                    {{ date('d-M',strtotime($transaction->created_at)  ) }}  
                    <div class="font-size-sm text-muted font-weight-bold" style="    font-size: 10px;"> {{ date('h:i',strtotime($transaction->created_at)  ) }}</div>
@@ -23,29 +23,29 @@
                 <div class="timeline-badge">
                    <i class="fa fa-genderless text-success icon-xl"></i>
                 </div>
-                <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3">The form was created by <span class="font-weight-bolder font-size-lg text-dark-75">{{ getnamebyuserid($transaction->user_id)  }}</span></div>
+                <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3" style="color: #828282!important; margin-top: 5px; margin-bottom: 5px;">The form was created by <span class="font-weight-bolder font-size-lg text-dark-75">{{ getnamebyuserid($transaction->user_id)  }}</span></div>
              </div>
          @endif
          <!--end::Item-->
          <!--begin::Item-->
          @if($transaction->type == 'updated')
 
-         <div class="timeline-item align-items-start"  style="margin-bottom: 5px;margin-top: 17px;" >
+         <div class="timeline-item align-items-start"style="margin:0px;" >
             <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg" style="    font-size: 11px;">
                {{ date('d-M',strtotime($transaction->updated_at)  ) }}  
                <div class="font-size-sm text-muted font-weight-bold" style="    font-size: 10px;"> {{ date('h:i',strtotime($transaction->updated_at)  ) }}</div>
             </div>
             <div class="timeline-badge">
-               <i class="fa fa-genderless text-success icon-xl"></i>
+               <i class="fa fa-genderless text-success icon-xl" style="color: #ff6a00!important; "></i>
             </div>
-            <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3">The form was Updated by <span class="font-weight-bolder font-size-lg text-dark-75">{{ getnamebyuserid($transaction->user_id)  }}</span></div>
+            <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3" style="margin-top: 5px; margin-bottom: 5px; color: #828282!important;">The form was Updated by <span class="font-weight-bolder font-size-lg text-dark-75">{{ getnamebyuserid($transaction->user_id)  }}</span></div>
          </div>
          @php
          $update_values =  getupdatedvalue($transaction->id);
          $data = $update_values->toArray();
          @endphp
          @if(empty($data))
-         <div class="timeline-item align-items-start" >
+         <div class="timeline-item align-items-start" style="margin:0px;">
             <!--begin::Label-->
             <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"  style="    font-size: 11px;">
                {{ date('d-M',strtotime($transaction->created_at)  ) }}  
@@ -58,7 +58,7 @@
             </div>
             <!--end::Badge-->
             <!--begin::Text-->
-            <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3">The form was updated by <span class="font-weight-bolder font-size-lg text-dark-75">{{ getnamebyuserid($transaction->user_id)  }}</span></div>
+            <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3" style="margin-top: 5px; margin-bottom: 5px; color: #828282!important;">The form was updated by <span class="font-weight-bolder font-size-lg text-dark-75">{{ getnamebyuserid($transaction->user_id)  }}</span></div>
             <!--end::Text-->
          </div>
          @endif
@@ -104,7 +104,7 @@
          @endif
          @if($transaction->type == 'deleted')
          <!--begin::Item-->
-         <div class="timeline-item align-items-start">
+         <div class="timeline-item align-items-start" style="margin:0px;">
             <!--begin::Label-->
             <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"  style="    font-size: 11px;">
                {{ date('d-M',strtotime($transaction->created_at)  ) }}  
@@ -117,7 +117,7 @@
             </div>
             <!--end::Badge-->
             <!--begin::Text-->
-            <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3">The form was deleted by <span class="font-weight-bolder font-size-lg text-dark-75">{{ getnamebyuserid($transaction->user_id)  }}</span></div>
+            <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3" style="margin-top: 5px; margin-bottom: 5px; color: #828282!important;">The form was deleted by <span class="font-weight-bolder font-size-lg text-dark-75">{{ getnamebyuserid($transaction->user_id)  }}</span></div>
             <!--end::Text-->
          </div>
          @endif
@@ -127,7 +127,7 @@
          @endif
 
          @if(empty($data_all))
-         <div class="timeline-item align-items-start" style="    text-align: center;">
+         <div class="timeline-item align-items-start" style="margin:0px;    text-align: center;">
 
             <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3"> <span class="font-weight-bolder font-size-lg text-dark-75">no data available</span></div>
             <!--end::Text-->

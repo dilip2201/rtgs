@@ -68,7 +68,7 @@ class TransactionController extends Controller
         $enddate = explode("GMT", $getenddate);
         $chkenddate = date('Y-m-d', strtotime($enddate[0]));
 
-        $transactions = DB::table($id.'_transactions')->select([$id.'_transactions.*',$id.'_benificiaries.*',$id.'_transactions'.'.id'])->leftJoin($id.'_benificiaries', $id.'_transactions'.'.beneficiary_id', '=', $id.'_benificiaries'.'.id')->orderby($id.'_transactions'.'.id', 'desc')->where($id.'_transactions'.'.is_deleted','no');
+        $transactions = DB::table($id.'_transactions')->select([$id.'_transactions.*'])->orderby($id.'_transactions'.'.id', 'desc')->where($id.'_transactions'.'.is_deleted','no');
 
 
 
@@ -105,13 +105,13 @@ class TransactionController extends Controller
                 return getusername($q->user_id);
             })
             ->addColumn('beneficiary', function ($q) use($id) {
-                return getusernamebenificiery($q->beneficiary_id,$id);
+                return getbenificiaryfromtran($q->id,$id,'name');
             })
             ->addColumn('remmiter', function ($q) use($id) {
                 return getusernamebenificiery($q->remmiter_id,$id);
             })
-            ->addColumn('bank', function ($q) {
-                return $q->bank_name;
+            ->addColumn('bank', function ($q) use($id) {
+                return getbenificiaryfromtran($q->id,$id,'bank_name');
             })
             ->addColumn('date', function ($q) {
                 return date('Y-m-d',strtotime($q->transaction_date));

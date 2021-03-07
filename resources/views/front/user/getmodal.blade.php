@@ -1,5 +1,5 @@
 <div class="card card-custom">
-    <div class="card-body p-0">
+    <div class="card-body pb-10">
         <!--begin: Wizard-->
         <div class="wizard wizard-2" id="kt_wizard" data-wizard-state="step-first" data-wizard-clickable="false">
             <!--begin: Wizard Nav-->
@@ -50,7 +50,7 @@
                                         <div class="form-group">
                                             <label><b>Name</b> <span style="color: red">*</span></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg" name="user_name" value="@if(!empty($user)){{ $user->name }}@endif"  placeholder="Name" value="" maxlength="30" required />
-                                            <span class="form-text text-muted">Fill in the user name and surname</span>
+                                            <span class="form-text new-textmute text-muted">Fill in the user name and surname</span>
                                         </div>
                                     </div>
 
@@ -59,7 +59,7 @@
                                         <div class="form-group">
                                             <label><b>Email ID</b> <span style="color: red">*</span></label>
                                             <input type="email" value="@if(!empty($user)){{ $user->email }}@endif" class="form-control form-control-solid form-control-lg" name="email" placeholder="Email ID" maxlength="50" />
-                                            <span class="form-text text-muted">Fill in the user's email</span>
+                                            <span class="form-text new-textmute text-muted">Fill in the user's email</span>
                                             <input id="password-confirm" type="password" placeholder="Confirm Password"
                                  name="asaspassword_confirmation" autocomplete="new-password" style="display: none;">
                                         </div>
@@ -72,7 +72,7 @@
                                         <div class="form-group">
                                             <label><b>Phone No</b> <span style="color: red">*</span></label>
                                             <input type="text" name="phone" class="form-control form-control-solid form-control-lg phone"  maxlength="10" placeholder="Phone No" value="@if(!empty($user)){{ $user->phone }}@endif"  />
-                                            <span class="form-text text-muted">Enter his phone number</span>
+                                            <span class="form-text new-textmute text-muted">Enter his phone number</span>
                                         </div>
                                         <!--end::Input-->
                                     </div>
@@ -91,21 +91,21 @@
                                         <div class="image-input image-input-outline" id="kt_profile_avatar" style="background-image: url({{ URL::asset('public/admin/company/employee/'.$image) }})">
                                          <div class="image-input-wrapper" style="background-image: url({{ URL::asset('public/company/employee/'.$image) }})" ></div>
                                          <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
-                                         <i class="fa fa-pencil icon-sm text-muted"></i>
+                                         <i class="fa fa-pencil icon-sm new-textmute text-muted"></i>
                                          <input type="file" name="profile_avatar" class="profile_avatar" id="profile_avatar" accept=".png, .jpg, .jpeg">
                                          <input type="hidden" name="profile_avatar_remove">
                                          </label>
                                          <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="" data-original-title="Cancel avatar">
-                                         <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                         <i class="ki ki-bold-close icon-xs new-textmute text-muted"></i>
                                          </span>
                                     </div>
-                                    <span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>
+                                    <span class="form-text new-textmute text-muted">Allowed file types: png, jpg, jpeg.</span>
                                     </div>  
                                     </div>     
                                     </div>
                                     <div class="row">
                                     <div class="col-xl-12">
-                                        <button type="submit" class="btn btn-success " >Submit <span class="spinnermm"></span></button>
+                                        <button type="submit" class="btn btn-success " >Create/Update User <span class="spinnermm"></span></button>
                                     </div>
                                 </div>
                             </div>

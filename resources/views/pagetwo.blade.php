@@ -37,17 +37,17 @@ input[type=checkbox] { display: inline; }
     <div class="application" style=" width: 100%;  display: block; height: 85px; margin-top: -15px;">
       <span style="font-size: 15px; width: 100%;  display: block; text-align: center;  font-weight: 700;">Application for Funds Transfer through RTGS / NEFT</span>
       <span style="font-size: 13px; width: 100%; margin-top: -2px; text-align: center; display: block;  font-weight: 700;">
-        <input type="checkbox" name="" checked=""> RTGS <input type="checkbox" name=""> 
+        <input type="checkbox" name="" @if($transaction_method == 'rtgs') checked @endif> RTGS <input type="checkbox" name=""  @if($transaction_method == 'neft') checked @endif> 
         NEFT (Select RTGS or NEFT as remittance type)
       </span>
       <span class="hindi" style="font-size: 13px; width: 100%;  margin-top: -5px;   padding: 0px; text-align: center; display: block;">आरटीजीएस / एनईएफटी मा RTGS / NEFT के माध्यम से फंड ट्रांसफर के लिए आवेदन</span>
       <span class="hindi" style="font-size: 13px; width: 100%; margin-top: -10px; text-align: center; display: block;  ">
-        <input type="checkbox" name="" checked=""> आरटीजीएस <input type="checkbox" name=""> 
+        <input type="checkbox" name="" @if($transaction_method == 'rtgs') checked @endif> आरटीजीएस <input type="checkbox" name="" @if($transaction_method == 'neft') checked @endif> 
         एनईएफटी (आरटीजीएस या एनईएफटी  चुनें)
       </span>
     </div>
 
-    <div class="application" style=" width: 100%;  margin-top: -35px; display: block; height: 195px; ">
+    <div class="application" style=" width: 100%;  margin-top: -35px; display: block; height: 175px; ">
       
       <span class="hindi" style="font-size: 13px; width: 100%; margin-top: -10px; text-align: left; display: block;  ">
         To / प्रति,
@@ -56,18 +56,10 @@ input[type=checkbox] { display: inline; }
         The Branch Manger / शाखा प्रबंधक
       </span>
       <span class="hindi"   style="font-size: 13px; width: 100%; margin-top: -10px; text-align: left; display: block;  ">
-        __________________Branch/ शाखा
+        <span style="border-bottom: 1px solid #000;">{{ $benificiery->bank_name }} </span> Branch/ शाखा
       </span>
       <div style="font-size: 13px; width: 100%; margin-top: -25px; text-align: right; display: block;  ">
-        <span class="hindi">Date/ तारीख:</span> <span style="border: 1px solid #000; color: #ccc;">D</span>
-        
-        <span style="width: 20px; height: 20px; border: 1px solid #000; text-align: center;   line-height: 10px;">D</span>
-        <span style="border: 1px solid #000; padding-left: 4px; padding-right: 4px; color: #ccc;">M</span>
-        <span style="border: 1px solid #000; padding-left: 4px; padding-right: 4px; color: #ccc;">M</span>
-        <span style="border: 1px solid #000; padding-left: 4px; padding-right: 4px; color: #ccc;">Y</span>
-        <span style="border: 1px solid #000; padding-left: 4px; padding-right: 4px; color: #ccc;">Y</span>
-        <span style="border: 1px solid #000; padding-left: 4px; padding-right: 4px; color: #ccc;">Y</span>
-        <span style="border: 1px solid #000; padding-left: 4px; padding-right: 4px; color: #ccc;">Y</span>
+        <span class="hindi">Date/ तारीख:</span> <span style="border-bottom: 1px solid #000;">{{ date('d M Y',strtotime($transaction_date)) }} </span>
         
       </div>
       <div style="font-size: 13px; width: 100%; margin-top: -10px; text-align: left; display: block;  ">
@@ -75,9 +67,9 @@ input[type=checkbox] { display: inline; }
         Dear Sir/ प्रिय महोदय,
         </span>
         <span style="font-size: 13px; width: 100%; text-align: left; ">
-        Please remit through NEFT/ RTGS a sum of </span><span class="hindi"> ₹ </span>_____________________________ (Rupees in words) _________________ ___________________________________only as per details give below: <br>
+        Please remit through NEFT/ RTGS a sum of </span><span class="hindi"> ₹ </span> <span style="border-bottom: 1px solid #000;">{{ $amount }} </span> (Rupees in words) <span style="border-bottom: 1px solid #000; ">{{ AmountInWords($amount) }} </span> only as per details give below: <br>
         
-        <span style="font-size: 13px; text-align: left; "   class="hindi"> कृपया नीचे दिए गए विवरण के  अनुसार ₹ </span> <span>___________________________________ </span><span class="hindi"> (शब्दों में ₹) </span>____________________________ _________________________________________<span class="hindi">  केवल प्रेषित करे</span>
+        <span style="font-size: 13px; text-align: left; "   class="hindi"> कृपया नीचे दिए गए विवरण के  अनुसार ₹ </span> <span><span style="border-bottom: 1px solid #000;">{{ $amount }} </span> </span><span class="hindi"> (शब्दों में ₹) </span><span style="border-bottom: 1px solid #000; ">{{ AmountInWords($amount) }} </span><span class="hindi">  केवल प्रेषित करे</span>
         
         
       </div>
@@ -102,180 +94,148 @@ input[type=checkbox] { display: inline; }
 </div>
 
 <div class="application" style="padding: 10px 15px;   text-align: center;  display: block; height: 40px; ">
-    <div style="width: 30%;  display: block; float: left;">
-       <span  class="hindi"  style="font-size: 13px; width: 100%; margin-top: -10px; text-align: left; display: block;  ">
+    <div style="width: 25%;  display: block; float: left;">
+       <span  class="hindi"  style="font-size: 12px; width: 100%; margin-top: -10px; text-align: left; display: block;  ">
           Account Number / खाता संख्या :
         </span> 
-         <span  class="hindi"  style="font-size: 13px; width: 100%; margin-top: -5px; text-align: left; display: block;  ">
+         <span  class="hindi"  style="font-size: 12px; width: 100%; margin-top: -5px; text-align: left; display: block;  ">
           Cheque Number/ चेक नंबर :
         </span> 
     </div>
 
-    <div style="width: 40%;display: block; float: left; ">
-      <span  class="hindi"  style="font-size: 13px; width: 100%; margin-top: -3px; text-align: left; display: block;  ">
-        <span  style=" width: 20px; height: 20px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 10px; "></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
+    <div style="width: 52%;display: block; float: left; ">
+      <span  class="hindi"  style="font-size: 13px; width: 100%; margin-top: -5px; text-align: left; display: block;  ">
+        @php $raccountnumber = str_split($remmiter->account_number); @endphp
+        @if(!empty($raccountnumber))
+        @foreach($raccountnumber as $number)
+          <span  style="@if(!$loop->first)   margin-left: -5px;  @endif width: 15px; height: 15px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 9px; @if(!$loop->first) border-left: none; @endif">{{ $number }}</span>
+        @endforeach
+        @endif
+        
+        
+        
       </span> 
-      <span  class="hindi"  style="font-size: 13px; width: 100%; margin-top: -3px; text-align: left; display: block;">
-        <span  style=" width: 20px; height: 20px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 10px; "></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
+      <span  class="hindi"  style="font-size: 12px; width: 100%; margin-top: -3px; text-align: left; display: block;">
+        @php $cheque_number = str_split($cheque_number); @endphp
+
+        @if(!empty($cheque_number))
+        @foreach($cheque_number as $number)
+          <span  style="@if(!$loop->first)  margin-left: -5px;  @endif width: 15px; height: 15px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 9px; @if(!$loop->first)  border-left: none;  @endif">{{ $number }}</span>
+        @endforeach
+        @endif
+        
       </span> 
     </div>
-    <div style="width: 30%;display: block; float: left; ">
-      <span  class="hindi"  style="font-size: 13px; width: 100%; margin-top: -5px; text-align: left; display: block;  ">
+    <div style="width: 27%;display: block; float: left; ">
+      <span  class="hindi"  style="font-size: 12px; width: 100%; margin-top: -5px; text-align: left; display: block;  ">
         Cheque Date / चेक  की तारीख:
         <span  class="hindi"  style="font-size: 13px; width: 100%; margin-top: -3px; text-align: left; display: block;  ">
-        <span  style=" width: 20px; height: 20px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 10px; ">D</span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;">D</span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;">M</span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;">M</span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;">Y</span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;">Y</span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;">Y</span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;">Y</span>
+        
+        @php $dates = str_split(date('d',strtotime($transaction_date))); @endphp
+        @php $months = str_split(date('m',strtotime($transaction_date))); @endphp
+        @php $years = str_split(date('Y',strtotime($transaction_date))); @endphp
+        
+        @if(!empty($dates))
+        @foreach($dates as $date)
+          <span  style="@if(!$loop->first)  margin-left: -5px;  @endif width: 15px; height: 15px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 8px; @if(!$loop->first) border-left: none;  @endif">{{ $date }}</span>
+        @endforeach
+        @endif
+        @if(!empty($months))
+        @foreach($months as $month)
+          <span  style="  margin-left: -5px; width: 15px; height: 15px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 8px;  border-left: none;  ">{{ $month }}</span>
+        @endforeach
+        @endif
+        @if(!empty($years))
+        @foreach($years as $year)
+          <span  style="  margin-left: -5px; width: 15px; height: 15px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 8px; border-left: none; ">{{ $year }}</span>
+        @endforeach
+        @endif
+       
       </span> 
       </span>
     </div>
 </div>
-<div class="application" style="padding: 10px 15px;   text-align: center;  display: block; height: 65px; ">
-    <div style="width: 30%;  display: block; float: left;">
-       <span  class="hindi"  style="font-size: 13px; width: 100%; margin-top: -10px; text-align: left; display: block;  ">
+@php $raddredd = $remmiter->address.' '.$remmiter->address2.','.$remmiter->area.', '.$remmiter->city.', '.strtolower($remmiter->state).'-'.$remmiter->pin; 
+$stringlength = strlen($raddredd);
+$raddrres = str_split($raddredd, 38);
+$finalvalue = $stringlength/38;
+$roundvalue = round($finalvalue);
+$totallength = $roundvalue * 20;
+
+$finalheight = $totallength + 20;
+
+@endphp
+<div class="application" style="padding: 10px 15px;   text-align: center;   display: block; height: {{$finalheight }}px; ">
+    <div style="width: 25%;  display: block; float: left;">
+       <span  class="hindi"  style="font-size: 12px; width: 100%; margin-top: -10px; text-align: left; display: block;  ">
           Remitter's Name/ आवेदक का नाम:
         </span> 
-         <span  class="hindi"  style="font-size: 13px; width: 100%; margin-top: -5px; text-align: left; display: block;  ">
+         <span  class="hindi"  style="font-size: 12px; width: 100%; margin-top: -5px; text-align: left; display: block;  ">
           Address/ पता:
         </span> 
     </div>
 
-    <div style="width: 70%;display: block; float: left; ">
-      <span  class="hindi"  style="font-size: 13px; width: 100%; margin-top: -3px; text-align: left; display: block;  ">
-        <span  style=" width: 20px; height: 20px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 10px; "></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
+    <div style="width: 75%;display: block; float: left; ">
+      <span  class="hindi"  style="font-size: 12px; width: 100%; margin-top: -3px; text-align: left; display: block;  ">
+        @php $rnames = str_split(substr($remmiter->name, 0, 38));
+        $rnamecount = count($rnames);
+        @endphp
+        @if(!empty($rnames))
+        @foreach($rnames as $rname)
+          <span  style="@if(!$loop->first)   margin-left: -5px;  @endif width: 15px; height: 15px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 8px; @if(!$loop->first) border-left: none; @endif">{{ $rname }} </span>
+        @endforeach
+        @endif
+
+        @php $remaincountname = 38 - $rnamecount; @endphp
+        @if($remaincountname > 0)
+        @for($rname = 1; $rname <= $remaincountname; $rname++)
+        <span  style=" width: 15px; height: 15px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 9px; margin-left: -5px; border-left: none;"></span>
+        @endfor
+        @endif
+       
+        
+
+      </span> 
+
+
+
+      @if(!empty($raddrres))
+        @foreach($raddrres as $addrress)
+          @php $newaddress = str_split($addrress); @endphp
+
+
+          <span  class="hindi"  style="font-size: 12px; width: 100%;  @if($loop->first)  margin-top: -3px;   @endif  @if(!$loop->first)  margin-top: -10px;   @endif text-align: left; display: block;  ">
+          @if(!empty($newaddress))
+          @foreach($newaddress as $add)
+            <span  style="@if(!$loop->first)   margin-left: -5px;  @endif  width: 15px; height: 15px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 8px; @if(!$loop->first)  border-left: none;  @endif">{{ $add }} </span>
+          @endforeach
+          @endif
+        </span> 
+        @endforeach
+      @endif
       
-        
-
-      </span> 
-      <span  class="hindi"  style="font-size: 13px; width: 100%; margin-top: -3px; text-align: left; display: block;  ">
-        <span  style=" width: 20px; height: 20px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 10px; "></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        
-
-
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; "></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        
-
-      </span> 
      
     </div>
     
 </div>
 
 <div class="application" style="padding: 10px 15px;   text-align: center; margin-top: -5px; display: block; height: 20px;  ">
-    <div style="width: 30%;  display: block; float: left;">
-       <span  class="hindi"  style="font-size: 13px; width: 100%; line-height: 5px; margin-top: -10px; text-align: left; display: block;  ">
+    <div style="width: 25%;  display: block; float: left;">
+       <span  class="hindi"  style="font-size: 12px; width: 100%; line-height: 5px; margin-top: -10px; text-align: left; display: block;  ">
           Mobile / Other Number / मोबाइल / अन्य नंबर:
         </span> 
         
     </div>
 
     <div style="width: 70%;display: block; float: left; ">
-      <span  class="hindi"  style="font-size: 13px; width: 100%; margin-top: -3px; text-align: left; display: block;  ">
-        <span  style=" width: 20px; height: 20px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 10px; "></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
+      <span  class="hindi"  style="font-size: 12px; width: 100%; margin-top: -3px; text-align: left; display: block;  ">
+        @php $rmobiles = str_split(substr($remmiter->mobile_number, 0, 10)); @endphp
+        @if(!empty($rmobiles))
+        @foreach($rmobiles as $rmobile)
+          <span  style="@if(!$loop->first)   margin-left: -5px;  @endif width: 15px; height: 15px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 9px; @if(!$loop->first) border-left: none; @endif">{{ $rmobile }} </span>
+        @endforeach
+        @endif
+
       </span> 
       
      
@@ -284,44 +244,32 @@ input[type=checkbox] { display: inline; }
 </div>
   
  <div class="application" style=" width: 100%; text-align: center;  border-top: 1px solid #000; border-bottom: 1px solid #000;  display: block; background:#dbddc7; height: 20px; ">
-  <div style="font-weight: 700; font-size: 13px; display: block; margin-top: -8px;" class="hindi">DETAILS OF BENEFICIARY / लाभार्थी का विवरण</div>
+  <div style="font-weight: 700; font-size: 12px; display: block; margin-top: -8px;" class="hindi">DETAILS OF BENEFICIARY / लाभार्थी का विवरण</div>
 </div>
 <div class="application" style="padding: 10px 15px;   text-align: center;  display: block; height: 15px; ">
-    <div style="width: 30%;  display: block; float: left;">
-       <span  class="hindi"  style="font-size: 13px; width: 100%; line-height: 5px; margin-top: 0px; text-align: left; display: block;  ">
+    <div style="width: 25%;  display: block; float: left;">
+       <span  class="hindi"  style="font-size: 12px; width: 100%; line-height: 5px; margin-top: 0px; text-align: left; display: block;  ">
           Beneficiary&#x27;s Name / लाभार्थी का नाम:
         </span> 
         
     </div>
 
-    <div style="width: 70%;display: block; float: left; ">
-      <span  class="hindi"  style="font-size: 13px; width: 100%; margin-top: -3px; text-align: left; display: block;  ">
-        <span  style=" width: 20px; height: 20px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 10px; "></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
+    <div style="width: 75%;display: block; float: left; ">
+      <span  class="hindi"  style="font-size: 12px; width: 100%; margin-top: -3px; text-align: left; display: block;  ">
+        @php $bnames = str_split(substr($benificiery->name, 0, 38));
+        $bnamecount = count($bnames);
+        @endphp
+        @if(!empty($bnames))
+        @foreach($bnames as $bname)
+          <span  style="@if(!$loop->first)   margin-left: -5px;  @endif width: 15px; height: 15px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 8px; @if(!$loop->first) border-left: none; @endif">{{ $bname }} </span>
+        @endforeach
+        @endif
+        @php $remaincountname = 38 - $bnamecount; @endphp
+        @if($remaincountname > 0)
+        @for($bname = 1; $bname <= $remaincountname; $bname++)
+        <span  style=" width: 15px; height: 15px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 9px; margin-left: -5px; border-left: none;"></span>
+        @endfor
+        @endif
       </span> 
       
      
@@ -329,83 +277,59 @@ input[type=checkbox] { display: inline; }
     
 </div>
 <div class="application" style="padding: 10px 15px;   text-align: center;  display: block; height: 12px; ">
-    <div style="width: 30%;  display: block; float: left;">
-       <span  class="hindi"  style="font-size: 13px; width: 100%; line-height: 5px; margin-top: -12px; text-align: left; display: block;  ">
+    <div style="width: 25%;  display: block; float: left;">
+       <span  class="hindi"  style="font-size: 12px; width: 100%; line-height: 5px; margin-top: -12px; text-align: left; display: block;  ">
           Account Number / लाभार्थी का खाता संख्या
         </span> 
         
     </div>
 
-    <div style="width: 70%;display: block; float: left; ">
-      <span  class="hindi"  style="font-size: 13px; width: 100%; margin-top: -3px; text-align: left; display: block;  ">
-        <span  style=" width: 20px; height: 20px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 10px; "></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
+    <div style="width: 75%;display: block; float: left; ">
+      <span  class="hindi"  style="font-size: 12px; width: 100%; margin-top: -10px; text-align: left; display: block;  ">
+        @php $baccount_numbers = str_split(substr($benificiery->account_number, 0, 38));
+        $baccount_numbercount = count($baccount_numbers);
+        @endphp
+        @if(!empty($baccount_numbers))
+        @foreach($baccount_numbers as $baccount_number)
+          <span  style="@if(!$loop->first)   margin-left: -5px;  @endif width: 15px; height: 15px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 9px; @if(!$loop->first) border-left: none; @endif">{{ $baccount_number }} </span>
+        @endforeach
+        @endif
+        @php $remainaccount_number = 38 - $baccount_numbercount; @endphp
+        @if($baccount_numbercount > 0)
+        @for($bnumber = 1; $bnumber <= $remainaccount_number; $bnumber++)
+        <span  style=" width: 15px; height: 15px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 9px; margin-left: -5px; border-left: none;"></span>
+        @endfor
+        @endif
       </span> 
       
      
     </div>
     
 </div>
-<div class="application" style="padding: 10px 15px;      text-align: center;  display: block; height: 12px; ">
-    <div style="width: 30%;  display: block; float: left;">
-       <span  class="hindi"  style="font-size: 13px; width: 100%; line-height: 5px; margin-top: 0px; text-align: left; display: block;  ">
+<div class="application" style="padding: 10px 15px;  text-align: center; margin-top: -10px;  display: block; height: 12px; ">
+    <div style="width: 25%;  display: block; float: left;">
+       <span  class="hindi"  style="font-size: 12px; width: 100%; line-height: 5px; margin-top: 0px; text-align: left; display: block;  ">
           Bank Name / लाभार्थी का  बैंक का नाम:
         </span> 
         
     </div>
 
-    <div style="width: 70%;display: block; float: left; ">
-      <span  class="hindi"  style="font-size: 13px; width: 100%; margin-top: -3px; text-align: left; display: block;  ">
-        <span  style=" width: 20px; height: 20px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 10px; "></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
+    <div style="width: 75%;display: block; float: left; ">
+      <span  class="hindi"  style="font-size: 12px; width: 100%; margin-top: -3px; text-align: left; display: block;  ">
+        @php $bbank_names = str_split(substr($benificiery->bank_name, 0, 38));
+        $bbank_namecount = count($bbank_names);
+        @endphp
+        @if(!empty($bbank_names))
+        @foreach($bbank_names as $bbank_name)
+          <span  style="@if(!$loop->first)   margin-left: -5px;  @endif width: 15px; height: 15px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 9px; @if(!$loop->first) border-left: none; @endif">{{ $bbank_name }} </span>
+        @endforeach
+        @endif
+        @php $remainbank_name = 38 - $bbank_namecount; @endphp
+        @if($remainbank_name > 0)
+        @for($bname = 1; $bname <= $remainbank_name; $bname++)
+        <span  style=" width: 15px; height: 15px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 9px; margin-left: -5px; border-left: none;"></span>
+        @endfor
+        @endif
       </span> 
       
      
@@ -413,27 +337,29 @@ input[type=checkbox] { display: inline; }
     
 </div>
 <div class="application" style="padding: 10px 15px;      text-align: center;  display: block; height: 12px; ">
-    <div style="width: 30%;  display: block; float: left;">
-       <span  class="hindi"  style="font-size: 13px; width: 100%; line-height: 5px; margin-top: 0px; text-align: left; display: block;  ">
+    <div style="width: 25%;  display: block; float: left;">
+       <span  class="hindi"  style="font-size: 12px; width: 100%; line-height: 5px; margin-top: 5px; text-align: left; display: block;  ">
           IFSC Code (11-digit) / IFSC कोड:
         </span> 
         
     </div>
 
-    <div style="width: 70%;display: block; float: left; ">
-      <span  class="hindi"  style="font-size: 13px; width: 100%; margin-top: -3px; text-align: left; display: block;  ">
-        <span  style=" width: 20px; height: 20px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 10px; "></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-       
+    <div style="width: 75%;display: block; float: left; ">
+      <span  class="hindi"  style="font-size: 12px; width: 100%; margin-top: 0px; text-align: left; display: block;  ">
+        @php $bifscs = str_split(substr($benificiery->ifsc, 0, 38));
+        $bifscs_count = count($bifscs);
+        @endphp
+        @if(!empty($bifscs))
+        @foreach($bifscs as $bifsc)
+          <span  style="@if(!$loop->first)   margin-left: -5px;  @endif width: 15px; height: 15px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 9px; @if(!$loop->first) border-left: none; @endif">{{ $bifsc }} </span>
+        @endforeach
+        @endif
+        @php $remainifsc = 38 - $bifscs_count; @endphp
+        @if($remainifsc > 0)
+        @for($bifscc = 1; $bifscc <= $remainifsc; $bifscc++)
+        <span  style=" width: 15px; height: 15px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 9px; margin-left: -5px; border-left: none;"></span>
+        @endfor
+        @endif
       </span> 
       
      
@@ -441,43 +367,30 @@ input[type=checkbox] { display: inline; }
     
 </div>
 <div class="application" style="padding: 10px 15px;      text-align: center;  display: block; height: 12px; ">
-    <div style="width: 30%;  display: block; float: left;">
-       <span  class="hindi"  style="font-size: 13px; width: 100%; line-height: 5px; margin-top: 0px; text-align: left; display: block;  ">
+    <div style="width: 25%;  display: block; float: left;">
+       <span  class="hindi"  style="font-size: 12px; width: 100%; line-height: 5px; margin-top: 0px; text-align: left; display: block;  ">
           Branch Address / शाखा का पता:
         </span> 
         
     </div>
 
-    <div style="width: 70%;display: block; float: left; ">
-      <span  class="hindi"  style="font-size: 13px; width: 100%; margin-top: -3px; text-align: left; display: block;  ">
-        <span  style=" width: 20px; height: 20px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 10px; "></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-       
-       <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-      
+    <div style="width: 75%;display: block; float: left; ">
+      <span  class="hindi"  style="font-size: 12px; width: 100%; margin-top: -3px; text-align: left; display: block;  ">
+        @php $bbranch_names = str_split(substr($benificiery->branch_name, 0, 38));
+        $bbranch_names_count = count($bbranch_names);
+        @endphp
+        @if(!empty($bbranch_names))
+        @foreach($bbranch_names as $bbranch_name)
+          <span  style="@if(!$loop->first)   margin-left: -5px;  @endif width: 15px; height: 15px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 9px; @if(!$loop->first) border-left: none; @endif">{{ $bbranch_name }} </span>
+        @endforeach
+        @endif
+        @php $remainnamecount = 38 - $bbranch_names_count; @endphp
+        @if($remainnamecount > 0)
+        @for($bncount = 1; $bncount <= $remainnamecount; $bncount++)
+        <span  style=" width: 15px; height: 15px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 9px; margin-left: -5px; border-left: none;"></span>
+        @endfor
+        @endif
+
        
       </span> 
       
@@ -486,43 +399,29 @@ input[type=checkbox] { display: inline; }
     
 </div>
 <div class="application" style="padding: 10px 15px;      text-align: center;  display: block; height: 12px; ">
-    <div style="width: 30%;  display: block; float: left;">
-       <span  class="hindi"  style="font-size: 13px; width: 100%; line-height: 5px; margin-top: -15px; text-align: left; display: block;  ">
+    <div style="width: 25%;  display: block; float: left;">
+       <span  class="hindi"  style="font-size: 12px; width: 100%; line-height: 5px; margin-top: -15px; text-align: left; display: block;  ">
           Confirm Account Number Again /खाता संख्या की फिर से पुष्टि करें:
         </span> 
         
     </div>
 
-    <div style="width: 70%;display: block; float: left; ">
-      <span  class="hindi"  style="font-size: 13px; width: 100%; margin-top: -3px; text-align: left; display: block;  ">
-        <span  style=" width: 20px; height: 20px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 10px; "></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-       
-       <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-        <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-         <span  style=" width: 20px; height: 20px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 10px; margin-left: -5px; border-left: none;"></span>
-      
+    <div style="width: 75%;display: block; float: left; ">
+      <span  class="hindi"  style="font-size: 12px; width: 100%; margin-top: -3px; text-align: left; display: block;  ">
+        @php $baccount_numbers = str_split(substr($benificiery->account_number, 0, 38));
+        $baccount_number_count = count($baccount_numbers);
+        @endphp
+        @if(!empty($baccount_numbers))
+        @foreach($baccount_numbers as $baccount_number)
+          <span  style="@if(!$loop->first)   margin-left: -5px;  @endif width: 15px; height: 15px; border: 1px solid #000; text-align: center;  display: inline-block; line-height: 9px; @if(!$loop->first) border-left: none; @endif">{{ $baccount_number }} </span>
+        @endforeach
+        @endif
+        @php $remainaccountcount = 38 - $baccount_number_count; @endphp
+        @if($remainaccountcount > 0)
+        @for($baccountcount = 1; $baccountcount <= $remainaccountcount; $baccountcount++)
+        <span  style=" width: 15px; height: 15px;  display: inline-block;  border: 1px solid #000; text-align: center; line-height: 9px; margin-left: -5px; border-left: none;"></span>
+        @endfor
+        @endif
        
       </span> 
       
@@ -530,15 +429,18 @@ input[type=checkbox] { display: inline; }
     </div>
     
 </div>
-<div class="application" style="padding: 10px 15px;      text-align: center;  margin-top: -5px; display: block; height: 15px; ">
-    <div style="width: 30%;  display: block; float: left;">
-       <span  class="hindi"  style="font-size: 13px; width: 100%; line-height: 5px;text-align: left; display: block;  ">
+<div class="application" style="padding: 10px 15px;      text-align: center;  margin-top: 0px; display: block; height: 15px; ">
+    <div style="width: 25%;  display: block; float: left;">
+       <span  class="hindi"  style="font-size: 12px; width: 100%; line-height: 5px;text-align: left; display: block;  ">
           Remarks (if any) / टिप्पणी (यदि हो):
         </span> 
         
     </div>
-
-    <div style="width: 70%;display: block; float: left; ">________________________________________________________</div>
+    @if(!empty($remarks))
+    <div style="width: 73%;display: block; float: left; font-size: 12px; text-align: left; border-bottom: 1px solid #000; ">{{ $remarks }}</div>
+    @else
+    <div style="width: 73%;display: block; float: left; ">________________________________________________________</div>
+    @endif
     
 </div>
 <div class="application" style=" width: 100%; text-align: center;  border-top: 1px solid #000; border-bottom: 1px solid #000;  display: block; background:#dbddc7; height: 20px; ">
@@ -755,6 +657,7 @@ input[type=checkbox] { display: inline; }
   With Holding / रोक
 </div>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="application" style=" width: 100%; text-align: center;  border-top: 1px solid #000; border-bottom: 1px solid #000;  display: block; background:#dbddc7; height: 20px; ">
   <div style="font-weight: 700; font-size: 13px; display: block; margin-top: -8px;" class="hindi">Terms and Conditions / नियम और शर्तें</div>
 </div>
@@ -996,13 +899,12 @@ input[type=checkbox] { display: inline; }
        <span  class="hindi"  style="font-size: 12px;  line-height: 7px;width: 100%;  text-align: left; display: block;  ">
           Name and signature of Bank official / बैंक अधिकारी का नाम और हस्ताक्षर
         </span> 
-         
     </div>
 
       <div style="width: 33%;display: block; float: left; border-bottom: 1px solid #000; height: 15px;">
      </div> 
       <div style="width: 17%;display: block; float: left;  height: 15px;">
-        <img src="{{ url('public/Bank-Seal.png')}}"  style="margin-top: -40px; width: 100px; height: auto;">
+        <img src="http://3.23.151.152/rtgs_php/public/Bank-Seal.png"  style="margin-top: -40px; width: 100px; height: auto;">
      </div> 
     
     

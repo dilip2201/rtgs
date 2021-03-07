@@ -1,66 +1,40 @@
 @extends('layouts.app')
 @section('pageTitle', 'Create a new form')
 @section('content')
-<style type="text/css">
-	.error{
-		color: #a51010!important;
-	}
-    .switch input:checked~span:before{
-        border: 1px solid #4a99ff;
-        background:none;
-    }
-    .switch input:empty~span:before{
-        border: 1px solid #4a99ff;
-        background:none;
-    }
-    .switch input:empty~span:after{
-        background-color: #3699ff;
-    }
 
-</style>
 
 <!--begin::Card-->
 <div class="card card-custom">.
       
-    <div class="card-body p-0">
+    <div class="card-body p-0"  style="padding-top: 30px!important; padding-bottom: 30px!important">
         <!--begin: Wizard-->
         <div class="wizard wizard-2" id="kt_wizard" data-wizard-state="step-first" data-wizard-clickable="false">
             <!--begin: Wizard Nav-->
-            <div class="wizard-nav border-right py-8 px-8 px-lg-10">
+            <div class="wizard-nav border-right py-6 px-6 px-lg-6" style="padding-right: 32px!important;">
                 <!--begin::Wizard Step 1 Nav-->
                 <div class="wizard-steps">
                     <div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
                         <div class="wizard-wrapper">
-                            <div class="wizard-icon">
-                                <span class="svg-icon svg-icon-2x">
+                            <div class="wizard-icon" style="font-size: 25px;   line-height: 43px;">
+                                <span class="number" style="padding: 9px 19px;    border-radius: 50%;     font-size: 18px;">
                                     <!--begin::Svg Icon | path:/metronic/theme/html/demo13/dist/assets/media/svg/icons/General/User.svg-->
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="0" y="0" width="24" height="24"></rect>
-                                            <path d="M16.3740377,19.9389434 L22.2226499,11.1660251 C22.4524142,10.8213786 22.3592838,10.3557266 22.0146373,10.1259623 C21.8914367,10.0438285 21.7466809,10 21.5986122,10 L17,10 L17,4.47708173 C17,4.06286817 16.6642136,3.72708173 16.25,3.72708173 C15.9992351,3.72708173 15.7650616,3.85240758 15.6259623,4.06105658 L9.7773501,12.8339749 C9.54758575,13.1786214 9.64071616,13.6442734 9.98536267,13.8740377 C10.1085633,13.9561715 10.2533191,14 10.4013878,14 L15,14 L15,19.5229183 C15,19.9371318 15.3357864,20.2729183 15.75,20.2729183 C16.0007649,20.2729183 16.2349384,20.1475924 16.3740377,19.9389434 Z" fill="#000000"></path>
-                                            <path d="M4.5,5 L9.5,5 C10.3284271,5 11,5.67157288 11,6.5 C11,7.32842712 10.3284271,8 9.5,8 L4.5,8 C3.67157288,8 3,7.32842712 3,6.5 C3,5.67157288 3.67157288,5 4.5,5 Z M4.5,17 L9.5,17 C10.3284271,17 11,17.6715729 11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L4.5,20 C3.67157288,20 3,19.3284271 3,18.5 C3,17.6715729 3.67157288,17 4.5,17 Z M2.5,11 L6.5,11 C7.32842712,11 8,11.6715729 8,12.5 C8,13.3284271 7.32842712,14 6.5,14 L2.5,14 C1.67157288,14 1,13.3284271 1,12.5 C1,11.6715729 1.67157288,11 2.5,11 Z" fill="#000000" opacity="0.3"></path>
-                                        </g>
-                                    </svg>
+                                    1
                                     <!--end::Svg Icon-->
                                 </span>
                             </div>
                             <div class="wizard-label">
-                                <h3 class="wizard-title" style="font-size: 14px;">Create form</h3>
-                                <div class="wizard-desc" style="font-size: 14px;">Setup the form details</div>
+                                <h3 class="wizard-title" style="font-size: 14px; ">Create form</h3>
+                                <div class="wizard-desc" style="font-size: 14px; ">Setup the form details</div>
                             </div>
                         </div>
                     </div>
                     <div class="wizard-step" data-wizard-type="step">
                         <div class="wizard-wrapper">
                             <div class="wizard-icon">
-                                <span class="svg-icon svg-icon-2x">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="0" y="0" width="24" height="24"></rect>
-                                            <path d="M9,10 L9,19 L10.1525987,19.3841996 C11.3761964,19.7920655 12.6575468,20 13.9473319,20 L17.5405883,20 C18.9706314,20 20.2018758,18.990621 20.4823303,17.5883484 L21.231529,13.8423552 C21.5564648,12.217676 20.5028146,10.6372006 18.8781353,10.3122648 C18.6189212,10.260422 18.353992,10.2430672 18.0902299,10.2606513 L14.5,10.5 L14.8641964,6.49383981 C14.9326895,5.74041495 14.3774427,5.07411874 13.6240179,5.00562558 C13.5827848,5.00187712 13.5414031,5 13.5,5 L13.5,5 C12.5694044,5 11.7070439,5.48826024 11.2282564,6.28623939 L9,10 Z" fill="#000000"></path>
-                                            <rect fill="#000000" opacity="0.3" x="2" y="9" width="5" height="11" rx="1"></rect>
-                                        </g>
-                                    </svg>
+                                 <span class="number" style="padding: 9px 17px;    border-radius: 50%;       font-size: 18px;    color: #fff;">
+                                    <!--begin::Svg Icon | path:/metronic/theme/html/demo13/dist/assets/media/svg/icons/General/User.svg-->
+                                    2
+                                    <!--end::Svg Icon-->
                                 </span>
                             </div>
                             <div class="wizard-label">
@@ -74,7 +48,7 @@
             </div>
             <!--end: Wizard Nav-->
             <!--begin: Wizard Body-->
-            <div class="wizard-body py-8 px-8  px-lg-10">
+            <div class="wizard-body py-6 px-6  px-lg-6" style="padding-right: 32px!important;">
                 <!--begin: Wizard Form-->
                 <div class="row">
                     <div class="offset-xxl-2 col-xxl-8">
@@ -91,8 +65,8 @@
                                 <div class="row">
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>Remitter / Transferor</b> <span style="color: red">*</span></label>
-                                             <select class="form-control remmiter"  name="remmiter_id">
+                                            <label><b class="clrblck">Remitter / Transferor</b> <span style="color: red">*</span></label>
+                                             <select class="form-control remmiter remmiter_id"  name="remmiter_id">
                                                 <option value="">Select a Remmiter</option>
                                                     @if(!empty($remmiters))
                                                         @foreach($remmiters as $remmiter)
@@ -102,47 +76,128 @@
                                                 </select>
                                             
                                            
-                                            <span class="form-text text-muted">select the remmiter's name</span>
+                                           
                                         </div>
                                     </div>
                                 </div>
-                                
-                                <div class="row">
-                                    <div class="col-xl-6">
-                                        <!--begin::Input-->
-                                        <div class="form-group">
-                                            <label><b>Beneficiary</b> <span style="color: red">*</span></label>
-                                            <div class="form-group ">
-                                                <select class="form-control benificiaries"  name="beneficiary_id">
-                                                    <option value="">Select a Beneficiary</option>
-                                                    @if(!empty($benificiaries))
-                                                        @foreach($benificiaries as $benificiary)
-                                                        <option value="{{ $benificiary->id }}" @if(!empty($transaction) && $transaction->beneficiary_id == $benificiary->id) {{ 'selected' }} @endif>{{ $benificiary->nickname }}</option>
-                                                        @endforeach
-                                                    @endif
-                                                </select>
+                                <div class="loadbanificiaty" style="display: none;">
+                                    <option value="">Select a Beneficiary</option>
+                                        @if(!empty($benificiaries))
+                                            @foreach($benificiaries as $benificiary)
+                                            <option value="{{ $benificiary->id }}" >{{ $benificiary->nickname }}</option>
+                                            @endforeach
+                                        @endif
+                                </div>
+                                <div class="row benificiariesrow">
+                                    @if(empty($transaction))
+                                    <div class="remove1" style="width:100%; float:left;">
+                                        <div class="col-xl-4" style="float: left;">
+                                            <!--begin::Input-->
+                                            <div class="form-group">
+                                                <label><b class="clrblck">Beneficiary 1</b> <span style="color: red">*</span></label>
+                                                <div class="form-group ">
+                                                    <select class="form-control benificiaries beneficiary_id"  name="beni[1][benificiar]">
+                                                        <option value="">Select a Beneficiary</option>
+                                                        @if(!empty($benificiaries))
+                                                            @foreach($benificiaries as $benificiary)
+                                                            <option value="{{ $benificiary->id }}" >{{ $benificiary->nickname }}</option>
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
+                                                </div>
                                             </div>
+                                            <!--end::Input-->
                                         </div>
-                                        <!--end::Input-->
-                                    </div>
 
 
-                                     <div class="col-xl-6">
-                                        <!--begin::Input-->
-                                        <div class="form-group">
-                                            <a style="margin-top: 25px;" href="{{ route('company.benificiaries.create') }}" class="btn btn-primary font-weight-bolder"><i class="la la-plus"></i>New Benificiaries</a>
+                                        <div class="col-xl-4" style="float: left;">
+                                            
+                                            <div class="form-group">
+                                              <label><b class="clrblck">Amount 1</b> <span style="color: red">*</span></label>
+                                                <input type="text" class="form-control form-control-solid form-control-lg culculateamount" maxlength="10" name="beni[1][amount]" placeholder="Amount"  required />
+                                                
+                                            </div>
+                                            
                                         </div>
-                                        <!--end::Input-->
+
+                                         <div class="col-xl-4" style="float: left;">
+                                            <!--begin::Input-->
+                                            <div class="form-group">
+                                              <label><b class="clrblck">Remark 1</b> <span style="color: red">*</span></label>
+                                                <input type="text" class="form-control form-control-solid form-control-lg amount" maxlength="10" name="beni[1][remark]" placeholder="Remark"  required />
+                                                
+                                            </div>
+                                            <!--end::Input-->
+                                        </div>
                                     </div>
-                                    
+                                    @endif
+                                    @if(!empty($transaction))
+                                        @php $trans =  gettransaction($transaction->id,$id); $i = 1; @endphp
+                                        
+                                        @if(!empty($trans))
+                                            @foreach($trans as $tran)
+                                                <div class="remove{{ $tran->id }}" style="width:100%; float:left;">
+                                                    <div class="col-xl-4" style="float: left;">
+                                                        <!--begin::Input-->
+                                                        <div class="form-group">
+                                                            <label><b class="clrblck">Beneficiary {{ $i }}</b> <span style="color: red">*</span></label>
+                                                            <div class="form-group ">
+                                                                <select class="form-control benificiaries beneficiary_id"  name="beni[{{ $tran->id }}][benificiar]">
+                                                                    <option value="">Select a Beneficiary</option>
+                                                                    @if(!empty($benificiaries))
+                                                                        @foreach($benificiaries as $benificiary)
+                                                                        <option value="{{ $benificiary->id }}" @if($tran->beneficiary_id == $benificiary->id) selected @endif>{{ $benificiary->nickname }}</option>
+                                                                        @endforeach
+                                                                    @endif
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <!--end::Input-->
+                                                    </div>
+
+
+                                                    <div class="col-xl-4" style="float: left;">
+                                                        
+                                                        <div class="form-group">
+                                                          <label><b class="clrblck">Amount {{ $i }}</b> <span style="color: red">*</span></label>
+                                                            <input type="text" class="form-control form-control-solid form-control-lg culculateamount" maxlength="10" name="beni[{{ $tran->id }}][amount]" value="{{ $tran->amount }}" placeholder="Amount"  required />
+                                                            
+                                                        </div>
+                                                        
+                                                    </div>
+
+                                                     <div class="@if($loop->first) col-xl-4 @else col-xl-3 @endif" style="float: left;">
+                                                        <!--begin::Input-->
+                                                        <div class="form-group">
+                                                          <label><b class="clrblck">Remark {{ $i }}</b> <span style="color: red">*</span></label>
+                                                            <input type="text" class="form-control form-control-solid form-control-lg amount" maxlength="10" name="beni[{{ $tran->id }}][remark]" value="{{ $tran->remarks }}" placeholder="Remark"  required />
+                                                            
+                                                        </div>
+                                                        <!--end::Input-->
+                                                    </div>
+                                                    @if(!$loop->first)
+                                                    <div class="col-xl-1" style="float:left;">
+                                                        <a href="javascript:void(0)" class="removerowvisa" data-id="{{ $tran->id }}"  style="background: #ed90ae;    padding: 3px 8px;    border-radius: 53%;    color: #fff;    margin-top: 35px;    float: left;"><i class="fa fa-minus" style="color:#fff;"></i></a>
+                                                    </div>
+                                                    @endif
+                                                </div>
+                                                @php $i++; @endphp
+                                            @endforeach
+                                        @endif
+                                    @endif
+                                </div>
+                                    <div class="row">
+                                         <div class="col-xl-12">
+                                            <a class="addrow" style="float: left; cursor:pointer;  margin-bottom: 13px;    margin-top: -10px;"><i style="font-size: 24px;    color: #3699ff;    float: left;" class="fa fa-plus-circle"></i> <span style="    font-size: 12px;    color: #000;    margin-top: 4px;    float: left;    margin-left: 6px;">Add another beneficiary </span> </a> <i data-toggle="tooltip" title="By clicking on Add another beneficiary, it will add another row for adding beneficiary detail. You can remove it too." class="fa fa-info-circle" style="color: #000; margin-top: -3px; cursor: pointer;  float: left; margin-left: 5px;"></i>
+                                         </div>
                                     </div>
                                     <h4 class="mb-3 font-weight-bold text-dark">Enter the transaction's details</h4>
                                     <div class="row">
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>Amount</b> <span style="color: red">*</span></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg amount" maxlength="10" name="amount" value="@if(!empty($transaction)){{ $transaction->amount }}@endif"  placeholder="Amount"  required />
-                                            <span class="form-text text-muted">Fill in the amount to be transferred</span>
+                                            <label><b class="clrblck">Amount</b> <span style="color: red">*</span></label>
+                                            <input type="text" class="form-control form-control-solid form-control-lg finalamount" maxlength="10" name="amount" value="@if(!empty($transaction)){{ $transaction->amount }}@endif"  placeholder="Amount"  required />
+                                            <span class="form-text text-muted new-textmute">Fill in the amount to be transferred</span>
                                         </div>
                                     </div>
                                     @php
@@ -160,14 +215,14 @@
                                     @endif
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>Cheque No</b> <span style="color: red">*</span></label>
+                                            <label><b class="clrblck">Cheque No</b> <span style="color: red">*</span></label>
                                             <input type="text" maxlength="6" class="form-control form-control-solid form-control-lg cheque_number" name="cheque_number"  placeholder="Cheque No" value="{{ $cheque_number }}" required />
-                                            <span class="form-text text-muted">Fill in the cheque number</span>
+                                            <span class="form-text text-muted new-textmute">Fill in the cheque number</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>Transaction method</b> <span style="color: red">*</span></label>
+                                            <label><b class="clrblck">Transaction method</b> <span style="color: red">*</span></label>
                                             <div class="radio-inline">
                                                             <label class="radio">
                                                             <input type="radio" class="transaction_method" name="transaction_method" @if(empty($transaction)) checked @endif @if(!empty($transaction->transaction_method) && $transaction->transaction_method == 'neft') checked @endif value="neft" />
@@ -177,7 +232,7 @@
                                                             <span></span>RTGS</label>
                                                            
                                                         </div>
-                                            <span class="form-text text-muted">Select the mode</span>
+                                            <span class="form-text text-muted new-textmute">Select the mode</span>
                                         </div>
                                     </div>
                                     @php
@@ -190,9 +245,9 @@
                                     @endif
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>Date</b> <span style="color: red">*</span></label>
+                                            <label><b class="clrblck">Date</b> <span style="color: red">*</span></label>
                                             <input type="date" class="form-control form-control-solid form-control-lg transaction_date" name="transaction_date" value="{{ $date }}"  placeholder="Date" value="" required />
-                                            <span class="form-text text-muted">Edit the date if neccessary</span>
+                                            <span class="form-text text-muted new-textmute">Edit the date if neccessary</span>
                                         </div>
                                     </div>
                                     </div>
@@ -223,14 +278,7 @@
                                         <!--begin::Input-->
                                         <div class="form-group benificiary_detail" >
                                             @if(!empty($transaction))
-                                            @php $benificiary = getbenificiary($transaction->beneficiary_id)  @endphp
-
-                                            <label><b style="color: #000; font-size: 14px;">Benificiary's details</b></label><br>
-                                            <span class="benificiary_name" style="color: #9f9f9f;">{{ $benificiary->name ?? '-' }}</span><br>
-                                            <span class="benificiary_state" style="color: #9f9f9f;">{{ $benificiary->city ?? '-' }}, {{ $benificiary->state ?? '-' }}</span><br>
-                                            <span class="benificiary_citybank" style="color: #9f9f9f;">{{ $benificiary->bank_name ?? '-' }}</span><br>
-                                            <span class="benificiary_citybank" style="color: #9f9f9f;">{{ $benificiary->ifsc ?? '-' }}</span><br>
-                                            <span class="benificiary_citybank" style="color: #9f9f9f;">{{ $benificiary->account_number ?? '-' }}</span><br>
+                                            {!! gethtml($transaction->id,$id) !!}
                                             @endif
                                         </div>
                                         <!--end::Input-->
@@ -240,7 +288,7 @@
                                         <div class="form-group transaction_detail">
                                             @if(!empty($transaction))
                                                 <label><b style="color: #000; font-size: 14px;">Transaction details</b></label><br>
-                                                <span class="benificiary_name" style="color: #9f9f9f;">HBCS</span><br>
+                                                
                                                 <span class="cheque_number_class" style="color: #9f9f9f;">{{ $transaction->cheque_number }}</span><br>
                                                 <span class="amount_class" style="color: #9f9f9f;">{{ $transaction->amount }}</span><br>
                                                 <span class="transaction_mode_class" style="color: #9f9f9f;">{{ strtoupper($transaction->transaction_method) }}</span><br>
@@ -248,7 +296,7 @@
 
                                             @else
                                                 <label><b style="color: #000; font-size: 14px;">Transaction details</b></label><br>
-                                                <span class="benificiary_name" style="color: #9f9f9f;">HBCS</span><br>
+                                                
                                                 <span class="cheque_number_class" style="color: #9f9f9f;">31-343456677878</span><br>
                                                 <span class="amount_class" style="color: #9f9f9f;">1200$</span><br>
                                                 <span class="transaction_mode_class" style="color: #9f9f9f;">NEFT</span><br>
@@ -264,8 +312,8 @@
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label>Remarks</label>
-                                            <textarea required="" class="form-control form-control-solid form-control-lg" name="remarks">@if(!empty($transaction)){{ $transaction->remarks }}@endif</textarea>
-                                            <span class="form-text text-muted">Enter payment reference / Narration</span>
+                                            <textarea required="" class="form-control form-control-solid form-control-lg remarks" name="remarks">@if(!empty($transaction)){{ $transaction->remarks }}@endif</textarea>
+                                            <span class="form-text text-muted new-textmute">Enter payment reference / Narration</span>
                                         </div>
                                         <!--end::Input-->
                                     </div>
@@ -306,12 +354,7 @@
         <div class="modal-content">
         <div class="modal-body printmodaldata" style="padding: 0px;">
 
-            <div class="d-flex justify-content-center loaderspin" style="margin-top: 11%;">
-              
-               <img src="{{ URL::asset('public/spinner1.gif') }}" style="height: 139px;
-    width: auto;">
-             
-            </div>
+          
                 
                   
         </div>
@@ -341,6 +384,7 @@
 </div>
 @push('style')
 <link href="{{ URL::asset('public/assets/css/pages/wizard/wizard-2afa4.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ URL::asset('public/css/pages/form.css') }}" rel="stylesheet" type="text/css" />
 @endpush
 @push('script')
 <script>var KTAppSettings = { "breakpoints": { "sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1400 }, "colors": { "theme": { "base": { "white": "#ffffff", "primary": "#3699FF", "secondary": "#E5EAEE", "success": "#1BC5BD", "info": "#8950FC", "warning": "#FFA800", "danger": "#F64E60", "light": "#E4E6EF", "dark": "#181C32" }, "light": { "white": "#ffffff", "primary": "#E1F0FF", "secondary": "#EBEDF3", "success": "#C9F7F5", "info": "#EEE5FF", "warning": "#FFF4DE", "danger": "#FFE2E5", "light": "#F3F6F9", "dark": "#D6D6E0" }, "inverse": { "white": "#ffffff", "primary": "#ffffff", "secondary": "#3F4254", "success": "#ffffff", "info": "#ffffff", "warning": "#ffffff", "danger": "#ffffff", "light": "#464E5F", "dark": "#ffffff" } }, "gray": { "gray-100": "#F3F6F9", "gray-200": "#EBEDF3", "gray-300": "#E4E6EF", "gray-400": "#D1D3E0", "gray-500": "#B5B5C3", "gray-600": "#7E8299", "gray-700": "#5E6278", "gray-800": "#3F4254", "gray-900": "#181C32" } }, "font-family": "Poppins" };</script>
@@ -351,6 +395,24 @@
 
 <script src="{{ URL::asset('public/assets/js/pages/crud/forms/widgets/select2afa4.js') }}"></script>
 <script type="text/javascript">
+    function generaterandomnumber() {
+          
+      var rendomnumber = Math.floor((Math.random() * 1000000) + 1);
+      return rendomnumber;
+    }
+
+    function calculatetotal(){
+    
+
+        var sum = 0;
+        $(".culculateamount").each(function(){
+            sum += +$(this).val();
+        });
+        $('.finalamount').val(sum);
+
+    }
+    var incrementvalue = 1;
+
     "use strict";
     var KTWizard3 = function() {
         var e, t, i, a = [];
@@ -463,25 +525,91 @@
     jQuery(document).ready((function() {
         KTWizard3.init()
     }));
-
+    
     
 	$(document).ready(function(){
+        $('body').on('keyup','.culculateamount',function(){
+            calculatetotal();
+        })
+        $('[data-toggle="tooltip"]').tooltip();
+        $('body').on('click','.addrow',function(){
+                incrementvalue++;
+                rendomnumber = generaterandomnumber();
+                var options = $('.loadbanificiaty').get(0).outerHTML;
+                var html = `<div class="remove`+rendomnumber+`" style="width:100%; float:left;">
+                                    <div class="col-xl-4" style="float:left;">
+                                        <!--begin::Input-->
+                                        <div class="form-group">
+                                            <label><b>Beneficiary `+incrementvalue+`</b> <span style="color: red">*</span></label>
+                                            <div class="form-group ">
+                                                <select class="form-control benificiaries beneficiary_id"  name="beni[`+rendomnumber+`][benificiar]">
+                                                   `+options+`
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--end::Input-->
+                                    </div>
+
+
+                                    <div class="col-xl-4" style="float:left;">
+                                        
+                                        <div class="form-group">
+                                          <label><b>Amount `+incrementvalue+`</b> <span style="color: red">*</span></label>
+                                            <input type="text" class="form-control form-control-solid form-control-lg culculateamount" maxlength="10" name="beni[`+rendomnumber+`][amount]" placeholder="Amount"  required />
+                                            
+                                        </div>
+                                        
+                                    </div>
+
+                                     <div class="col-xl-3" style="float:left;">
+                                        <!--begin::Input-->
+                                        <div class="form-group">
+                                          <label><b>Remark `+incrementvalue+`</b> <span style="color: red">*</span></label>
+                                            <input type="text" class="form-control form-control-solid form-control-lg amount" maxlength="10" name="beni[`+rendomnumber+`][remark]"  placeholder="Remark"  required />
+                                            
+                                        </div>
+                                        <!--end::Input-->
+                                    </div>
+                                    <div class="col-xl-1" style="float:left;">
+                                        <a href="javascript:void(0)" class="removerowvisa" data-id="`+rendomnumber+`"  style="background: #ed90ae;    padding: 3px 8px;    border-radius: 53%;    color: #fff;    margin-top: 35px;    float: left;"><i class="fa fa-minus" style="color:#fff;"></i></a>
+                                    </div>
+                            </div>`;
+                $('.benificiariesrow').append(html);
+                $('.benificiaries').select2({
+                     placeholder: "Select a beneficiary",
+                });
+            })
+
+        $('body').on('click','.removerowvisa',function(){
+            var id = $(this).data('id');
+            $('.remove'+id).remove();
+            calculatetotal();
+        })
+
+        var furl = "{{ url('public/spinner1.gif') }}";
         $('body').on('click','.printsection',function(){
-                var id = 1;
+                var remmiter_id = $('.remmiter_id').val();
+                var beneficiary_id = $('.beneficiary_id').val();
+                var cheque_number = $('.cheque_number').val();
+                var transaction_date = $('.transaction_date').val();
+                var amount = $('.amount').val();
+                var transaction_method = $('.transaction_method').val();
+                var remarks = $('.remarks').val();
+
+
                 $.ajax({
                 url: "{{ route('company.form.printsectionmodal')}}",
                 type: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
-                data: {id: id},
+                data: {remmiter_id:remmiter_id,beneficiary_id:beneficiary_id,cheque_number:cheque_number,transaction_date:transaction_date,amount:amount,transaction_method:transaction_method,remarks:remarks},
                 beforeSend: function () {
-                    $(".modal-content").css("height", "400px");
-                    $('.loaderspin').show();
+                    $('.printmodaldata').html(`<div class=" loaderspin" style="height: 200px;vertical-align: middle;line-height: 200px;text-align: center;"><img src="`+furl+`" style="height: 90px; width: auto;"></div>`);
+                    
                 },
                 success: function (data) {
                     $(".modal-content").css("height", "auto");
-                    $('.loaderspin').hide();
                     $('.printmodaldata').html(data);
                 },
             });

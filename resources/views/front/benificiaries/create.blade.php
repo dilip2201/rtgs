@@ -26,25 +26,19 @@
 @endsection
 <!--begin::Card-->
 <div class="card card-custom">
-    <div class="card-body p-0">
+    <div class="card-body p-0" style="padding-top: 30px!important; padding-bottom: 30px!important">
         <!--begin: Wizard-->
         <div class="wizard wizard-2" id="kt_wizard" data-wizard-state="step-first" data-wizard-clickable="false">
             <!--begin: Wizard Nav-->
-            <div class="wizard-nav border-right py-8 px-8 px-lg-10">
+            <div class="wizard-nav border-right py-6 px-6 px-lg-6">
                 <!--begin::Wizard Step 1 Nav-->
                 <div class="wizard-steps">
                     <div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
                         <div class="wizard-wrapper">
-                            <div class="wizard-icon">
-                                <span class="svg-icon svg-icon-2x">
+                            <div class="wizard-icon" style="font-size: 25px;   line-height: 43px;">
+                                <span class="number" style="padding: 9px 19px;    border-radius: 50%;     font-size: 18px;">
                                     <!--begin::Svg Icon | path:/metronic/theme/html/demo13/dist/assets/media/svg/icons/General/User.svg-->
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <polygon points="0 0 24 0 24 24 0 24" />
-                                            <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
-                                            <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
-                                        </g>
-                                    </svg>
+                                    1
                                     <!--end::Svg Icon-->
                                 </span>
                             </div>
@@ -57,15 +51,10 @@
                     <div class="wizard-step" data-wizard-type="step">
                         <div class="wizard-wrapper">
                             <div class="wizard-icon">
-                                <span class="svg-icon svg-icon-2x">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="0" y="0" width="24" height="24" />
-                                            <rect fill="#000000" opacity="0.3" x="2" y="5" width="20" height="14" rx="2" />
-                                            <rect fill="#000000" x="2" y="8" width="20" height="3" />
-                                            <rect fill="#000000" opacity="0.3" x="16" y="14" width="4" height="2" rx="1" />
-                                        </g>
-                                    </svg>
+                                 <span class="number" style="padding: 9px 17px;    border-radius: 50%;       font-size: 18px;    color: #fff;">
+                                    <!--begin::Svg Icon | path:/metronic/theme/html/demo13/dist/assets/media/svg/icons/General/User.svg-->
+                                    2
+                                    <!--end::Svg Icon-->
                                 </span>
                             </div>
                             <div class="wizard-label">
@@ -90,36 +79,36 @@
                                 @endif
                             <!--begin: Wizard Step 1-->
                             <div class="pb-3" data-wizard-type="step-content" data-wizard-state="current">
-                                <h4 class="mb-3 font-weight-bold text-dark">Enter your new beneficiary / remmiter details</h4>
+                                <h4 class="mb-3 font-weight-bold  text-dark">Enter your new beneficiary / remmiter details</h4>
                                 
                                 <div class="row">
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>Name</b> <span style="color: red">*</span></label>
+                                            <label><b class="clrblck">Name</b> <span style="color: red">*</span></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg" name="name"  value="@if(!empty($benificiary)){{ $benificiary->name }}@endif" placeholder="Name" maxlength="38"/>
-                                            <span class="form-text text-muted">Enter beneficiary name as per bank records</span>
+                                            <span class="form-text new-textmute text-muted">Enter beneficiary name as per bank records</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>Nickname</b> <span style="color: red">*</span></label>
+                                            <label><b class="clrblck">Nickname</b> <span style="color: red">*</span></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg" name="nickname" placeholder="Nickname" value="@if(!empty($benificiary)){{ $benificiary->nickname }}@endif"
                                             maxlength="150"   />
-                                            <span class="form-text text-muted">Fill in the nickname</span>
+                                            <span class="form-text new-textmute text-muted">Fill in the nickname</span>
                                         </div>
                                     </div>
 
                                     <div class="col-xl-6">
                                         <!--begin::Input-->
                                         <div class="form-group">
-                                            <label><b>E-mail</b> <span style="color: red">*</span></label>
+                                            <label><b class="clrblck">E-mail</b> <span style="color: red">*</span></label>
                                             <input type="email" value="@if(!empty($benificiary)){{ $benificiary->email }}@endif" class="form-control form-control-solid form-control-lg" name="email" autocomplete="none"  placeholder="E-mail" /> 
                                         </div>
                                     </div>
                                      <div class="col-xl-6">
                                         <!--begin::Input-->
                                         <div class="form-group">
-                                            <label><b>Mobile No.</b> <span style="color: red">*</span></label>
+                                            <label><b class="clrblck">Mobile No.</b> <span style="color: red">*</span></label>
                                             <input type="text" name="mobile_number" class="form-control form-control-solid form-control-lg"  placeholder="Mobile No." autocomplete="none"  value="@if(!empty($benificiary)){{ $benificiary->mobile_number }}@endif"  maxlength="10" />
                                             
                                         </div>
@@ -127,14 +116,14 @@
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group ">
-                                            <label><b>Is a remmiter?</b> <span style="color: red">*</span></label>
+                                            <label><b class="clrblck">Is a remmiter?</b> <span style="color: red">*</span></label>
                                             <span class="switch">
                                                 <label>
                                                     <input type="checkbox" name="is_remitter" @if(!empty($benificiary) && $benificiary->is_remitter == 'yes') checked @endif">
                                                     <span></span>
                                                 </label>
                                             </span>
-                                           <span class="form-text text-muted">Turn on if the beneficiary is Remitter/Transferor too</span>
+                                           <span class="form-text new-textmute text-muted">Turn on if the beneficiary is Remitter/Transferor too</span>
                                         </div>
                                     </div>
                                     </div>
@@ -142,21 +131,21 @@
                                     <div class="row">
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>Address</b> <span style="color: red">*</span></label>
+                                            <label><b class="clrblck">Address</b> <span style="color: red">*</span></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg" name="address" value="@if(!empty($benificiary)){{ $benificiary->address }}@endif" autocomplete="none"  placeholder="Address"  maxlength="150"/>
                                             
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>Address 2</b> <span style="color: red">*</span></label>
+                                            <label><b class="clrblck">Address 2</b> <span style="color: red">*</span></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg" name="address2" value="@if(!empty($benificiary)){{ $benificiary->address2 }}@endif" autocomplete="none"  placeholder="Address 2"   maxlength="150"/>
                                             
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>Pin</b> <span style="color: red">*</span></label>
+                                            <label><b class="clrblck">Pin</b> <span style="color: red">*</span></label>
                                             <span  style="position: absolute; cursor: pointer; top: 40px;    right: 15px;" class="spinners"></span>
                                             <input type="text" class="form-control form-control-solid form-control-lg pincode_data" name="pin" value="@if(!empty($benificiary)){{ $benificiary->pin }}@endif"   placeholder="Pincode"   autocomplete="none"  maxlength="6"/>
                                             
@@ -164,14 +153,14 @@
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>Area</b> <span style="color: red">*</span></label>
+                                            <label><b class="clrblck">Area</b> <span style="color: red">*</span></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg area_data" name="area" value="@if(!empty($benificiary)){{ $benificiary->area }}@endif" autocomplete="none"   placeholder="Area" maxlength="50"/>
                                             
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label><b>City</b> <span style="color: red">*</span></label>
+                                            <label><b class="clrblck">City</b> <span style="color: red">*</span></label>
                                             <input type="text" class="form-control form-control-solid form-control-lg city_data" name="city" value="@if(!empty($benificiary)){{ $benificiary->city }}@endif" autocomplete="none"   placeholder="City"  maxlength="50" />
                                             
                                         </div>
@@ -182,7 +171,7 @@
                                             <input type="text" class="form-control form-control-solid form-control-lg state_data" name="states" value="@if(!empty($benificiary)){{ $benificiary->state }}@endif" autocomplete="none"   placeholder="State"   maxlength="50"/>
                                         </div> -->
                                     <div class="form-group">
-                                            <label><b>States</b> <span style="color: red">*</span></label>
+                                            <label><b class="clrblck">States</b> <span style="color: red">*</span></label>
                                              <select class="form-control states"  name="states">
                                                 <option value="">Select a state</option>
                                                     @if(!empty($states))
@@ -193,7 +182,7 @@
                                                 </select>
                                             
                                            
-                                            <span class="form-text text-muted">select the remmiter's name</span>
+                                            <span class="form-text new-textmute text-muted">select the remmiter's name</span>
                                         </div>
                                     </div>
                                 </div>
@@ -273,16 +262,16 @@
                                    <div class="image-input image-input-outline" id="kt_profile_avatar" style="background-size: 190px 112px;width: 190px;background-image: url({{ URL::asset('public/images/logo/bank_check.jpg') }})">
                                         <div class="image-input-wrapper" style="background-size: 190px 112px;width: 190px;height: 112px;background-image: url({{ URL::asset('public/images/logo/'.$image) }})"></div>
                                         <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
-                                          <i class="fa fa-pencil icon-sm text-muted"></i>
+                                          <i class="fa fa-pencil icon-sm  new-textmute text-muted"></i>
                                           <input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg">
                                           <input type="hidden" name="profile_avatar_remove" class="">
                                         </label>
                                         <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="" data-original-title="Cancel avatar">
-                                          <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                          <i class="ki ki-bold-close icon-xs new-textmute text-muted"></i>
                                         </span>
                                         @if(!empty($benificiary->check_book_image))
                                         <span class="profile_remove btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"  id="profile_remove" data-action="remove" data-toggle="tooltip" title="" data-original-title="Remove avatar">
-                                          <i class="ki ki-bold-close icon-xs text-muted" ></i>
+                                          <i class="ki ki-bold-close icon-xs new-textmute text-muted" ></i>
                                         </span>
                                         @endif
                                         <input type="hidden" name="profile_deleted" class="profile_deleted" value="0">
@@ -337,6 +326,7 @@
 <input type="hidden" class="emails" value="{{ implode(',',$emails) }}">
 @push('style')
 <link href="{{ URL::asset('public/assets/css/pages/wizard/wizard-2afa4.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ URL::asset('public/css/pages/form.css') }}" rel="stylesheet" type="text/css" />
 @endpush
 @push('script')
 <script type="text/javascript" src="https://preview.keenthemes.com/metronic/theme/html/demo13/dist/assets/js/pages/custom/profile/profile.js?v=7.2.0"></script>
@@ -421,7 +411,7 @@ $('body').on('keyup', '.ifsc', function () {
 
 
 $('.states').select2({
-     placeholder: "Select a beneficiary",
+     placeholder: "Select a states",
 });
 "use strict";
 var KTWizard3 = function() {

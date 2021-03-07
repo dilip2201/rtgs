@@ -56,7 +56,7 @@ input[type=checkbox] { display: inline; }
         The Branch Manger / शाखा प्रबंधक
       </span>
       <span class="hindi"   style="font-size: 13px; width: 100%; margin-top: -10px; text-align: left; display: block;  ">
-        <span style="border-bottom: 1px solid #000;">{{ $data->bbank_name }} </span> Branch/ शाखा
+        <span style="border-bottom: 1px solid #000;">{{ getbeni($data->id,'bank_name') }} </span> Branch/ शाखा
       </span>
       <div style="font-size: 13px; width: 100%; margin-top: -25px; text-align: right; display: block;  ">
         <span class="hindi">Date/ तारीख:</span> <span style="border-bottom: 1px solid #000;">{{ date('d M Y',strtotime($data->transaction_date)) }} </span>
@@ -159,10 +159,10 @@ input[type=checkbox] { display: inline; }
 $stringlength = strlen($raddredd);
 $raddrres = str_split($raddredd, 38);
 $finalvalue = $stringlength/38;
-$roundvalue = round($finalvalue);
+$roundvalue = ceil($finalvalue);
 $totallength = $roundvalue * 20;
 
-$finalheight = $totallength + 20;
+$finalheight = $totallength + 30;
 
 @endphp
 <div class="application" style="padding: 10px 15px;   text-align: center;   display: block; height: {{$finalheight }}px; ">
@@ -256,7 +256,7 @@ $finalheight = $totallength + 20;
 
     <div style="width: 75%;display: block; float: left; ">
       <span  class="hindi"  style="font-size: 12px; width: 100%; margin-top: -3px; text-align: left; display: block;  ">
-        @php $bnames = str_split(substr($data->bname, 0, 38));
+        @php $bnames = str_split(substr(getbeni($data->id,'name'), 0, 38));
         $bnamecount = count($bnames);
         @endphp
         @if(!empty($bnames))
@@ -286,7 +286,7 @@ $finalheight = $totallength + 20;
 
     <div style="width: 75%;display: block; float: left; ">
       <span  class="hindi"  style="font-size: 12px; width: 100%; margin-top: -10px; text-align: left; display: block;  ">
-        @php $baccount_numbers = str_split(substr($data->baccount_number, 0, 38));
+        @php $baccount_numbers = str_split(substr(getbeni($data->id,'account_number'), 0, 38));
         $baccount_numbercount = count($baccount_numbers);
         @endphp
         @if(!empty($baccount_numbers))
@@ -316,7 +316,7 @@ $finalheight = $totallength + 20;
 
     <div style="width: 75%;display: block; float: left; ">
       <span  class="hindi"  style="font-size: 12px; width: 100%; margin-top: -3px; text-align: left; display: block;  ">
-        @php $bbank_names = str_split(substr($data->bbank_name, 0, 38));
+        @php $bbank_names = str_split(substr(getbeni($data->id,'bank_name'), 0, 38));
         $bbank_namecount = count($bbank_names);
         @endphp
         @if(!empty($bbank_names))
@@ -346,7 +346,7 @@ $finalheight = $totallength + 20;
 
     <div style="width: 75%;display: block; float: left; ">
       <span  class="hindi"  style="font-size: 12px; width: 100%; margin-top: 0px; text-align: left; display: block;  ">
-        @php $bifscs = str_split(substr($data->bifsc, 0, 38));
+        @php $bifscs = str_split(substr(getbeni($data->id,'ifsc'), 0, 38));
         $bifscs_count = count($bifscs);
         @endphp
         @if(!empty($bifscs))
@@ -376,7 +376,7 @@ $finalheight = $totallength + 20;
 
     <div style="width: 75%;display: block; float: left; ">
       <span  class="hindi"  style="font-size: 12px; width: 100%; margin-top: -3px; text-align: left; display: block;  ">
-        @php $bbranch_names = str_split(substr($data->bbranch_name, 0, 38));
+        @php $bbranch_names = str_split(substr(getbeni($data->id,'branch_name'), 0, 38));
         $bbranch_names_count = count($bbranch_names);
         @endphp
         @if(!empty($bbranch_names))
@@ -408,7 +408,7 @@ $finalheight = $totallength + 20;
 
     <div style="width: 75%;display: block; float: left; ">
       <span  class="hindi"  style="font-size: 12px; width: 100%; margin-top: -3px; text-align: left; display: block;  ">
-        @php $baccount_numbers = str_split(substr($data->baccount_number, 0, 38));
+        @php $baccount_numbers = str_split(substr(getbeni($data->id,'account_number'), 0, 38));
         $baccount_number_count = count($baccount_numbers);
         @endphp
         @if(!empty($baccount_numbers))
@@ -899,13 +899,12 @@ $finalheight = $totallength + 20;
        <span  class="hindi"  style="font-size: 12px;  line-height: 7px;width: 100%;  text-align: left; display: block;  ">
           Name and signature of Bank official / बैंक अधिकारी का नाम और हस्ताक्षर
         </span> 
-         
     </div>
 
       <div style="width: 33%;display: block; float: left; border-bottom: 1px solid #000; height: 15px;">
      </div> 
       <div style="width: 17%;display: block; float: left;  height: 15px;">
-        <img src="{{ url('public/Bank-Seal.png')}}"  style="margin-top: -40px; width: 100px; height: auto;">
+        <img src="http://3.23.151.152/rtgs_php/public/Bank-Seal.png"  style="margin-top: -40px; width: 100px; height: auto;">
      </div> 
     
     

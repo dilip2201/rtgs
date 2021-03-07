@@ -204,7 +204,6 @@ class CompanyController extends Controller
                             form_number int(11) DEFAULT NULL,
                             user_id int(11) DEFAULT NULL,
                             remmiter_id int(11) DEFAULT NULL,
-                            beneficiary_id int(11) DEFAULT NULL,
                             amount decimal(10,0) NOT NULL,
                             cheque_number varchar(255) DEFAULT NULL,
                             transaction_method enum('neft','rtgs') NOT NULL DEFAULT 'neft',
@@ -215,6 +214,18 @@ class CompanyController extends Controller
                             updated_at TIMESTAMP NULL DEFAULT NULL,
                             primary key(id)) COLLATE='utf8_general_ci' ENGINE=InnoDB AUTO_INCREMENT=1";
                     DB::statement($transactioncreateTableSqlString);
+
+                    $transaction_benificiaries_table = $user->id."_transaction_benificiaries";
+                    $trastring = "CREATE TABLE $transaction_benificiaries_table (
+                            id  BIGINT(20) NOT NULL AUTO_INCREMENT,
+                            transaction_id int(11) DEFAULT NULL,
+                            beneficiary_id int(11) DEFAULT NULL,
+                            amount decimal(10,0) NOT NULL,
+                            remarks text,
+                            created_at TIMESTAMP NULL DEFAULT NULL,
+                            updated_at TIMESTAMP NULL DEFAULT NULL,
+                            primary key(id)) COLLATE='utf8_general_ci' ENGINE=InnoDB AUTO_INCREMENT=1";
+                    DB::statement($trastring);
 
                     $transaction_logs_table = $user->id."_transaction_logs";
                     $transactionlogscreateTableSqlString = "CREATE TABLE $transaction_logs_table (

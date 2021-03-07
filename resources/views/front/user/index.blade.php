@@ -68,6 +68,7 @@
 </div>
 @push('style')
 <link href="{{ URL::asset('public/assets/css/pages/wizard/wizard-2afa4.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ URL::asset('public/css/pages/user.css') }}" rel="stylesheet" type="text/css" />
 @endpush
 @push('script')
 

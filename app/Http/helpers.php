@@ -275,4 +275,75 @@ function number_to_word($number){
           $words[$point = $point % 10] : '';
  return $result . "Rupees  " . $points ;
 }
+
+
+function getaddress($postalcode){
+
+}
+
+function getbenificiaryfromtran($tid,$id,$type){
+    $transactioncount = \DB::table($id.'_transaction_benificiaries')->where('transaction_id',$tid)->count();
+    if($transactioncount > 1){
+      return 'Multiple benificiaries';
+    }else{
+      $transaction = \DB::table($id.'_transaction_benificiaries')->where('transaction_id',$tid)->first();
+      if(!empty($transaction)){
+        $user = \DB::table($id.'_benificiaries')->where('id',$transaction->beneficiary_id)->first();
+        if(!empty($user)){
+          return $user->$type;
+        }else{
+          return '-';
+        }
+      }
+    }
+    
+}
+
+function getbeni($bid,$type){ 
+    $id = 0;
+    if(auth()->user()->parent_id == null){
+        $id = auth()->user()->id;   
+    } else {
+        $id = auth()->user()->parent_id;    
+    }     
+    $user = \DB::table($id.'_benificiaries')->where('id',$bid)->first();
+    if(!empty($user)){
+      return $user->$type;
+    }else{
+      return '-';
+    }
+     
+    
+}
+
+function gethtml($tid,$id){
+  $return = '<label><b style="color: #000; font-size: 14px;">Benificiary\'s details</b></label><br>';
+  $transactioncount = \DB::table($id.'_transaction_benificiaries')->where('transaction_id',$tid)->count();
+  if($transactioncount > 1){
+   $return .=  '<span class="benificiary_name" style="color: #9f9f9f;">Multiple benificiaries</span><br>';
+  }else{
+    $transaction = \DB::table($id.'_transaction_benificiaries')->where('transaction_id',$tid)->first();
+     if(!empty($transaction)){
+        $user = \DB::table($id.'_benificiaries')->where('id',$transaction->beneficiary_id)->first();
+        if(!empty($user)){
+          
+          $return .= '<span class="benificiary_name" style="color: #9f9f9f;">'.$user->name.'</span><br>';
+          $return .= '<span class="benificiary_state" style="color: #9f9f9f;">'.$user->city.', '.$user->state.'</span><br>';
+          $return .= ' <span class="benificiary_citybank" style="color: #9f9f9f;">'.$user->bank_name.'</span><br>';
+          $return .= '<span class="benificiary_citybank" style="color: #9f9f9f;">'.$user->ifsc.'</span><br>';
+          $return .= '<span class="benificiary_citybank" style="color: #9f9f9f;">'.$user->account_number.'</span><br>';
+        }else{
+          $return .=  '<span class="benificiary_name" style="color: #9f9f9f;">No data found.</span><br>';
+        }
+      }
+  }
+  return $return;
+    
+}
+
+function gettransaction($tid,$id){
+    $transaction = \DB::table($id.'_transaction_benificiaries')->where('transaction_id',$tid)->get();
+    return $transaction;
+}
+
 ?>
