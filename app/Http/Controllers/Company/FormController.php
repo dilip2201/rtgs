@@ -66,8 +66,8 @@ class FormController extends Controller
             ->join($benificiarytable.' as r','r.id','tr.remmiter_id')
             ->join($benificiarytable.' as b','b.id',$transactionbenitable.'.beneficiary_id')
             ->where($transactionbenitable.'.transaction_id',$downloadid)
-            ->select([$transactionbenitable.'.*','tr.*',$transactionbenitable.'.id as id','r.name as rname','r.address as raddress','r.address2 as raddress2','r.area as rarea','r.city as rcity','r.state as rstate','r.pin as rpin','r.mobile_number as rmobile_number','r.account_number as raccount_number','b.name as bname','b.address as baddress','b.address2 as baddress2','b.area as barea','b.city as bcity','b.state as bstate','b.pin as bpin','b.mobile_number as bmobile_number','b.ifsc as bifsc','b.account_type as baccount_type','b.account_number as baccount_number',$transactionbenitable.'.amount as tamout'])->get();
-           
+            ->select([$transactionbenitable.'.*','tr.*',$transactionbenitable.'.id as id','r.name as rname','r.address as raddress','r.address2 as raddress2','r.area as rarea','r.city as rcity','r.state as rstate','r.pin as rpin','r.mobile_number as rmobile_number','r.account_number as raccount_number','b.name as bname','b.address as baddress','b.address2 as baddress2','b.area as barea','b.city as bcity','b.state as bstate','b.pin as bpin','b.mobile_number as bmobile_number','b.ifsc as bifsc','b.account_type as baccount_type','b.account_number as baccount_number',$transactionbenitable.'.amount as tamout',$transactionbenitable.'.remarks as tremark','tr.amount as traamount'])->get();
+            
             $spreadsheet = new Spreadsheet();
             $sheet = $spreadsheet->getActiveSheet();
             $sheet->getColumnDimension('A')->setWidth(10);
@@ -100,7 +100,7 @@ class FormController extends Controller
              $rowno = 2;
             foreach ($transactiondata as $transaction) {
                 
-                
+                $am = $transaction->traamount;
                 $sheet->setCellValue('A' . $rowno, $rowno ?? '');
                 $sheet->setCellValue('B' . $rowno, '' );
                 $sheet->setCellValue('c' . $rowno, $transaction->tamout);
@@ -112,9 +112,13 @@ class FormController extends Controller
                 $sheet->setCellValue('I' . $rowno, $transaction->baccount_type ?? 'N/A');
                 $sheet->setCellValue('J' . $rowno,$transaction->baccount_number ?? 'N/A');
                 $sheet->setCellValue('K' . $rowno,$transaction->bname ?? 'N/A');
-                $sheet->setCellValue('L' . $rowno,$transaction->remarks ?? 'N/A');
+                $sheet->setCellValue('L' . $rowno,$transaction->tremark ?? 'N/A');
                 $rowno++;
             }
+            $sheet->setCellValue('A' . $rowno, 'Total');
+            $sheet->setCellValue('B' . $rowno, 'Total');
+            $sheet->setCellValue('c' . $rowno, $am);
+            $sheet->mergeCells('A'.$rowno.':B'.$rowno);
              $fileName = "Demo.xlsx";
             $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
             $response =  new StreamedResponse(

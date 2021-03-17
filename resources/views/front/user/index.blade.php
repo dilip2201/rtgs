@@ -5,6 +5,37 @@
 	.error{
 		color: #a51010!important;
 	}
+    .dataTables_length{
+        width: 50%;
+        float: left;
+        font-size: 11px;
+        margin-top: -26px;
+    }
+    .dataTables_info{
+        
+        text-align: center;
+    }
+    .dataTables_paginate {
+        width: 50%!important;
+        float: right;
+        margin-top: -26px!important;
+    }
+    .card-header{
+        border-bottom: 0px!important;
+    }
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color:  #3699ff!important;
+      opacity: 1; /* Firefox */
+      font-weight: 600;
+    }
+    .dataTables_wrapper{
+        margin-top: -30px;
+    }
+    #employee_filter input{
+        color:  #3699ff!important;
+        font-weight: 600;
+    }
+    
 </style>
 @section('button')
 <a href="{{ route('company.form.create') }}"  class="btn btn-primary font-weight-bolder" >New Form<i style="font-size: 10px;
@@ -15,19 +46,18 @@
 <!--begin::Card-->
 <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
 <div class="card card-custom">
-	<div class="card-header">
-		<div class="card-title">
-			<span class="card-icon">
-				<i class="flaticon-avatar text-primary"></i>
-			</span>
-			<h3 class="card-label">Users</h3>
-		</div>
-		<div class="card-toolbar">
-			<a href="#" data-toggle="modal" data-target="#exampleModalSizeSm" data-id="" class="btn btn-primary font-weight-bolder openaddmodal">
-			<i class="la la-plus"></i>New User</a>
-			<!--end::Button-->
-		</div>
-	</div>
+	
+    <div style="float: left; width: 100%; padding:15px 30px;">
+            
+            <div style="width: 50%; float: left;">
+             <span style="width: 100%; float: left; font-weight: 600; font-size: 17px; color: #000;">User</span>
+             <span style="width: 100%; float: left;">Here you can see and filter by users</span>
+            </div>
+            <div style="width: 50%; float: right; text-align: right; ">
+                
+             <a data-toggle="modal" data-target="#exampleModalSizeSm"  class="btn btn-light-primary font-weight-bolder openaddmodal">New User</a>
+            </div>
+        </div>
 	<div class="card-body">
 		<!--begin: Datatable-->
 		<table class="table table-bordered table-hover table-checkable" id="employee" style="margin-top: 13px !important">
@@ -188,7 +218,8 @@
             "autoWidth": false,
             processing: true,
             serverSide: true,
-            stateSave: true,
+            "dom": '<"top"f>rt<"bottom"ilp><"clear">',
+            
             ajax: {
                 'url': "{{ route('company.users.getall') }}",
                 'type': 'POST',

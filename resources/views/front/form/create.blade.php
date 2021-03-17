@@ -90,7 +90,7 @@
                                 </div>
                                 <div class="row benificiariesrow">
                                     @if(empty($transaction))
-                                    <div class="remove1" style="width:100%; float:left;">
+                                    <div class="remove1 totalbani" style="width:100%; float:left;">
                                         <div class="col-xl-4" style="float: left;">
                                             <!--begin::Input-->
                                             <div class="form-group">
@@ -114,7 +114,7 @@
                                             
                                             <div class="form-group">
                                               <label><b class="clrblck">Amount 1</b> <span style="color: red">*</span></label>
-                                                <input type="text" class="form-control form-control-solid form-control-lg culculateamount" maxlength="10" name="beni[1][amount]" placeholder="Amount"  required />
+                                                <input type="text" class="form-control form-control-solid form-control-lg culculateamount amount" maxlength="10" name="beni[1][amount]" placeholder="Amount"  required />
                                                 
                                             </div>
                                             
@@ -124,7 +124,7 @@
                                             <!--begin::Input-->
                                             <div class="form-group">
                                               <label><b class="clrblck">Remark 1</b> <span style="color: red">*</span></label>
-                                                <input type="text" class="form-control form-control-solid form-control-lg amount" maxlength="10" name="beni[1][remark]" placeholder="Remark"  required />
+                                                <input type="text" class="form-control form-control-solid form-control-lg " maxlength="10" name="beni[1][remark]" placeholder="Remark"  required />
                                                 
                                             </div>
                                             <!--end::Input-->
@@ -136,13 +136,13 @@
                                         
                                         @if(!empty($trans))
                                             @foreach($trans as $tran)
-                                                <div class="remove{{ $tran->id }}" style="width:100%; float:left;">
+                                                <div class="remove{{ $tran->id }} totalbani" style="width:100%; float:left;">
                                                     <div class="col-xl-4" style="float: left;">
                                                         <!--begin::Input-->
                                                         <div class="form-group">
                                                             <label><b class="clrblck">Beneficiary {{ $i }}</b> <span style="color: red">*</span></label>
                                                             <div class="form-group ">
-                                                                <select class="form-control benificiaries beneficiary_id"  name="beni[{{ $tran->id }}][benificiar]">
+                                                                <select class="form-control  @if($loop->first) benificiaries @endif beneficiary_id"  name="beni[{{ $tran->id }}][benificiar]">
                                                                     <option value="">Select a Beneficiary</option>
                                                                     @if(!empty($benificiaries))
                                                                         @foreach($benificiaries as $benificiary)
@@ -160,7 +160,7 @@
                                                         
                                                         <div class="form-group">
                                                           <label><b class="clrblck">Amount {{ $i }}</b> <span style="color: red">*</span></label>
-                                                            <input type="text" class="form-control form-control-solid form-control-lg culculateamount" maxlength="10" name="beni[{{ $tran->id }}][amount]" value="{{ $tran->amount }}" placeholder="Amount"  required />
+                                                            <input type="text" class="form-control form-control-solid form-control-lg culculateamount @if($loop->first) amount @endif" maxlength="10" name="beni[{{ $tran->id }}][amount]" value="{{ $tran->amount }}" placeholder="Amount"  required />
                                                             
                                                         </div>
                                                         
@@ -170,7 +170,7 @@
                                                         <!--begin::Input-->
                                                         <div class="form-group">
                                                           <label><b class="clrblck">Remark {{ $i }}</b> <span style="color: red">*</span></label>
-                                                            <input type="text" class="form-control form-control-solid form-control-lg amount" maxlength="10" name="beni[{{ $tran->id }}][remark]" value="{{ $tran->remarks }}" placeholder="Remark"  required />
+                                                            <input type="text" class="form-control form-control-solid form-control-lg " maxlength="10" name="beni[{{ $tran->id }}][remark]" value="{{ $tran->remarks }}" placeholder="Remark"  required />
                                                             
                                                         </div>
                                                         <!--end::Input-->
@@ -255,7 +255,7 @@
                             </div>
                             <div class="pb-5" data-wizard-type="step-content">
                                 <h4 class="mb-5 font-weight-bold text-dark" >Review & confirm</h4>
-                                <h4 data-wizard-type="action-prev" class="mb-5 font-weight-bold text-dark" style="cursor: pointer; color: #3699ff!important;"><i class="flaticon2-left-arrow-1" style="color: #3699ff!important; margin-right: 10px;"></i>Back and edit</h4>
+                                <h4 data-wizard-type="action-prev" class="mb-5 font-weight-bold text-dark clickback" style="cursor: pointer; color: #3699ff!important;"><i class="flaticon2-left-arrow-1" style="color: #3699ff!important; margin-right: 10px;"></i>Back and edit</h4>
                                 <div class="row">
                                     
                                     <div class="col-xl-4">
@@ -434,12 +434,20 @@
                                     confirmButton: "btn font-weight-bold btn-light"
                                 }
                             }).then((function() {
+
                                 KTUtil.scrollTop()
                             }))
                         })), !1
                     }
                 })), i.on("changed", (function(e) {
                     KTUtil.scrollTop()
+                    var numItems = $('.totalbani').length;
+                    if(numItems >1){
+                        $('.printsection').css('display','none');
+                    }else{
+                        $('.printsection').css('display','inline-block');
+                    }
+
                 })), i.on("submit", (function(e) {
                     var i = a[e.getStep() - 1];
                     i && i.validate().then((function(e) {
@@ -528,6 +536,9 @@
     
     
 	$(document).ready(function(){
+        $('body').on('click','.clickback',function(){
+            $('.printsection').css('display','none');
+        });
         $('body').on('keyup','.culculateamount',function(){
             calculatetotal();
         })
@@ -536,13 +547,13 @@
                 incrementvalue++;
                 rendomnumber = generaterandomnumber();
                 var options = $('.loadbanificiaty').get(0).outerHTML;
-                var html = `<div class="remove`+rendomnumber+`" style="width:100%; float:left;">
+                var html = `<div class="remove`+rendomnumber+` totalbani" style="width:100%; float:left;">
                                     <div class="col-xl-4" style="float:left;">
                                         <!--begin::Input-->
                                         <div class="form-group">
                                             <label><b>Beneficiary `+incrementvalue+`</b> <span style="color: red">*</span></label>
                                             <div class="form-group ">
-                                                <select class="form-control benificiaries beneficiary_id"  name="beni[`+rendomnumber+`][benificiar]">
+                                                <select class="form-control beneficiary_id"  name="beni[`+rendomnumber+`][benificiar]">
                                                    `+options+`
                                                 </select>
                                             </div>
@@ -565,7 +576,7 @@
                                         <!--begin::Input-->
                                         <div class="form-group">
                                           <label><b>Remark `+incrementvalue+`</b> <span style="color: red">*</span></label>
-                                            <input type="text" class="form-control form-control-solid form-control-lg amount" maxlength="10" name="beni[`+rendomnumber+`][remark]"  placeholder="Remark"  required />
+                                            <input type="text" class="form-control form-control-solid form-control-lg " maxlength="10" name="beni[`+rendomnumber+`][remark]"  placeholder="Remark"  required />
                                             
                                         </div>
                                         <!--end::Input-->
@@ -575,7 +586,7 @@
                                     </div>
                             </div>`;
                 $('.benificiariesrow').append(html);
-                $('.benificiaries').select2({
+                $('.beneficiary_id').select2({
                      placeholder: "Select a beneficiary",
                 });
             })

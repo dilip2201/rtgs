@@ -16,12 +16,41 @@
     .switch input:empty~span:after{
         background-color: #3699ff;
     }
+    .dataTables_length{
+        width: 50%;
+        float: left;
+        font-size: 11px;
+        margin-top: -26px;
+    }
+    .dataTables_info{
+        
+        text-align: center;
+    }
+    .dataTables_paginate {
+        width: 50%!important;
+        float: right;
+        margin-top: -26px!important;
+    }
+    .card-header{
+        border-bottom: 0px!important;
+    }
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color:  #3699ff!important;
+      opacity: 1; /* Firefox */
+      font-weight: 600;
+    }
+    .dataTables_wrapper{
+        margin-top: -30px;
+    }
+    #employee_filter input{
+        color:  #3699ff!important;
+        font-weight: 600;
+    }
 </style>
 @section('button')
 <a href="{{ route('company.form.create') }}"  data-id="" class="btn btn-primary font-weight-bolder" >New Form<i style="font-size: 10px;
     margin-left: 6px;" class="flaticon2-right-arrow"></i></a>
-    <a href="{{ route('company.benificiaries.create') }}"  style="margin-left: 15px;" data-id="" class="btn btn-light-primary font-weight-bold mr-2" >New beneficiary / remmiter<i style="font-size: 10px;
-    margin-left: 6px;" class="flaticon2-right-arrow"></i></a> 
+    
 @endsection
 @if(session()->has('status'))
     <div class="alert alert-success" style="background-color: snow;    border-color: #4a99ff;    color: #4a99ff;">
@@ -36,38 +65,39 @@
 @endif
 <!--begin::Card-->
 <div class="card card-custom">
-   <div class="card-header">
-      <div class="card-title">
-         <span class="card-icon">
-         <i class="flaticon-avatar text-primary"></i>
-         </span>
-         <h3 class="card-label">Benificiaries</h3>
-      </div>
-      <div class="card-toolbar">
-         <a href="{{ route('company.benificiaries.create') }}"  class="btn btn-primary font-weight-bolder">
-         <i class="la la-plus"></i>New beneficiary / remmiter</a>
-         <!--end::Button-->
-      </div>
-   </div>
-   <div class="card-body">
-      <div class="mb-7">
+        <div style="float: left; width: 100%; padding:15px 30px;">
+            
+            <div style="width: 50%; float: left;">
+             <span style="width: 100%; float: left; font-weight: 600; font-size: 17px; color: #000;">Benificiaries</span>
+             <span style="width: 100%; float: left;">Here you can see and filter by beneficiaries</span>
+            </div>
+            <div style="width: 50%; float: right; text-align: right; ">
+                
+             <a href="{{ route('company.benificiaries.create') }}"  class="btn btn-light-primary font-weight-bolder ">New beneficiary / remmiter</a>
+            </div>
+        </div>
+         
+      
+   
+   <div class="card-body" style="padding-top: 0px;">
+      
          <div class="row align-items-center">
             <div class="col-lg-3 col-md-9 col-sm-12">
                <div class="input-group" id="kt_daterangepicker_2">
-                  <input type="text" class="form-control" readonly="readonly" placeholder="Select date range">
+                  <input type="text" class="form-control" readonly="readonly" placeholder="Select a date range" style="color: #3699ff; font-weight: 600;">
                   <input type="hidden" name="startdate" class="startdate">
                   <input type="hidden" name="enddate" class="enddate">
                   <div class="input-group-append">
-                     <span class="input-group-text">
-                     <i class="la la-calendar-check-o"></i>
+                     <span class="input-group-text" style="background: none;">
+                     <i class="fa fa-calendar-o" aria-hidden="true" style="font-size: 13px; color: #3699ff;"></i>
                      </span>
                   </div>
                </div>
             </div>
          </div>
-      </div>
+      
       <!--begin: Datatable-->
-      <table class="table table-bordered table-hover table-checkable" id="employee" style="margin-top: 13px !important">
+      <table class="table table-bordered table-hover table-checkable" id="employee" style="margin-top: -55px; ">
          <thead>
             <tr>
                <th>#</th>
@@ -223,7 +253,8 @@
             "autoWidth": false,
             processing: true,
             serverSide: true,
-            stateSave: true,
+           "dom": '<"top"f>rt<"bottom"ilp><"clear">',
+            
             ajax: {
                 'url': "{{ route('company.benificiaries.getall') }}",
                 'type': 'POST',

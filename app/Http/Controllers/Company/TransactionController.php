@@ -111,7 +111,7 @@ class TransactionController extends Controller
                 return getusernamebenificiery($q->remmiter_id,$id);
             })
             ->addColumn('bank', function ($q) use($id) {
-                return getbenificiaryfromtran($q->id,$id,'bank_name');
+                return getbankbenificiery($q->remmiter_id,$id);
             })
             ->addColumn('date', function ($q) {
                 return date('Y-m-d',strtotime($q->transaction_date));

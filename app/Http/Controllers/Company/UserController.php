@@ -170,7 +170,7 @@ class UserController extends Controller
         return DataTables::of($user)
             ->addColumn('action', function ($q) {
                 $id = encrypt($q->id);
-                $return = '<a title="Edit"  data-id="'.$id.'"   data-toggle="modal" data-target=".add_modal" class="openaddmodal" href="javascript:void(0)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> <a class="delete_record" data-id="'.$q->id.'" href="javascript:void(0)"> <i class="fa fa-trash" aria-hidden="true"></i> </a>';
+                $return = '<a title="Edit" style="float: left; margin-right:5px;"  data-id="'.$id.'"   data-toggle="modal" data-target=".add_modal" class="openaddmodal" href="javascript:void(0)"><i style="color: #000;" class="fa fa-pencil-square-o" aria-hidden="true"></i></a> <a class="delete_record" data-id="'.$q->id.'" href="javascript:void(0)"> <i style="color: #000;" class="fa fa-trash" aria-hidden="true"></i> </a>';
                 
                 return $return;
             })

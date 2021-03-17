@@ -162,7 +162,7 @@ $finalvalue = $stringlength/38;
 $roundvalue = round($finalvalue);
 $totallength = $roundvalue * 20;
 
-$finalheight = $totallength + 20;
+$finalheight = $totallength + 30;
 
 @endphp
 <div class="application" style="padding: 10px 15px;   text-align: center;   display: block; height: {{$finalheight }}px; ">

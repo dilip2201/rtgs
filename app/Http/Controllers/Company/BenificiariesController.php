@@ -275,7 +275,7 @@ class BenificiariesController extends Controller
         
         return DataTables::of($benificiaries)
             ->addColumn('action', function ($q) {
-                $return = '<a title="Edit"  data-id="'.$q->id.'"   data-toggle="modal" data-target="#exampleModalSizeLg" class="openaddmodal" href="javascript:void(0)"><i class="fa fa-eye"></i></a>  <a style="color:#000;"  href="'.route('company.benificiaries.edit',$q->id).'"  ><i class="fa fa-pencil"></i></a> ';
+                $return = '<a title="Edit" style="float: left; margin-right:7px;"  data-id="'.$q->id.'"   data-toggle="modal" data-target="#exampleModalSizeLg" class="openaddmodal" href="javascript:void(0)"><i class="fa fa-eye" style="color:#000;"></i></a>  <a style="color:#000;"  href="'.route('company.benificiaries.edit',$q->id).'"  ><i class="fa fa-pencil-square-o" aria-hidden="true" style="color:#000;"></i></a> ';
                 
                 return $return;
             })

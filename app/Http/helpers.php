@@ -131,6 +131,15 @@ function getusernamebenificiery($benificieryid, $id) {
     return $return;
 }
 
+function getbankbenificiery($benificieryid, $id) {
+    $user = \DB::table($id.'_benificiaries')->where('id',$benificieryid)->first();
+    $return = '-';
+    if(!empty($user)){
+        $return = $user->bank_name;
+    }
+    return $return;
+}
+
 function getbenificiary($benificieryid) {
 
     $id = 0;

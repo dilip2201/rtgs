@@ -252,7 +252,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xl-6">
+                                <div class="col-xl-6" style="padding-left:0px;">
                                 <div class="form-group">
                                    @php
                                    if(!empty($benificiary->check_book_image)){
@@ -263,16 +263,16 @@
                                    @endphp
                                    <div class="image-input image-input-outline" id="kt_profile_avatar" style="background-size: 185px 112px;width: 190px;background-image: url({{ URL::asset('public/images/logo/bank_check.jpg') }})">
                                         <div class="image-input-wrapper" style="background-size: 185px 112px;width: 190px;height: 112px;background-image: url({{ URL::asset('public/images/logo/'.$image) }})"></div>
-                                        <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                                        <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Upload Cheque">
                                           <i class="fa fa-pencil icon-sm  new-textmute text-muted"></i>
                                           <input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg">
                                           <input type="hidden" name="profile_avatar_remove" class="">
                                         </label>
-                                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="" data-original-title="Cancel avatar">
+                                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="" data-original-title="Cancel Cheque">
                                           <i class="ki ki-bold-close icon-xs new-textmute text-muted"></i>
                                         </span>
                                         @if(!empty($benificiary->check_book_image))
-                                        <span class="profile_remove btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"  id="profile_remove" data-action="remove" data-toggle="tooltip" title="" data-original-title="Remove avatar">
+                                        <span class="profile_remove btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"  id="profile_remove" data-action="remove" data-toggle="tooltip" title="" data-original-title="Cancel Cheque">
                                           <i class="ki ki-bold-close icon-xs new-textmute text-muted" ></i>
                                         </span>
                                         @endif
@@ -413,11 +413,8 @@ $('body').on('keyup', '.ifsc', function () {
 
 
 $('.states').select2({
-<<<<<<< HEAD
      placeholder: "Select a states",
-=======
-     placeholder: "Select a state",
->>>>>>> c92b4a68cf85f1d0f157eace71193ea91a5e788c
+
 });
 "use strict";
 var KTWizard3 = function() {

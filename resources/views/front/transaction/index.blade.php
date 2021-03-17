@@ -16,8 +16,55 @@
     .switch input:empty~span:after{
         background-color: #3699ff;
     }.font-size-lg {
-    font-size: 13px;
-}
+      font-size: 13px;
+    }
+     .dataTables_length{
+        width: 50%;
+        float: left;
+        font-size: 11px;
+        margin-top: -26px;
+    }
+    .dataTables_info{
+        
+        text-align: center;
+    }
+    .dataTables_paginate {
+        width: 50%!important;
+        float: right;
+        margin-top: -26px!important;
+    }
+    .card-header{
+        border-bottom: 0px!important;
+    }
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color:  #3699ff!important;
+      opacity: 1; /* Firefox */
+      font-weight: 600;
+    }
+    #employee_wrapper{
+        margin-top: -30px;
+    }
+    #employee_filter input{
+        color:  #3699ff!important;
+        font-weight: 600;
+    }
+    input{
+      color:  #3699ff!important;
+      font-weight: 600!important;
+    }
+    .select2-selection__placeholder{
+      font-weight: 600;
+    }
+    .select2-selection.select2-selection--single{
+      border-color: #3699ff;
+    }
+    .select2-selection__placeholder{
+      color: #3699ff!important;
+    }
+    .select2-selection__rendered{
+     color: #3699ff!important; 
+     font-weight: 600;
+    }
 </style>
 @section('button')
 <a href="{{ route('company.form.create') }}"  data-id="" class="btn btn-primary font-weight-bolder" >New Form<i style="font-size: 10px;
@@ -38,79 +85,67 @@
 
 <!--begin::Card-->
 <div class="card card-custom">
-   <div class="card-header">
-      <div class="card-title">
-         <span class="card-icon">
-         <i class="flaticon-avatar text-primary"></i>
-         </span>
-         <h3 class="card-label">Transactions</h3>
-      </div>
-      <div class="card-toolbar">
-         <a href="{{ route('company.form.create') }}"  class="btn btn-primary font-weight-bolder">
-         <i class="la la-plus"></i>New Form</a>
-         <!--end::Button-->
-      </div>
-   </div>
-   <div class="card-body">
-      <div class="mb-7">
-         <div class="row align-items-center">
-            <div class="col-md-12">
-               <div class="row align-items-center">
-                  <div class="col-md-3 my-2 my-md-0">
-                     <div class="d-flex align-items-center">
-                        <div class="input-group daternge" id="kt_daterangepicker_2">
-                           <input type="text" class="form-control daternge" readonly="readonly" placeholder="Select date range">
-                           <input type="hidden" name="startdate" class="startdate">
-                           <input type="hidden" name="enddate" class="enddate">
-                           <div class="input-group-append">
-                              <span class="input-group-text">
-                              <i class="la la-calendar-check-o"></i>
-                              </span>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-md-2 my-2 my-md-0">
-                     <div class="d-flex align-items-center">
-                        <select class="form-control remmiter"  name="remmiter">
-                           <option value="">Select a Remmiter</option>
-                           @if(!empty($remmiters))
-                           @foreach($remmiters as $remmiter)
-                           <option value="{{ $remmiter->id }}" @if(!empty($transaction) && $transaction->remmiter_id == $remmiter->id) {{ 'selected' }} @endif>{{ $remmiter->nickname }}</option>
-                           @endforeach
-                           @endif
-                        </select>
-                     </div>
-                  </div>
-                  <div class="col-md-2 my-2 my-md-0">
-                     <div class="d-flex align-items-center">
-                        <select class="form-control beneficiary"  name="beneficiary">
-                           <option value="">Select a Beneficiary</option>
-                           @if(!empty($benificiaries))
-                           @foreach($benificiaries as $benificiary)
-                           <option value="{{ $benificiary->id }}" @if(!empty($transaction) && $transaction->beneficiary_id == $benificiary->id) {{ 'selected' }} @endif>{{ $benificiary->name }}</option>
-                           @endforeach
-                           @endif
-                        </select>
-                     </div>
-                  </div>
-                  <div class="col-md-2 my-2 my-md-0">
-                     <div class="d-flex align-items-center">
-                        <select class="form-control mode"  name="mode">
-                           <option value="">Select Mode</option>
-                           <option value="rtgs">RTGS</option>
-                           <option value="neft">NEFT</option>
-                        </select>
-                     </div>
-                  </div>
-                  <div class="col-md-2 my-2 my-md-0">
-                         
-                          <a href="#" class="btn btn-secondary font-weight-boldest resetdata"><i class="flaticon2-refresh"></i></a>
-                  </div>
-               </div>
+   
+   <div style="float: left; width: 100%; padding:15px 30px;">
+            
+            <div style="width: 50%; float: left;">
+             <span style="width: 100%; float: left; font-weight: 600; font-size: 17px; color: #000;">Transactions</span>
+             <span style="width: 100%; float: left;">Here you can see and filter by transactions</span>
             </div>
-         </div>
-      </div>
+            <div style="width: 50%; float: right; text-align: right; ">
+                
+             <a href="{{ route('company.form.create') }}"  class="btn btn-light-primary font-weight-bolder ">New form</a>
+            </div>
+        </div>
+   <div class="card-body" style="padding-top: 0px;">
+      
+     <div class="row align-items-center">
+        <div class="col-md-12">
+           <div class="row align-items-center">
+              <div class="col-md-3 my-2 my-md-0">
+                 <div class="d-flex align-items-center">
+                    <div class="input-group daternge" id="kt_daterangepicker_2">
+                       <input type="text" class="form-control daternge" readonly="readonly" placeholder="Select date range">
+                       <input type="hidden" name="startdate" class="startdate">
+                       <input type="hidden" name="enddate" class="enddate">
+                       <div class="input-group-append">
+                          <span class="input-group-text" style="background: none;">
+                          <i class="fa fa-calendar-o" aria-hidden="true" style="font-size: 13px; color: #3699ff;"></i>
+                          </span>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+              <div class="col-md-2 my-2 my-md-0">
+                 <div class="d-flex align-items-center">
+                    <select class="form-control remmiter"  name="remmiter">
+                       <option value="">Select a Remmiter</option>
+                       @if(!empty($remmiters))
+                       @foreach($remmiters as $remmiter)
+                       <option value="{{ $remmiter->id }}" @if(!empty($transaction) && $transaction->remmiter_id == $remmiter->id) {{ 'selected' }} @endif>{{ $remmiter->nickname }}</option>
+                       @endforeach
+                       @endif
+                    </select>
+                 </div>
+              </div>
+             
+              <div class="col-md-2 my-2 my-md-0">
+                 <div class="d-flex align-items-center">
+                    <select class="form-control mode"  name="mode">
+                       <option value="">Select Mode</option>
+                       <option value="rtgs">RTGS</option>
+                       <option value="neft">NEFT</option>
+                    </select>
+                 </div>
+              </div>
+              <div class="col-md-2 my-2 my-md-0">
+                     
+                      <a href="#" class="btn btn-secondary font-weight-boldest resetdata"  style="border-color: #3699ff; background-color: #fff; color: #3699ff;"><i class="flaticon2-refresh" style="padding-right: 0px; color: #3699ff; font-weight: 600;"></i></a>
+              </div>
+           </div>
+        </div>
+     </div>
+      
       <!--begin: Datatable-->
       <table class="table table-bordered table-hover table-checkable" id="employee" style="margin-top: 13px !important">
          <thead>
@@ -280,7 +315,8 @@
             "autoWidth": false,
             processing: true,
             serverSide: true,
-            stateSave: true,
+            "dom": '<"top"f>rt<"bottom"ilp><"clear">',
+            
             ajax: {
                 'url': "{{ route('company.transaction.getall') }}",
                 'type': 'POST',
