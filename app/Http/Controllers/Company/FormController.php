@@ -366,7 +366,7 @@ class FormController extends Controller
 
                     return redirect('company/transaction')->with('status', 'Transaction Update successfully.');
                 }else{
-                    $form_id = '1001';
+                    $form_id = '0001';
                     $qry = DB::table($id.'_transactions')->orderby('id','desc')->first();
                     if(!empty($qry)){
                         $form_id = $qry->form_number +1;

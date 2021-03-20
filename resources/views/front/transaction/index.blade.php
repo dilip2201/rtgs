@@ -94,7 +94,7 @@
             </div>
             <div style="width: 50%; float: right; text-align: right; ">
                 
-             <a href="{{ route('company.form.create') }}"  class="btn btn-light-primary font-weight-bolder ">New form</a>
+            <!--  <a href="{{ route('company.form.create') }}"  class="btn btn-light-primary font-weight-bolder ">New form</a> -->
             </div>
         </div>
    <div class="card-body" style="padding-top: 0px;">
@@ -151,15 +151,14 @@
          <thead>
             <tr>
                <th>#</th>
-               <th>Form ID</th>
-               <th>User</th>
-               <th>Beneficiary</th>
-               <th>Remmiter</th>
-               <th>Bank</th>
+               <th>Transaction ID</th>
                <th>Date</th>
-               <th>Mode</th>
+               <th>Remitter</th>
+               <th>Beneficiary</th>
+               <th>Bank</th>
                <th>Amount</th>
-               <th>Actions</th>
+               <th style="width: 50px;">Mode</th>
+               <th style="width: 125px;">Actions</th>
             </tr>
          </thead>
       </table>
@@ -333,13 +332,13 @@
             columns: [
                 {data: 'DT_RowIndex', "orderable": false},
                 {data: 'form_id'},
-                {data: 'user'},
-                {data: 'beneficiary'},
-                {data: 'remmiter'},
-                {data: 'bank'},
                 {data: 'date'},
-                {data: 'mode'},
+                {data: 'remmiter'},
+                {data: 'beneficiary'},
+                
+                {data: 'bank'},
                 {data: 'amount'},
+                {data: 'mode'},
                 {data: 'actions'},
             ]
         });

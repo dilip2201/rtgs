@@ -394,6 +394,8 @@
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
 <script src="{{ URL::asset('public/assets/js/pages/crud/forms/widgets/select2afa4.js') }}"></script>
+<script src="{{ URL::asset('public/js/inputmask.js') }}"></script>
+
 <script type="text/javascript">
     function generaterandomnumber() {
           
@@ -536,6 +538,7 @@
     
     
 	$(document).ready(function(){
+        
         $('body').on('click','.clickback',function(){
             $('.printsection').css('display','none');
         });

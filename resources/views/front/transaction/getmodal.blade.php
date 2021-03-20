@@ -17,8 +17,8 @@
          @if($transaction->type == 'created')
              <div class="timeline-item align-items-start" style="margin:0px;">
                 <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg" style="    font-size: 11px;">
-                   {{ date('d-M',strtotime($transaction->created_at)  ) }}  
-                   <div class="font-size-sm text-muted font-weight-bold" style="    font-size: 10px;"> {{ date('h:i',strtotime($transaction->created_at)  ) }}</div>
+                   {{ date('d-M',strtotime('+5 hour +30 minutes',strtotime($transaction->created_at))) }}  
+                   <div class="font-size-sm text-muted font-weight-bold" style="    font-size: 10px;">{{ date('h:i',strtotime('+5 hour +30 minutes',strtotime($transaction->created_at))) }} </div>
                 </div>
                 <div class="timeline-badge">
                    <i class="fa fa-genderless text-success icon-xl"></i>
@@ -32,8 +32,8 @@
 
          <div class="timeline-item align-items-start"style="margin:0px;" >
             <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg" style="    font-size: 11px;">
-               {{ date('d-M',strtotime($transaction->updated_at)  ) }}  
-               <div class="font-size-sm text-muted font-weight-bold" style="    font-size: 10px;"> {{ date('h:i',strtotime($transaction->updated_at)  ) }}</div>
+               {{ date('d-M',strtotime('+5 hour +30 minutes',strtotime($transaction->created_at))) }}  
+               <div class="font-size-sm text-muted font-weight-bold" style="    font-size: 10px;"> {{ date('h:i',strtotime('+5 hour +30 minutes',strtotime($transaction->created_at))) }}</div>
             </div>
             <div class="timeline-badge">
                <i class="fa fa-genderless text-success icon-xl" style="color: #ff6a00!important; "></i>
@@ -48,8 +48,8 @@
          <div class="timeline-item align-items-start" style="margin:0px;">
             <!--begin::Label-->
             <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"  style="    font-size: 11px;">
-               {{ date('d-M',strtotime($transaction->created_at)  ) }}  
-               <div class="font-size-sm text-muted font-weight-bold"  style="    font-size: 9px;"> {{ date('h:i',strtotime($transaction->created_at)  ) }}</div>
+               {{ date('d-M',strtotime('+5 hour +30 minutes',strtotime($transaction->created_at))) }}  
+               <div class="font-size-sm text-muted font-weight-bold"  style="    font-size: 9px;"> {{ date('h:i',strtotime('+5 hour +30 minutes',strtotime($transaction->created_at))) }}</div>
             </div>
             <!--end::Label-->
             <!--begin::Badge-->
@@ -67,7 +67,7 @@
              <?php
                 $type = $update_value->type;
                 if($update_value->type == 'cheque_number'){
-                    $type = 'Check Number';
+                    $type = 'Cheque Number';
                 }
                 if($update_value->type == 'remmiter_id'){
                     $type = 'Remmiter';
@@ -107,8 +107,8 @@
          <div class="timeline-item align-items-start" style="margin:0px;">
             <!--begin::Label-->
             <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg"  style="    font-size: 11px;">
-               {{ date('d-M',strtotime($transaction->created_at)  ) }}  
-               <div class="font-size-sm text-muted font-weight-bold"  style="    font-size: 9px;"> {{ date('h:i',strtotime($transaction->created_at)  ) }}</div>
+               {{ date('d-M',strtotime('+5 hour +30 minutes',strtotime($transaction->created_at))) }}  
+               <div class="font-size-sm text-muted font-weight-bold"  style="    font-size: 9px;">  {{ date('h:i',strtotime('+5 hour +30 minutes',strtotime($transaction->created_at))) }}</div>
             </div>
             <!--end::Label-->
             <!--begin::Badge-->

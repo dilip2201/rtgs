@@ -99,11 +99,8 @@ class TransactionController extends Controller
                 return $return;
             })
             ->addColumn('form_id', function ($q) {
-                return 'INV - '.$q->form_number;
-            })
-            ->addColumn('user', function ($q) {
-                return getusername($q->user_id);
-            })
+                return 'T'.$q->form_number;
+            })            
             ->addColumn('beneficiary', function ($q) use($id) {
                 return getbenificiaryfromtran($q->id,$id,'name');
             })
@@ -114,7 +111,7 @@ class TransactionController extends Controller
                 return getbankbenificiery($q->remmiter_id,$id);
             })
             ->addColumn('date', function ($q) {
-                return date('Y-m-d',strtotime($q->transaction_date));
+                return date('d M Y',strtotime($q->transaction_date));
             })
             ->addColumn('mode', function ($q) {
             	if($q->transaction_method == 'neft'){
